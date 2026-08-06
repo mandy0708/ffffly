@@ -39,7 +39,7 @@ export function DotField() {
       const waveY = height * (0.55 + Math.cos(time * 0.48) * 0.2);
 
       context.clearRect(0, 0, width, height);
-      context.fillStyle = "#171717";
+      context.fillStyle = "#ffffff";
 
       for (let y = -spacing; y <= height + spacing; y += spacing) {
         for (let x = -spacing; x <= width + spacing; x += spacing) {
@@ -50,7 +50,7 @@ export function DotField() {
           const field = Math.sin(x * 0.018 + time * 1.4) + Math.cos(y * 0.016 - time);
           const energy = Math.max(0, ripple * 0.5 + 0.5) * Math.exp(-distance / 390);
           const radius = 0.45 + energy * 1.15 + Math.max(0, field) * 0.08;
-          const opacity = 0.05 + energy * 0.14;
+          const opacity = 0.09 + energy * 0.22;
 
           context.globalAlpha = opacity;
           context.beginPath();
