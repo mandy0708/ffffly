@@ -2,6 +2,8 @@
 
 import { useEffect, useRef } from "react";
 
+const LATTICE_ANGLES = [0, (2 * Math.PI) / 3, (4 * Math.PI) / 3];
+
 export function DotField() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
@@ -33,10 +35,11 @@ export function DotField() {
     function draw(now: number) {
       if (!context) return;
 
-      const time = reduceMotion.matches ? 0 : now * 0.00022;
-      const spacing = Math.max(8, width / 140);
-      const waveX = width * (0.5 + Math.sin(time * 0.64) * 0.23);
-      const waveY = height * (0.55 + Math.cos(time * 0.48) * 0.2);
+      const time = reduceMotion.matches ? 0 : now * 0.00018;
+      const spacing = Math.max(7, width / 160);
+      const waveX = width * (0.5 + Math.sin(time * 0.5) * 0.25);
+      const waveY = height * (0.55 + Math.cos(time * 0.38) * 0.2);
+      const freq = 0.052;
 
       context.clearRect(0, 0, width, height);
       context.fillStyle = "#ffffff";
@@ -46,11 +49,23 @@ export function DotField() {
           const dx = x - waveX;
           const dy = y - waveY;
           const distance = Math.sqrt(dx * dx + dy * dy);
-          const ripple = Math.sin(distance * 0.038 - time * 12);
-          const field = Math.sin(x * 0.018 + time * 1.4) + Math.cos(y * 0.016 - time);
-          const energy = Math.max(0, ripple * 0.5 + 0.5) * Math.exp(-distance / 390);
-          const radius = 0.45 + energy * 1.15 + Math.max(0, field) * 0.08;
-          const opacity = 0.09 + energy * 0.22;
+          const glow = Math.exp(-distance / 460);
+
+          // Three sine fields 120° apart interfere into a flowing hexagonal/
+          // diamond lattice — the "geometric shapes" read out of point size,
+          // not from drawing different glyphs.
+          let lattice = 0;
+          for (const angle of LATTICE_ANGLES) {
+            const proj = x * Math.cos(angle) + y * Math.sin(angle);
+            lattice += Math.sin(proj * freq + time * 1.6);
+          }
+          lattice /= LATTICE_ANGLES.length;
+
+          const energy = Math.max(0, lattice) * (0.35 + glow * 0.65);
+          const radius = 0.35 + energy * 1.5;
+          const opacity = 0.06 + energy * 0.26;
+
+          if (opacity <= 0.061) continue;
 
           context.globalAlpha = opacity;
           context.beginPath();

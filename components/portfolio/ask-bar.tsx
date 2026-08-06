@@ -1,6 +1,6 @@
 "use client";
 
-import { type FormEvent, type MouseEvent, useEffect, useRef, useState } from "react";
+import { type FormEvent, useEffect, useRef, useState } from "react";
 import { getReply } from "@/components/portfolio/chat-responses";
 
 type Message = { id: number; role: "user" | "bot"; text: string };
@@ -13,10 +13,24 @@ export function AskBar() {
   const [messages, setMessages] = useState<Message[]>([]);
   const [isTyping, setIsTyping] = useState(false);
   const threadRef = useRef<HTMLDivElement>(null);
+  const dockRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     threadRef.current?.scrollTo({ top: threadRef.current.scrollHeight, behavior: "smooth" });
   }, [messages, isTyping]);
+
+  useEffect(() => {
+    if (!isOpen) return;
+
+    function handleOutsideClick(event: MouseEvent) {
+      if (dockRef.current && !dockRef.current.contains(event.target as Node)) {
+        setIsOpen(false);
+      }
+    }
+
+    document.addEventListener("mousedown", handleOutsideClick);
+    return () => document.removeEventListener("mousedown", handleOutsideClick);
+  }, [isOpen]);
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -35,14 +49,10 @@ export function AskBar() {
     }, 650);
   }
 
-  function handlePanelClick(event: MouseEvent<HTMLElement>) {
-    if (event.target === event.currentTarget) setIsOpen(false);
-  }
-
   return (
-    <div className={`ask-dock${isOpen ? " is-open" : ""}`}>
+    <div ref={dockRef} className={`ask-dock${isOpen ? " is-open" : ""}`}>
       {isOpen && (
-        <section className="chat-panel" aria-label="Chat with Mandy" onClick={handlePanelClick}>
+        <section className="chat-panel" aria-label="Chat with Mandy">
           <button
             className="chat-close"
             type="button"
@@ -54,10 +64,10 @@ export function AskBar() {
               <path d="M14.8 27.79 28 14.59M14.8 14.59 28 27.79" stroke="white" strokeOpacity="0.7" strokeWidth="1.2" strokeLinecap="round" />
             </svg>
           </button>
-          <p className="chat-greeting" onClick={(event) => event.stopPropagation()}>
+          <p className="chat-greeting">
             hi，很高兴认识你，你可以用提问的方式了解更多~
           </p>
-          <div className="chat-thread" ref={threadRef} onClick={(event) => event.stopPropagation()}>
+          <div className="chat-thread" ref={threadRef}>
             {messages.map((message) => (
               <p key={message.id} className={`chat-msg is-${message.role}`}>
                 {message.text}
