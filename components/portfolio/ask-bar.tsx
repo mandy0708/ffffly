@@ -1,15 +1,22 @@
 "use client";
 
-import { type FormEvent, useState } from "react";
+import { type FormEvent, type MouseEvent, useEffect, useRef, useState } from "react";
+import { getReply } from "@/components/portfolio/chat-responses";
 
-const DEFAULT_QUESTION = "你平时都用什么AI软件，用\n在哪些需求上？";
-const DEFAULT_ANSWER =
-  "我日常用Codex和Figma AI功能，图片生成用GPT Image、LibLib和即梦。";
+type Message = { id: number; role: "user" | "bot"; text: string };
+
+let nextId = 1;
 
 export function AskBar() {
   const [question, setQuestion] = useState("");
   const [isOpen, setIsOpen] = useState(false);
-  const [sentQuestion, setSentQuestion] = useState<string | null>(null);
+  const [messages, setMessages] = useState<Message[]>([]);
+  const [isTyping, setIsTyping] = useState(false);
+  const threadRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    threadRef.current?.scrollTo({ top: threadRef.current.scrollHeight, behavior: "smooth" });
+  }, [messages, isTyping]);
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -18,14 +25,24 @@ export function AskBar() {
     const trimmed = question.trim();
     if (!trimmed) return;
 
-    setSentQuestion(trimmed);
     setQuestion("");
+    setMessages((prev) => [...prev, { id: nextId++, role: "user", text: trimmed }]);
+    setIsTyping(true);
+
+    window.setTimeout(() => {
+      setIsTyping(false);
+      setMessages((prev) => [...prev, { id: nextId++, role: "bot", text: getReply(trimmed) }]);
+    }, 650);
+  }
+
+  function handlePanelClick(event: MouseEvent<HTMLElement>) {
+    if (event.target === event.currentTarget) setIsOpen(false);
   }
 
   return (
     <div className={`ask-dock${isOpen ? " is-open" : ""}`}>
       {isOpen && (
-        <section className="chat-panel" aria-label="Chat with Mandy">
+        <section className="chat-panel" aria-label="Chat with Mandy" onClick={handlePanelClick}>
           <button
             className="chat-close"
             type="button"
@@ -37,9 +54,23 @@ export function AskBar() {
               <path d="M14.8 27.79 28 14.59M14.8 14.59 28 27.79" stroke="white" strokeOpacity="0.7" strokeWidth="1.2" strokeLinecap="round" />
             </svg>
           </button>
-          <p className="chat-greeting">hi，很高兴认识你，你可以用提问的方式了解更多~</p>
-          <p className="chat-question">{sentQuestion ?? DEFAULT_QUESTION}</p>
-          <p className="chat-answer">{DEFAULT_ANSWER}</p>
+          <p className="chat-greeting" onClick={(event) => event.stopPropagation()}>
+            hi，很高兴认识你，你可以用提问的方式了解更多~
+          </p>
+          <div className="chat-thread" ref={threadRef} onClick={(event) => event.stopPropagation()}>
+            {messages.map((message) => (
+              <p key={message.id} className={`chat-msg is-${message.role}`}>
+                {message.text}
+              </p>
+            ))}
+            {isTyping && (
+              <div className="chat-typing" aria-label="Mandy is typing">
+                <span />
+                <span />
+                <span />
+              </div>
+            )}
+          </div>
         </section>
       )}
       <form className="ask-bar" onSubmit={handleSubmit}>

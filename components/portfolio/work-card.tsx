@@ -33,8 +33,8 @@ export function WorkCard({
         <div className="card-shade" aria-hidden="true" />
       </div>
       <svg className="card-arrow" viewBox="0 0 42 42" fill="none" aria-hidden="true">
-        <circle cx="21" cy="21" r="20.4" fill="white" fillOpacity="0.1" stroke="white" strokeOpacity="0.5" strokeWidth="1.2" />
-        <path d="M14.8 27.79 28 14.59M28 25V14.59H17.5" stroke="white" strokeOpacity="0.7" strokeWidth="1.2" strokeLinecap="round" />
+        <circle className="card-arrow-ring" cx="21" cy="21" r="20.4" fill="white" fillOpacity="0.1" stroke="white" strokeOpacity="0.5" strokeWidth="1.2" />
+        <path className="card-arrow-glyph" d="M14.8 27.79 28 14.59M28 25V14.59H17.5" stroke="white" strokeOpacity="0.7" strokeWidth="1.2" strokeLinecap="round" />
       </svg>
       <div className="card-copy">
         <h2>{title}</h2>
