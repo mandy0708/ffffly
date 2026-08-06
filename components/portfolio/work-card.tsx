@@ -1,5 +1,8 @@
+"use client";
+
 import Image from "next/image";
 import type { StaticImageData } from "next/image";
+import { useSquirclePath } from "@/components/portfolio/use-squircle";
 
 type WorkCardProps = {
   className: string;
@@ -11,6 +14,9 @@ type WorkCardProps = {
   subtitle?: string;
 };
 
+const CARD_CORNER_RADIUS = 22;
+const CARD_CORNER_SMOOTHING = 0.6;
+
 export function WorkCard({
   className,
   href,
@@ -20,8 +26,16 @@ export function WorkCard({
   title,
   subtitle,
 }: WorkCardProps) {
+  const { ref, clipPath } = useSquirclePath<HTMLAnchorElement>(CARD_CORNER_RADIUS, CARD_CORNER_SMOOTHING);
+
   return (
-    <a className={`work-card ${className}`} href={href} aria-label={`${title}${subtitle ? ` — ${subtitle}` : ""}`}>
+    <a
+      ref={ref}
+      className={`work-card ${className}`}
+      href={href}
+      aria-label={`${title}${subtitle ? ` — ${subtitle}` : ""}`}
+      style={{ clipPath, WebkitClipPath: clipPath }}
+    >
       <div className="card-art">
         <Image
           src={image}
