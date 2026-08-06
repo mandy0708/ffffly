@@ -10,7 +10,7 @@ export function WorkCards() {
     <div id="work" className="works" aria-label="Selected work">
       <WorkCard
         className="card-sketchbook"
-        href="#sketchbook"
+        href="/work"
         image={sketchbookImage}
         imageAlt="Sketchbook illustration of a bridge, a boat and a wind turbine"
         title="Sketchbook"
@@ -18,7 +18,7 @@ export function WorkCards() {
 
       <WorkCard
         className="card-brand"
-        href="#work"
+        href="/work"
         image={brandImage}
         imageAlt="Z.ai app icon shown on a phone lock screen"
         title="Brand Design"
@@ -27,7 +27,7 @@ export function WorkCards() {
 
       <WorkCard
         className="card-about"
-        href="#about"
+        href="/about"
         image={aboutImage}
         imageAlt="Portrait of Mandy ZhangMan"
         title="About Me"
@@ -36,7 +36,7 @@ export function WorkCards() {
 
       <WorkCard
         className="card-contact"
-        href="#contact"
+        href="/about#contact"
         image={contactImage}
         imageAlt="Illustration of a vintage telephone"
         title="Contact Me"
@@ -44,7 +44,7 @@ export function WorkCards() {
 
       <WorkCard
         className="card-culture"
-        href="#work"
+        href="/work"
         image={cultureImage}
         imageAlt="Travel mahjong set open in its case"
         title="Culture & IP"

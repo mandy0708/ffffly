@@ -1,33 +1,24 @@
-"use client";
-
-import { useState } from "react";
+import Link from "next/link";
 
 const links = [
-  { href: "#home", label: "Home" },
-  { href: "#work", label: "Work" },
-  { href: "#about", label: "About" },
+  { href: "/", label: "Home" },
+  { href: "/work", label: "Work" },
+  { href: "/about", label: "About" },
 ];
 
 export function PortfolioNav() {
-  const [active, setActive] = useState(links[0].href);
-
   return (
     <nav className="top-nav" aria-label="Main navigation">
       <div className="nav-links">
-        {links.map((link) => (
-          <a
-            key={link.href}
-            href={link.href}
-            data-active={link.href === active}
-            onClick={() => setActive(link.href)}
-          >
+        {links.map((link, index) => (
+          <Link key={link.href} href={link.href} data-active={index === 0}>
             {link.label}
-          </a>
+          </Link>
         ))}
       </div>
-      <a className="nav-cta" href="#contact">
+      <Link className="nav-cta" href="/about#contact">
         Let&apos;s talk
-      </a>
+      </Link>
     </nav>
   );
 }

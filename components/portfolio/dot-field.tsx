@@ -2,9 +2,52 @@
 
 import { useEffect, useRef } from "react";
 
-const LATTICE_ANGLES = [0, (2 * Math.PI) / 3, (4 * Math.PI) / 3];
+function hash(x: number, y: number) {
+  const s = Math.sin(x * 127.1 + y * 311.7) * 43758.5453123;
+  return s - Math.floor(s);
+}
 
-export function DotField() {
+function smooth(t: number) {
+  return t * t * (3 - 2 * t);
+}
+
+function lerp(a: number, b: number, t: number) {
+  return a + (b - a) * t;
+}
+
+function valueNoise(x: number, y: number) {
+  const xi = Math.floor(x);
+  const yi = Math.floor(y);
+  const xf = x - xi;
+  const yf = y - yi;
+  const u = smooth(xf);
+  const v = smooth(yf);
+
+  const a = hash(xi, yi);
+  const b = hash(xi + 1, yi);
+  const c = hash(xi, yi + 1);
+  const d = hash(xi + 1, yi + 1);
+
+  return lerp(lerp(a, b, u), lerp(c, d, u), v);
+}
+
+function fbm(x: number, y: number) {
+  let total = 0;
+  let amp = 0.5;
+  let freq = 1;
+  let max = 0;
+
+  for (let i = 0; i < 4; i++) {
+    total += valueNoise(x * freq, y * freq) * amp;
+    max += amp;
+    amp *= 0.5;
+    freq *= 2.15;
+  }
+
+  return total / max;
+}
+
+export function DotField({ fixed = false }: { fixed?: boolean }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
@@ -35,37 +78,25 @@ export function DotField() {
     function draw(now: number) {
       if (!context) return;
 
-      const time = reduceMotion.matches ? 0 : now * 0.00018;
-      const spacing = Math.max(7, width / 160);
-      const waveX = width * (0.5 + Math.sin(time * 0.5) * 0.25);
-      const waveY = height * (0.55 + Math.cos(time * 0.38) * 0.2);
-      const freq = 0.052;
+      const time = reduceMotion.matches ? 0 : now * 0.00012;
+      const spacing = Math.max(6, width / 190);
+      const scale = 0.9 / Math.max(width, height) * 100;
+      const driftX = Math.cos(time * 0.6) * 6 + time * 1.1;
+      const driftY = Math.sin(time * 0.5) * 6 - time * 0.7;
 
       context.clearRect(0, 0, width, height);
       context.fillStyle = "#ffffff";
 
       for (let y = -spacing; y <= height + spacing; y += spacing) {
         for (let x = -spacing; x <= width + spacing; x += spacing) {
-          const dx = x - waveX;
-          const dy = y - waveY;
-          const distance = Math.sqrt(dx * dx + dy * dy);
-          const glow = Math.exp(-distance / 460);
+          const n = fbm(x * scale + driftX, y * scale + driftY);
+          const energy = Math.max(0, (n - 0.42) / 0.58);
+          const shaped = energy * energy;
 
-          // Three sine fields 120° apart interfere into a flowing hexagonal/
-          // diamond lattice — the "geometric shapes" read out of point size,
-          // not from drawing different glyphs.
-          let lattice = 0;
-          for (const angle of LATTICE_ANGLES) {
-            const proj = x * Math.cos(angle) + y * Math.sin(angle);
-            lattice += Math.sin(proj * freq + time * 1.6);
-          }
-          lattice /= LATTICE_ANGLES.length;
+          const radius = 0.3 + shaped * 2.2;
+          const opacity = 0.05 + shaped * 0.5;
 
-          const energy = Math.max(0, lattice) * (0.35 + glow * 0.65);
-          const radius = 0.35 + energy * 1.5;
-          const opacity = 0.06 + energy * 0.26;
-
-          if (opacity <= 0.061) continue;
+          if (opacity <= 0.052) continue;
 
           context.globalAlpha = opacity;
           context.beginPath();
@@ -89,5 +120,11 @@ export function DotField() {
     };
   }, []);
 
-  return <canvas ref={canvasRef} className="dot-field" aria-hidden="true" />;
+  return (
+    <canvas
+      ref={canvasRef}
+      className={`dot-field${fixed ? " dot-field-fixed" : ""}`}
+      aria-hidden="true"
+    />
+  );
 }
