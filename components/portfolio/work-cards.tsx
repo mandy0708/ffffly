@@ -1,36 +1,58 @@
+import sketchbookImage from "@/public/images/portfolio/sketchbook-illustration.jpg";
+import brandImage from "@/public/images/portfolio/brand-phone.jpg";
+import aboutImage from "@/public/images/portfolio/about-portrait.jpg";
+import contactImage from "@/public/images/portfolio/contact-phone.jpg";
+import cultureImage from "@/public/images/portfolio/mahjong-2.jpg";
 import { WorkCard } from "@/components/portfolio/work-card";
 
 export function WorkCards() {
   return (
-    <div id="work" className="works" aria-label="Selected sections">
-      <WorkCard className="blog-card" href="#sketchbook" number="01" title="Sketchbook" subtitle="Experiments and notes">
-        <span className="card-label">Sketchbook</span>
-      </WorkCard>
+    <div id="work" className="works" aria-label="Selected work">
+      <WorkCard
+        className="card-sketchbook"
+        href="#sketchbook"
+        image={sketchbookImage}
+        imageAlt="Sketchbook illustration of a bridge, a boat and a wind turbine"
+        title="Sketchbook"
+      />
 
-      <WorkCard className="recent-card" href="#work" number="02" title="Brand design" subtitle="Building brands from positioning to system">
-        <span className="round-arrow">↗</span>
-        <div className="recent-copy">
-          <h2>Brand Design</h2>
-          <p>Building brands from positioning to system.</p>
-        </div>
-      </WorkCard>
+      <WorkCard
+        className="card-brand"
+        href="#work"
+        image={brandImage}
+        imageAlt="Z.ai app icon shown on a phone lock screen"
+        title="Brand Design"
+        subtitle="Building brands from positioning to system."
+      />
 
-      <WorkCard className="about-card" href="#about" number="03" title="About me" subtitle="Mandy ZhangMan">
-        <div className="about-copy">
-          <h2>About Me</h2>
-          <p>Real me: strategist, designer, and problem-solver.</p>
-        </div>
-      </WorkCard>
+      <WorkCard
+        className="card-about"
+        href="#about"
+        image={aboutImage}
+        imageAlt="Portrait of Mandy ZhangMan"
+        title="About Me"
+        subtitle="Brand designer, AI tinkerer, and problem-solver."
+      />
 
-      <WorkCard className="contact-card" href="#contact" number="04" title="Contact me" subtitle="Let's talk">
-        <span className="round-arrow">↗</span>
-        <div className="contact-copy">Contact Me</div>
-      </WorkCard>
+      <WorkCard
+        className="card-contact"
+        href="#contact"
+        image={contactImage}
+        imageAlt="Illustration of a vintage telephone"
+        title="Contact Me"
+      />
 
-      <WorkCard className="services-card" href="#work" number="05" title="Culture and IP" subtitle="Visual stories">
-        <span className="round-arrow">↗</span>
-        <div className="service-copy">Culture &amp; IP</div>
-      </WorkCard>
+      <WorkCard
+        className="card-culture"
+        href="#work"
+        image={cultureImage}
+        imageAlt="Travel mahjong set open in its case"
+        title="Culture & IP"
+      />
+
+      <div className="mandy-badge" aria-hidden="true">
+        HELLO, I&apos;M MANDY !
+      </div>
     </div>
   );
 }

@@ -1,29 +1,45 @@
-import type { ReactNode } from "react";
+import Image from "next/image";
+import type { StaticImageData } from "next/image";
 
 type WorkCardProps = {
   className: string;
   href: string;
-  number: string;
+  image: StaticImageData;
+  imageAlt: string;
+  objectPosition?: string;
   title: string;
-  subtitle: string;
-  children: ReactNode;
+  subtitle?: string;
 };
 
 export function WorkCard({
   className,
   href,
-  number,
+  image,
+  imageAlt,
+  objectPosition,
   title,
   subtitle,
-  children,
 }: WorkCardProps) {
   return (
-    <a
-      className={`work-card ${className}`}
-      href={href}
-      aria-label={`${number} ${title} ${subtitle}`}
-    >
-      <div className="card-art">{children}</div>
+    <a className={`work-card ${className}`} href={href} aria-label={`${title}${subtitle ? ` — ${subtitle}` : ""}`}>
+      <div className="card-art">
+        <Image
+          src={image}
+          alt={imageAlt}
+          fill
+          sizes="(max-width: 900px) 40vw, 290px"
+          style={{ objectFit: "cover", objectPosition }}
+        />
+        <div className="card-shade" aria-hidden="true" />
+      </div>
+      <svg className="card-arrow" viewBox="0 0 42 42" fill="none" aria-hidden="true">
+        <circle cx="21" cy="21" r="20.4" fill="white" fillOpacity="0.1" stroke="white" strokeOpacity="0.5" strokeWidth="1.2" />
+        <path d="M14.8 27.79 28 14.59M28 25V14.59H17.5" stroke="white" strokeOpacity="0.7" strokeWidth="1.2" strokeLinecap="round" />
+      </svg>
+      <div className="card-copy">
+        <h2>{title}</h2>
+        {subtitle && <p>{subtitle}</p>}
+      </div>
     </a>
   );
 }
