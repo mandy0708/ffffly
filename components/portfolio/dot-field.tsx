@@ -2,51 +2,6 @@
 
 import { useEffect, useRef } from "react";
 
-function hash(x: number, y: number) {
-  const s = Math.sin(x * 127.1 + y * 311.7) * 43758.5453123;
-  return s - Math.floor(s);
-}
-
-function smooth(t: number) {
-  return t * t * (3 - 2 * t);
-}
-
-function lerp(a: number, b: number, t: number) {
-  return a + (b - a) * t;
-}
-
-function valueNoise(x: number, y: number) {
-  const xi = Math.floor(x);
-  const yi = Math.floor(y);
-  const xf = x - xi;
-  const yf = y - yi;
-  const u = smooth(xf);
-  const v = smooth(yf);
-
-  const a = hash(xi, yi);
-  const b = hash(xi + 1, yi);
-  const c = hash(xi, yi + 1);
-  const d = hash(xi + 1, yi + 1);
-
-  return lerp(lerp(a, b, u), lerp(c, d, u), v);
-}
-
-function fbm(x: number, y: number) {
-  let total = 0;
-  let amp = 0.5;
-  let freq = 1;
-  let max = 0;
-
-  for (let i = 0; i < 4; i++) {
-    total += valueNoise(x * freq, y * freq) * amp;
-    max += amp;
-    amp *= 0.5;
-    freq *= 2.15;
-  }
-
-  return total / max;
-}
-
 export function DotField({ fixed = false }: { fixed?: boolean }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
@@ -78,25 +33,24 @@ export function DotField({ fixed = false }: { fixed?: boolean }) {
     function draw(now: number) {
       if (!context) return;
 
-      const time = reduceMotion.matches ? 0 : now * 0.00012;
-      const spacing = Math.max(6, width / 190);
-      const scale = 0.9 / Math.max(width, height) * 100;
-      const driftX = Math.cos(time * 0.6) * 6 + time * 1.1;
-      const driftY = Math.sin(time * 0.5) * 6 - time * 0.7;
+      const time = reduceMotion.matches ? 0 : now * 0.00022;
+      const spacing = 10;
+      const waveX = width * (0.5 + Math.sin(time * 0.64) * 0.23);
+      const waveY = height * (0.48 + Math.cos(time * 0.48) * 0.19);
 
       context.clearRect(0, 0, width, height);
       context.fillStyle = "#ffffff";
 
       for (let y = -spacing; y <= height + spacing; y += spacing) {
         for (let x = -spacing; x <= width + spacing; x += spacing) {
-          const n = fbm(x * scale + driftX, y * scale + driftY);
-          const energy = Math.max(0, (n - 0.42) / 0.58);
-          const shaped = energy * energy;
-
-          const radius = 0.3 + shaped * 2.2;
-          const opacity = 0.05 + shaped * 0.5;
-
-          if (opacity <= 0.052) continue;
+          const dx = x - waveX;
+          const dy = y - waveY;
+          const distance = Math.sqrt(dx * dx + dy * dy);
+          const ripple = Math.sin(distance * 0.038 - time * 12);
+          const field = Math.sin(x * 0.018 + time * 1.4) + Math.cos(y * 0.016 - time);
+          const energy = Math.max(0, ripple * 0.5 + 0.5) * Math.exp(-distance / 390);
+          const radius = 0.45 + energy * 1.22 + Math.max(0, field) * 0.1;
+          const opacity = 0.065 + energy * 0.16;
 
           context.globalAlpha = opacity;
           context.beginPath();
