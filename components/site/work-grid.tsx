@@ -1,31 +1,34 @@
 "use client";
 
+import Image from "next/image";
 import { useState } from "react";
+import type { StaticImageData } from "next/image";
 
 export type WorkProject = {
   tag: string;
   title: string;
   description: string;
-  tint: string;
+  image: StaticImageData;
 };
 
-export function WorkGrid({ projects }: { projects: WorkProject[] }) {
-  const categories = ["All", ...Array.from(new Set(projects.map((p) => p.tag)))];
-  const [active, setActive] = useState(categories[0]);
+const CATEGORIES = ["All Projects", "Branding", "Marketing", "Culture&IP", "Web design"];
 
-  const visible = active === "All" ? projects : projects.filter((p) => p.tag === active);
+export function WorkGrid({ projects }: { projects: WorkProject[] }) {
+  const [active, setActive] = useState(CATEGORIES[0]);
+
+  const visible = active === "All Projects" ? projects : projects.filter((p) => p.tag === active);
 
   return (
     <>
-      <div className="work-filter" role="tablist" aria-label="Filter projects by client">
-        {categories.map((category) => (
+      <div className="work-filter" role="tablist" aria-label="Filter projects by category">
+        {CATEGORIES.map((category) => (
           <button
             key={category}
             type="button"
             data-active={category === active}
             onClick={() => setActive(category)}
           >
-            {category === "All" ? "All projects" : category}
+            {category}
           </button>
         ))}
       </div>
@@ -33,7 +36,9 @@ export function WorkGrid({ projects }: { projects: WorkProject[] }) {
       <div className="work-grid">
         {visible.map((project) => (
           <a className="work-item" href="/about#contact" key={project.title}>
-            <div className="work-item-image" style={{ background: project.tint }} />
+            <div className="work-item-image">
+              <Image src={project.image} alt={project.title} fill sizes="(max-width: 640px) 100vw, 420px" style={{ objectFit: "cover" }} />
+            </div>
             <div className="work-item-body">
               <div className="work-item-head">
                 <h3>{project.title}</h3>

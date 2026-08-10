@@ -36,6 +36,9 @@ yarn-error.log*
 # vercel
 .vercel
 
+# raw project source assets (originals kept locally, compressed copies live in public/images/work)
+/public/images/portfolio/项目*/
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts
