@@ -1,13 +1,14 @@
 import type { Metadata } from "next";
 import { DotField } from "@/components/portfolio/dot-field";
 import { SiteNav } from "@/components/site/site-nav";
+import { WorkGrid, type WorkProject } from "@/components/site/work-grid";
 
 export const metadata: Metadata = {
   title: "Work — Mandy ZhangMan",
   description: "Selected brand design work for Zhipu AI and 4Paradigm.",
 };
 
-const projects = [
+const projects: WorkProject[] = [
   {
     tag: "智谱 AI",
     title: "智谱品牌升级",
@@ -65,15 +66,7 @@ export default function WorkPage() {
             (4Paradigm) — from brand systems to launch visuals and culture IP.
           </p>
         </div>
-        <div className="work-grid">
-          {projects.map((project) => (
-            <a className="work-item" href="/about#contact" style={{ background: project.tint }} key={project.title}>
-              <span className="tag">{project.tag}</span>
-              <h3>{project.title}</h3>
-              <p>{project.description}</p>
-            </a>
-          ))}
-        </div>
+        <WorkGrid projects={projects} />
       </div>
     </main>
   );

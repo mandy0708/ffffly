@@ -39,7 +39,7 @@ export function DotField({ fixed = false }: { fixed?: boolean }) {
       const waveY = height * (0.48 + Math.cos(time * 0.48) * 0.19);
 
       context.clearRect(0, 0, width, height);
-      context.fillStyle = "#ffffff";
+      context.fillStyle = "#171717";
 
       for (let y = -spacing; y <= height + spacing; y += spacing) {
         for (let x = -spacing; x <= width + spacing; x += spacing) {
