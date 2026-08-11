@@ -10,7 +10,8 @@ export type WorkProjectDetail = {
   client: string;
   projectLink?: string;
   narrative: string[];
-  galleryCount: number;
+  gallery: string[];
+  galleryColumns?: number;
 };
 
 export const workProjects: WorkProjectDetail[] = [
@@ -28,7 +29,7 @@ export const workProjects: WorkProjectDetail[] = [
       "随着智谱从大模型研发公司走向全球化 AI 品牌（z.ai），原有品牌形象已难以承载新的业务格局与国际化表达。我作为智谱唯一的品牌设计师主导本次品牌升级：从品牌战略与受众洞察出发，提炼「AI、严谨、安全」的核心气质，完成多轮创意方案提报，并在反复对齐中推动共识落地。",
       "最终交付全新 logo 与完整 VI 体系，建立覆盖数字端与线下场景的视觉规范，确保品牌在官网、发布会、市场活动等全触点的一致性表达，支撑智谱品牌的全球化更新。",
     ],
-    galleryCount: 10,
+    gallery: ["1.jpg", "2.jpg", "3.jpg", "4.jpg", "5.jpg", "6.jpg", "7.jpg", "8.jpg", "9.jpg"],
   },
   {
     slug: "zhipu-agent-openday",
@@ -43,7 +44,7 @@ export const workProjects: WorkProjectDetail[] = [
       "Agent OpenDay 是智谱发布 AutoGLM、GLM-PC、首次提出 GLM-OS 概念的发布会，核心命题是「人机交互范式的转变」——一个抽象的技术叙事，需要被现场数百位嘉宾和镜头直观感知。",
       "视觉上，承袭了品牌标志性的科技蓝黑底色，在其上引入更具呼吸感的渐变光效：深色的稳定代表既有的技术秩序，现场大平流动的光效则指向 Agent 带来的新交互形态。在这一视觉语言下，我完成了大会主视觉、核心延展物料与重要嘉宾演讲 PPT 的设计，并指导实习生与供应商团队，将其延展至舞台大屏、会场导视等全场景。从演示内容到物理空间，整场发布会保持了统一的视觉秩序。",
     ],
-    galleryCount: 2,
+    gallery: ["品牌作品集260722-41.jpg", "品牌作品集260722-42.jpg"],
   },
   {
     slug: "zhipu-foundation-model",
@@ -58,22 +59,7 @@ export const workProjects: WorkProjectDetail[] = [
       "基座模型是智谱技术叙事的核心，其发布视觉直接定义外界对品牌的第一印象，而 Benchmark 作为每次发布中被引用、截图、传播最多的素材。25-26 年我围绕高频发布场景建立了三项基础规范：KV 版式规范、整体风格设定以及 Benchmark 图表规范，统一 blog 与传播物料中的数据呈现样式。",
       "技术严谨、可信的面貌对外输出，高频发布下的视觉产出也有章可循。",
     ],
-    galleryCount: 7,
-  },
-  {
-    slug: "zhipu-multimodal",
-    tag: "Marketing",
-    year: "2025",
-    title: "智谱 V 系列多模态模型发布视觉",
-    description: "Launch visual system for the V-series multimodal model.",
-    role: "品牌设计师",
-    deliverables: ["模型发布主 KV", "模型榜单", "模型发布营销物料"],
-    client: "智谱",
-    narrative: [
-      "在 GLM-4.5V、GLM-4.6V、GLM-OCR、AutoGLM、智谱输入法等多模态模型密集发布，视觉上需要回答一个问题：如何与基座模型的发布形成区隔，又不脱离智谱的品牌识别。",
-      "我的策略是在保留品牌基础视觉元素与版式秩序的前提下，放开一些色彩表达——相较基座模型发布的克制用色，多模态系列采用更丰富的色彩语言，呼应「多模态」本身的多元感知特性。系列发布由此形成了既可识别、又有辨识层次的视觉资产。",
-    ],
-    galleryCount: 1,
+    gallery: ["2.jpg", "3.jpg", "4.jpg", "5.jpg", "6.jpg", "7.jpg"],
   },
   {
     slug: "4paradigm-branding",
@@ -88,7 +74,7 @@ export const workProjects: WorkProjectDetail[] = [
       "在 2019 年，作为 To B 的快速增长的 AI 企业，第四范式的品牌要解决一个问题：技术能力强，但对内对外的视觉表达要统一标准，以沉淀品牌资产和价值。我从内部推行品牌基因定位法，通过系统的品牌分析工具确立品牌核心气质，在此基础上建立完整的 VI 手册与一系列设计标准，形成对内对外一致的品牌规范，并对规范进行宣贯。",
       "该品牌体系获得市场与专业双重认可：VI 获 K-Design Award 2022，包装获德国 iF 设计奖、当代好设计奖、亚洲设计奖。",
     ],
-    galleryCount: 11,
+    gallery: ["1.jpg", "2.jpg", "3.jpg", "4.jpg", "6.jpg", "7.jpg", "8.jpg", "9.jpg", "10.jpg", "11.jpg", "21.jpg", "22.jpg"],
   },
   {
     slug: "4paradigm-marketing",
@@ -103,7 +89,7 @@ export const workProjects: WorkProjectDetail[] = [
       "To B 企业的品牌对外露出有限，每一次出现都更显珍贵——发布会、雇主品牌、日常营销、印刷物料等每个触点，都需要传递一致的品牌印象。我们通过统一的插画风格、品牌色调与质感语言，建立了清晰、一致、具有差异性的对外活动视觉体系，覆盖发布会主视觉与全套营销物料的设计与落地。",
       "系统化的规范让每一次活动都在强化同一个品牌印象，而非重新开始，实现更持续、更有效的品牌传播。",
     ],
-    galleryCount: 9,
+    gallery: ["2.jpg", "3.jpg", "4.jpg", "5.jpg", "11.jpg", "12.jpg", "13.jpg", "14.jpg", "15.jpg"],
   },
   {
     slug: "4paradigm-culture-ip",
@@ -120,37 +106,68 @@ export const workProjects: WorkProjectDetail[] = [
       "目标 — 让每一位员工在轻松愉快的工作环境下，对公司文化有认同感，增强公司向心力与凝聚力，同时又能体现企业的个性。",
       "解决方案 — 推出企业形象 IP。形象 IP 具有强生命力，可做更丰富的延伸内容，将企业文化故事化，增强企业文化的渗透力。除此之外，IP 作为标志性的载体，与员工建立情感联系的同时，也保持了企业文化的一致性与连贯性。",
     ],
-    galleryCount: 9,
+    gallery: ["1.jpg", "2.jpg", "3.jpg", "4.jpg", "5.jpg", "6.jpg", "7.jpg", "8.jpg", "9.jpg", "10.jpg"],
   },
   {
     slug: "4paradigm-culture-system",
     tag: "Culture&IP",
     year: "2024",
     title: "第四范式企业文化视觉系统",
-    description: "Draft: a culture symbol system translating 4Paradigm's vision and mission into visual language.",
+    description: "A culture symbol system translating 4Paradigm's vision and mission into visual language.",
     role: "品牌设计师",
     deliverables: ["企业愿景 / 使命宣言视觉", "文化符号系统", "文化衫等周边延展"],
     client: "第四范式",
     narrative: [
-      "【草稿待补充】围绕第四范式「AI for Everyone」的企业愿景与使命宣言，设计了一套可延展的文化符号系统，用几何图形语言呼应「范式」的技术气质。",
-      "【草稿待补充】符号系统从愿景海报延展至文化衫等周边物料，让抽象的企业文化以视觉化、可触达的方式渗透进日常工作场景。",
+      "围绕第四范式「AI for Everyone」的企业愿景与使命宣言，设计了一套可延展的文化符号系统，用几何图形语言呼应「范式」的技术气质。",
+      "符号系统从愿景海报延展至文化衫等周边物料，让抽象的企业文化以视觉化、可触达的方式渗透进日常工作场景。",
     ],
-    galleryCount: 13,
+    gallery: [
+      "第四范式企业文化设计方案-10.jpg",
+      "第四范式企业文化设计方案-12.jpg",
+      "第四范式企业文化设计方案-14.jpg",
+      "第四范式企业文化设计方案-16.jpg",
+      "第四范式企业文化设计方案-17.jpg",
+      "第四范式企业文化设计方案-18.jpg",
+      "第四范式企业文化设计方案-19.jpg",
+      "第四范式企业文化设计方案-20.jpg",
+      "第四范式企业文化设计方案-23.jpg",
+      "第四范式企业文化设计方案-24.jpg",
+      "第四范式企业文化设计方案-25.jpg",
+      "第四范式企业文化设计方案-26.jpg",
+      "第四范式企业文化设计方案-27.jpg",
+      "第四范式企业文化设计方案-28.jpg",
+    ],
   },
   {
     slug: "4paradigm-onboarding-gifts",
     tag: "Culture&IP",
     year: "2024",
     title: "第四范式文创周边与入职礼",
-    description: "Draft: gift box and badge system design for onboarding and work-anniversary milestones.",
+    description: "Gift box and badge system design for onboarding and work-anniversary milestones.",
     role: "品牌设计师",
     deliverables: ["入职欢迎礼盒设计", "司龄徽章系统", "文创周边设计"],
     client: "第四范式",
     narrative: [
-      "【草稿待补充】为新人入职与员工司龄纪念设计了一套礼盒与徽章体系，从「Welcome」欢迎徽章到 0/1/2/4 年司龄徽章，用轻松有趣的视觉语言传递公司对员工的认可与陪伴。",
-      "【草稿待补充】礼盒包装延续品牌视觉语言，让每一次拆礼盒都成为一次品牌体验的延伸。",
+      "为新人入职与员工司龄纪念设计了一套礼盒与徽章体系，从「Welcome」欢迎徽章到 0/1/2/4 年司龄徽章，用轻松有趣的视觉语言传递公司对员工的认可与陪伴。",
+      "礼盒包装延续品牌视觉语言，让每一次拆礼盒都成为一次品牌体验的延伸。",
     ],
-    galleryCount: 6,
+    gallery: ["1.jpg", "2.jpg", "3.jpg", "4.jpg", "5.jpg", "06.jpg", "7.jpg"],
+  },
+  {
+    slug: "4paradigm-mahjong",
+    tag: "Culture&IP",
+    year: "2024",
+    title: "第四范式品牌定制麻将",
+    description: "A custom mahjong set that turns the brand system into a playable cultural gift.",
+    role: "品牌设计师",
+    deliverables: ["麻将牌面设计", "定制礼盒与配件", "品牌符号延展"],
+    client: "第四范式",
+    narrative: [
+      "把品牌视觉语言延展到一副定制麻将上——将第四范式的「4」标志、品牌色与符号系统融入筒、条、字牌的牌面设计，让品牌以一种可把玩、有温度的方式融入日常。",
+      "配套定制礼盒与骰子、筹码等配件，整套呈现统一的品牌质感，成为兼具收藏价值与传播力的文化周边。",
+    ],
+    gallery: ["3.jpg", "4.jpg", "5.jpg", "6.jpg"],
+    galleryColumns: 2,
   },
 ];
 

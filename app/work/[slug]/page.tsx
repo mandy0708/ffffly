@@ -27,10 +27,9 @@ export default async function WorkProjectPage({ params }: PageProps<"/work/[slug
   if (!project) notFound();
 
   const cover = coverImages[project.slug as keyof typeof coverImages];
-  const galleryImages = Array.from({ length: project.galleryCount }, (_, i) => {
-    const n = String(i + 1).padStart(2, "0");
-    return `/images/work/gallery/${project.slug}/${n}.jpg`;
-  });
+  const galleryImages = project.gallery.map(
+    (name) => `/images/work/gallery/${project.slug}/${encodeURIComponent(name)}`,
+  );
 
   const currentIndex = workProjects.findIndex((p) => p.slug === project.slug);
   const relatedCount = Math.min(3, workProjects.length - 1);
@@ -50,11 +49,6 @@ export default async function WorkProjectPage({ params }: PageProps<"/work/[slug
         </div>
 
         <div className="project-overview">
-          <div className="project-narrative">
-            {project.narrative.map((paragraph) => (
-              <p key={paragraph.slice(0, 12)}>{paragraph}</p>
-            ))}
-          </div>
           <aside className="project-meta-sidebar">
             <div className="project-meta-item">
               <span className="label">服务品牌</span>
@@ -77,10 +71,15 @@ export default async function WorkProjectPage({ params }: PageProps<"/work/[slug
               </div>
             )}
           </aside>
+          <div className="project-narrative">
+            {project.narrative.map((paragraph) => (
+              <p key={paragraph.slice(0, 12)}>{paragraph}</p>
+            ))}
+          </div>
         </div>
 
         {galleryImages.length > 0 && (
-          <div className="project-gallery">
+          <div className={`project-gallery${project.galleryColumns === 2 ? " project-gallery--two" : ""}`}>
             {galleryImages.map((src) => (
               <div className="project-gallery-item" key={src}>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
