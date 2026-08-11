@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import { DotField } from "@/components/portfolio/dot-field";
 import { SiteNav } from "@/components/site/site-nav";
+import { SiteFooter } from "@/components/site/site-footer";
 import portrait from "@/public/images/portfolio/about-portrait.jpg";
 
 export const metadata: Metadata = {
@@ -13,7 +13,7 @@ const experience = [
   {
     date: "2024.05 - 至今",
     company: "北京智谱华章科技有限公司",
-    role: "品牌设计",
+    role: "品牌设计负责人",
     bullets: [
       "全面负责公司品牌视觉体系的维护与迭代，覆盖官网、发布会、市场活动及品牌周边等全触点",
       "主导品牌升级项目，从提案到落地全程负责",
@@ -64,52 +64,109 @@ const education = [
   { school: "哈尔滨广播电视大学", degree: "大专 · 广告学", date: "2007 - 2010" },
 ];
 
-const stats = [
-  { value: "13+", label: "Years of experience" },
-  { value: "5", label: "Brands & teams led" },
-  { value: "15+", label: "Product logo & VI systems" },
-  { value: "3+", label: "International design awards" },
+const highlights = [
+  {
+    index: "01",
+    zh: "品牌设计",
+    en: "Brand Design",
+    desc: "从0到1构建品牌视觉体系，主导品牌升级项目，从提案到落地全程负责。",
+  },
+  {
+    index: "02",
+    zh: "视觉设计",
+    en: "Visual Design",
+    desc: "发布会、产品官网与 Campaign 视觉设计，把复杂的技术讲清楚、讲好看。",
+  },
+  {
+    index: "03",
+    zh: "文化&IP",
+    en: "Culture & IP",
+    desc: "企业文化与吉祥物 IP 形象设计，让品牌更有温度、更容易被记住。",
+  },
+  {
+    index: "04",
+    zh: "雇主品牌",
+    en: "Employer Branding",
+    desc: "校招、内部活动与员工体验设计，凝聚团队认同感，扩大雇主品牌影响力。",
+  },
+];
+
+const skills = [
+  {
+    title: "品牌设计",
+    desc: "从品牌定位到视觉系统的全链路设计。梳理品牌基因与设计原则，建立 LOGO、VI 到落地规范的完整体系，让抽象定位沉淀为对内对外一致的视觉语言。",
+  },
+  {
+    title: "营销与创意",
+    desc: "围绕产品发布与传播打造视觉表达。承接模型发布、活动视觉、落地物料的创意与生产，将企业最核心的信息清晰、有力地传递给市场。",
+  },
+  {
+    title: "品牌文化",
+    desc: "让品牌拥有温度与人格的延展设计。覆盖雇主品牌、文化周边与 IP 形象设定，把企业理念转译为可感知的触点，在人才与用户的第一印象中建立差异化认知。",
+  },
+  {
+    title: "AI 工作流",
+    desc: "将 AI 从个人技巧升级为团队能力。建立可复用的工作流与 skills，制定 AI 参与设计生产的边界与终审标准，让设计的效率与能力边界持续外扩。",
+  },
+  {
+    title: "团队与交付管理",
+    desc: "以规范和标准化流程保障稳定产出。管理 3–6 人设计团队及供应商网络，让交付的一致性依赖机制而非个人状态，在高频需求下保持稳定质量。",
+  },
+  {
+    title: "知识产权",
+    desc: "为品牌与技术资产提供法律保护。具备外观、实用新型专利及商标注册、著作权登记的完整报奖与申报经验，助力企业的创新成果尽快受到保护。",
+  },
 ];
 
 export default function AboutPage() {
   return (
     <main className="site-shell">
-      <DotField fixed />
       <SiteNav />
       <div className="site-main">
         <section className="about-hero">
-          <div className="about-hero-photo">
-            <Image src={portrait} alt="Portrait of Mandy ZhangMan" width={168} height={168} />
-          </div>
           <div className="about-hero-copy">
-            <h1>Mandy ZhangMan</h1>
-            <p className="tagline">Brand Designer.<br />Making brands for AI, with AI.</p>
-            <p className="about-meta">
-              <span>13 years of experience</span>
-              <span>Brand Design Expert</span>
-              <span>www.ffffly.com</span>
-            </p>
+            <h1 className="tagline">Brand Designer.<br />Making brands for AI, with AI.</h1>
           </div>
         </section>
 
-        <div className="about-stats">
-          {stats.map((stat) => (
-            <div className="about-stat" key={stat.label}>
-              <div className="value">{stat.value}</div>
-              <div className="label">{stat.label}</div>
-            </div>
-          ))}
+        <div className="about-highlights">
+          <div className="about-highlights-col">
+            {highlights.slice(0, 2).map((item) => (
+              <div key={item.en}>
+                <div className="about-highlight-index">{item.index}</div>
+                <p className="about-highlight-title">
+                  <span>{item.zh}</span>
+                  <span>{item.en}</span>
+                </p>
+                <p className="about-highlight-desc">{item.desc}</p>
+              </div>
+            ))}
+          </div>
+          <div className="about-highlights-photo">
+            <Image src={portrait} alt="Portrait of Mandy ZhangMan" width={240} height={280} />
+          </div>
+          <div className="about-highlights-col">
+            {highlights.slice(2, 4).map((item) => (
+              <div key={item.en}>
+                <div className="about-highlight-index">{item.index}</div>
+                <p className="about-highlight-title">
+                  <span>{item.zh}</span>
+                  <span>{item.en}</span>
+                </p>
+                <p className="about-highlight-desc">{item.desc}</p>
+              </div>
+            ))}
+          </div>
         </div>
 
         <div className="section-heading">
           <span className="index">01</span>
           <h2>Experience</h2>
         </div>
-        <div className="timeline">
+        <div className="experience-list">
           {experience.map((job) => (
-            <div className="timeline-item" key={job.company + job.date}>
-              <div className="timeline-date">{job.date}</div>
-              <div className="timeline-body">
+            <div className="experience-card" key={job.company + job.date}>
+              <div className="experience-card-main">
                 <h3>{job.company}</h3>
                 <p className="role">{job.role}</p>
                 <ul>
@@ -118,6 +175,7 @@ export default function AboutPage() {
                   ))}
                 </ul>
               </div>
+              <div className="experience-card-date">{job.date}</div>
             </div>
           ))}
         </div>
@@ -138,8 +196,21 @@ export default function AboutPage() {
           ))}
         </div>
 
-        <div className="section-heading" id="contact">
+        <div className="section-heading">
           <span className="index">03</span>
+          <h2>Skills &amp; Expertise</h2>
+        </div>
+        <div className="skills-grid">
+          {skills.map((skill) => (
+            <div className="skill-card" key={skill.title}>
+              <p className="skill-card-title">{skill.title}</p>
+              <p className="skill-card-desc">{skill.desc}</p>
+            </div>
+          ))}
+        </div>
+
+        <div className="section-heading" id="contact">
+          <span className="index">04</span>
           <h2>Contact</h2>
         </div>
         <div className="contact-block">
@@ -153,6 +224,7 @@ export default function AboutPage() {
           </div>
         </div>
       </div>
+      <SiteFooter />
     </main>
   );
 }

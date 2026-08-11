@@ -12,6 +12,7 @@ type WorkCardProps = {
   objectPosition?: string;
   title: string;
   subtitle?: string;
+  onActivate?: () => void;
 };
 
 const CARD_CORNER_RADIUS = 22;
@@ -25,6 +26,7 @@ export function WorkCard({
   objectPosition,
   title,
   subtitle,
+  onActivate,
 }: WorkCardProps) {
   const { ref, clipPath } = useSquirclePath<HTMLAnchorElement>(CARD_CORNER_RADIUS, CARD_CORNER_SMOOTHING);
 
@@ -35,6 +37,7 @@ export function WorkCard({
       href={href}
       aria-label={`${title}${subtitle ? ` — ${subtitle}` : ""}`}
       style={{ clipPath, WebkitClipPath: clipPath }}
+      onClick={onActivate ? (event) => { event.preventDefault(); onActivate(); } : undefined}
     >
       <div className="card-art">
         <Image

@@ -2,9 +2,11 @@
 
 import Image from "next/image";
 import { useState } from "react";
+import { useSearchParams } from "next/navigation";
 import type { StaticImageData } from "next/image";
 
 export type WorkProject = {
+  slug: string;
   tag: string;
   title: string;
   description: string;
@@ -14,7 +16,10 @@ export type WorkProject = {
 const CATEGORIES = ["All Projects", "Branding", "Marketing", "Culture&IP", "Web design"];
 
 export function WorkGrid({ projects }: { projects: WorkProject[] }) {
-  const [active, setActive] = useState(CATEGORIES[0]);
+  const searchParams = useSearchParams();
+  const requested = searchParams.get("category");
+  const initial = requested && CATEGORIES.includes(requested) ? requested : CATEGORIES[0];
+  const [active, setActive] = useState(initial);
 
   const visible = active === "All Projects" ? projects : projects.filter((p) => p.tag === active);
 
@@ -35,7 +40,7 @@ export function WorkGrid({ projects }: { projects: WorkProject[] }) {
 
       <div className="work-grid">
         {visible.map((project) => (
-          <a className="work-item" href="/about#contact" key={project.title}>
+          <a className="work-item" href={`/work/${project.slug}`} key={project.title}>
             <div className="work-item-image">
               <Image src={project.image} alt={project.title} fill sizes="(max-width: 640px) 100vw, 420px" style={{ objectFit: "cover" }} />
             </div>
