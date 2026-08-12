@@ -169,6 +169,25 @@ export const workProjects: WorkProjectDetail[] = [
     gallery: ["3.jpg", "4.jpg", "5.jpg", "6.jpg"],
     galleryColumns: 2,
   },
+  {
+    slug: "tetellus-branding",
+    tag: "Branding",
+    year: "2024",
+    title: "Tetellus 谛造品牌设计",
+    description: "Building a full brand identity for a smart-technology company.",
+    role: "品牌设计师",
+    deliverables: ["品牌 LOGO 与 VI", "品牌视觉系统", "品牌应用物料"],
+    client: "Tetellus 谛造",
+    narrative: [
+      "围绕「触手可及的科技，谛造智能星球」的品牌理念，为 Tetellus 谛造打造完整的品牌形象——从 LOGO、品牌色到几何视觉语言，构建一套兼具科技感与亲和力的视觉识别系统。",
+      "以深蓝为主色、红蓝渐变为点缀，配合星球、轨道等几何符号，将「让科技触手可及」的品牌主张转化为可延展至各类应用场景的视觉资产。",
+    ],
+    gallery: [
+      "1.jpg", "3.jpg", "4.jpg", "5.jpg", "6.jpg", "7.jpg", "8.jpg", "9.jpg", "10.jpg", "11.jpg",
+      "12.jpg", "13.jpg", "14.jpg", "15.jpg", "16.jpg", "17.jpg", "18.jpg", "19.jpg", "20.jpg", "21.jpg",
+      "22.jpg", "23.jpg", "24.jpg", "25.jpg", "26.jpg", "27.jpg", "28.jpg", "29.jpg", "30.jpg", "31.jpg",
+    ],
+  },
 ];
 
 export function getWorkProject(slug: string) {

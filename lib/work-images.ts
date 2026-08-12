@@ -7,6 +7,7 @@ import fourParadigmCultureIp from "@/public/images/work/4paradigm-culture-ip.jpg
 import fourParadigmCultureSystem from "@/public/images/work/4paradigm-culture-system.jpg";
 import fourParadigmOnboardingGifts from "@/public/images/work/4paradigm-onboarding-gifts.jpg";
 import fourParadigmMahjong from "@/public/images/work/4paradigm-mahjong.jpg";
+import tetellusBranding from "@/public/images/work/tetellus-branding.jpg";
 
 export const coverImages = {
   "zhipu-brand-upgrade": zhipuBrandUpgrade,
@@ -18,4 +19,5 @@ export const coverImages = {
   "4paradigm-culture-system": fourParadigmCultureSystem,
   "4paradigm-onboarding-gifts": fourParadigmOnboardingGifts,
   "4paradigm-mahjong": fourParadigmMahjong,
+  "tetellus-branding": tetellusBranding,
 };
