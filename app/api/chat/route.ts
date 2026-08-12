@@ -3,12 +3,14 @@ export const runtime = 'edge'
 const OPENROUTER_ENDPOINT = 'https://openrouter.ai/api/v1/chat/completions'
 
 // 按顺序自动兜底：主模型不可用时 OpenRouter 会依次尝试后面的模型。
-// 越靠前的越快/越常用；最后的 550B 超大模型仅作最终兜底。
+// 按问答速度从快到慢排列——首选最快的小模型，超大 / 推理模型仅作兜底。
 const MODELS = [
-  'google/gemma-4-26b-a4b-it:free',
+  'liquid/lfm-2.5-2.6b:free', // 2.6B，问答最快
+  'openai/gpt-oss-20b:free', // 小激活，较快
+  'google/gemma-4-26b-a4b-it:free', // ~4B 激活
+  'nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free', // 含推理，问答偏慢，仅兜底
   'nvidia/nemotron-3-super-120b-a12b:free',
-  'openai/gpt-oss-20b:free',
-  'nvidia/nemotron-3-ultra-550b-a55b:free',
+  'nvidia/nemotron-3-ultra-550b-a55b:free', // 550B，最终兜底
 ]
 
 // 回复长度上限，避免超长生成拖慢整体时长
