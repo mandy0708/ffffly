@@ -179,7 +179,7 @@ export async function POST(request: Request) {
       return jsonError('服务暂时不可用，请稍后再试。', 502)
     }
     console.error('OpenRouter error', upstream.status, detail)
-    return jsonError(`[debug] upstream ${upstream.status}: ${detail.slice(0, 300)}`, 502)
+    return jsonError('我这会儿有点忙，稍后再聊好吗？', 502)
   }
 
   // 原样透传 OpenRouter 的 SSE 流（标准 OpenAI 格式）
