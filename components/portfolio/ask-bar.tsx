@@ -1,11 +1,19 @@
 "use client";
 
 import { type FormEvent, useEffect, useRef, useState } from "react";
-import { getReply } from "@/components/portfolio/chat-responses";
 
 type Message = { id: number; role: "user" | "bot"; text: string };
 
 let nextId = 1;
+
+// 把 UI 消息历史转成 OpenAI/OpenRouter 的 messages 格式
+function toApiMessages(messages: Message[], latest: string) {
+  const history = messages.map((m) => ({
+    role: m.role === "bot" ? ("assistant" as const) : ("user" as const),
+    content: m.text,
+  }));
+  return [...history, { role: "user" as const, content: latest }];
+}
 
 export function AskBar() {
   const [question, setQuestion] = useState("");
@@ -32,21 +40,98 @@ export function AskBar() {
     return () => document.removeEventListener("mousedown", handleOutsideClick);
   }, [isOpen]);
 
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setIsOpen(true);
 
     const trimmed = question.trim();
-    if (!trimmed) return;
+    if (!trimmed || isTyping) return;
 
     setQuestion("");
+    const apiMessages = toApiMessages(messages, trimmed);
     setMessages((prev) => [...prev, { id: nextId++, role: "user", text: trimmed }]);
     setIsTyping(true);
 
-    window.setTimeout(() => {
+    const botId = nextId++;
+    let started = false;
+
+    // 收到第一段文本时才把气泡插入线程，在那之前保持打字动画
+    function appendChunk(chunk: string) {
+      if (!chunk) return;
+      if (!started) {
+        started = true;
+        setIsTyping(false);
+        setMessages((prev) => [...prev, { id: botId, role: "bot", text: chunk }]);
+        return;
+      }
+      setMessages((prev) =>
+        prev.map((m) => (m.id === botId ? { ...m, text: m.text + chunk } : m))
+      );
+    }
+
+    function showError(text: string) {
       setIsTyping(false);
-      setMessages((prev) => [...prev, { id: nextId++, role: "bot", text: getReply(trimmed) }]);
-    }, 650);
+      if (started) {
+        setMessages((prev) =>
+          prev.map((m) => (m.id === botId ? { ...m, text: m.text || text } : m))
+        );
+      } else {
+        setMessages((prev) => [...prev, { id: botId, role: "bot", text }]);
+      }
+    }
+
+    try {
+      const res = await fetch("/api/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ messages: apiMessages }),
+      });
+
+      if (!res.ok || !res.body) {
+        let text = "我这会儿有点忙，稍后再聊好吗？";
+        try {
+          const data = await res.json();
+          if (data?.error) text = data.error;
+        } catch {
+          /* 忽略解析失败，用默认提示 */
+        }
+        showError(text);
+        return;
+      }
+
+      // 解析 OpenRouter 的 SSE 流（标准 OpenAI 格式：一行行 `data: {...}`，以 `data: [DONE]` 结束）
+      const reader = res.body.getReader();
+      const decoder = new TextDecoder();
+      let buffer = "";
+
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+        buffer += decoder.decode(value, { stream: true });
+
+        const lines = buffer.split("\n");
+        buffer = lines.pop() ?? "";
+
+        for (const line of lines) {
+          const trimmedLine = line.trim();
+          if (!trimmedLine.startsWith("data:")) continue;
+          const payload = trimmedLine.slice(5).trim();
+          if (!payload || payload === "[DONE]") continue;
+          try {
+            const json = JSON.parse(payload);
+            appendChunk(json.choices?.[0]?.delta?.content ?? "");
+          } catch {
+            /* OpenRouter 心跳/注释行等，忽略 */
+          }
+        }
+      }
+
+      if (!started) {
+        showError("这个我暂时答不上来，直接戳 Contact Me 跟我聊聊吧～");
+      }
+    } catch {
+      showError("网络好像开小差了，稍后再试试～");
+    }
   }
 
   return (
