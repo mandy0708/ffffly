@@ -3,14 +3,11 @@ export const runtime = 'edge'
 const OPENROUTER_ENDPOINT = 'https://openrouter.ai/api/v1/chat/completions'
 
 // 按顺序自动兜底：主模型不可用时 OpenRouter 会依次尝试后面的模型。
-// 按问答速度从快到慢排列——首选最快的小模型，超大 / 推理模型仅作兜底。
+// 注意：OpenRouter 的 models 数组最多只能有 3 个。按问答速度从快到慢排列。
 const MODELS = [
   'liquid/lfm-2.5-2.6b:free', // 2.6B，问答最快
   'openai/gpt-oss-20b:free', // 小激活，较快
-  'google/gemma-4-26b-a4b-it:free', // ~4B 激活
-  'nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free', // 含推理，问答偏慢，仅兜底
-  'nvidia/nemotron-3-super-120b-a12b:free',
-  'nvidia/nemotron-3-ultra-550b-a55b:free', // 550B，最终兜底
+  'google/gemma-4-26b-a4b-it:free', // ~4B 激活，兜底
 ]
 
 // 回复长度上限，避免超长生成拖慢整体时长
@@ -183,9 +180,14 @@ export async function POST(request: Request) {
 
   if (!upstream.ok || !upstream.body) {
     const detail = await upstream.text().catch(() => '')
+    if (upstream.status === 429) {
+      return jsonError('现在问的人有点多，稍等片刻再试～', 429)
+    }
+    if (upstream.status === 401 || upstream.status === 403) {
+      return jsonError('服务暂时不可用，请稍后再试。', 502)
+    }
     console.error('OpenRouter error', upstream.status, detail)
-    // TODO(debug): 临时把真实错误透传给前端定位问题，定位后需还原为友好提示
-    return jsonError(`[debug] ${upstream.status}: ${detail.slice(0, 500)}`, 502)
+    return jsonError('我这会儿有点忙，稍后再聊好吗？', 502)
   }
 
   // 原样透传 OpenRouter 的 SSE 流（标准 OpenAI 格式）
