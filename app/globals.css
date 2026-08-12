@@ -47,6 +47,9 @@ button, input { font: inherit; color: inherit; }
 .dot-field-fixed { position: fixed; z-index: -1; }
 
 .hero { position: relative; width: 100%; height: 100%; }
+.hero-intro { display: none; }
+/* Footer is mobile-only on the home page — the desktop canvas has no room for it. */
+.portfolio-shell .site-footer { display: none; }
 
 /* Nav — fixed px size (matches .site-nav on sub-pages) so the tab does not
    jump in size when navigating between the home page and sub-pages. */
@@ -519,6 +522,18 @@ button, input { font: inherit; color: inherit; }
 
 @media (max-width: 640px) {
   .work-grid { grid-template-columns: 1fr; }
+  /* Filter tabs stay on a single row; overflow scrolls sideways instead of
+     wrapping to a second line. */
+  .work-filter {
+    width: 100%;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+  .work-filter::-webkit-scrollbar { display: none; }
+  .work-filter button { flex-shrink: 0; }
 }
 @media (max-width: 520px) {
   .site-nav { width: calc(100% - 32px); }
@@ -579,4 +594,167 @@ a.project-meta-item .value:hover { opacity: 0.7; }
   .project-overview { grid-template-columns: 1fr; gap: 32px; }
   .project-related-grid { grid-template-columns: 1fr; }
   .project-gallery--two { grid-template-columns: 1fr; }
+}
+
+/* ===== Home page — mobile (stacked vertical layout, à la jenny-m.webflow.io) =====
+   The desktop home is a fixed 1440x1080 canvas scaled as one piece. That does not
+   read on a phone, so below 720px we drop the canvas and reflow everything into a
+   normal, scrollable single column: fixed nav, a hero intro, full-width stacked
+   work cards, and the ask bar at the bottom. */
+@media (max-width: 720px) {
+  /* The home layout (layout.tsx) puts `h-full` on <html>, which caps the
+     document at viewport height — fine for the desktop one-screen canvas, but it
+     traps the taller mobile column and blocks scrolling. Let the page grow. */
+  html:has(.portfolio-shell) { height: auto; }
+
+  .portfolio-shell {
+    height: auto;
+    min-height: 100svh;
+    display: block;
+    overflow: visible;
+  }
+  .stage {
+    width: 100%;
+    max-width: 100%;
+    aspect-ratio: auto;
+    height: auto;
+    container-type: normal;
+    overflow: visible;
+    padding: 84px 16px 40px;
+  }
+  /* Dot field covers the whole scrollable viewport as a fixed backdrop. */
+  .dot-field { position: fixed; inset: 0; width: 100vw; height: 100svh; }
+
+  .hero { height: auto; }
+
+  /* Hero intro */
+  .hero-intro { display: block; margin: 4px 4px 24px; }
+  .hero-intro-eyebrow {
+    margin: 0 0 12px;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    color: rgba(20, 20, 20, 0.5);
+  }
+  .hero-intro-title {
+    margin: 0;
+    font-size: clamp(28px, 8vw, 36px);
+    font-weight: 700;
+    line-height: 1.18;
+    letter-spacing: -0.01em;
+    color: #141414;
+  }
+
+  /* Nav — fixed full-width bar */
+  .top-nav {
+    position: fixed;
+    top: 12px;
+    left: 50%;
+    width: calc(100% - 24px);
+    height: 52px;
+    padding: 6px 6px 6px 18px;
+  }
+  .nav-links { gap: 18px; }
+  .nav-links a { font-size: 14px; }
+  .nav-cta { height: 40px; padding: 0 16px; font-size: 13px; }
+
+  /* Work cards — full-width stacked */
+  .works {
+    position: static;
+    inset: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .work-card {
+    position: static;
+    left: auto;
+    top: auto;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 3 / 2;
+    border-radius: 20px;
+    animation: none;
+    translate: none;
+  }
+  .work-card:hover { transform: none; }
+  .card-sketchbook,
+  .card-brand,
+  .card-about,
+  .card-contact,
+  .card-culture { left: auto; top: auto; width: 100%; height: auto; }
+
+  .card-shade { height: 55%; }
+  .card-copy { padding: 0 22px 20px; }
+  .card-copy h2 { font-size: 22px; }
+  .card-copy p { font-size: 14px; max-width: 34ch; margin-top: 6px; }
+  .card-sketchbook .card-copy h2,
+  .card-contact .card-copy h2,
+  .card-culture .card-copy h2,
+  .card-brand .card-copy h2,
+  .card-about .card-copy h2 { font-size: 22px; }
+  .card-brand .card-copy p,
+  .card-about .card-copy p { font-size: 14px; max-width: 34ch; }
+
+  .card-arrow {
+    left: auto;
+    top: 16px;
+    right: 16px;
+    width: 40px;
+    height: 40px;
+  }
+
+  .mandy-badge { display: none; }
+
+  /* Ask bar — normal flow below the cards */
+  /* `relative` (not static) so the absolutely-positioned ask-bar / chat-panel
+     inside anchor to the dock, while the dock itself flows in the column. */
+  .ask-dock,
+  .ask-dock.is-open {
+    position: relative;
+    left: auto;
+    top: auto;
+    transform: none;
+    width: 100%;
+    height: 58px;
+    margin-top: 20px;
+  }
+  .ask-dock.is-open { height: 420px; }
+
+  .ask-bar,
+  .ask-dock.is-open .ask-bar {
+    inset: auto;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 58px;
+    border-radius: 16px;
+    padding: 0 8px 0 20px;
+  }
+  .ask-bar input { font-size: 16px; padding: 0 8px 0 0; }
+  .ask-bar button,
+  .ask-dock.is-open .ask-bar button { width: 40px; height: 40px; }
+
+  .chat-panel { border-radius: 22px; }
+  .chat-close { top: 16px; right: 16px; width: 30px; height: 30px; }
+  .chat-greeting { left: 22px; top: 22px; right: 60px; font-size: 15px; }
+  .chat-thread {
+    left: 18px;
+    right: 18px;
+    top: 66px;
+    bottom: 72px;
+    gap: 12px;
+  }
+  .chat-msg { font-size: 15px; max-width: 85%; }
+  .chat-msg.is-user { padding: 9px 13px; border-radius: 16px; }
+  .chat-typing { gap: 5px; padding: 4px 0; }
+  .chat-typing span { width: 5px; height: 5px; }
+
+  /* Footer below the chat — same design as the sub-pages' footer (border,
+     padding, type all inherited from .site-footer), just spaced from the chat. */
+  .portfolio-shell .site-footer {
+    display: flex;
+    margin-top: 40px;
+  }
 }
