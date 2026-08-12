@@ -151,7 +151,7 @@ export const workProjects: WorkProjectDetail[] = [
       "为新人入职与员工司龄纪念设计了一套礼盒与徽章体系，从「Welcome」欢迎徽章到 0/1/2/4 年司龄徽章，用轻松有趣的视觉语言传递公司对员工的认可与陪伴。",
       "礼盒包装延续品牌视觉语言，让每一次拆礼盒都成为一次品牌体验的延伸。",
     ],
-    gallery: ["1.jpg", "2.jpg", "3.jpg", "4.jpg", "5.jpg", "06.jpg", "7.jpg"],
+    gallery: ["1.jpg", "2.jpg", "3.jpg", "4.jpg", "5.gif", "06.jpg", "7.jpg"],
   },
   {
     slug: "4paradigm-mahjong",
