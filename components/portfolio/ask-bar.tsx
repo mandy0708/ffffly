@@ -1,6 +1,7 @@
 "use client";
 
 import { type FormEvent, useEffect, useRef, useState } from "react";
+import { Markdown } from "@/components/portfolio/markdown";
 
 type Message = { id: number; role: "user" | "bot"; text: string };
 
@@ -153,11 +154,17 @@ export function AskBar() {
             hi，很高兴认识你，你可以用提问的方式了解更多~
           </p>
           <div className="chat-thread" ref={threadRef}>
-            {messages.map((message) => (
-              <p key={message.id} className={`chat-msg is-${message.role}`}>
-                {message.text}
-              </p>
-            ))}
+            {messages.map((message) =>
+              message.role === "bot" ? (
+                <div key={message.id} className="chat-msg is-bot chat-md">
+                  <Markdown text={message.text} />
+                </div>
+              ) : (
+                <p key={message.id} className="chat-msg is-user">
+                  {message.text}
+                </p>
+              )
+            )}
             {isTyping && (
               <div className="chat-typing" aria-label="Mandy is typing">
                 <span />
