@@ -536,7 +536,8 @@ button, input { font: inherit; color: inherit; }
   .work-filter button { flex-shrink: 0; }
 }
 @media (max-width: 520px) {
-  .site-nav { width: calc(100% - 32px); }
+  .site-nav,
+  .top-nav { width: calc(100% - 32px); }
 }
 @media (max-width: 640px) {
   .site-main { padding-top: 110px; }
@@ -620,7 +621,11 @@ a.project-meta-item .value:hover { opacity: 0.7; }
     height: auto;
     container-type: normal;
     overflow: visible;
-    padding: 84px 16px 40px;
+    /* Match the sub-pages' comfortable spacing: same 110px top clearance below
+       the nav and 24px side gutters as .site-main. The nav sits at 16px from the
+       edge (calc(100% - 32px)), so content is intentionally narrower than the
+       nav tab, mirroring the sub-page rhythm. */
+    padding: 110px 24px 48px;
   }
   /* Dot field covers the whole scrollable viewport as a fixed backdrop. */
   .dot-field { position: fixed; inset: 0; width: 100vw; height: 100svh; }
@@ -628,7 +633,7 @@ a.project-meta-item .value:hover { opacity: 0.7; }
   .hero { height: auto; }
 
   /* Hero intro */
-  .hero-intro { display: block; margin: 4px 4px 24px; }
+  .hero-intro { display: block; margin: 0 0 32px; text-align: center; }
   .hero-intro-eyebrow {
     margin: 0 0 12px;
     font-size: 13px;
@@ -645,18 +650,11 @@ a.project-meta-item .value:hover { opacity: 0.7; }
     color: #141414;
   }
 
-  /* Nav — fixed full-width bar */
-  .top-nav {
-    position: fixed;
-    top: 12px;
-    left: 50%;
-    width: calc(100% - 24px);
-    height: 52px;
-    padding: 6px 6px 6px 18px;
-  }
-  .nav-links { gap: 18px; }
-  .nav-links a { font-size: 14px; }
-  .nav-cta { height: 40px; padding: 0 16px; font-size: 13px; }
+  /* Nav — identical to the sub-pages' .site-nav. In the stacked layout it becomes
+     a fixed bar; its width follows the exact same breakpoints as .site-nav (480px
+     centered until 520px, then calc(100% - 32px)) so the tab is pixel-identical to
+     the Work/About nav at every width. */
+  .top-nav { position: fixed; }
 
   /* Work cards — full-width stacked */
   .works {
@@ -664,8 +662,14 @@ a.project-meta-item .value:hover { opacity: 0.7; }
     inset: auto;
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 20px;
   }
+  /* Mobile card order: Work (Brand) → Culture & IP → Sketchbook → About → Contact */
+  .card-brand { order: 1; }
+  .card-culture { order: 2; }
+  .card-sketchbook { order: 3; }
+  .card-about { order: 4; }
+  .card-contact { order: 5; }
   .work-card {
     position: static;
     left: auto;
@@ -696,7 +700,14 @@ a.project-meta-item .value:hover { opacity: 0.7; }
   .card-brand .card-copy p,
   .card-about .card-copy p { font-size: 14px; max-width: 34ch; }
 
-  .card-arrow {
+  /* Pin the arrow to the top-right on every card. These per-card selectors match
+     the (0,2,0) specificity of the base rules that set the desktop `left`, so the
+     later mobile declaration wins instead of losing to them. */
+  .card-sketchbook .card-arrow,
+  .card-contact .card-arrow,
+  .card-culture .card-arrow,
+  .card-brand .card-arrow,
+  .card-about .card-arrow {
     left: auto;
     top: 16px;
     right: 16px;
