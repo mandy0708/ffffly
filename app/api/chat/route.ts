@@ -2,12 +2,20 @@ export const runtime = 'edge'
 
 const OPENROUTER_ENDPOINT = 'https://openrouter.ai/api/v1/chat/completions'
 
-// 按顺序自动兜底：主模型不可用时 OpenRouter 会依次尝试后面的模型
+// 按顺序自动兜底：主模型不可用时 OpenRouter 会依次尝试后面的模型。
+// 越靠前的越快/越常用；最后的 550B 超大模型仅作最终兜底。
 const MODELS = [
+  'google/gemma-4-26b-a4b-it:free',
   'nvidia/nemotron-3-super-120b-a12b:free',
-  'google/gemma-4-31b-it:free',
   'openai/gpt-oss-20b:free',
+  'nvidia/nemotron-3-ultra-550b-a55b:free',
 ]
+
+// 回复长度上限，避免超长生成拖慢整体时长
+const MAX_TOKENS = 800
+
+// 只把最近若干条对话历史发给模型，长对话时也能保持较快响应
+const MAX_HISTORY = 10
 
 // 简单限流：每 IP 每分钟最多 10 次。Edge 无持久存储，用内存 Map 即可（够个人站用）
 const RATE_LIMIT = 10
@@ -145,7 +153,7 @@ export async function POST(request: Request) {
   const userMessages = Array.isArray(body.messages) ? body.messages : []
   const messages: ChatMessage[] = [
     { role: 'system', content: SYSTEM_PROMPT },
-    ...userMessages,
+    ...userMessages.slice(-MAX_HISTORY),
   ]
 
   // 调用 OpenRouter，用 models 数组做自动兜底
@@ -164,6 +172,7 @@ export async function POST(request: Request) {
         models: MODELS,
         messages,
         stream: true,
+        max_tokens: MAX_TOKENS,
       }),
     })
   } catch {
