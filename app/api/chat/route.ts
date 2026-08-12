@@ -183,14 +183,9 @@ export async function POST(request: Request) {
 
   if (!upstream.ok || !upstream.body) {
     const detail = await upstream.text().catch(() => '')
-    if (upstream.status === 429) {
-      return jsonError('现在问的人有点多，稍等片刻再试～', 429)
-    }
-    if (upstream.status === 401 || upstream.status === 403) {
-      return jsonError('服务暂时不可用，请稍后再试。', 502)
-    }
     console.error('OpenRouter error', upstream.status, detail)
-    return jsonError('我这会儿有点忙，稍后再聊好吗？', 502)
+    // TODO(debug): 临时把真实错误透传给前端定位问题，定位后需还原为友好提示
+    return jsonError(`[debug] ${upstream.status}: ${detail.slice(0, 500)}`, 502)
   }
 
   // 原样透传 OpenRouter 的 SSE 流（标准 OpenAI 格式）
