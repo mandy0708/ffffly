@@ -4,9 +4,9 @@ const OPENROUTER_ENDPOINT = 'https://openrouter.ai/api/v1/chat/completions'
 
 // 按顺序自动兜底：主模型不可用时 OpenRouter 会依次尝试后面的模型
 const MODELS = [
-  'deepseek/deepseek-chat-v3:free',
-  'meta-llama/llama-3.3-70b-instruct:free',
-  'qwen/qwen-2.5-72b-instruct:free',
+  'nvidia/nemotron-3-super-120b-a12b:free',
+  'google/gemma-4-31b-it:free',
+  'openai/gpt-oss-20b:free',
 ]
 
 // 简单限流：每 IP 每分钟最多 10 次。Edge 无持久存储，用内存 Map 即可（够个人站用）
