@@ -7,8 +7,8 @@ import { SiteFooter } from "@/components/site/site-footer";
 export default function Home() {
   return (
     <main id="home" className="portfolio-shell">
+      <DotField fixed />
       <div className="stage">
-        <DotField />
         <PortfolioNav />
         <Hero />
         <AskBar />

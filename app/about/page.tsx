@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import { DotField } from "@/components/portfolio/dot-field";
 import { SiteNav } from "@/components/site/site-nav";
 import { SiteFooter } from "@/components/site/site-footer";
 import portrait from "@/public/images/portfolio/about-portrait.jpg";
@@ -91,36 +92,69 @@ const highlights = [
   },
 ];
 
-const skills = [
+// Line icons (24x24, stroke = currentColor) shown in each expertise group's badge.
+const strokeProps = {
+  fill: "none",
+  stroke: "currentColor",
+  strokeWidth: 1.7,
+  strokeLinecap: "round" as const,
+  strokeLinejoin: "round" as const,
+};
+
+const expertise = [
   {
-    title: "品牌定位与设计 DNA",
-    desc: "梳理企业理念、战略与竞争语境，提炼品牌核心气质，转化为可执行、可延展的视觉定位与设计原则。",
+    zh: "品牌策略与系统",
+    en: "Brand Strategy & System",
+    icon: (
+      <svg viewBox="0 0 24 24" {...strokeProps} aria-hidden="true">
+        <circle cx="12" cy="12" r="9" />
+        <path d="M15.6 8.4l-2 5.2-5.2 2 2-5.2z" />
+      </svg>
+    ),
+    items: ["品牌定位与设计 DNA", "品牌视觉系统与规范", "企业文化与 IP 设计"],
   },
   {
-    title: "品牌视觉系统与规范",
-    desc: "建立 LOGO、VI 到落地物料的完整设计标准，沉淀对内对外一致的品牌规范体系。",
+    zh: "设计执行",
+    en: "Design Execution",
+    icon: (
+      <svg viewBox="0 0 24 24" {...strokeProps} aria-hidden="true">
+        <path d="M12 20h9" />
+        <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4 12.5-12.5z" />
+      </svg>
+    ),
+    items: ["UI 与线上视觉设计", "印刷工艺与展会落地物料", "发布与营销视觉创意"],
   },
   {
-    title: "发布与营销视觉创意",
-    desc: "围绕模型发布、产品上线与品牌活动，统筹从创意概念到落地物料的完整视觉产出。",
+    zh: "设计方法与资产",
+    en: "Method & Assets",
+    icon: (
+      <svg viewBox="0 0 24 24" {...strokeProps} aria-hidden="true">
+        <path d="M12 3 3 8l9 5 9-5-9-5z" />
+        <path d="M3 16l9 5 9-5" />
+        <path d="M3 12l9 5 9-5" />
+      </svg>
+    ),
+    items: ["AI 设计工作流", "设计投奖规划与申报", "知识产权挖掘与注册"],
   },
   {
-    title: "AI 设计工作流",
-    desc: "搭建可复用的工作流与 skills，制定 AI 参与生产的边界与终审标准，并持续维护更新。",
-  },
-  {
-    title: "企业文化与 IP 设计",
-    desc: "在雇主品牌、文化周边与 IP 形象设定方面有丰富经验，把企业理念转译为有温度的触点。",
-  },
-  {
-    title: "知识产权挖掘与注册",
-    desc: "具备专利挖掘、材料撰写与商标、著作权注册经验，从需求梳理到证书获取全程跟进。",
+    zh: "团队与协作",
+    en: "Team & Collaboration",
+    icon: (
+      <svg viewBox="0 0 24 24" {...strokeProps} aria-hidden="true">
+        <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+        <circle cx="9" cy="7" r="4" />
+        <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+        <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+      </svg>
+    ),
+    items: ["供应商与外部协作管理", "模板标准化与规范资产沉淀", "团队行业影响力建设"],
   },
 ];
 
 export default function AboutPage() {
   return (
     <main className="site-shell">
+      <DotField fixed />
       <SiteNav />
       <div className="site-main">
         <section className="about-hero">
@@ -200,11 +234,19 @@ export default function AboutPage() {
           <span className="index">03</span>
           <h2>Skills &amp; Expertise</h2>
         </div>
-        <div className="skills-grid">
-          {skills.map((skill) => (
-            <div className="skill-card" key={skill.title}>
-              <p className="skill-card-title">{skill.title}</p>
-              <p className="skill-card-desc">{skill.desc}</p>
+        <div className="expertise-grid">
+          {expertise.map((group) => (
+            <div className="expertise-card" key={group.en}>
+              <div className="expertise-icon">{group.icon}</div>
+              <div className="expertise-head">
+                <h3 className="expertise-zh">{group.zh}</h3>
+                <span className="expertise-en">{group.en}</span>
+              </div>
+              <ul className="expertise-list">
+                {group.items.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
             </div>
           ))}
         </div>
