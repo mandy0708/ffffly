@@ -13,7 +13,7 @@ export type WorkProject = {
   image: StaticImageData;
 };
 
-const CATEGORIES = ["All Projects", "Branding", "Marketing", "Culture&IP", "Web design"];
+const CATEGORIES = ["All Projects", "Branding", "Marketing", "Culture&IP", "Packaging"];
 
 export function WorkGrid({ projects }: { projects: WorkProject[] }) {
   const searchParams = useSearchParams();

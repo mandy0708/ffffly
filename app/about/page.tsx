@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import Image from "next/image";
+import wechatQr from "@/public/images/about/wechat-qr.jpg";
 import {
   Flag,
   Paintbrush,
@@ -293,8 +295,12 @@ export default function AboutPage() {
             <a href="mailto:zh-man@163.com">zh-man@163.com</a>
           </div>
           <div className="contact-item">
-            <span className="label">Phone / WeChat</span>
+            <span className="label">Phone</span>
             <a href="tel:18601005787">186 0100 5787</a>
+          </div>
+          <div className="contact-item">
+            <span className="label">WeChat</span>
+            <Image className="contact-qr" src={wechatQr} alt="Mandy ZhangMan's WeChat QR code" width={140} height={140} />
           </div>
         </div>
       </div>

@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import sketchbookImage from "@/public/images/portfolio/sketchbook-illustration.jpg";
-import brandImage from "@/public/images/portfolio/brand-phone.jpg";
+import brandImage from "@/public/images/portfolio/brand-bag.jpg";
 import aboutImage from "@/public/images/portfolio/about-portrait.jpg";
 import contactImage from "@/public/images/portfolio/contact-phone.jpg";
 import cultureImage from "@/public/images/portfolio/mahjong-2.jpg";
@@ -32,7 +32,7 @@ export function WorkCards() {
         className="card-brand"
         href="/work"
         image={brandImage}
-        imageAlt="Z.ai app icon shown on a phone lock screen"
+        imageAlt="Branded tote bag with a purple geometric pattern"
         title="Brand Design"
         subtitle="Building brands from positioning to system."
       />

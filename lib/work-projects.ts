@@ -188,6 +188,24 @@ export const workProjects: WorkProjectDetail[] = [
       "22.jpg", "23.jpg", "24.jpg", "25.jpg", "26.jpg", "27.jpg", "28.jpg", "29.jpg", "30.jpg", "31.jpg",
     ],
   },
+  {
+    slug: "product-packaging-design",
+    tag: "Packaging",
+    year: "2023 - 2024",
+    title: "产品包装设计",
+    description: "A collection of product packaging design across multiple FMCG and lifestyle brands.",
+    role: "包装设计师",
+    deliverables: ["包装结构与视觉设计", "礼盒与外包装设计", "系列化产品视觉延展"],
+    client: "发现东北 / Florid / ëmonster / 汤面日记 / 谙味 / 中国电信定制",
+    narrative: [
+      "从东北滋补饮品、花草茶、香薰蜡烛到方便速食与节庆礼盒，我为多个品牌完成了从包装结构到视觉表达的完整设计，覆盖食品、健康与生活方式等多个品类。",
+      "每个项目都围绕品牌调性与产品卖点展开：用色彩与图形传递产品的功能与情绪价值，在保证陈列与生产可行性的同时，塑造具有辨识度的货架形象。",
+    ],
+    gallery: [
+      "01.png", "02.png", "03.jpg", "06.jpg", "07.jpg", "08.jpg", "09.jpg",
+      "10.png", "11.jpg", "12.png", "13.png", "14.png", "15.png", "16.jpg", "17.jpg",
+    ],
+  },
 ];
 
 export function getWorkProject(slug: string) {

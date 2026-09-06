@@ -598,11 +598,12 @@ button, input { font: inherit; color: inherit; }
 .about-title-block { max-width: 960px; margin: 12px 0 80px; display: flex; flex-direction: column; align-items: center; text-align: center; }
 .about-title-block h1 { font-size: clamp(34px, 5vw, 52px); font-weight: 600; margin: 0; line-height: 1.35; }
 
-.contact-block { display: flex; justify-content: center; flex-wrap: wrap; gap: 40px; }
+.contact-block { display: flex; flex-direction: column; align-items: center; gap: 32px; }
 .contact-item { display: flex; flex-direction: column; align-items: center; gap: 6px; }
 .contact-item .label { font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-40); }
 .contact-item a { font-size: 18px; font-weight: 600; transition: opacity 0.2s ease; }
 .contact-item a:hover { opacity: 0.7; }
+.contact-qr { width: 140px; height: 140px; border-radius: 12px; border: 1px solid var(--ink-08); }
 
 /* Work — layout follows harrisonz.webflow.io/projects: big title, a
    filter bar of rounded-rectangle tabs, 2-column grid of
