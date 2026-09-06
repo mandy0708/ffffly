@@ -18,23 +18,8 @@ export function DotField({ fixed = false }: { fixed?: boolean }) {
     let height = 0;
     let pixelRatio = 1;
 
-    // Dot color follows the active theme (--dot-color); re-read on theme change
-    // rather than every frame.
-    let dotColor = "#171717";
-    function readDotColor() {
-      const value = getComputedStyle(document.documentElement)
-        .getPropertyValue("--dot-color")
-        .trim();
-      if (value) dotColor = value;
-    }
-    readDotColor();
-    const themeObserver = new MutationObserver(readDotColor);
-    themeObserver.observe(document.documentElement, {
-      attributes: true,
-      attributeFilter: ["data-theme"],
-    });
-    const colorScheme = window.matchMedia("(prefers-color-scheme: dark)");
-    colorScheme.addEventListener("change", readDotColor);
+    const dotColor =
+      getComputedStyle(document.documentElement).getPropertyValue("--dot-color").trim() || "#171717";
 
     // The cursor-light origin follows the cursor. `pointer*` is the latest cursor
     // position in canvas coords; `current*` is the eased origin that trails toward
@@ -152,8 +137,6 @@ export function DotField({ fixed = false }: { fixed?: boolean }) {
     return () => {
       cancelAnimationFrame(animationFrame);
       resizeObserver.disconnect();
-      themeObserver.disconnect();
-      colorScheme.removeEventListener("change", readDotColor);
       window.removeEventListener("pointermove", onPointerMove);
       document.removeEventListener("pointerleave", onPointerLeave);
     };

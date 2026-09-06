@@ -1,259 +1,291 @@
 import type { Metadata } from "next";
-import Image from "next/image";
-import { DotField } from "@/components/portfolio/dot-field";
+import {
+  Flag,
+  Paintbrush,
+  Palette,
+  Megaphone,
+  AppWindow,
+  Box,
+  Gift,
+  Sparkles,
+} from "lucide-react";
 import { SiteNav } from "@/components/site/site-nav";
 import { SiteFooter } from "@/components/site/site-footer";
-import portrait from "@/public/images/portfolio/about-portrait.jpg";
 
 export const metadata: Metadata = {
   title: "About — Mandy ZhangMan",
   description: "Brand designer. Making brands for AI, with AI. Resume, education and contact.",
 };
 
-const experience = [
+const experience: {
+  date: string;
+  companyZh: string;
+  companyEn: string;
+  role: string;
+  description: string;
+  note?: string;
+}[] = [
   {
-    date: "2024.05 - 至今",
-    company: "北京智谱华章科技有限公司",
+    date: "2024 — Present",
+    companyZh: "智谱华章",
+    companyEn: "Z.ai",
     role: "品牌设计负责人",
-    bullets: [
-      "全面负责公司品牌视觉体系的维护与迭代，覆盖官网、发布会、市场活动及品牌周边等全触点",
-      "主导品牌升级项目，从提案到落地全程负责",
-      "构建 AI 驱动的设计工作流，大量设计生产环节由 AI 完成",
-    ],
+    description:
+      "负责 AI 科技品牌从品牌升级、视觉体系到产品发布、传播、数字体验、展览及品牌资产的完整建设，并推动 AI 融入设计生产流程。",
   },
   {
-    date: "2019.07 - 2023.04",
-    company: "第四范式（北京）技术有限公司",
+    date: "2019 — 2023",
+    companyZh: "第四范式",
+    companyEn: "4Paradigm",
     role: "品牌设计负责人",
-    bullets: [
-      "带领品牌团队获得多个设计奖项，包括德国F设计奖、当代好设计奖、亚洲设计奖等",
-      "带领品牌团队获得多个实用新型/外观专利、商标许可证、著作权登记证书",
-      "定义第四范式品牌视觉识别系统",
-      "IxDC2022 国际体验设计大会讲师",
-      "受邀参与2022 中央美术学院系列课程介绍人工智能品牌设计案例",
-    ],
+    description:
+      "负责企业科技品牌体系建设与持续升级，覆盖品牌识别、产品与营销传播、雇主品牌、活动、IP 及实体品牌资产。",
+    note: "IxDC2022 大会讲师 · 受邀为中央美术学院讲授 AI 品牌设计案例",
   },
   {
-    date: "2018.02 - 2019.04",
-    company: "玖富数科科技集团有限责任公司",
-    role: "高级品牌设计师",
-    bullets: [
-      "负责品牌VI的维护和升级，共完成15+套新产品logo及VI设计，3套吉祥物设计，多次负责APP大型运营活动设计，对外礼品设计、制作及落地",
-      "建立公司内部品牌资源池，实现设计与模版等资源的线上共享与自助下载",
-    ],
+    date: "2018 — 2019",
+    companyZh: "玖富数科",
+    companyEn: "9F",
+    role: "资深品牌设计师",
+    description:
+      "负责多业务线品牌与产品视觉，从品牌识别、IP 到营销活动及品牌周边，推动视觉资产系统化。",
   },
   {
-    date: "2016.05 - 2017.08",
-    company: "北京万科企业有限公司",
+    date: "2016 — 2017",
+    companyZh: "万科",
+    companyEn: "Vanke",
     role: "创意总监",
-    bullets: [
-      "在职期间，多中标并完成新品牌的 VI 形象建立，以及校招、品牌发布会、企业文化等活动的视觉设计工作",
-      "带领团队创作完成向子公司的创意提报，部门由4人扩至20人，进行创意培训及日常管理",
-      "2016年第三季度“绩优”员工、2016年年度“绩优”员工、北京万科销售中心2016最佳新人",
+    description:
+      "负责企业品牌与文化传播，覆盖品牌视觉、招聘与活动，并承担设计团队建设与管理。",
+  },
+  {
+    date: "2014 — 2016",
+    companyZh: "中信信托",
+    companyEn: "",
+    role: "品牌设计",
+    description:
+      "参与多个业务线品牌建设与视觉体系搭建，覆盖地产、科技及消费相关业务。",
+  },
+];
+
+const awards = [
+  { num: "01", title: "当代好设计奖", detail: "WINNER 2022" },
+  { num: "02", title: "亚洲设计奖", detail: "2023 Grand Prize" },
+  { num: "03", title: "WOLDA 世界标志设计大赛", detail: "铜奖" },
+  { num: "04", title: "K DESIGN", detail: "2022 Grand Prize" },
+  { num: "05", title: "Pentawards", detail: "入围奖" },
+];
+
+const capabilities = [
+  {
+    en: "Brand Strategy",
+    zh: "品牌策略",
+    icon: (
+      <Flag size={20} strokeWidth={1.5} aria-hidden="true" />
+    ),
+    items: ["品牌定位", "品牌架构", "品牌叙事", "品牌升级", "创意策略", "设计策略"],
+  },
+  {
+    en: "Creative Direction",
+    zh: "创意与视觉",
+    icon: (
+      <Paintbrush size={20} strokeWidth={1.5} aria-hidden="true" />
+    ),
+    items: ["创意概念", "创意方向", "视觉概念", "视觉语言", "艺术指导", "主题创意"],
+  },
+  {
+    en: "Brand Identity",
+    zh: "品牌识别",
+    icon: (
+      <Palette size={20} strokeWidth={1.5} aria-hidden="true" />
+    ),
+    items: ["品牌标志", "VI 视觉识别", "品牌视觉系统", "品牌资产", "IP 形象", "品牌周边"],
+  },
+  {
+    en: "Brand Communication",
+    zh: "品牌传播",
+    icon: (
+      <Megaphone size={20} strokeWidth={1.5} aria-hidden="true" />
+    ),
+    items: ["产品发布", "品牌活动", "社交媒体内容", "雇主品牌", "营销创意", "传播视觉", "内容视觉"],
+  },
+  {
+    en: "Digital Experience",
+    zh: "数字体验",
+    icon: (
+      <AppWindow size={20} strokeWidth={1.5} aria-hidden="true" />
+    ),
+    items: ["官网", "产品视觉", "数字界面", "交互体验", "原型设计", "网站设计与上线"],
+  },
+  {
+    en: "Space & Experience",
+    zh: "空间与体验",
+    icon: (
+      <Box size={20} strokeWidth={1.5} aria-hidden="true" />
+    ),
+    items: ["展览", "展厅", "展会", "发布会", "活动空间", "线下品牌体验"],
+  },
+  {
+    en: "Physical & IP",
+    zh: "实体与 IP",
+    icon: (
+      <Gift size={20} strokeWidth={1.5} aria-hidden="true" />
+    ),
+    items: ["包装设计", "品牌周边", "IP 衍生品", "礼赠产品", "印刷工艺", "打样", "供应链", "量产"],
+  },
+  {
+    en: "AI & Brand Systems",
+    zh: "AI 与品牌系统",
+    icon: (
+      <Sparkles size={20} strokeWidth={1.5} aria-hidden="true" />
+    ),
+    items: [
+      "AI 辅助创意", "视觉生成", "内容生产", "设计工作流", "品牌资产管理",
+      "模板系统", "品牌规范", "供应商协作", "设计效率体系",
+    ],
+  },
+];
+
+// "02 Skills & Expertise": 4 pastel, alternating-tilt overlapping cards —
+// mirrors the colorful "What I do best?" cards on harrisonz.webflow.io (title
+// color tinted from the card's own pastel, tool names as plain scattered text).
+const toolGroups: { zh: string; en: string; bg?: string; fg: string; dark?: boolean; tools: string[][] }[] = [
+  {
+    zh: "视觉生成",
+    en: "Visual Generation",
+    bg: "#FFFFFF",
+    fg: "#171717",
+    tools: [
+      ["GPT Image", "即梦", "Liblib", "Midjourney"],
+      ["TapNow", "Kling", "CapCut"],
     ],
   },
   {
-    date: "2014.08 - 2016.04",
-    company: "中信信托-旅游地产",
-    role: "创作部副经理",
-    bullets: ["负责集团房地产、IT、红酒领域的 VI 视觉设计工作，参与公司品牌策划工作"],
-  },
-];
-
-const education = [
-  { school: "北京服装学院", degree: "本科 · 数字媒体艺术", date: "2020 - 2022" },
-  { school: "哈尔滨广播电视大学", degree: "大专 · 广告学", date: "2007 - 2010" },
-];
-
-const highlights = [
-  {
-    index: "01",
-    zh: "品牌设计",
-    en: "Brand Design",
-    desc: "从0到1构建品牌视觉体系，主导品牌升级项目，从提案到落地全程负责。",
+    zh: "设计与原型",
+    en: "Design & Prototyping",
+    dark: true,
+    fg: "#FFFFFF",
+    tools: [
+      ["Figma", "Figma AI", "Photoshop"],
+      ["Illustrator"],
+    ],
   },
   {
-    index: "02",
-    zh: "视觉设计",
-    en: "Visual Design",
-    desc: "发布会、产品官网与 Campaign 视觉设计，把复杂的技术讲清楚、讲好看。",
+    zh: "创意开发",
+    en: "Creative Development",
+    bg: "#FFFFFF",
+    fg: "#171717",
+    tools: [
+      ["Cursor", "Codex", "Figma Make"],
+      ["Vercel", "Framer"],
+    ],
   },
   {
-    index: "03",
-    zh: "文化&IP",
-    en: "Culture & IP",
-    desc: "企业文化与吉祥物 IP 形象设计，让品牌更有温度、更容易被记住。",
-  },
-  {
-    index: "04",
-    zh: "雇主品牌",
-    en: "Employer Branding",
-    desc: "校招、内部活动与员工体验设计，凝聚团队认同感，扩大雇主品牌影响力。",
-  },
-];
-
-// Line icons (24x24, stroke = currentColor) shown in each expertise group's badge.
-const strokeProps = {
-  fill: "none",
-  stroke: "currentColor",
-  strokeWidth: 1.7,
-  strokeLinecap: "round" as const,
-  strokeLinejoin: "round" as const,
-};
-
-const expertise = [
-  {
-    zh: "品牌策略与系统",
-    en: "Brand Strategy & System",
-    icon: (
-      <svg viewBox="0 0 24 24" {...strokeProps} aria-hidden="true">
-        <circle cx="12" cy="12" r="9" />
-        <path d="M15.6 8.4l-2 5.2-5.2 2 2-5.2z" />
-      </svg>
-    ),
-    items: ["品牌定位与设计 DNA", "品牌视觉系统与规范", "企业文化与 IP 设计"],
-  },
-  {
-    zh: "设计执行",
-    en: "Design Execution",
-    icon: (
-      <svg viewBox="0 0 24 24" {...strokeProps} aria-hidden="true">
-        <path d="M12 20h9" />
-        <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4 12.5-12.5z" />
-      </svg>
-    ),
-    items: ["UI 与线上视觉设计", "印刷工艺与展会落地物料", "发布与营销视觉创意"],
-  },
-  {
-    zh: "设计方法与资产",
-    en: "Method & Assets",
-    icon: (
-      <svg viewBox="0 0 24 24" {...strokeProps} aria-hidden="true">
-        <path d="M12 3 3 8l9 5 9-5-9-5z" />
-        <path d="M3 16l9 5 9-5" />
-        <path d="M3 12l9 5 9-5" />
-      </svg>
-    ),
-    items: ["AI 设计工作流", "设计投奖规划与申报", "知识产权挖掘与注册"],
-  },
-  {
-    zh: "团队与协作",
-    en: "Team & Collaboration",
-    icon: (
-      <svg viewBox="0 0 24 24" {...strokeProps} aria-hidden="true">
-        <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
-        <circle cx="9" cy="7" r="4" />
-        <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
-        <path d="M16 3.13a4 4 0 0 1 0 7.75" />
-      </svg>
-    ),
-    items: ["供应商与外部协作管理", "模板标准化与规范资产沉淀", "团队行业影响力建设"],
+    zh: "研究与协作",
+    en: "Research & Collaboration",
+    dark: true,
+    fg: "#FFFFFF",
+    tools: [["Gemini", "Claude"]],
   },
 ];
 
 export default function AboutPage() {
   return (
     <main className="site-shell">
-      <DotField fixed />
       <SiteNav />
       <div className="site-main">
-        <section className="about-hero">
-          <div className="about-hero-copy">
-            <h1 className="tagline">Brand Designer.<br />Making brands for AI, with AI.</h1>
-          </div>
-        </section>
-
-        <div className="about-highlights">
-          <div className="about-highlights-col">
-            {highlights.slice(0, 2).map((item) => (
-              <div key={item.en}>
-                <div className="about-highlight-index">{item.index}</div>
-                <p className="about-highlight-title">
-                  <span>{item.zh}</span>
-                  <span>{item.en}</span>
-                </p>
-                <p className="about-highlight-desc">{item.desc}</p>
-              </div>
-            ))}
-          </div>
-          <div className="about-highlights-photo">
-            <Image src={portrait} alt="Portrait of Mandy ZhangMan" width={240} height={280} />
-          </div>
-          <div className="about-highlights-col">
-            {highlights.slice(2, 4).map((item) => (
-              <div key={item.en}>
-                <div className="about-highlight-index">{item.index}</div>
-                <p className="about-highlight-title">
-                  <span>{item.zh}</span>
-                  <span>{item.en}</span>
-                </p>
-                <p className="about-highlight-desc">{item.desc}</p>
-              </div>
-            ))}
-          </div>
+        <div className="about-title-block">
+          <h1>Brand &amp; Creative Expert</h1>
+          <p className="about-title-sub">
+            从品牌策略、创意与视觉系统，到传播、数字体验、空间与实体，构建完整的品牌体验
+          </p>
         </div>
 
-        <div className="section-heading">
-          <span className="index">01</span>
-          <h2>Experience</h2>
-        </div>
-        <div className="experience-list">
-          {experience.map((job) => (
-            <div className="experience-card" key={job.company + job.date}>
-              <div className="experience-card-main">
-                <h3>{job.company}</h3>
-                <p className="role">{job.role}</p>
-                <ul>
-                  {job.bullets.map((bullet) => (
-                    <li key={bullet}>{bullet}</li>
-                  ))}
-                </ul>
-              </div>
-              <div className="experience-card-date">{job.date}</div>
-            </div>
-          ))}
-        </div>
-
-        <div className="section-heading">
-          <span className="index">02</span>
-          <h2>Education</h2>
-        </div>
-        <div className="education-list">
-          {education.map((edu) => (
-            <div className="education-item" key={edu.school}>
-              <div className="date">{edu.date}</div>
-              <div>
-                <p className="school">{edu.school}</p>
-                <p className="degree">{edu.degree}</p>
-              </div>
-            </div>
-          ))}
-        </div>
-
-        <div className="section-heading">
-          <span className="index">03</span>
-          <h2>Skills &amp; Expertise</h2>
+        <div className="section-title-block">
+          <h2>Capabilities</h2>
+          <p className="section-subtitle">从品牌策略到全触点落地，覆盖品牌完整链路</p>
         </div>
         <div className="expertise-grid">
-          {expertise.map((group) => (
-            <div className="expertise-card" key={group.en}>
-              <div className="expertise-icon">{group.icon}</div>
+          {capabilities.map((capability) => (
+            <div className="expertise-card" key={capability.en}>
+              <div className="expertise-icon">{capability.icon}</div>
               <div className="expertise-head">
-                <h3 className="expertise-zh">{group.zh}</h3>
-                <span className="expertise-en">{group.en}</span>
+                <h3 className="expertise-zh">{capability.zh}</h3>
+                <span className="expertise-en">{capability.en}</span>
               </div>
-              <ul className="expertise-list">
-                {group.items.map((item) => (
-                  <li key={item}>{item}</li>
-                ))}
-              </ul>
+              <p className="expertise-items">{capability.items.join(" / ")}</p>
             </div>
           ))}
         </div>
 
-        <div className="section-heading" id="contact">
-          <span className="index">04</span>
+        <div className="section-title-block">
+          <h2>AI-Native Creative Workflow</h2>
+          <p className="section-subtitle">深度使用 AI，并将其融入从创意探索、视觉生成到设计与数字体验</p>
+        </div>
+        <div className="best-grid">
+          {toolGroups.map((group, i) => (
+            <div
+              className={`best-card${group.dark ? " best-card--dark" : ""}`}
+              data-tilt={i % 2 === 0 ? "a" : "b"}
+              style={group.dark ? undefined : { background: group.bg }}
+              key={group.zh}
+            >
+              <h3 className="best-card-title" style={{ color: group.fg }}>{group.zh}</h3>
+              <span className="best-card-en" style={{ color: group.fg }}>{group.en}</span>
+              <div className="best-card-panel">
+                <p className="best-card-tools">
+                  {group.tools.map((line, li) => (
+                    <span key={li}>
+                      {li > 0 && <br />}
+                      {line.join("/")}
+                    </span>
+                  ))}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div className="section-title-block">
+          <h2>Job Experience</h2>
+          <p className="section-subtitle">14+ 年品牌与创意设计经验，覆盖 AI、科技、互联网与大型企业，兼具品牌全链路实践与团队管理</p>
+        </div>
+        <div className="job-list">
+          {experience.map((job) => (
+            <div className="job-item" key={job.date}>
+              <h3 className="job-company">
+                {job.companyZh}
+                {job.companyEn && ` · ${job.companyEn}`}
+              </h3>
+              <div className="job-body">
+                <p className="job-role">{job.role}</p>
+                <p className="job-desc">{job.description}</p>
+                {job.note && <p className="job-note">{job.note}</p>}
+              </div>
+              <p className="job-year">{job.date}</p>
+            </div>
+          ))}
+        </div>
+
+        <div className="section-title-block">
+          <h2>Awards &amp; Recognition</h2>
+          <p className="section-subtitle">覆盖品牌、视觉识别与创意设计领域的专业认可</p>
+        </div>
+        <div className="awards-list">
+          {awards.map((award) => (
+            <div className="awards-item" key={award.num}>
+              <div className="awards-item-left">
+                <span className="awards-num">{award.num}</span>
+                <h3 className="awards-title">{award.title}</h3>
+              </div>
+              <span className="awards-detail">{award.detail}</span>
+            </div>
+          ))}
+        </div>
+
+        <div className="section-title-block" id="contact">
           <h2>Contact</h2>
+          <p className="section-subtitle">期待与优秀的团队，共同创造有影响力的品牌</p>
         </div>
         <div className="contact-block">
           <div className="contact-item">
