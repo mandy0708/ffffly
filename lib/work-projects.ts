@@ -29,7 +29,7 @@ export const workProjects: WorkProjectDetail[] = [
       "随着智谱从大模型研发公司走向全球化 AI 品牌（z.ai），原有品牌形象已难以承载新的业务格局与国际化表达。我作为智谱唯一的品牌设计师主导本次品牌升级：从品牌战略与受众洞察出发，提炼「AI、严谨、安全」的核心气质，完成多轮创意方案提报，并在反复对齐中推动共识落地。",
       "最终交付全新 logo 与完整 VI 体系，建立覆盖数字端与线下场景的视觉规范，确保品牌在官网、发布会、市场活动等全触点的一致性表达，支撑智谱品牌的全球化更新。",
     ],
-    gallery: ["1.jpg", "2.jpg", "3.jpg", "4.jpg", "5.jpg", "6.jpg", "7.jpg", "8.jpg", "9.jpg"],
+    gallery: ["1.jpg", "2.jpg", "3.jpg", "4.jpg", "5.jpg", "6.jpg", "7.jpg", "8.jpg", "9.jpg", "10.jpg", "11.jpg", "12.jpg"],
   },
   {
     slug: "zhipu-agent-openday",
@@ -109,6 +109,21 @@ export const workProjects: WorkProjectDetail[] = [
     gallery: ["1.jpg", "2.jpg", "3.jpg", "4.jpg", "5.jpg", "6.jpg", "7.jpg", "8.jpg", "9.jpg", "10.jpg"],
   },
   {
+    slug: "4paradigm-heiwa-ip",
+    tag: "Culture&IP",
+    year: "2021",
+    title: "文创周边 | 黑娃IP设计",
+    description: "A mascot IP design bringing 4Paradigm's AI-for-everyone spirit to life.",
+    role: "IP 设计师",
+    deliverables: ["IP 形象方案"],
+    client: "第四范式",
+    narrative: [
+      "「黑娃」是围绕第四范式「AI For Everyone」理念设计的品牌 IP 形象——圆润的深灰色身形、灵动的三角耳朵与呆萌的表情，用轻松亲和的视觉语言软化技术品牌的距离感。设计上延续品牌一贯的科技气质（深色基调、克制的线条），同时通过大耳朵、圆眼睛等萌系造型元素，让 IP 更容易被员工与用户记住和喜爱。",
+      "在基础形象之外，我延展出一套情绪化表情包（皱眉、认真思考等日常状态），并将 IP 落地到毛毯、背包徽章、毛线帽别针等周边物料上，让「黑娃」真正走进办公与生活场景，成为品牌与人之间更有温度的连接点。",
+    ],
+    gallery: ["1.jpg", "2.jpg", "3.jpg", "4.jpg", "5.jpg"],
+  },
+  {
     slug: "4paradigm-culture-system",
     tag: "Culture&IP",
     year: "2024",
@@ -142,7 +157,7 @@ export const workProjects: WorkProjectDetail[] = [
     slug: "4paradigm-onboarding-gifts",
     tag: "Culture&IP",
     year: "2024",
-    title: "第四范式文创周边与入职礼",
+    title: "文创周边 | 入职礼",
     description: "Gift box and badge system design for onboarding and work-anniversary milestones.",
     role: "品牌设计师",
     deliverables: ["入职欢迎礼盒设计", "司龄徽章系统", "文创周边设计"],
@@ -154,10 +169,25 @@ export const workProjects: WorkProjectDetail[] = [
     gallery: ["1.jpg", "2.jpg", "3.jpg", "4.jpg", "5.gif", "06.jpg", "7.jpg"],
   },
   {
+    slug: "4paradigm-store-gifts",
+    tag: "Culture&IP",
+    year: "2023",
+    title: "文创周边 | 企业商店礼品",
+    description: "Notebook and sock designs for 4Paradigm's internal culture store.",
+    role: "品牌设计师",
+    deliverables: ["文创笔记本设计", "文创袜子设计"],
+    client: "第四范式",
+    narrative: [
+      "围绕第四范式的品牌 IP 与色彩语言，为企业商店设计了一系列日常办公文创——深蓝、深灰配色的压纹笔记本，将行走的 IP 形象低调地烫印在封面上，兼具实用性与品牌辨识度。",
+      "同步设计了一组撞色文创袜子，用紫、绿、黄等品牌延展色搭配重复排列的 IP 小图标，让严肃的科技品牌也多了一份轻松活泼，成为员工日常可穿戴的品牌周边。",
+    ],
+    gallery: ["1.jpg", "2.jpg", "3.jpg", "4.jpg", "5.jpg", "6.jpg", "7.jpg", "8.jpg"],
+  },
+  {
     slug: "4paradigm-mahjong",
     tag: "Culture&IP",
     year: "2024",
-    title: "第四范式品牌定制麻将",
+    title: "文创周边 | 麻将设计",
     description: "A custom mahjong set that turns the brand system into a playable cultural gift.",
     role: "品牌设计师",
     deliverables: ["麻将牌面设计", "定制礼盒与配件", "品牌符号延展"],
@@ -173,7 +203,7 @@ export const workProjects: WorkProjectDetail[] = [
     slug: "tetellus-branding",
     tag: "Branding",
     year: "2024",
-    title: "Tetellus 谛造品牌设计",
+    title: "品牌设计 | Tetellus 谛造",
     description: "Building a full brand identity for a smart-technology company.",
     role: "品牌设计师",
     deliverables: ["品牌 LOGO 与 VI", "品牌视觉系统", "品牌应用物料"],
@@ -211,3 +241,21 @@ export const workProjects: WorkProjectDetail[] = [
 export function getWorkProject(slug: string) {
   return workProjects.find((project) => project.slug === slug);
 }
+
+// Cards with no detail page yet — the work grid shows only their cover and
+// title, and clicking one shows a "筹备中" toast instead of navigating.
+export type ComingSoonProject = {
+  slug: string;
+  tag: string;
+  title: string;
+  description: string;
+};
+
+export const comingSoonProjects: ComingSoonProject[] = [
+  {
+    slug: "yuanhuan-intelligent",
+    tag: "Branding",
+    title: "品牌设计 | 元环智能",
+    description: "Designing a new brand identity and visual system for Yuanhuan Intelligent.",
+  },
+];

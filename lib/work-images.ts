@@ -9,6 +9,9 @@ import fourParadigmOnboardingGifts from "@/public/images/work/4paradigm-onboardi
 import fourParadigmMahjong from "@/public/images/work/4paradigm-mahjong.jpg";
 import tetellusBranding from "@/public/images/work/tetellus-branding.jpg";
 import productPackagingDesign from "@/public/images/work/product-packaging-design.png";
+import fourParadigmHeiwaIp from "@/public/images/work/4paradigm-heiwa-ip.jpg";
+import fourParadigmStoreGifts from "@/public/images/work/4paradigm-store-gifts.jpg";
+import yuanhuanIntelligent from "@/public/images/work/yuanhuan-intelligent.jpg";
 
 export const coverImages = {
   "zhipu-brand-upgrade": zhipuBrandUpgrade,
@@ -22,4 +25,7 @@ export const coverImages = {
   "4paradigm-mahjong": fourParadigmMahjong,
   "tetellus-branding": tetellusBranding,
   "product-packaging-design": productPackagingDesign,
+  "4paradigm-heiwa-ip": fourParadigmHeiwaIp,
+  "4paradigm-store-gifts": fourParadigmStoreGifts,
+  "yuanhuan-intelligent": yuanhuanIntelligent,
 };

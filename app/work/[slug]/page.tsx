@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import Link from "next/link";
 import { notFound } from "next/navigation";
 import { SiteNav } from "@/components/site/site-nav";
 import { SiteFooter } from "@/components/site/site-footer";
+import { RelatedWorks } from "@/components/site/related-works";
 import { getWorkProject, workProjects } from "@/lib/work-projects";
 import { coverImages } from "@/lib/work-images";
 
@@ -32,8 +32,11 @@ export default async function WorkProjectPage({ params }: PageProps<"/work/[slug
   );
 
   const currentIndex = workProjects.findIndex((p) => p.slug === project.slug);
-  const relatedCount = Math.min(3, workProjects.length - 1);
-  const relatedProjects = Array.from({ length: relatedCount }, (_, i) => workProjects[(currentIndex + 1 + i) % workProjects.length]);
+  const relatedCount = workProjects.length - 1;
+  const relatedProjects = Array.from({ length: relatedCount }, (_, i) => {
+    const p = workProjects[(currentIndex + 1 + i) % workProjects.length];
+    return { slug: p.slug, tag: p.tag, year: p.year, title: p.title, image: coverImages[p.slug as keyof typeof coverImages] };
+  });
 
   return (
     <main className="site-shell">
@@ -89,26 +92,7 @@ export default async function WorkProjectPage({ params }: PageProps<"/work/[slug
           </div>
         )}
 
-        <div className="project-related">
-          <h2>Related Works</h2>
-          <div className="project-related-grid">
-            {relatedProjects.map((related) => (
-              <Link className="project-related-item" href={`/work/${related.slug}`} key={related.slug}>
-                <div className="project-related-image">
-                  <Image
-                    src={coverImages[related.slug as keyof typeof coverImages]}
-                    alt={related.title}
-                    fill
-                    sizes="(max-width: 640px) 100vw, 280px"
-                    style={{ objectFit: "cover" }}
-                  />
-                </div>
-                <span className="project-related-tag">{related.tag} · {related.year}</span>
-                <span className="project-related-title">{related.title}</span>
-              </Link>
-            ))}
-          </div>
-        </div>
+        <RelatedWorks projects={relatedProjects} />
       </div>
       <SiteFooter />
     </main>

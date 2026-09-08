@@ -64,7 +64,7 @@ export function DotField({ fixed = false }: { fixed?: boolean }) {
       const time = reduceMotion.matches ? 0 : now * 0.00022;
       // Dedicated, faster clock for the autonomous flow so it visibly moves on
       // its own — independent of the cursor.
-      const flowTime = reduceMotion.matches ? 0 : now * 0.0009;
+      const flowTime = reduceMotion.matches ? 0 : now * 0.001;
       const spacing = 10;
 
       // Automatic drift, used as the origin whenever the cursor is idle/away.

@@ -1,31 +1,21 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import sketchbookImage from "@/public/images/portfolio/sketchbook-illustration.jpg";
 import brandImage from "@/public/images/portfolio/brand-bag.jpg";
 import aboutImage from "@/public/images/portfolio/about-portrait.jpg";
-import contactImage from "@/public/images/portfolio/contact-phone.jpg";
+import contactImage from "@/public/images/portfolio/contact-phone2.jpg";
 import cultureImage from "@/public/images/portfolio/mahjong-2.jpg";
 import { WorkCard } from "@/components/portfolio/work-card";
 
 export function WorkCards() {
-  const [showComingSoon, setShowComingSoon] = useState(false);
-
-  useEffect(() => {
-    if (!showComingSoon) return;
-    const timer = setTimeout(() => setShowComingSoon(false), 2000);
-    return () => clearTimeout(timer);
-  }, [showComingSoon]);
-
   return (
     <div id="work" className="works" aria-label="Selected work">
       <WorkCard
         className="card-sketchbook"
-        href="/work"
+        href="/sketchbook"
         image={sketchbookImage}
         imageAlt="Sketchbook illustration of a bridge, a boat and a wind turbine"
         title="Sketchbook"
-        onActivate={() => setShowComingSoon(true)}
       />
 
       <WorkCard
@@ -50,7 +40,7 @@ export function WorkCards() {
         className="card-contact"
         href="/about#contact"
         image={contactImage}
-        imageAlt="Illustration of a vintage telephone"
+        imageAlt="Abstract render of flowing glass ribbons"
         title="Contact Me"
       />
 
@@ -63,14 +53,8 @@ export function WorkCards() {
       />
 
       <div className="mandy-badge" aria-hidden="true">
-        HELLO, I&apos;M MANDY !
+        👋 Hello, I&apos;m Mandy !
       </div>
-
-      {showComingSoon && (
-        <div className="coming-soon-toast" role="status">
-          正在建设中
-        </div>
-      )}
     </div>
   );
 }
