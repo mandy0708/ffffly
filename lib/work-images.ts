@@ -14,6 +14,7 @@ import fourParadigmStoreGifts from "@/public/images/work/4paradigm-store-gifts.j
 import yuanhuanIntelligent from "@/public/images/work/yuanhuan-intelligent.jpg";
 import northeasternChoiceBranding from "@/public/images/work/northeastern-choice-branding.jpg";
 import nineAiBranding from "@/public/images/work/nine-ai-branding.jpg";
+import foodBrandPackagingDesign from "@/public/images/work/food-brand-packaging-design.jpg";
 
 export const coverImages = {
   "zhipu-brand-upgrade": zhipuBrandUpgrade,
@@ -32,4 +33,5 @@ export const coverImages = {
   "yuanhuan-intelligent": yuanhuanIntelligent,
   "northeastern-choice-branding": northeasternChoiceBranding,
   "nine-ai-branding": nineAiBranding,
+  "food-brand-packaging-design": foodBrandPackagingDesign,
 };

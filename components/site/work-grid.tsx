@@ -19,7 +19,15 @@ const CATEGORIES = ["All Projects", "Branding", "Marketing", "Culture&IP", "Pack
 
 // Under the Branding filter, 4Paradigm should lead ahead of Zhipu — the
 // reverse of their order in "All Projects" — so this list overrides it there.
-const BRANDING_ORDER = ["yuanhuan-intelligent", "4paradigm-branding", "zhipu-brand-upgrade", "tetellus-branding"];
+const BRANDING_ORDER = [
+  "yuanhuan-intelligent",
+  "4paradigm-branding",
+  "zhipu-brand-upgrade",
+  "tetellus-branding",
+  "northeastern-choice-branding",
+  "nine-ai-branding",
+  "food-brand-packaging-design",
+];
 
 export function WorkGrid({ projects }: { projects: WorkProject[] }) {
   const searchParams = useSearchParams();

@@ -232,7 +232,10 @@ export const workProjects: WorkProjectDetail[] = [
       "从花草茶、香薰蜡烛到谷物膳食与节庆礼盒，我为多个品牌完成了从包装结构到视觉表达的完整设计，覆盖健康、香氛与生活方式等多个品类。",
       "每个项目都围绕品牌调性与产品卖点展开：用色彩与图形传递产品的功能与情绪价值，在保证陈列与生产可行性的同时，塑造具有辨识度的货架形象。",
     ],
-    gallery: ["01.jpg", "02.jpg", "03.jpg", "04.jpg", "05.jpg", "06.jpg", "07.jpg", "08.jpg"],
+    gallery: [
+      "01.jpg", "02.jpg", "03.jpg", "04.jpg", "05.jpg", "06.jpg",
+      "07.jpg", "08.jpg", "09.jpg", "10.jpg", "11.jpg", "12.jpg",
+    ],
   },
   {
     slug: "northeastern-choice-branding",
@@ -269,6 +272,25 @@ export const workProjects: WorkProjectDetail[] = [
     gallery: [
       "01.jpg", "02.jpg", "03.jpg", "04.jpg", "05.jpg", "06.jpg", "07.jpg", "08.jpg",
       "09.jpg", "10.jpg", "11.jpg", "12.jpg", "13.jpg", "14.jpg", "15.jpg",
+    ],
+  },
+  {
+    slug: "food-brand-packaging-design",
+    tag: "Branding",
+    categories: ["Branding", "Packaging"],
+    year: "2025",
+    title: "食品品牌及包装设计",
+    description: "Full brand identity and packaging design for a fresh noodle-soup food brand.",
+    role: "品牌设计师",
+    deliverables: ["品牌 LOGO 与视觉识别", "包装结构与视觉设计", "品牌宣传物料"],
+    client: "汤面日记 Noodles Soup Diary",
+    narrative: [
+      "「汤面日记」主打「文火慢炖、熬足八小时」的鸡汤鲜面，我从品牌命名与气质出发，建立温暖、质朴又不失品质感的视觉语言，以红黑为主色调传递「原汤好味」的产品信任感。",
+      "从品牌 LOGO、包装结构到延展物料，围绕「一汤两面随心配」的产品卖点展开设计，让传统鸡汤鲜面在货架上拥有清晰、有记忆点的品牌形象。",
+    ],
+    gallery: [
+      "01.jpg", "02.jpg", "03.jpg", "04.jpg", "05.jpg",
+      "06.jpg", "07.jpg", "08.jpg", "09.jpg", "10.jpg",
     ],
   },
 ];
