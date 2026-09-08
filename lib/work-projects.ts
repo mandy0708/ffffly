@@ -232,8 +232,8 @@ export const workProjects: WorkProjectDetail[] = [
       "每个项目都围绕品牌调性与产品卖点展开：用色彩与图形传递产品的功能与情绪价值，在保证陈列与生产可行性的同时，塑造具有辨识度的货架形象。",
     ],
     gallery: [
-      "01.png", "02.png", "03.jpg", "06.jpg", "07.jpg", "08.jpg", "09.jpg",
-      "10.png", "11.jpg", "12.png", "13.png", "14.png", "15.png", "16.jpg", "17.jpg",
+      "01.jpg", "02.jpg", "03.jpg", "06.jpg", "07.jpg", "08.jpg", "09.jpg",
+      "10.jpg", "11.jpg", "12.jpg", "13.jpg", "14.jpg", "15.jpg", "16.jpg", "17.jpg",
     ],
   },
 ];

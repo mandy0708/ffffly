@@ -8,7 +8,7 @@ export type SketchbookImage = {
 const files: { name: string; width: number; height: number }[] = [
   { name: "1岁参加高考_1.jpg", width: 1042, height: 1900 },
   { name: "1岁参加高考_封面.jpg", width: 1250, height: 532 },
-  { name: "20.png", width: 6542, height: 4500 },
+  { name: "20.jpg", width: 2400, height: 1651 },
   { name: "中秋-01.jpg", width: 4326, height: 2706 },
   { name: "小正-气球.png", width: 3597, height: 3463 },
   { name: "小正-采花.png", width: 3597, height: 3463 },
@@ -37,7 +37,7 @@ const files: { name: string; width: number; height: number }[] = [
   { name: "脉脉-新年新flag-07.jpg", width: 960, height: 960 },
   { name: "Frame 2147223842.png", width: 912, height: 912 },
   { name: "Frame 2147224632.png", width: 1620, height: 1620 },
-  { name: "校招-天才实习生_画板 1 副本 3.png", width: 2344, height: 16771 },
+  { name: "校招-天才实习生_画板 1 副本 3.jpg", width: 1400, height: 10017 },
 ];
 
 function toAlt(name: string) {
