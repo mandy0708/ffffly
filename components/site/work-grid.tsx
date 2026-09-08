@@ -8,6 +8,7 @@ import type { StaticImageData } from "next/image";
 export type WorkProject = {
   slug: string;
   tag: string;
+  categories?: string[];
   title: string;
   description: string;
   image: StaticImageData;
@@ -33,7 +34,8 @@ export function WorkGrid({ projects }: { projects: WorkProject[] }) {
     return () => clearTimeout(timer);
   }, [showComingSoon]);
 
-  const filtered = active === "All Projects" ? projects : projects.filter((p) => p.tag === active);
+  const filtered =
+    active === "All Projects" ? projects : projects.filter((p) => (p.categories ?? [p.tag]).includes(active));
   const visible =
     active === "Branding"
       ? [...filtered].sort((a, b) => BRANDING_ORDER.indexOf(a.slug) - BRANDING_ORDER.indexOf(b.slug))

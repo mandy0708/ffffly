@@ -23,6 +23,7 @@ const projects: WorkProject[] = [
   ...workProjects.map((project) => ({
     slug: project.slug,
     tag: project.tag,
+    categories: project.categories,
     title: project.title,
     description: project.description,
     image: coverImages[project.slug as keyof typeof coverImages],

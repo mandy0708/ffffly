@@ -1,6 +1,7 @@
 export type WorkProjectDetail = {
   slug: string;
   tag: string;
+  categories?: string[];
   year: string;
   title: string;
   subtitle?: string;
@@ -223,17 +224,51 @@ export const workProjects: WorkProjectDetail[] = [
     tag: "Packaging",
     year: "2023 - 2024",
     title: "产品包装设计",
-    description: "A collection of product packaging design across multiple FMCG and lifestyle brands.",
+    description: "A collection of product packaging design across multiple lifestyle brands.",
     role: "包装设计师",
     deliverables: ["包装结构与视觉设计", "礼盒与外包装设计", "系列化产品视觉延展"],
-    client: "发现东北 / Florid / ëmonster / 汤面日记 / 谙味 / 中国电信定制",
+    client: "Florid / ëmonster / 谙味 / 中国电信定制",
     narrative: [
-      "从东北滋补饮品、花草茶、香薰蜡烛到方便速食与节庆礼盒，我为多个品牌完成了从包装结构到视觉表达的完整设计，覆盖食品、健康与生活方式等多个品类。",
+      "从花草茶、香薰蜡烛到谷物膳食与节庆礼盒，我为多个品牌完成了从包装结构到视觉表达的完整设计，覆盖健康、香氛与生活方式等多个品类。",
       "每个项目都围绕品牌调性与产品卖点展开：用色彩与图形传递产品的功能与情绪价值，在保证陈列与生产可行性的同时，塑造具有辨识度的货架形象。",
     ],
+    gallery: ["01.jpg", "02.jpg", "03.jpg", "04.jpg", "05.jpg", "06.jpg", "07.jpg", "08.jpg"],
+  },
+  {
+    slug: "northeastern-choice-branding",
+    tag: "Branding",
+    categories: ["Branding", "Packaging"],
+    year: "2023",
+    title: "健康滋补品牌及包装设计",
+    description: "Building a health-focused brand identity and packaging system for a Northeastern tonic foods brand.",
+    role: "品牌设计师",
+    deliverables: ["品牌 LOGO 与视觉识别", "产品包装设计", "电商详情页视觉", "品牌宣传物料"],
+    client: "发现东北 Northeastern Choice",
+    narrative: [
+      "「发现东北」是一个专注东北道地滋补食材的健康品牌，我从品牌气质出发，建立「臻选·真情·真自然」的品牌主张，并搭建纳米、溯源、有机三大产品信任支点，塑造品牌在健康食品赛道的差异化认知。",
+      "视觉上延续东北山林的自然气息，从品牌 LOGO、包装到电商详情页，贯穿人参、石榴等核心原料的功效故事，让「健康」既有品牌温度，也有产品说服力。",
+    ],
     gallery: [
-      "01.jpg", "02.jpg", "03.jpg", "06.jpg", "07.jpg", "08.jpg", "09.jpg",
-      "10.jpg", "11.jpg", "12.jpg", "13.jpg", "14.jpg", "15.jpg", "16.jpg", "17.jpg",
+      "01.jpg", "02.jpg", "03.jpg", "04.jpg", "05.jpg", "06.jpg",
+      "07.jpg", "08.jpg", "09.jpg", "10.jpg", "11.jpg",
+    ],
+  },
+  {
+    slug: "nine-ai-branding",
+    tag: "Branding",
+    year: "2024",
+    title: "品牌设计 | 互联网金融品牌",
+    description: "Logo and brand identity exploration for an AI-driven internet finance brand.",
+    role: "品牌设计师",
+    deliverables: ["品牌命名与 Logo 设计", "多方案创意提报", "标识应用延展"],
+    client: "NINE AI",
+    narrative: [
+      "为一家互联网金融科技品牌进行 Logo 设计提案，从「九狐」的品牌联想出发，探索狐狸形象与 AI 科技感的结合，提出 NINE AI、FOX TIMES.AI 等多个命名与标识方向。",
+      "标识以简洁的几何线条构建狐狸剪影，橙黑配色兼具警觉与活力，并延展至员工文化衫等应用场景，验证标识在多场景下的识别度与延展性。",
+    ],
+    gallery: [
+      "01.jpg", "02.jpg", "03.jpg", "04.jpg", "05.jpg", "06.jpg", "07.jpg", "08.jpg",
+      "09.jpg", "10.jpg", "11.jpg", "12.jpg", "13.jpg", "14.jpg", "15.jpg",
     ],
   },
 ];
