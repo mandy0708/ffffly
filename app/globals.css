@@ -641,25 +641,26 @@ button, input { font: inherit; color: inherit; }
   .work-filter button { flex-shrink: 0; }
 }
 @media (max-width: 640px) {
-  /* Nav — the 480px desktop pill has no room for four links plus a text CTA
-     once the tab shrinks to fit a phone screen; tighten link spacing and
-     collapse the CTA to an icon-only circle so nothing clips off-screen. */
+  /* Nav — the 480px desktop pill has no room for four links plus the CTA once
+     the tab shrinks to fit a phone screen. Keep the CTA as the same black
+     rounded-rect button and let the links row scroll sideways instead of
+     squeezing everything down or replacing the CTA with an icon. */
   .site-nav,
   .top-nav {
     width: calc(100% - 32px);
     padding: 6px 6px 6px 20px;
   }
-  .nav-links, .site-nav-links { gap: 12px; }
-  .nav-links a, .site-nav-links a { font-size: 13px; }
-  .nav-cta, .site-nav-cta {
-    flex-shrink: 0;
-    width: 36px;
-    height: 36px;
-    padding: 0;
-    border-radius: 50%;
+  .nav-links, .site-nav-links {
+    gap: 22px;
+    flex-shrink: 1;
+    min-width: 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
   }
-  .nav-cta-label { display: none; }
-  .nav-cta-icon { display: block; }
+  .nav-links::-webkit-scrollbar, .site-nav-links::-webkit-scrollbar { display: none; }
+  .nav-links a, .site-nav-links a { flex-shrink: 0; font-size: 14px; }
+  .nav-cta, .site-nav-cta { flex-shrink: 0; padding: 0 16px; font-size: 13px; }
 }
 @media (max-width: 640px) {
   .site-main { padding-top: 110px; }
