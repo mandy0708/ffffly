@@ -6,6 +6,7 @@ import aboutImage from "@/public/images/portfolio/about-portrait.jpg";
 import contactImage from "@/public/images/portfolio/contact-phone2.jpg";
 import cultureImage from "@/public/images/portfolio/culture-cover.jpg";
 import { WorkCard } from "@/components/portfolio/work-card";
+import { AwardsBadgeCard } from "@/components/portfolio/awards-badge-card";
 
 export function WorkCards() {
   return (
@@ -56,6 +57,8 @@ export function WorkCards() {
       <div className="mandy-badge" aria-hidden="true">
         👋 Hello, I&apos;m Mandy !
       </div>
+
+      <AwardsBadgeCard />
     </div>
   );
 }

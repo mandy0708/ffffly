@@ -221,8 +221,9 @@ button, input { font: inherit; color: inherit; }
 .card-contact { animation: card-float-b 7.8s ease-in-out -2s infinite; }
 .card-culture { animation: card-float-a 8.2s ease-in-out -4s infinite; }
 .mandy-badge { animation: card-float-c 6.5s ease-in-out -1s infinite; }
+.badge-card-awards { animation: card-float-b 8s ease-in-out -2.5s infinite; }
 @media (prefers-reduced-motion: reduce) {
-  .card-sketchbook, .card-brand, .card-about, .card-contact, .card-culture, .mandy-badge { animation: none; }
+  .card-sketchbook, .card-brand, .card-about, .card-contact, .card-culture, .mandy-badge, .badge-card-awards { animation: none; }
 }
 
 .mandy-badge {
@@ -240,6 +241,40 @@ button, input { font: inherit; color: inherit; }
   box-shadow: 0 0 10px var(--shadow-10);
   color: var(--ink);
   font-size: 1.6389cqw;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+/* Awards stat card — bottom-right accent, mirrors jenny-m.webflow.io's
+   "120+ Reviews Globally" white stat card. Logos are text monograms until
+   real award-logo art is dropped in. */
+.badge-card-awards {
+  position: absolute;
+  left: 81cqw;
+  top: 55cqw;
+  z-index: 15;
+  width: 17cqw;
+  padding: 1.4cqw 1.6cqw;
+  border-radius: 1.2cqw;
+  background: var(--surface);
+  box-shadow: 0 0 20px var(--shadow-10);
+  display: flex;
+  flex-direction: column;
+  gap: 0.9cqw;
+}
+.badge-awards-stat { display: flex; flex-direction: column; gap: 0.2cqw; }
+.badge-awards-number { font-size: 2.6cqw; font-weight: 700; color: var(--ink); line-height: 1; }
+.badge-awards-label { font-size: 0.85cqw; font-weight: 500; color: var(--ink-55); line-height: 1.3; }
+.badge-awards-logos { display: flex; flex-wrap: wrap; gap: 0.5cqw; }
+.badge-awards-logo {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.35cqw 0.6cqw;
+  border-radius: 999px;
+  background: var(--ink-06);
+  color: var(--ink-70);
+  font-size: 0.72cqw;
   font-weight: 600;
   white-space: nowrap;
 }
@@ -927,7 +962,7 @@ a.project-meta-item .value:hover { opacity: 0.7; }
     height: 40px;
   }
 
-  .mandy-badge { display: none; }
+  .mandy-badge, .badge-card-awards { display: none; }
 
   /* Contact dock — normal flow below the cards, `relative` (not static) so
      the absolutely-positioned pill inside anchors to the dock while the dock
