@@ -294,11 +294,11 @@ export default function AboutPage() {
             <span className="label">Email</span>
             <a href="mailto:zh-man@163.com">zh-man@163.com</a>
           </div>
-          <div className="contact-item">
+          <div className="contact-item" id="phone">
             <span className="label">Phone</span>
             <a href="tel:18601005787">186 0100 5787</a>
           </div>
-          <div className="contact-item">
+          <div className="contact-item" id="wechat">
             <span className="label">WeChat</span>
             <Image className="contact-qr" src={wechatQr} alt="Mandy ZhangMan's WeChat QR code" width={140} height={140} />
           </div>

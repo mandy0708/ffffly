@@ -1,4 +1,4 @@
-import { AskBar } from "@/components/portfolio/ask-bar";
+import { ContactDock } from "@/components/portfolio/contact-dock";
 import { DotField } from "@/components/portfolio/dot-field";
 import { Hero } from "@/components/portfolio/hero";
 import { PortfolioNav } from "@/components/portfolio/portfolio-nav";
@@ -11,7 +11,7 @@ export default function Home() {
       <div className="stage">
         <PortfolioNav />
         <Hero />
-        <AskBar />
+        <ContactDock />
         <SiteFooter />
       </div>
     </main>
