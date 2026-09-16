@@ -107,8 +107,6 @@ button, input { font: inherit; color: inherit; }
 
 .hero { position: relative; width: 100%; height: 100%; }
 .hero-intro { display: none; }
-/* Footer is mobile-only on the home page — the desktop canvas has no room for it. */
-.portfolio-shell .site-footer { display: none; }
 
 /* Nav — fixed px size (matches .site-nav on sub-pages) so the tab does not
    jump in size when navigating between the home page and sub-pages. */
@@ -315,13 +313,77 @@ button, input { font: inherit; color: inherit; }
   transition: opacity 0.25s ease 0.05s, transform 0.25s ease 0.05s;
 }
 .contact-dock.is-open .contact-content { opacity: 1; transform: scale(1); pointer-events: auto; }
-.contact-items { display: flex; gap: 2cqw; }
-.contact-item-link { display: flex; flex-direction: column; align-items: center; gap: 0.6667cqw; text-decoration: none; }
-.contact-item-icon { display: grid; place-items: center; width: 3.3333cqw; height: 3.3333cqw; border-radius: 50%; }
-.contact-item-icon svg { width: 1.5cqw; height: 1.5cqw; }
-.contact-item-label { font-size: 1.1667cqw; font-weight: 700; color: var(--ink); }
+.contact-items { display: flex; gap: 2.2cqw; }
+.contact-item-link { display: flex; flex-direction: column; align-items: center; gap: 0.7333cqw; text-decoration: none; }
+.contact-item-icon { display: grid; place-items: center; width: 3.6667cqw; height: 3.6667cqw; border-radius: 50%; }
+.contact-item-icon svg { width: 1.65cqw; height: 1.65cqw; }
+.contact-item-label { font-size: 1.2833cqw; font-weight: 700; color: var(--ink); }
 
 .contact-copyright { font-size: 1cqw; font-weight: 500; color: var(--ink-60); white-space: nowrap; }
+
+/* ===== Home page — content below the first-screen canvas, plain CSS units,
+   normal document flow (the page scrolls past the fixed-canvas hero). ===== */
+
+/* Image showcase — enfind.webflow.io-style infinite horizontal marquee of
+   placeholder imagery, mixing rounded-rect and fully-round tiles. Display
+   only, not interactive; the user will swap in real photos later. */
+.image-showcase { width: 100%; overflow: hidden; padding: 100px 0; background: var(--paper); }
+.image-showcase-track {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  width: max-content;
+  animation: image-showcase-scroll 32s linear infinite;
+}
+.image-showcase-item { flex-shrink: 0; background: var(--card-placeholder); }
+.image-showcase-item--rect { width: 280px; height: 350px; border-radius: 24px; }
+.image-showcase-item--circle { width: 280px; height: 280px; border-radius: 50%; align-self: center; }
+@keyframes image-showcase-scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .image-showcase-track { animation: none; }
+}
+
+/* Projects showcase — four picks from the Work grid, reusing its card look. */
+.home-projects { max-width: 1140px; margin: 0 auto; padding: 40px 24px 120px; text-align: center; }
+.home-projects-heading { margin: 0 0 48px; display: flex; flex-direction: column; align-items: center; gap: 12px; }
+.home-projects-heading h2 { font-size: clamp(28px, 4vw, 36px); font-weight: 600; margin: 0; }
+.home-projects-heading p { max-width: 520px; margin: 0; font-size: 15px; font-weight: 400; color: var(--ink-60); line-height: 1.6; }
+.home-projects-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; text-align: left; }
+.home-project-card { display: flex; flex-direction: column; gap: 14px; }
+.home-project-image { position: relative; width: 100%; aspect-ratio: 4 / 5; border-radius: 20px; overflow: hidden; background: var(--card-placeholder); transition: transform 0.25s ease; }
+.home-project-card:hover .home-project-image { transform: translateY(-4px); }
+.home-project-body { display: flex; flex-direction: column; gap: 6px; }
+.home-project-tag { font-size: 12px; font-weight: 500; color: var(--ink-45); }
+.home-project-body h3 { font-size: 16px; font-weight: 600; margin: 0; line-height: 1.4; }
+.home-projects-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 48px;
+  padding: 14px 24px;
+  border-radius: 999px;
+  background: var(--cta-bg);
+  color: var(--cta-fg);
+  font-size: 14px;
+  font-weight: 600;
+  transition: transform 0.2s ease;
+}
+.home-projects-cta:hover { transform: scale(1.03); }
+
+@media (max-width: 900px) {
+  .home-projects-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 640px) {
+  .image-showcase { padding: 64px 0; }
+  .image-showcase-item--rect { width: 200px; height: 250px; border-radius: 18px; }
+  .image-showcase-item--circle { width: 200px; height: 200px; }
+  .home-projects { padding: 24px 20px 80px; }
+  .home-projects-grid { grid-template-columns: 1fr; }
+}
+
 /* ===== Sub-pages (About / Work) — regular scrollable pages, plain CSS units ===== */
 .site-nav {
   position: fixed;
@@ -682,6 +744,18 @@ a.project-meta-item .value:hover { opacity: 0.7; }
   border-radius: 16px;
   overflow: hidden;
   background: var(--card-placeholder);
+  opacity: 0;
+  transform: translateY(64px) scale(1.06);
+}
+.sketchbook-item.is-in {
+  animation: sketchbook-fly-in 1s cubic-bezier(.16, 1, .3, 1) var(--stagger, 0s) both;
+}
+@keyframes sketchbook-fly-in {
+  0% { opacity: 0; transform: translateY(64px) scale(1.06); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .sketchbook-item { opacity: 1; transform: none; animation: none; }
 }
 .sketchbook-item img { width: 100%; height: 100%; display: block; object-fit: cover; transition: transform 0.35s ease; }
 .sketchbook-item:hover img { transform: scale(1.06); }
@@ -833,17 +907,10 @@ a.project-meta-item .value:hover { opacity: 0.7; }
   .contact-dots { gap: 6px; }
   .contact-dots span { width: 5px; height: 5px; }
   .contact-content { gap: 12px; }
-  .contact-items { gap: 24px; }
-  .contact-item-icon { width: 48px; height: 48px; }
-  .contact-item-icon svg { width: 22px; height: 22px; }
-  .contact-item-label { font-size: 16px; }
+  .contact-items { gap: 26px; }
+  .contact-item-icon { width: 53px; height: 53px; }
+  .contact-item-icon svg { width: 24px; height: 24px; }
+  .contact-item-label { font-size: 18px; }
   .contact-copyright { font-size: 13px; }
-
-  /* Footer below the dock — same design as the sub-pages' footer (border,
-     padding, type all inherited from .site-footer), just spaced from it. */
-  .portfolio-shell .site-footer {
-    display: flex;
-    margin-top: 40px;
-  }
 }
 

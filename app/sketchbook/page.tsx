@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { SiteNav } from "@/components/site/site-nav";
 import { SiteFooter } from "@/components/site/site-footer";
+import { SketchbookMasonry } from "@/components/site/sketchbook-masonry";
 import { sketchbookImages } from "@/lib/sketchbook-images";
 
 export const metadata: Metadata = {
@@ -18,18 +19,7 @@ export default function SketchbookPage() {
           <p className="sketchbook-subtitle">记录创作过程中的视觉碎片、想法与实验</p>
         </div>
 
-        <div className="sketchbook-masonry">
-          {sketchbookImages.map((image) => (
-            <div
-              className="sketchbook-item"
-              key={image.src}
-              style={{ aspectRatio: `${image.width} / ${image.height}` }}
-            >
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={image.src} alt={image.alt} loading="lazy" />
-            </div>
-          ))}
-        </div>
+        <SketchbookMasonry images={sketchbookImages} />
       </div>
       <SiteFooter />
     </main>
