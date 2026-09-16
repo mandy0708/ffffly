@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { ArrowUpRight } from "lucide-react";
 
 const links = [
   { href: "/", label: "Home" },
@@ -18,7 +19,8 @@ export function PortfolioNav() {
         ))}
       </div>
       <Link className="nav-cta" href="/about#contact">
-        Let&apos;s talk
+        <span className="nav-cta-label">Let&apos;s talk</span>
+        <ArrowUpRight className="nav-cta-icon" size={18} strokeWidth={2} aria-hidden="true" />
       </Link>
     </nav>
   );

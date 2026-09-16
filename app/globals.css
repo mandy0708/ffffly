@@ -90,7 +90,7 @@ button, input { font: inherit; color: inherit; }
    viewport, never wider — with no scrolling. */
 .stage {
   position: relative;
-  z-index: 1;
+  z-index: 2;
   width: min(1440px, 100vw, 133.3334svh);
   aspect-ratio: 1440 / 1080;
   container-type: inline-size;
@@ -111,7 +111,7 @@ button, input { font: inherit; color: inherit; }
 /* Nav — fixed px size (matches .site-nav on sub-pages) so the tab does not
    jump in size when navigating between the home page and sub-pages. */
 .top-nav {
-  position: absolute;
+  position: fixed;
   left: 50%;
   top: 24px;
   z-index: 20;
@@ -151,6 +151,7 @@ button, input { font: inherit; color: inherit; }
   white-space: nowrap;
 }
 .nav-cta:hover { transform: scale(1.03); }
+.nav-cta-icon { display: none; }
 
 @container (max-width: 520px) {
   .top-nav { width: calc(100% - 32px); }
@@ -331,7 +332,7 @@ button, input { font: inherit; color: inherit; }
 .image-showcase-track {
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 12px;
   width: max-content;
   animation: image-showcase-scroll 32s linear infinite;
 }
@@ -515,7 +516,7 @@ button, input { font: inherit; color: inherit; }
   margin-left: -12px;
   border: 1px solid var(--ink-10);
   border-radius: 22px;
-  padding: 22px 4px 4px;
+  padding: 16px 4px 4px;
   transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.35s ease;
   box-shadow: 0 10px 22px var(--shadow-08);
 }
@@ -523,7 +524,7 @@ button, input { font: inherit; color: inherit; }
 .best-card[data-tilt="b"] { transform: rotate(6deg) translateY(22px); z-index: 1; }
 .best-card:hover { transform: rotate(0deg) translateY(-8px) scale(1.03); box-shadow: 0 20px 36px var(--shadow-16); z-index: 2; }
 .best-card-title { font-size: 19px; font-weight: 700; margin: 0; padding: 0 14px; }
-.best-card-en { display: block; font-size: 10px; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; opacity: 0.65; margin: 2px 0 10px; padding: 0 14px; }
+.best-card-en { display: block; font-size: 10px; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; opacity: 0.65; margin: 2px 0 16px; padding: 0 14px; }
 .best-card-panel { flex: 1; min-height: 0; overflow: hidden; display: flex; align-items: center; justify-content: center; background: #F0F0F1; border-radius: 16px; padding: 18px 16px; }
 .best-card-tools { margin: 0; font-size: 13px; font-weight: 400; line-height: 1.7; text-align: center; color: rgba(0, 0, 0, 0.55); }
 .best-card--dark { background: #171717; border-color: #171717; }
@@ -640,9 +641,26 @@ button, input { font: inherit; color: inherit; }
   .work-filter::-webkit-scrollbar { display: none; }
   .work-filter button { flex-shrink: 0; }
 }
-@media (max-width: 520px) {
+@media (max-width: 640px) {
+  /* Nav — the 480px desktop pill has no room for four links plus a text CTA
+     once the tab shrinks to fit a phone screen; tighten link spacing and
+     collapse the CTA to an icon-only circle so nothing clips off-screen. */
   .site-nav,
-  .top-nav { width: calc(100% - 32px); }
+  .top-nav {
+    width: calc(100% - 32px);
+    padding: 6px 6px 6px 20px;
+  }
+  .nav-links, .site-nav-links { gap: 12px; }
+  .nav-links a, .site-nav-links a { font-size: 13px; }
+  .nav-cta, .site-nav-cta {
+    flex-shrink: 0;
+    width: 36px;
+    height: 36px;
+    padding: 0;
+    border-radius: 50%;
+  }
+  .nav-cta-label { display: none; }
+  .nav-cta-icon { display: block; }
 }
 @media (max-width: 640px) {
   .site-main { padding-top: 110px; }
@@ -663,10 +681,17 @@ button, input { font: inherit; color: inherit; }
   .job-year { flex: none; text-align: left; }
   .job-desc { max-width: none; }
   .expertise-grid { grid-template-columns: 1fr; }
-  .best-grid { grid-template-columns: 1fr; }
-  .best-card[data-tilt] { transform: none; }
-  .awards-item { flex-direction: column; align-items: flex-start; gap: 8px; }
-  .awards-item-left { flex-wrap: wrap; }
+  .best-grid { grid-template-columns: 1fr; gap: 32px; padding: 0 16px; }
+  .best-card { width: 100%; margin: 0; }
+  .best-card[data-tilt="a"] { transform: rotate(-4deg) translateX(-10px); }
+  .best-card[data-tilt="b"] { transform: rotate(4deg) translateX(10px); }
+  .best-card-panel { padding: 18px 14px; }
+  /* Keep the number + title on one row with the specific award right-aligned
+     (same layout as desktop) instead of stacking into a column. */
+  .awards-item { gap: 10px; padding: 14px 16px; }
+  .awards-item-left { gap: 10px; }
+  .awards-title { font-size: 15px; }
+  .awards-detail { font-size: 12px; }
 }
 
 /* Work — project detail page follows jenny-m.webflow.io/projects/streamline:
@@ -777,8 +802,8 @@ a.project-meta-item .value:hover { opacity: 0.7; }
   .sketchbook-masonry { column-count: 3; }
 }
 @media (max-width: 720px) {
-  .sketchbook-masonry { column-count: 2; }
-  .sketchbook-item { border-radius: 12px; }
+  .sketchbook-masonry { column-count: 2; column-gap: 20px; }
+  .sketchbook-item { border-radius: 12px; margin-bottom: 20px; }
 }
 
 /* ===== Home page — mobile (stacked vertical layout, à la jenny-m.webflow.io) =====
