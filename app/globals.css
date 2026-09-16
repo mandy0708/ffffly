@@ -195,19 +195,24 @@ button, input { font: inherit; color: inherit; }
 .card-sketchbook { left: 1.6667cqw; top: 12.9167cqw; width: 16cqw; height: 13.33cqw; }
 .card-sketchbook .card-shade { height: 33%; }
 .card-sketchbook .card-arrow { left: 11.14cqw; top: 1.4722cqw; }
-.card-contact .card-arrow, .card-culture .card-arrow { left: 13.64cqw; top: 1.4722cqw; }
+.card-contact .card-arrow { left: 16.64cqw; top: 1.4722cqw; }
+.card-culture .card-arrow { left: 16.14cqw; top: 1.4722cqw; }
 .card-sketchbook .card-copy h2 { font-size: 2cqw; }
-.card-contact .card-copy h2, .card-culture .card-copy h2 { font-size: 2.05cqw; }
+.card-contact .card-copy h2, .card-culture .card-copy h2 { font-size: 2.4cqw; }
 
 .card-brand { left: 24cqw; top: 15cqw; width: 25cqw; height: 34cqw; }
-.card-about { left: 53cqw; top: 27cqw; width: 25cqw; height: 33.5cqw; }
+.card-about { left: 53cqw; top: 27cqw; width: 22cqw; height: 29.5cqw; }
 .card-brand .card-shade, .card-about .card-shade { height: 27%; }
-.card-brand .card-arrow, .card-about .card-arrow { left: 20cqw; top: 1.6389cqw; }
+.card-brand .card-arrow { left: 20cqw; top: 1.6389cqw; }
+.card-about .card-arrow { left: 17cqw; top: 1.6389cqw; }
 .card-brand .card-copy h2, .card-about .card-copy h2 { font-size: 2.3cqw; font-weight: 600; }
 .card-brand .card-copy p, .card-about .card-copy p { font-size: 1.05cqw; font-weight: 400; max-width: 19.5cqw; }
 
-.card-contact { left: 79.5cqw; top: 10cqw; width: 18.5cqw; height: 18.3cqw; }
-.card-culture { left: 2.9167cqw; top: 48.4722cqw; width: 18.5cqw; height: 18.3cqw; }
+/* Contact Me / Culture & IP — enlarged again; they read too small next to
+   Brand/About and the composition lacked the impact of the jenny-m
+   reference, where every card carries real visual weight. */
+.card-contact { left: 77cqw; top: 7cqw; width: 21.5cqw; height: 21.2cqw; }
+.card-culture { left: 2cqw; top: 48.4722cqw; width: 21cqw; height: 20.7cqw; }
 .card-contact .card-shade, .card-culture .card-shade { height: 46%; }
 
 /* Subtle, slow floating of the home cards. Uses the `translate` property so it
