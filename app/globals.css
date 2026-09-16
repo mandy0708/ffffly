@@ -327,7 +327,7 @@ button, input { font: inherit; color: inherit; }
 /* Image showcase — enfind.webflow.io-style infinite horizontal marquee of
    placeholder imagery, mixing rounded-rect and fully-round tiles. Display
    only, not interactive; the user will swap in real photos later. */
-.image-showcase { position: relative; z-index: 1; width: 100%; overflow: hidden; padding: 100px 0; background: var(--paper); }
+.image-showcase { position: relative; z-index: 1; width: 100%; overflow: hidden; padding: 100px 0; }
 .image-showcase-track {
   display: flex;
   align-items: center;
