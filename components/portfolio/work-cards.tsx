@@ -15,8 +15,8 @@ export function WorkCards() {
         className="card-sketchbook"
         href="/sketchbook"
         image={sketchbookImage}
-        imageAlt="Close-up of colored pencils and a watercolor palette"
-        objectPosition="35% 68%"
+        imageAlt="Bold illustrated magazine cover with pink, blue and red bike chains and lock"
+        objectPosition="center 78%"
         title="Sketchbook"
       />
 
