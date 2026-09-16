@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 import { SiteNav } from "@/components/site/site-nav";
 import { SiteFooter } from "@/components/site/site-footer";
+import { awards } from "@/lib/awards";
 
 export const metadata: Metadata = {
   title: "About — Mandy ZhangMan",
@@ -66,14 +67,6 @@ const experience: {
     description:
       "参与多个业务线品牌建设与视觉体系搭建，覆盖地产、科技及消费相关业务。",
   },
-];
-
-const awards = [
-  { num: "01", title: "当代好设计奖", detail: "WINNER 2022" },
-  { num: "02", title: "亚洲设计奖", detail: "2023 Grand Prize" },
-  { num: "03", title: "WOLDA 世界标志设计大赛", detail: "铜奖" },
-  { num: "04", title: "K DESIGN", detail: "2022 Grand Prize" },
-  { num: "05", title: "Pentawards", detail: "入围奖" },
 ];
 
 const capabilities = [

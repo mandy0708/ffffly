@@ -1,3 +1,4 @@
+import { AwardsShowcase } from "@/components/portfolio/awards-showcase";
 import { ContactDock } from "@/components/portfolio/contact-dock";
 import { DotField } from "@/components/portfolio/dot-field";
 import { Hero } from "@/components/portfolio/hero";
@@ -19,6 +20,7 @@ export default function Home() {
       </div>
       <ImageShowcase />
       <ProjectsShowcase />
+      <AwardsShowcase />
       <SiteFooter />
     </main>
   );

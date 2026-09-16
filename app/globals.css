@@ -188,22 +188,22 @@ button, input { font: inherit; color: inherit; }
 .card-copy h2 { margin: 0; font-weight: 600; line-height: 1.1; }
 .card-copy p { margin: 0.4167cqw 0 0; font-weight: 400; line-height: 1.3; }
 
-.card-sketchbook { left: 1.6667cqw; top: 10.4167cqw; width: 21cqw; height: 17.5cqw; }
+.card-sketchbook { left: 1.6667cqw; top: 12.9167cqw; width: 21cqw; height: 17.5cqw; }
 .card-sketchbook .card-shade { height: 33%; }
 .card-sketchbook .card-arrow { left: 16.1389cqw; top: 1.4722cqw; }
 .card-contact .card-arrow, .card-culture .card-arrow { left: 13.8889cqw; top: 1.4722cqw; }
 .card-sketchbook .card-copy h2 { font-size: 2cqw; }
 .card-contact .card-copy h2, .card-culture .card-copy h2 { font-size: 1.7917cqw; }
 
-.card-brand { left: 26.1111cqw; top: 13.8889cqw; width: 23.6111cqw; height: 31.9444cqw; }
-.card-about { left: 54.0278cqw; top: 26.25cqw; width: 23.6111cqw; height: 31.9444cqw; }
+.card-brand { left: 26.1111cqw; top: 16.3889cqw; width: 23.6111cqw; height: 31.9444cqw; }
+.card-about { left: 54.0278cqw; top: 28.75cqw; width: 23.6111cqw; height: 31.9444cqw; }
 .card-brand .card-shade, .card-about .card-shade { height: 27%; }
 .card-brand .card-arrow, .card-about .card-arrow { left: 18.6111cqw; top: 1.6389cqw; }
 .card-brand .card-copy h2, .card-about .card-copy h2 { font-size: 2.1181cqw; font-weight: 600; }
 .card-brand .card-copy p, .card-about .card-copy p { font-size: 0.9792cqw; font-weight: 400; max-width: 18.75cqw; }
 
-.card-contact { left: 80.8333cqw; top: 8.8889cqw; width: 18.75cqw; height: 18.4722cqw; }
-.card-culture { left: 2.9167cqw; top: 45.9722cqw; width: 18.75cqw; height: 18.4722cqw; }
+.card-contact { left: 80.8333cqw; top: 11.3889cqw; width: 18.75cqw; height: 18.4722cqw; }
+.card-culture { left: 2.9167cqw; top: 48.4722cqw; width: 18.75cqw; height: 18.4722cqw; }
 .card-contact .card-shade, .card-culture .card-shade { height: 46%; }
 
 /* Subtle, slow floating of the home cards. Uses the `translate` property so it
@@ -224,7 +224,7 @@ button, input { font: inherit; color: inherit; }
 .mandy-badge {
   position: absolute;
   left: 70.8611cqw;
-  top: 45.8cqw;
+  top: 48.3cqw;
   z-index: 15;
   display: flex;
   align-items: center;
@@ -335,9 +335,9 @@ button, input { font: inherit; color: inherit; }
   width: max-content;
   animation: image-showcase-scroll 32s linear infinite;
 }
-.image-showcase-item { flex-shrink: 0; background: var(--card-placeholder); }
-.image-showcase-item--rect { width: 280px; height: 350px; border-radius: 24px; }
-.image-showcase-item--circle { width: 280px; height: 280px; border-radius: 50%; align-self: center; }
+.image-showcase-item { flex-shrink: 0; width: 280px; height: 350px; background: var(--card-placeholder); }
+.image-showcase-item--rect { border-radius: 24px; }
+.image-showcase-item--circle { border-radius: 999px; }
 @keyframes image-showcase-scroll {
   from { transform: translateX(0); }
   to { transform: translateX(-50%); }
@@ -351,13 +351,13 @@ button, input { font: inherit; color: inherit; }
 .home-projects-heading { margin: 0 0 48px; display: flex; flex-direction: column; align-items: center; gap: 12px; }
 .home-projects-heading h2 { font-size: clamp(28px, 4vw, 36px); font-weight: 600; margin: 0; }
 .home-projects-heading p { max-width: 520px; margin: 0; font-size: 15px; font-weight: 400; color: var(--ink-60); line-height: 1.6; }
-.home-projects-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; text-align: left; }
-.home-project-card { display: flex; flex-direction: column; gap: 14px; }
-.home-project-image { position: relative; width: 100%; aspect-ratio: 4 / 5; border-radius: 20px; overflow: hidden; background: var(--card-placeholder); transition: transform 0.25s ease; }
+.home-projects-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 32px; text-align: left; }
+.home-project-card { display: flex; flex-direction: column; gap: 16px; }
+.home-project-image { position: relative; width: 100%; aspect-ratio: 7 / 5; border-radius: 20px; overflow: hidden; background: var(--card-placeholder); transition: transform 0.25s ease; }
 .home-project-card:hover .home-project-image { transform: translateY(-4px); }
 .home-project-body { display: flex; flex-direction: column; gap: 6px; }
 .home-project-tag { font-size: 12px; font-weight: 500; color: var(--ink-45); }
-.home-project-body h3 { font-size: 16px; font-weight: 600; margin: 0; line-height: 1.4; }
+.home-project-body h3 { font-size: 18px; font-weight: 600; margin: 0; line-height: 1.4; }
 .home-projects-cta {
   display: inline-flex;
   align-items: center;
@@ -365,23 +365,28 @@ button, input { font: inherit; color: inherit; }
   margin-top: 48px;
   padding: 14px 24px;
   border-radius: 999px;
-  background: var(--cta-bg);
-  color: var(--cta-fg);
+  border: 1px solid rgba(20, 20, 20, 0.2);
+  background: transparent;
+  color: var(--ink);
   font-size: 14px;
   font-weight: 600;
-  transition: transform 0.2s ease;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
 }
-.home-projects-cta:hover { transform: scale(1.03); }
+.home-projects-cta:hover { background: var(--cta-bg); color: var(--cta-fg); border-color: var(--cta-bg); }
 
-@media (max-width: 900px) {
-  .home-projects-grid { grid-template-columns: repeat(2, 1fr); }
-}
 @media (max-width: 640px) {
   .image-showcase { padding: 64px 0; }
-  .image-showcase-item--rect { width: 200px; height: 250px; border-radius: 18px; }
-  .image-showcase-item--circle { width: 200px; height: 200px; }
+  .image-showcase-item { width: 200px; height: 250px; }
+  .image-showcase-item--rect { border-radius: 18px; }
   .home-projects { padding: 24px 20px 80px; }
   .home-projects-grid { grid-template-columns: 1fr; }
+}
+
+/* Awards showcase — same design and content as the About page's section
+   (.awards-list already carries its own bottom margin before the footer). */
+.home-awards { max-width: 1140px; margin: 0 auto; padding: 0 24px; text-align: center; }
+@media (max-width: 640px) {
+  .home-awards { padding: 0 20px; }
 }
 
 /* ===== Sub-pages (About / Work) — regular scrollable pages, plain CSS units ===== */
