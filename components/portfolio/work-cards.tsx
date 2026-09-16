@@ -4,7 +4,7 @@ import sketchbookImage from "@/public/images/portfolio/sketchbook-illustration.j
 import brandImage from "@/public/images/portfolio/brand-bag.jpg";
 import aboutImage from "@/public/images/portfolio/about-portrait.jpg";
 import contactImage from "@/public/images/portfolio/contact-phone2.jpg";
-import cultureImage from "@/public/images/portfolio/mahjong-2.jpg";
+import cultureImage from "@/public/images/portfolio/culture-cover.jpg";
 import { WorkCard } from "@/components/portfolio/work-card";
 
 export function WorkCards() {
@@ -48,7 +48,7 @@ export function WorkCards() {
         className="card-culture"
         href="/work?category=Culture%26IP"
         image={cultureImage}
-        imageAlt="Travel mahjong set open in its case"
+        imageAlt="Backpack with 4Paradigm brand patches"
         title="Culture & IP"
       />
 
