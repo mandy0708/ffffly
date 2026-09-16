@@ -15,7 +15,7 @@ export function WorkCards() {
         className="card-sketchbook"
         href="/sketchbook"
         image={sketchbookImage}
-        imageAlt="Bold split illustration of design tools in blue and scissors in red"
+        imageAlt="Playful illustration of dice, a basketball and a playing card"
         title="Sketchbook"
       />
 
