@@ -192,23 +192,22 @@ button, input { font: inherit; color: inherit; }
 /* Hero card sizing: give Brand/About a clear size advantage over the three
    supporting cards (jenny-m.webflow.io-style hierarchy) instead of five
    near-identical tiles, so the composition has a focal point. */
-.card-sketchbook { left: 1.6667cqw; top: 12.9167cqw; width: 17.85cqw; height: 14.875cqw; }
+.card-sketchbook { left: 1.6667cqw; top: 12.9167cqw; width: 16cqw; height: 13.33cqw; }
 .card-sketchbook .card-shade { height: 33%; }
-.card-sketchbook .card-arrow { left: 12.99cqw; top: 1.4722cqw; }
-.card-contact .card-arrow, .card-culture .card-arrow { left: 11.08cqw; top: 1.4722cqw; }
+.card-sketchbook .card-arrow { left: 11.14cqw; top: 1.4722cqw; }
+.card-contact .card-arrow, .card-culture .card-arrow { left: 10.14cqw; top: 1.4722cqw; }
 .card-sketchbook .card-copy h2 { font-size: 2cqw; }
 .card-contact .card-copy h2, .card-culture .card-copy h2 { font-size: 1.7917cqw; }
 
-.card-brand { left: 26.1111cqw; top: 16.3889cqw; width: 26.44cqw; height: 35.78cqw; }
-.card-about { left: 54.0278cqw; top: 28.75cqw; width: 25.97cqw; height: 35.14cqw; }
+.card-brand { left: 24cqw; top: 15cqw; width: 25cqw; height: 34cqw; }
+.card-about { left: 53cqw; top: 27cqw; width: 25cqw; height: 33.5cqw; }
 .card-brand .card-shade, .card-about .card-shade { height: 27%; }
-.card-brand .card-arrow { left: 21.44cqw; top: 1.6389cqw; }
-.card-about .card-arrow { left: 20.97cqw; top: 1.6389cqw; }
+.card-brand .card-arrow, .card-about .card-arrow { left: 20cqw; top: 1.6389cqw; }
 .card-brand .card-copy h2, .card-about .card-copy h2 { font-size: 2.3cqw; font-weight: 600; }
-.card-brand .card-copy p, .card-about .card-copy p { font-size: 1.05cqw; font-weight: 400; max-width: 21cqw; }
+.card-brand .card-copy p, .card-about .card-copy p { font-size: 1.05cqw; font-weight: 400; max-width: 19.5cqw; }
 
-.card-contact { left: 82.75cqw; top: 11.3889cqw; width: 15.9375cqw; height: 15.7014cqw; }
-.card-culture { left: 2.9167cqw; top: 48.4722cqw; width: 15.9375cqw; height: 15.7014cqw; }
+.card-contact { left: 81cqw; top: 10cqw; width: 15cqw; height: 14.8cqw; }
+.card-culture { left: 2.9167cqw; top: 48.4722cqw; width: 15cqw; height: 14.8cqw; }
 .card-contact .card-shade, .card-culture .card-shade { height: 46%; }
 
 /* Subtle, slow floating of the home cards. Uses the `translate` property so it
