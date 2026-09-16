@@ -272,7 +272,7 @@ button, input { font: inherit; color: inherit; }
   position: absolute;
   left: 50%;
   top: 71.5972cqw;
-  width: 39.5833cqw;
+  width: 31.6667cqw;
   height: 0;
   transform: translateX(-50%);
   z-index: 30;
@@ -286,8 +286,8 @@ button, input { font: inherit; color: inherit; }
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 6.6667cqw;
-  height: 2.9167cqw;
+  width: 8cqw;
+  height: 3.5cqw;
   border-radius: 999px;
   background: rgba(226, 226, 226, 0.8);
   backdrop-filter: blur(10px);
@@ -295,42 +295,33 @@ button, input { font: inherit; color: inherit; }
   overflow: hidden;
   transition: width 0.35s cubic-bezier(0.2, 0.8, 0.2, 1), height 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
-.contact-dock.is-open .contact-pill { width: 39.5833cqw; height: 15.625cqw; border-radius: 999px; }
+.contact-dock.is-open .contact-pill { width: 31.6667cqw; height: 12.5cqw; border-radius: 999px; }
 
-.contact-dots { display: flex; align-items: center; gap: 0.45cqw; opacity: 0.5; transition: opacity 0.2s ease; }
+.contact-dots { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; gap: 0.54cqw; opacity: 0.5; transition: opacity 0.2s ease; }
 .contact-dock.is-open .contact-dots { opacity: 0; }
-.contact-dots span { width: 0.4167cqw; height: 0.4167cqw; border-radius: 50%; background: var(--ink); }
+.contact-dots span { width: 0.5cqw; height: 0.5cqw; border-radius: 50%; background: var(--ink); }
 
-.contact-items {
+.contact-content {
   position: absolute;
-  top: 1.875cqw;
-  left: 50%;
-  transform: translateX(-50%) scale(0.85);
+  inset: 0;
   display: flex;
-  gap: 2.5cqw;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.9cqw;
+  transform: scale(0.85);
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.25s ease 0.05s, transform 0.25s ease 0.05s;
 }
-.contact-dock.is-open .contact-items { opacity: 1; transform: translateX(-50%) scale(1); pointer-events: auto; }
-.contact-item-link { display: flex; flex-direction: column; align-items: center; gap: 0.8333cqw; text-decoration: none; }
-.contact-item-icon { display: grid; place-items: center; width: 4.1667cqw; height: 4.1667cqw; border-radius: 50%; }
-.contact-item-icon svg { width: 1.875cqw; height: 1.875cqw; }
-.contact-item-label { font-size: 1.4583cqw; font-weight: 500; color: var(--ink); }
+.contact-dock.is-open .contact-content { opacity: 1; transform: scale(1); pointer-events: auto; }
+.contact-items { display: flex; gap: 2cqw; }
+.contact-item-link { display: flex; flex-direction: column; align-items: center; gap: 0.6667cqw; text-decoration: none; }
+.contact-item-icon { display: grid; place-items: center; width: 3.3333cqw; height: 3.3333cqw; border-radius: 50%; }
+.contact-item-icon svg { width: 1.5cqw; height: 1.5cqw; }
+.contact-item-label { font-size: 1.1667cqw; font-weight: 700; color: var(--ink); }
 
-.contact-copyright {
-  position: absolute;
-  bottom: 1.25cqw;
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: 1.25cqw;
-  color: var(--ink-60);
-  white-space: nowrap;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.25s ease 0.1s;
-}
-.contact-dock.is-open .contact-copyright { opacity: 1; }
+.contact-copyright { font-size: 1cqw; font-weight: 500; color: var(--ink-60); white-space: nowrap; }
 /* ===== Sub-pages (About / Work) — regular scrollable pages, plain CSS units ===== */
 .site-nav {
   position: fixed;
@@ -403,7 +394,7 @@ button, input { font: inherit; color: inherit; }
 /* About — Skills & Expertise: 8 capability cards, each with an icon badge that
    inverts to a solid fill on hover (style previously shipped on
    zhangman.net/about's "03 Skills & Expertise"), 4 across in one row. */
-.expertise-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; width: 100%; margin-bottom: 120px; text-align: left; }
+.expertise-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; width: 100%; margin-bottom: 120px; text-align: left; }
 .expertise-card {
   display: flex;
   flex-direction: column;
@@ -832,20 +823,21 @@ a.project-meta-item .value:hover { opacity: 0.7; }
     top: auto;
     transform: none;
     width: 100%;
-    height: 84px;
+    height: 100px;
     margin-top: 20px;
   }
-  .contact-dock.is-open { height: 240px; }
+  .contact-dock.is-open { height: 192px; }
 
-  .contact-pill { width: 96px; height: 42px; }
-  .contact-dock.is-open .contact-pill { width: 420px; height: 225px; border-radius: 999px; }
-  .contact-dots { gap: 5px; }
-  .contact-dots span { width: 4px; height: 4px; }
-  .contact-items { gap: 30px; }
-  .contact-item-icon { width: 60px; height: 60px; }
-  .contact-item-icon svg { width: 27px; height: 27px; }
-  .contact-item-label { font-size: 20px; }
-  .contact-copyright { font-size: 17px; }
+  .contact-pill { width: 115px; height: 50px; }
+  .contact-dock.is-open .contact-pill { width: 336px; height: 180px; border-radius: 999px; }
+  .contact-dots { gap: 6px; }
+  .contact-dots span { width: 5px; height: 5px; }
+  .contact-content { gap: 12px; }
+  .contact-items { gap: 24px; }
+  .contact-item-icon { width: 48px; height: 48px; }
+  .contact-item-icon svg { width: 22px; height: 22px; }
+  .contact-item-label { font-size: 16px; }
+  .contact-copyright { font-size: 13px; }
 
   /* Footer below the dock — same design as the sub-pages' footer (border,
      padding, type all inherited from .site-footer), just spaced from it. */

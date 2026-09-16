@@ -3,13 +3,11 @@ import Image from "next/image";
 import wechatQr from "@/public/images/about/wechat-qr.jpg";
 import {
   Flag,
-  Paintbrush,
   Palette,
   Megaphone,
   AppWindow,
   Box,
   Gift,
-  Sparkles,
 } from "lucide-react";
 import { SiteNav } from "@/components/site/site-nav";
 import { SiteFooter } from "@/components/site/site-footer";
@@ -88,14 +86,6 @@ const capabilities = [
     items: ["品牌定位", "品牌架构", "品牌叙事", "品牌升级", "创意策略", "设计策略"],
   },
   {
-    en: "Creative Direction",
-    zh: "创意与视觉",
-    icon: (
-      <Paintbrush size={20} strokeWidth={1.5} aria-hidden="true" />
-    ),
-    items: ["创意概念", "创意方向", "视觉概念", "视觉语言", "艺术指导", "主题创意"],
-  },
-  {
     en: "Brand Identity",
     zh: "品牌识别",
     icon: (
@@ -134,17 +124,6 @@ const capabilities = [
       <Gift size={20} strokeWidth={1.5} aria-hidden="true" />
     ),
     items: ["包装设计", "品牌周边", "IP 衍生品", "礼赠产品", "印刷工艺", "打样", "供应链", "量产"],
-  },
-  {
-    en: "AI & Brand Systems",
-    zh: "AI 与品牌系统",
-    icon: (
-      <Sparkles size={20} strokeWidth={1.5} aria-hidden="true" />
-    ),
-    items: [
-      "AI 辅助创意", "视觉生成", "内容生产", "设计工作流", "品牌资产管理",
-      "模板系统", "品牌规范", "供应商协作", "设计效率体系",
-    ],
   },
 ];
 

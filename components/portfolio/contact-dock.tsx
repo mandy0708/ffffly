@@ -78,23 +78,25 @@ export function ContactDock() {
           <span />
           <span />
         </span>
-        <div className="contact-items">
-          {links.map((link) => (
-            <a
-              className="contact-item-link"
-              href={link.href}
-              key={link.key}
-              target={link.key === "behance" ? "_blank" : undefined}
-              rel={link.key === "behance" ? "noopener noreferrer" : undefined}
-            >
-              <span className="contact-item-icon" style={{ background: link.bg }}>
-                {link.icon}
-              </span>
-              <span className="contact-item-label">{link.label}</span>
-            </a>
-          ))}
+        <div className="contact-content">
+          <div className="contact-items">
+            {links.map((link) => (
+              <a
+                className="contact-item-link"
+                href={link.href}
+                key={link.key}
+                target={link.key === "behance" ? "_blank" : undefined}
+                rel={link.key === "behance" ? "noopener noreferrer" : undefined}
+              >
+                <span className="contact-item-icon" style={{ background: link.bg }}>
+                  {link.icon}
+                </span>
+                <span className="contact-item-label">{link.label}</span>
+              </a>
+            ))}
+          </div>
+          <span className="contact-copyright">All Rights Reserved</span>
         </div>
-        <span className="contact-copyright">All Rights Reserved</span>
       </div>
     </div>
   );
