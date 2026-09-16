@@ -1,13 +1,11 @@
-import { awards } from "@/lib/awards";
+import Image from "next/image";
+import award1 from "@/public/images/awards/award-1.png";
+import award2 from "@/public/images/awards/award-2-pentawards.png";
+import award3 from "@/public/images/awards/award-3-a-design.png";
+import award4 from "@/public/images/awards/award-4-if.png";
+import award5 from "@/public/images/awards/award-5-kdesign.png";
 
-// Short monogram shown per award until real award-logo art is dropped in.
-const marks: Record<string, string> = {
-  "当代好设计奖": "好设计",
-  "亚洲设计奖": "亚洲",
-  "WOLDA 世界标志设计大赛": "WOLDA",
-  "K DESIGN": "K",
-  "Pentawards": "P",
-};
+const logos = [award1, award2, award3, award4, award5];
 
 export function AwardsBadgeCard() {
   return (
@@ -17,9 +15,9 @@ export function AwardsBadgeCard() {
         <span className="badge-awards-label">International Design Awards</span>
       </div>
       <div className="badge-awards-logos">
-        {awards.map((award) => (
-          <span className="badge-awards-logo" key={award.num} title={award.title}>
-            {marks[award.title] ?? award.title}
+        {logos.map((logo, i) => (
+          <span className="badge-awards-logo" key={i}>
+            <Image src={logo} alt="" fill sizes="40px" style={{ objectFit: "cover" }} />
           </span>
         ))}
       </div>
