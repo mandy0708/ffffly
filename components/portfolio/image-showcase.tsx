@@ -1,10 +1,10 @@
 import Image from "next/image";
 import toteBag from "@/public/images/home/tote-bag.webp";
 import cap from "@/public/images/home/cap.webp";
-import thumb4 from "@/public/images/home/thumb-4.webp";
-import thumb6 from "@/public/images/home/thumb-6.webp";
+import waterBottle from "@/public/images/home/water-bottle.webp";
+import workbook from "@/public/images/home/workbook.jpg";
 
-const photos = [toteBag, cap, thumb4, thumb6];
+const photos = [toteBag, cap, waterBottle, workbook];
 
 const items = [
   { shape: "rect" as const, photo: photos[0] },

@@ -103,7 +103,7 @@ button, input { font: inherit; color: inherit; }
 .dot-field { position: absolute; inset: 0; z-index: 0; display: block; width: 100%; height: 100%; pointer-events: none; }
 /* Full-viewport backdrop: the dot field tiles edge to edge behind everything,
    with no boundary around the centered stage. */
-.dot-field-fixed { position: fixed; inset: 0; width: 100vw; height: 100svh; z-index: -1; }
+.dot-field-fixed { position: fixed; inset: 0; width: 100vw; height: 100svh; z-index: 0; }
 
 .hero { position: relative; width: 100%; height: 100%; }
 .hero-intro { display: none; }
@@ -327,7 +327,7 @@ button, input { font: inherit; color: inherit; }
 /* Image showcase — enfind.webflow.io-style infinite horizontal marquee of
    placeholder imagery, mixing rounded-rect and fully-round tiles. Display
    only, not interactive; the user will swap in real photos later. */
-.image-showcase { width: 100%; overflow: hidden; padding: 100px 0; background: var(--paper); }
+.image-showcase { position: relative; z-index: 1; width: 100%; overflow: hidden; padding: 100px 0; background: var(--paper); }
 .image-showcase-track {
   display: flex;
   align-items: center;
@@ -347,7 +347,7 @@ button, input { font: inherit; color: inherit; }
 }
 
 /* Projects showcase — four picks from the Work grid, reusing its card look. */
-.home-projects { max-width: 1140px; margin: 0 auto; padding: 40px 24px 120px; text-align: center; }
+.home-projects { position: relative; z-index: 1; max-width: 1140px; margin: 0 auto; padding: 40px 24px 120px; text-align: center; background: var(--paper); }
 .home-projects-heading { margin: 0 0 48px; display: flex; flex-direction: column; align-items: center; gap: 12px; }
 .home-projects-heading h2 { font-size: clamp(28px, 4vw, 36px); font-weight: 600; margin: 0; }
 .home-projects-heading p { max-width: 520px; margin: 0; font-size: 15px; font-weight: 400; color: var(--ink-60); line-height: 1.6; }
@@ -391,7 +391,7 @@ button, input { font: inherit; color: inherit; }
 
 /* Awards showcase — same design and content as the About page's section
    (.awards-list already carries its own bottom margin before the footer). */
-.home-awards { max-width: 1140px; margin: 0 auto; padding: 0 24px; text-align: center; }
+.home-awards { position: relative; z-index: 1; max-width: 1140px; margin: 0 auto; padding: 0 24px; text-align: center; background: var(--paper); }
 @media (max-width: 640px) {
   .home-awards { padding: 0 20px; }
 }
@@ -456,6 +456,7 @@ button, input { font: inherit; color: inherit; }
   padding: 40px 24px 48px;
   border-top: 1px solid var(--ink-08);
   text-align: center;
+  background: var(--paper);
 }
 .site-footer p { font-size: 13px; font-weight: 400; color: var(--ink-50); margin: 0; }
 
@@ -811,7 +812,7 @@ a.project-meta-item .value:hover { opacity: 0.7; }
     padding: 110px 24px 48px;
   }
   /* Dot field covers the whole scrollable viewport as a fixed backdrop. */
-  .dot-field { position: fixed; inset: 0; width: 100vw; height: 100svh; z-index: -1; }
+  .dot-field { position: fixed; inset: 0; width: 100vw; height: 100svh; z-index: 0; }
 
   .hero { height: auto; }
 
