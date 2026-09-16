@@ -23,6 +23,7 @@ export function WorkCards() {
         href="/work"
         image={brandImage}
         imageAlt="Branded tote bag with a purple geometric pattern"
+        objectPosition="center 65%"
         title="Brand Design"
         subtitle="Building brands from positioning to system."
       />
