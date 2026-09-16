@@ -103,7 +103,7 @@ button, input { font: inherit; color: inherit; }
 .dot-field { position: absolute; inset: 0; z-index: 0; display: block; width: 100%; height: 100%; pointer-events: none; }
 /* Full-viewport backdrop: the dot field tiles edge to edge behind everything,
    with no boundary around the centered stage. */
-.dot-field-fixed { position: fixed; inset: 0; width: 100vw; height: 100svh; z-index: 0; }
+.dot-field-fixed { position: fixed; inset: 0; width: 100vw; height: 100svh; z-index: -1; }
 
 .hero { position: relative; width: 100%; height: 100%; }
 .hero-intro { display: none; }
@@ -356,6 +356,7 @@ button, input { font: inherit; color: inherit; }
   display: flex;
   flex-direction: column;
   background: var(--surface);
+  border: 1px solid var(--ink-10);
   border-radius: 20px;
   padding: 4px;
   box-shadow: 0 4px 14px var(--shadow-04);
@@ -363,9 +364,7 @@ button, input { font: inherit; color: inherit; }
 }
 .home-project-card:hover { transform: translateY(-4px); box-shadow: 0 12px 28px var(--shadow-08); }
 .home-project-image { position: relative; width: 100%; aspect-ratio: 7 / 5; border-radius: 16px; overflow: hidden; background: var(--card-placeholder); }
-.home-project-body { display: flex; flex-direction: column; gap: 6px; padding: 12px 12px 16px; }
-.home-project-tag { font-size: 12px; font-weight: 500; color: var(--ink-45); }
-.home-project-body h3 { font-size: 18px; font-weight: 600; margin: 0; line-height: 1.4; }
+.home-project-card .work-item-body { padding: 14px 12px 16px; }
 .home-projects-cta {
   display: inline-flex;
   align-items: center;
@@ -474,7 +473,7 @@ button, input { font: inherit; color: inherit; }
   display: flex;
   flex-direction: column;
   background: var(--surface);
-  border: 1px solid var(--ink-06);
+  border: 1px solid var(--ink-10);
   border-radius: 20px;
   padding: 26px;
   box-shadow: 0 4px 14px var(--shadow-04);
@@ -513,7 +512,7 @@ button, input { font: inherit; color: inherit; }
   height: 145px;
   width: calc(100% + 24px);
   margin-left: -12px;
-  border: 1px solid var(--ink-06);
+  border: 1px solid var(--ink-10);
   border-radius: 22px;
   padding: 22px 4px 4px;
   transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.35s ease;
@@ -558,7 +557,7 @@ button, input { font: inherit; color: inherit; }
   width: 100%;
   max-width: 760px;
   background: var(--surface);
-  border: 1px solid var(--ink-06);
+  border: 1px solid var(--ink-10);
   border-radius: 14px;
   padding: 18px 26px;
   box-shadow: 0 4px 14px var(--shadow-04);
@@ -812,7 +811,7 @@ a.project-meta-item .value:hover { opacity: 0.7; }
     padding: 110px 24px 48px;
   }
   /* Dot field covers the whole scrollable viewport as a fixed backdrop. */
-  .dot-field { position: fixed; inset: 0; width: 100vw; height: 100svh; }
+  .dot-field { position: fixed; inset: 0; width: 100vw; height: 100svh; z-index: -1; }
 
   .hero { height: auto; }
 

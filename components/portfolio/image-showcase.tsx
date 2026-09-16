@@ -1,19 +1,20 @@
 import Image from "next/image";
 import toteBag from "@/public/images/home/tote-bag.webp";
 import cap from "@/public/images/home/cap.webp";
-import keychain from "@/public/images/home/keychain.webp";
+import thumb4 from "@/public/images/home/thumb-4.webp";
+import thumb6 from "@/public/images/home/thumb-6.webp";
 
-const photos = [toteBag, cap, keychain];
+const photos = [toteBag, cap, thumb4, thumb6];
 
 const items = [
   { shape: "rect" as const, photo: photos[0] },
   { shape: "circle" as const, photo: photos[1] },
   { shape: "rect" as const, photo: photos[2] },
-  { shape: "rect" as const, photo: photos[0] },
-  { shape: "circle" as const, photo: photos[2] },
-  { shape: "rect" as const, photo: photos[1] },
+  { shape: "rect" as const, photo: photos[3] },
   { shape: "circle" as const, photo: photos[0] },
-  { shape: "rect" as const, photo: photos[2] },
+  { shape: "rect" as const, photo: photos[1] },
+  { shape: "circle" as const, photo: photos[2] },
+  { shape: "rect" as const, photo: photos[3] },
 ];
 
 export function ImageShowcase() {

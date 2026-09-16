@@ -14,6 +14,7 @@ const projects = slugs.map((slug) => {
     slug,
     title: project.title,
     tag: project.tag,
+    description: project.description,
     image: coverImages[slug as keyof typeof coverImages],
     href: detail ? `/work/${slug}` : "/work",
   };
@@ -32,9 +33,12 @@ export function ProjectsShowcase() {
             <div className="home-project-image">
               <Image src={project.image} alt={project.title} fill sizes="(max-width: 640px) 100vw, 25vw" style={{ objectFit: "cover" }} />
             </div>
-            <div className="home-project-body">
-              <span className="home-project-tag">{project.tag}</span>
-              <h3>{project.title}</h3>
+            <div className="work-item-body">
+              <div className="work-item-head">
+                <h3>{project.title}</h3>
+                <span className="tag">{project.tag}</span>
+              </div>
+              <p>{project.description}</p>
             </div>
           </Link>
         ))}
