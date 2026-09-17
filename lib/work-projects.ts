@@ -20,7 +20,7 @@ export const workProjects: WorkProjectDetail[] = [
     slug: "yuanhuan-intelligent",
     tag: "Branding",
     year: "2026",
-    title: "品牌设计 | 元环智能",
+    title: "品牌设计 | MetaCircle",
     description: "Building the brand identity and visual system for MetaCircle, a corporate analytics platform.",
     role: "品牌设计师",
     deliverables: ["品牌 LOGO 与 VI", "品牌视觉系统", "品牌应用物料"],
