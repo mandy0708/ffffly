@@ -192,9 +192,9 @@ button, input { font: inherit; color: inherit; }
 /* Hero card sizing: give Brand/About a clear size advantage over the three
    supporting cards (jenny-m.webflow.io-style hierarchy) instead of five
    near-identical tiles, so the composition has a focal point. */
-.card-sketchbook { left: 1.6667cqw; top: 12.9167cqw; width: 17.6cqw; height: 14.663cqw; }
+.card-sketchbook { left: 1.6667cqw; top: 12.9167cqw; width: 19.36cqw; height: 16.13cqw; }
 .card-sketchbook .card-shade { height: 33%; }
-.card-sketchbook .card-arrow { left: 12.74cqw; top: 1.4722cqw; }
+.card-sketchbook .card-arrow { left: 14.5cqw; top: 1.4722cqw; }
 .card-contact .card-arrow, .card-culture .card-arrow { left: 14.64cqw; top: 1.4722cqw; }
 .card-sketchbook .card-copy h2 { font-size: 2cqw; }
 .card-contact .card-copy h2, .card-culture .card-copy h2 { font-size: 2.15cqw; }
