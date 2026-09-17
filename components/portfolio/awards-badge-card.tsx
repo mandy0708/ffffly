@@ -5,7 +5,7 @@ import award3 from "@/public/images/awards/award-3-a-design.png";
 import award4 from "@/public/images/awards/award-4-if.png";
 import award5 from "@/public/images/awards/award-5-kdesign.png";
 
-const logos = [award1, award2, award3, award4, award5];
+const logos = [award4, award1, award2, award3, award5];
 
 export function AwardsBadgeCard() {
   return (
