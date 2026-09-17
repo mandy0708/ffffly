@@ -1,9 +1,8 @@
 "use client";
 
-import sketchbookImage from "@/public/images/portfolio/sketchbook-planB.png";
 import brandImage from "@/public/images/portfolio/brand-bag.jpg";
 import aboutImage from "@/public/images/portfolio/about-portrait.jpg";
-import contactImage from "@/public/images/portfolio/contactme-planA.jpg";
+import contactImage from "@/public/images/portfolio/contactme-planB.png";
 import cultureImage from "@/public/images/portfolio/culture-cover.jpg";
 import { WorkCard } from "@/components/portfolio/work-card";
 import { AwardsBadgeCard } from "@/components/portfolio/awards-badge-card";
@@ -14,8 +13,8 @@ export function WorkCards() {
       <WorkCard
         className="card-sketchbook"
         href="/sketchbook"
-        image={sketchbookImage}
-        imageAlt="Illustration of a blue mailbox with an iced coffee inside"
+        video="/images/portfolio/sketchbook-planB.mp4"
+        imageAlt="Looping video illustration for the sketchbook"
         title="Sketchbook"
       />
 
@@ -42,7 +41,7 @@ export function WorkCards() {
         className="card-contact"
         href="/about#contact"
         image={contactImage}
-        imageAlt="Glossy 3D render of interlocking blue chain links"
+        imageAlt="Illustration of a blue mailbox with an iced coffee inside"
         title="Contact Me"
       />
 

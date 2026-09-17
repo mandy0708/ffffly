@@ -7,7 +7,8 @@ import { useSquirclePath } from "@/components/portfolio/use-squircle";
 type WorkCardProps = {
   className: string;
   href: string;
-  image: StaticImageData;
+  image?: StaticImageData;
+  video?: string;
   imageAlt: string;
   objectPosition?: string;
   title: string;
@@ -22,6 +23,7 @@ export function WorkCard({
   className,
   href,
   image,
+  video,
   imageAlt,
   objectPosition,
   title,
@@ -40,13 +42,27 @@ export function WorkCard({
       onClick={onActivate ? (event) => { event.preventDefault(); onActivate(); } : undefined}
     >
       <div className="card-art">
-        <Image
-          src={image}
-          alt={imageAlt}
-          fill
-          sizes="(max-width: 900px) 40vw, 290px"
-          style={{ objectFit: "cover", objectPosition }}
-        />
+        {video ? (
+          <video
+            src={video}
+            aria-label={imageAlt}
+            autoPlay
+            muted
+            loop
+            playsInline
+            style={{ objectFit: "cover", objectPosition, width: "100%", height: "100%" }}
+          />
+        ) : (
+          image && (
+            <Image
+              src={image}
+              alt={imageAlt}
+              fill
+              sizes="(max-width: 900px) 40vw, 290px"
+              style={{ objectFit: "cover", objectPosition }}
+            />
+          )
+        )}
         <div className="card-shade" aria-hidden="true" />
       </div>
       <svg className="card-arrow" viewBox="0 0 42 42" fill="none" aria-hidden="true">
