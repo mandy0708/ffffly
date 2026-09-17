@@ -1,9 +1,9 @@
 "use client";
 
-import sketchbookImage from "@/public/images/portfolio/sketchbook-desk.jpg";
+import sketchbookImage from "@/public/images/portfolio/sketchbook-planA.jpg";
 import brandImage from "@/public/images/portfolio/brand-bag.jpg";
 import aboutImage from "@/public/images/portfolio/about-portrait.jpg";
-import contactImage from "@/public/images/portfolio/contact-phone2.jpg";
+import contactImage from "@/public/images/portfolio/contactme-planA.jpg";
 import cultureImage from "@/public/images/portfolio/culture-cover.jpg";
 import { WorkCard } from "@/components/portfolio/work-card";
 import { AwardsBadgeCard } from "@/components/portfolio/awards-badge-card";
@@ -15,7 +15,7 @@ export function WorkCards() {
         className="card-sketchbook"
         href="/sketchbook"
         image={sketchbookImage}
-        imageAlt="Playful illustration of dice, a basketball and a playing card"
+        imageAlt="Glossy 3D render of a glass sphere filled with blue marbles"
         title="Sketchbook"
       />
 
@@ -42,7 +42,7 @@ export function WorkCards() {
         className="card-contact"
         href="/about#contact"
         image={contactImage}
-        imageAlt="Abstract render of flowing glass ribbons"
+        imageAlt="Glossy 3D render of interlocking blue chain links"
         title="Contact Me"
       />
 
