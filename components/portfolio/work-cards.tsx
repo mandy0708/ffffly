@@ -1,6 +1,6 @@
 "use client";
 
-import sketchbookImage from "@/public/images/portfolio/sketchbook-planA.jpg";
+import sketchbookImage from "@/public/images/portfolio/sketchbook-planB.png";
 import brandImage from "@/public/images/portfolio/brand-bag.jpg";
 import aboutImage from "@/public/images/portfolio/about-portrait.jpg";
 import contactImage from "@/public/images/portfolio/contactme-planA.jpg";
@@ -15,7 +15,7 @@ export function WorkCards() {
         className="card-sketchbook"
         href="/sketchbook"
         image={sketchbookImage}
-        imageAlt="Glossy 3D render of a glass sphere filled with blue marbles"
+        imageAlt="Illustration of a blue mailbox with an iced coffee inside"
         title="Sketchbook"
       />
 
