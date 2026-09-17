@@ -41,8 +41,12 @@ export function SketchbookMasonry({ images }: { images: SketchbookImage[] }) {
             "--stagger": `${(index % STAGGER_MAX_INDEX) * STAGGER_STEP}s`,
           } as React.CSSProperties}
         >
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={image.src} alt={image.alt} loading="lazy" />
+          {image.isVideo ? (
+            <video src={image.src} autoPlay muted loop playsInline aria-label={image.alt} />
+          ) : (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img src={image.src} alt={image.alt} loading="lazy" />
+          )}
         </div>
       ))}
     </div>

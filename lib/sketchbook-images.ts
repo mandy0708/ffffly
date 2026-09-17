@@ -3,7 +3,12 @@ export type SketchbookImage = {
   alt: string;
   width: number;
   height: number;
+  isVideo?: boolean;
 };
+
+const videoFiles: { name: string; width: number; height: number }[] = [
+  { name: "红包封面视频.mov", width: 1080, height: 1080 },
+];
 
 const files: { name: string; width: number; height: number }[] = [
   { name: "1岁参加高考_1.jpg", width: 1042, height: 1900 },
@@ -18,7 +23,6 @@ const files: { name: string; width: number; height: number }[] = [
   { name: "范式词典_1.jpg", width: 1563, height: 3384 },
   { name: "范式词典_3.jpg", width: 1564, height: 3384 },
   { name: "范式词典_头图.jpg", width: 1233, height: 534 },
-  { name: "超级符号-毛绒.png", width: 1590, height: 1590 },
   { name: "截屏2026-09-08 10.00.55.png", width: 1678, height: 1240 },
   { name: "2-1.jpg", width: 1875, height: 1875 },
   { name: "2-2.jpg", width: 1875, height: 1875 },
@@ -44,9 +48,18 @@ function toAlt(name: string) {
   return name.replace(/\.[^.]+$/, "").replace(/[_-]/g, " ").trim();
 }
 
-export const sketchbookImages: SketchbookImage[] = files.map((file) => ({
-  src: `/images/sketchbook/${encodeURIComponent(file.name)}`,
-  alt: toAlt(file.name),
-  width: file.width,
-  height: file.height,
-}));
+export const sketchbookImages: SketchbookImage[] = [
+  ...videoFiles.map((file) => ({
+    src: `/images/sketchbook/${encodeURIComponent(file.name)}`,
+    alt: toAlt(file.name),
+    width: file.width,
+    height: file.height,
+    isVideo: true,
+  })),
+  ...files.map((file) => ({
+    src: `/images/sketchbook/${encodeURIComponent(file.name)}`,
+    alt: toAlt(file.name),
+    width: file.width,
+    height: file.height,
+  })),
+];
