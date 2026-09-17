@@ -238,7 +238,7 @@ export const workProjects: WorkProjectDetail[] = [
     slug: "product-packaging-design",
     tag: "Packaging",
     year: "2023 - 2024",
-    title: "产品包装设计",
+    title: "合集｜产品包装设计",
     description: "A collection of product packaging design across multiple lifestyle brands.",
     role: "包装设计师",
     deliverables: ["包装结构与视觉设计", "礼盒与外包装设计", "系列化产品视觉延展"],
