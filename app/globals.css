@@ -264,11 +264,11 @@ button, input { font: inherit; color: inherit; }
    overlapping stack of circular award-logo badges. */
 .badge-card-awards {
   position: absolute;
-  left: 78cqw;
+  left: 80cqw;
   top: 56cqw;
   z-index: 15;
-  width: 21cqw;
-  padding: 1.5cqw 2cqw;
+  width: 19.5cqw;
+  padding: 1.5cqw 1.7cqw;
   border-radius: 1.4cqw;
   background: var(--surface);
   box-shadow: 0 0 20px var(--shadow-10);
