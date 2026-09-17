@@ -8,6 +8,7 @@ type WorkCardProps = {
   className: string;
   href: string;
   image?: StaticImageData;
+  mobileImage?: StaticImageData;
   video?: string;
   imageAlt: string;
   objectPosition?: string;
@@ -23,6 +24,7 @@ export function WorkCard({
   className,
   href,
   image,
+  mobileImage,
   video,
   imageAlt,
   objectPosition,
@@ -54,13 +56,26 @@ export function WorkCard({
           />
         ) : (
           image && (
-            <Image
-              src={image}
-              alt={imageAlt}
-              fill
-              sizes="(max-width: 900px) 40vw, 290px"
-              style={{ objectFit: "cover", objectPosition }}
-            />
+            <>
+              <Image
+                src={mobileImage ?? image}
+                alt={imageAlt}
+                fill
+                sizes="(max-width: 900px) 40vw, 290px"
+                style={{ objectFit: "cover", objectPosition }}
+                className={mobileImage ? "card-art-mobile" : undefined}
+              />
+              {mobileImage && (
+                <Image
+                  src={image}
+                  alt={imageAlt}
+                  fill
+                  sizes="(max-width: 900px) 40vw, 290px"
+                  style={{ objectFit: "cover", objectPosition }}
+                  className="card-art-desktop"
+                />
+              )}
+            </>
           )
         )}
         <div className="card-shade" aria-hidden="true" />

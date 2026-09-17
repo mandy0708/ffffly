@@ -1,9 +1,11 @@
 "use client";
 
 import brandImage from "@/public/images/portfolio/brand-bag.jpg";
+import brandImageMobile from "@/public/images/portfolio/brand-bag-phone.png";
 import aboutImage from "@/public/images/portfolio/about-portrait.jpg";
 import contactImage from "@/public/images/portfolio/contactme-planB.png";
 import cultureImage from "@/public/images/portfolio/culture-cover.jpg";
+import cultureImageMobile from "@/public/images/portfolio/culture-cover-phone.jpeg";
 import { WorkCard } from "@/components/portfolio/work-card";
 import { AwardsBadgeCard } from "@/components/portfolio/awards-badge-card";
 
@@ -22,6 +24,7 @@ export function WorkCards() {
         className="card-brand"
         href="/work"
         image={brandImage}
+        mobileImage={brandImageMobile}
         imageAlt="Branded tote bag with a purple geometric pattern"
         objectPosition="center 65%"
         title="Brand Design"
@@ -49,6 +52,7 @@ export function WorkCards() {
         className="card-culture"
         href="/work?category=Culture%26IP"
         image={cultureImage}
+        mobileImage={cultureImageMobile}
         imageAlt="Backpack with 4Paradigm brand patches"
         title="Culture & IP"
       />

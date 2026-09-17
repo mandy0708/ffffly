@@ -171,6 +171,13 @@ button, input { font: inherit; color: inherit; }
 .work-card:hover { z-index: 10; transform: translateY(-4px); filter: drop-shadow(0 16px 24px var(--card-shadow-color-hover)); }
 .card-art { position: absolute; inset: 0; overflow: hidden; }
 .card-art img, .card-art video { display: block; transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1); }
+/* Art direction: a card can swap to a differently-cropped image on phones
+   (e.g. a taller crop of the same photo) via mobileImage/desktop pairs. */
+.card-art img.card-art-mobile { display: none; }
+@media (max-width: 720px) {
+  .card-art img.card-art-desktop { display: none; }
+  .card-art img.card-art-mobile { display: block; }
+}
 .work-card:hover .card-art img, .work-card:hover .card-art video { transform: scale(1.06); }
 .card-shade {
   position: absolute;
