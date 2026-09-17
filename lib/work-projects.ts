@@ -17,6 +17,21 @@ export type WorkProjectDetail = {
 
 export const workProjects: WorkProjectDetail[] = [
   {
+    slug: "yuanhuan-intelligent",
+    tag: "Branding",
+    year: "2026",
+    title: "品牌设计 | 元环智能",
+    description: "Building the brand identity and visual system for MetaCircle, a corporate analytics platform.",
+    role: "品牌设计师",
+    deliverables: ["品牌 LOGO 与 VI", "品牌视觉系统", "品牌应用物料"],
+    client: "元环智能 MetaCircle",
+    narrative: [
+      "元环智能（MetaCircle）是一个面向企业的数字化分析平台，提供经营诊断与质量管控服务，需要一套能承载「智能」与「循环」双重气质的品牌形象。围绕中文名「元环」，我以虚线菱形围合成环的图形作为核心标识——菱形代表数据切片，环形代表持续运转的分析闭环，简洁的几何语言让品牌在科技感之外多一份精密与秩序感。",
+      "主色选用深紫渐变搭配亮紫点缀，传递专业与前瞻感；标识与品牌图形延展至官网、社交主页、办公文具、水杯与灯箱标识等全场景应用，构建了一套统一且具延展性的品牌视觉系统。",
+    ],
+    gallery: ["1.jpg", "2.jpg", "3.jpg", "4.jpg", "5.jpg", "6.jpg"],
+  },
+  {
     slug: "zhipu-brand-upgrade",
     tag: "Branding",
     year: "2026",
@@ -308,11 +323,4 @@ export type ComingSoonProject = {
   description: string;
 };
 
-export const comingSoonProjects: ComingSoonProject[] = [
-  {
-    slug: "yuanhuan-intelligent",
-    tag: "Branding",
-    title: "品牌设计 | 元环智能",
-    description: "Designing a new brand identity and visual system for Yuanhuan Intelligent.",
-  },
-];
+export const comingSoonProjects: ComingSoonProject[] = [];
