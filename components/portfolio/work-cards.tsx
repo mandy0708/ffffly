@@ -18,6 +18,7 @@ export function WorkCards() {
         video="/images/portfolio/sketchbook-planB.mp4"
         imageAlt="Looping video illustration for the sketchbook"
         title="Sketchbook"
+        subtitle="Illustration, 3D and motion — loose, unbriefed exploration."
       />
 
       <WorkCard
@@ -55,6 +56,7 @@ export function WorkCards() {
         mobileImage={cultureImageMobile}
         imageAlt="Backpack with 4Paradigm brand patches"
         title="Culture & IP"
+        subtitle="Corporate culture, IP and merchandise design."
       />
 
       <div className="mandy-badge" aria-hidden="true">
