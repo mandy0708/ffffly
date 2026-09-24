@@ -11,6 +11,10 @@ const videoFiles: { name: string; width: number; height: number }[] = [
 ];
 
 const files: { name: string; width: number; height: number }[] = [
+  { name: "IP 形象-过程稿 1-1.png", width: 1200, height: 1600 },
+  { name: "IP 形象-过程稿 1-2.png", width: 1200, height: 1600 },
+  { name: "IP 形象-过程稿 1-3.png", width: 1200, height: 1600 },
+  { name: "IP 形象-过程稿 1-4.png", width: 1200, height: 1600 },
   { name: "GLM5.2-cyber 1.png", width: 645, height: 864 },
   { name: "沪上阿姨-海报 1.png", width: 1160, height: 1547 },
   { name: "ChatGPT Image 2026年9月24日 14_27_30.png", width: 1254, height: 1254 },
