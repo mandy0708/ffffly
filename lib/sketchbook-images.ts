@@ -11,6 +11,11 @@ const videoFiles: { name: string; width: number; height: number }[] = [
 ];
 
 const files: { name: string; width: number; height: number }[] = [
+  { name: "zshop-描边.png", width: 736, height: 920 },
+  { name: "zshop-渐变.png", width: 736, height: 920 },
+  { name: "设计尝试-模型视觉 1.png", width: 1470, height: 1960 },
+  { name: "设计尝试-模型视觉 2.png", width: 1470, height: 1960 },
+  { name: "设计尝试-模型视觉 3.png", width: 1470, height: 1960 },
   { name: "1岁参加高考_1.jpg", width: 1042, height: 1900 },
   { name: "1岁参加高考_封面.jpg", width: 1250, height: 532 },
   { name: "20.jpg", width: 2400, height: 1651 },
@@ -42,11 +47,6 @@ const files: { name: string; width: number; height: number }[] = [
   { name: "Frame 2147223842.png", width: 912, height: 912 },
   { name: "Frame 2147224632.png", width: 1620, height: 1620 },
   { name: "校招-天才实习生_画板 1 副本 3.jpg", width: 1400, height: 10017 },
-  { name: "zshop-描边.png", width: 736, height: 920 },
-  { name: "zshop-渐变.png", width: 736, height: 920 },
-  { name: "设计尝试-模型视觉 1.png", width: 1470, height: 1960 },
-  { name: "设计尝试-模型视觉 2.png", width: 1470, height: 1960 },
-  { name: "设计尝试-模型视觉 3.png", width: 1470, height: 1960 },
 ];
 
 function toAlt(name: string) {
