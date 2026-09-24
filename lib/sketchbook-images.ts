@@ -42,6 +42,11 @@ const files: { name: string; width: number; height: number }[] = [
   { name: "Frame 2147223842.png", width: 912, height: 912 },
   { name: "Frame 2147224632.png", width: 1620, height: 1620 },
   { name: "校招-天才实习生_画板 1 副本 3.jpg", width: 1400, height: 10017 },
+  { name: "zshop-描边.png", width: 736, height: 920 },
+  { name: "zshop-渐变.png", width: 736, height: 920 },
+  { name: "设计尝试-模型视觉 1.png", width: 1470, height: 1960 },
+  { name: "设计尝试-模型视觉 2.png", width: 1470, height: 1960 },
+  { name: "设计尝试-模型视觉 3.png", width: 1470, height: 1960 },
 ];
 
 function toAlt(name: string) {
