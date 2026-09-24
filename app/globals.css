@@ -824,17 +824,19 @@ a.project-meta-item .value:hover { opacity: 0.7; }
 }
 
 /* Sketchbook — cosmos.so-style waterfall: equal-width columns, natural image
-   height, packed top-to-bottom with CSS multi-column layout (no JS masonry
-   lib needed). Wider shell than the other sub-pages so more columns fit. */
+   height, packed top-to-bottom. Column assignment is computed in JS
+   (components/site/sketchbook-masonry.tsx) with a greedy shortest-column-first
+   masonry — CSS multi-column's `balance` fill let one extreme-aspect-ratio
+   image skew an entire column, pushing new uploads out of the top row.
+   Wider shell than the other sub-pages so more columns fit. */
 .sketchbook-main { max-width: 1400px; }
 .sketchbook-title-block { max-width: 640px; margin: 12px 0 64px; display: flex; flex-direction: column; align-items: center; text-align: center; }
 .sketchbook-title-block h1 { font-size: clamp(34px, 5vw, 52px); font-weight: 600; margin: 0; line-height: 1.35; }
 .sketchbook-subtitle { max-width: none; margin: 18px 0 0; font-size: clamp(15px, 1.6vw, 17px); font-weight: 400; color: var(--ink-60); line-height: 1.75; }
 
-.sketchbook-masonry { column-count: 4; column-gap: 34px; width: 100%; }
+.sketchbook-masonry { display: flex; align-items: flex-start; gap: 34px; width: 100%; }
+.sketchbook-column { flex: 1 1 0; min-width: 0; display: flex; flex-direction: column; gap: 34px; }
 .sketchbook-item {
-  break-inside: avoid;
-  margin-bottom: 34px;
   border-radius: 16px;
   overflow: hidden;
   background: var(--card-placeholder);
@@ -854,12 +856,10 @@ a.project-meta-item .value:hover { opacity: 0.7; }
 .sketchbook-item img, .sketchbook-item video { width: 100%; height: 100%; display: block; object-fit: cover; transition: transform 0.35s ease; }
 .sketchbook-item:hover img, .sketchbook-item:hover video { transform: scale(1.06); }
 
-@media (max-width: 1080px) {
-  .sketchbook-masonry { column-count: 3; }
-}
 @media (max-width: 720px) {
-  .sketchbook-masonry { column-count: 2; column-gap: 20px; }
-  .sketchbook-item { border-radius: 12px; margin-bottom: 20px; }
+  .sketchbook-masonry { gap: 20px; }
+  .sketchbook-column { gap: 20px; }
+  .sketchbook-item { border-radius: 12px; }
 }
 
 /* ===== Home page — mobile (stacked vertical layout, à la jenny-m.webflow.io) =====

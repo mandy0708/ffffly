@@ -11,6 +11,8 @@ const videoFiles: { name: string; width: number; height: number }[] = [
 ];
 
 const files: { name: string; width: number; height: number }[] = [
+  { name: "GLM5.2-cyber 1.png", width: 645, height: 864 },
+  { name: "沪上阿姨-海报 1.png", width: 1160, height: 1547 },
   { name: "ChatGPT Image 2026年9月24日 14_27_30.png", width: 1254, height: 1254 },
   { name: "zshop-描边.png", width: 736, height: 920 },
   { name: "zshop-渐变.png", width: 736, height: 920 },
