@@ -48,7 +48,7 @@ export default async function WorkProjectPage({ params }: PageProps<"/work/[slug
         </div>
 
         <div className="project-hero">
-          <Image src={cover} alt={project.title} fill sizes="(max-width: 900px) 100vw, 900px" style={{ objectFit: "cover" }} priority />
+          <Image src={cover} alt={project.title} fill sizes="(max-width: 1140px) 100vw, 1140px" style={{ objectFit: "cover" }} priority />
         </div>
 
         <div className="project-overview">
