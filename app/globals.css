@@ -53,8 +53,9 @@
   --typing-dot: rgba(23, 23, 23, 0.4);
 
   /* Frosted nav bar (translucent + backdrop blur) */
-  --nav-bg: rgba(255, 255, 255, 0.7);
-  --nav-border: rgba(20, 20, 20, 0.06);
+  --nav-bg: rgba(255, 255, 255, 0.9);
+  --nav-border: rgba(20, 20, 20, 0.12);
+  --nav-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
 
   /* Animated dot-field texture (read by dot-field.tsx) */
   --dot-color: #171717;
@@ -124,7 +125,7 @@ button, input { font: inherit; color: inherit; }
   border: 1px solid var(--nav-border);
   background: var(--nav-bg);
   backdrop-filter: blur(16px);
-  box-shadow: 0 0 20px var(--shadow-10);
+  box-shadow: var(--nav-shadow);
   transform: translateX(-50%);
 }
 .nav-links { display: flex; align-items: center; gap: 28px; margin-right: auto; }
@@ -468,7 +469,7 @@ button, input { font: inherit; color: inherit; }
   border: 1px solid var(--nav-border);
   background: var(--nav-bg);
   backdrop-filter: blur(16px);
-  box-shadow: 0 0 20px var(--shadow-10);
+  box-shadow: var(--nav-shadow);
 }
 .site-nav-links { display: flex; align-items: center; gap: 28px; margin-right: auto; }
 .site-nav-links a { font-size: 15px; font-weight: 500; color: var(--ink-58); transition: color 0.2s ease, font-weight 0.2s ease; }
