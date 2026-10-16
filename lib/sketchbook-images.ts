@@ -7,6 +7,7 @@ export type SketchbookImage = {
 };
 
 const videoFiles: { name: string; width: number; height: number }[] = [
+  { name: "symbol-exploration-motion (1).mp4", width: 738, height: 920 },
   { name: "红包封面视频.mov", width: 1080, height: 1080 },
 ];
 
