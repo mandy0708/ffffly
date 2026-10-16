@@ -6,18 +6,15 @@ export type SketchbookImage = {
   isVideo?: boolean;
 };
 
-const videoFiles: { name: string; width: number; height: number }[] = [
-  { name: "symbol-exploration-motion (1).mp4", width: 738, height: 920 },
-  { name: "红包封面视频.mov", width: 1080, height: 1080 },
-];
-
 const files: { name: string; width: number; height: number }[] = [
+  { name: "symbol-exploration-motion (1).mp4", width: 738, height: 920 },
   { name: "20260932.png", width: 2248, height: 3000 },
   { name: "20260938.png", width: 2248, height: 3000 },
   { name: "AFT主视觉-修改稿2_画板 1 副本 5.png", width: 4000, height: 2250 },
   { name: "AFT主视觉-修改稿2_画板 1 副本 6.png", width: 4000, height: 2250 },
   { name: "AFT邀请函-01.jpg", width: 2342, height: 5075 },
   { name: "AFT邀请函-03.jpg", width: 2342, height: 5075 },
+  { name: "红包封面视频.mov", width: 1080, height: 1080 },
   { name: "IP 形象-过程稿 1-1.png", width: 1200, height: 1600 },
   { name: "IP 形象-过程稿 1-2.png", width: 1200, height: 1600 },
   { name: "IP 形象-过程稿 1-3.png", width: 1200, height: 1600 },
@@ -67,18 +64,10 @@ function toAlt(name: string) {
   return name.replace(/\.[^.]+$/, "").replace(/[_-]/g, " ").trim();
 }
 
-export const sketchbookImages: SketchbookImage[] = [
-  ...videoFiles.map((file) => ({
-    src: `/images/sketchbook/${encodeURIComponent(file.name)}`,
-    alt: toAlt(file.name),
-    width: file.width,
-    height: file.height,
-    isVideo: true,
-  })),
-  ...files.map((file) => ({
-    src: `/images/sketchbook/${encodeURIComponent(file.name)}`,
-    alt: toAlt(file.name),
-    width: file.width,
-    height: file.height,
-  })),
-];
+export const sketchbookImages: SketchbookImage[] = files.map((file) => ({
+  src: `/images/sketchbook/${encodeURIComponent(file.name)}`,
+  alt: toAlt(file.name),
+  width: file.width,
+  height: file.height,
+  ...(/\.(mp4|webm|mov)$/i.test(file.name) ? { isVideo: true } : {}),
+}));
