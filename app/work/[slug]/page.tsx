@@ -85,8 +85,12 @@ export default async function WorkProjectPage({ params }: PageProps<"/work/[slug
           <div className={`project-gallery${project.galleryColumns === 2 ? " project-gallery--two" : ""}`}>
             {galleryImages.map((src) => (
               <div className="project-gallery-item" key={src}>
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={src} alt={project.title} loading="lazy" />
+                {/\.(mp4|webm|mov)$/i.test(src) ? (
+                  <video src={src} autoPlay muted loop playsInline aria-label={project.title} />
+                ) : (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img src={src} alt={project.title} loading="lazy" />
+                )}
               </div>
             ))}
           </div>

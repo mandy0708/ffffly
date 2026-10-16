@@ -44,7 +44,7 @@ export const workProjects: WorkProjectDetail[] = [
     narrative: [
       "随着企业规模的扩大，原有品牌形象已难以承载新的业务格局与国际化表达。此次为智谱进行品牌形象升级，从品牌战略与受众洞察出发，提炼「基座模型、学术、安全」的核心气质，完成多轮创意方案提报，并在反复对齐中推动共识落地了全新 logo 与完整 VI。",
     ],
-    gallery: ["1.jpg", "2.jpg", "3.jpg", "4.jpg", "5.jpg", "6.jpg", "7.jpg", "8.jpg", "9.jpg", "10.jpg", "11.jpg", "12.jpg", "13.jpg", "14.jpg", "15.jpg", "16.jpg", "17.jpg", "18.jpg"],
+    gallery: ["1.jpg", "2.jpg", "3.jpg", "4.jpg", "5.jpg", "6.jpg", "7.jpg", "7-2.mp4", "8.jpg", "9.jpg", "10.jpg", "11.jpg", "12.jpg", "13.jpg", "14.jpg", "15.jpg", "16.jpg", "17.jpg", "18.jpg"],
   },
   {
     slug: "zhipu-agent-openday",
