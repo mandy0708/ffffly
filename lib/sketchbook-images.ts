@@ -11,6 +11,10 @@ const videoFiles: { name: string; width: number; height: number }[] = [
 ];
 
 const files: { name: string; width: number; height: number }[] = [
+  { name: "AFT主视觉-修改稿2_画板 1 副本 5.png", width: 4000, height: 2250 },
+  { name: "AFT主视觉-修改稿2_画板 1 副本 6.png", width: 4000, height: 2250 },
+  { name: "AFT邀请函-01.jpg", width: 2342, height: 5075 },
+  { name: "AFT邀请函-03.jpg", width: 2342, height: 5075 },
   { name: "IP 形象-过程稿 1-1.png", width: 1200, height: 1600 },
   { name: "IP 形象-过程稿 1-2.png", width: 1200, height: 1600 },
   { name: "IP 形象-过程稿 1-3.png", width: 1200, height: 1600 },
