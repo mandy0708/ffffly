@@ -11,6 +11,8 @@ const videoFiles: { name: string; width: number; height: number }[] = [
 ];
 
 const files: { name: string; width: number; height: number }[] = [
+  { name: "20260932.png", width: 2248, height: 3000 },
+  { name: "20260938.png", width: 2248, height: 3000 },
   { name: "AFT主视觉-修改稿2_画板 1 副本 5.png", width: 4000, height: 2250 },
   { name: "AFT主视觉-修改稿2_画板 1 副本 6.png", width: 4000, height: 2250 },
   { name: "AFT邀请函-01.jpg", width: 2342, height: 5075 },
