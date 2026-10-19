@@ -2,7 +2,7 @@
 
 import brandImage from "@/public/images/portfolio/brand-bag.jpg";
 import brandImageMobile from "@/public/images/portfolio/brand-bag-phone.png";
-import aboutImage from "@/public/images/portfolio/about-portrait.jpg";
+import aboutImage from "@/public/images/portfolio/about-me.jpg";
 import contactImage from "@/public/images/portfolio/contactme-planB.png";
 import cultureImage from "@/public/images/portfolio/culture-cover.jpg";
 import cultureImageMobile from "@/public/images/portfolio/culture-cover-phone.jpeg";
