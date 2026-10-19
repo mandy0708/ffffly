@@ -44,7 +44,7 @@ export const workProjects: WorkProjectDetail[] = [
     narrative: [
       "随着企业规模的扩大，原有品牌形象已难以承载新的业务格局与国际化表达。此次为智谱进行品牌形象升级，从品牌战略与受众洞察出发，提炼「基座模型、学术、安全」的核心气质，完成多轮创意方案提报，并在反复对齐中推动共识落地了全新 logo 与完整 VI。",
     ],
-    gallery: ["1.jpg", "2.jpg", "3.jpg", "4.jpg", "5.jpg", "6.jpg", "7.jpg", "7-2.mp4", "8.jpg", "9.jpg", "10.jpg", "11.jpg", "12.jpg", "13.jpg", "14.jpg", "15.jpg", "16.jpg", "17.jpg", "18.jpg"],
+    gallery: ["1.jpg", "2.jpg", "3.jpg", "4.jpg", "5.jpg", "6.jpg", "7.jpg", "7-2.mp4", "8.jpg", "9.jpg", "10.jpg", "11.jpg", "12.jpg", "13.jpg", "14.jpg", "15.jpg", "16.jpg", "17.jpg", "18.jpg", "19.jpg"],
   },
   {
     slug: "zhipu-agent-openday",
@@ -79,7 +79,7 @@ export const workProjects: WorkProjectDetail[] = [
   {
     slug: "4paradigm-branding",
     tag: "Branding",
-    year: "2023",
+    year: "2021",
     title: "第四范式品牌全案设计",
     description: "Defining 4Paradigm's brand visual identity system.",
     role: "品牌设计负责人",
@@ -141,7 +141,7 @@ export const workProjects: WorkProjectDetail[] = [
   {
     slug: "4paradigm-culture-system",
     tag: "Culture&IP",
-    year: "2024",
+    year: "2022",
     title: "第四范式企业文化视觉系统",
     description: "A culture symbol system translating 4Paradigm's vision and mission into visual language.",
     role: "品牌设计师",
@@ -217,7 +217,7 @@ export const workProjects: WorkProjectDetail[] = [
   {
     slug: "tetellus-branding",
     tag: "Branding",
-    year: "2024",
+    year: "2018",
     title: "品牌设计 | Tetellus 谛造",
     description: "Building a full brand identity for a smart-technology company.",
     role: "品牌设计师",
@@ -236,7 +236,7 @@ export const workProjects: WorkProjectDetail[] = [
   {
     slug: "product-packaging-design",
     tag: "Packaging",
-    year: "2023 - 2024",
+    year: "2023",
     title: "合集｜产品包装设计",
     description: "A collection of product packaging design across multiple lifestyle brands.",
     role: "包装设计师",
@@ -273,7 +273,7 @@ export const workProjects: WorkProjectDetail[] = [
   {
     slug: "nine-ai-branding",
     tag: "Branding",
-    year: "2024",
+    year: "2018",
     title: "品牌设计 | 互联网金融品牌",
     description: "Logo and brand identity exploration for an AI-driven internet finance brand.",
     role: "品牌设计师",
@@ -292,7 +292,7 @@ export const workProjects: WorkProjectDetail[] = [
     slug: "food-brand-packaging-design",
     tag: "Branding",
     categories: ["Branding", "Packaging"],
-    year: "2025",
+    year: "2023",
     title: "食品品牌及包装设计",
     description: "Full brand identity and packaging design for a fresh noodle-soup food brand.",
     role: "品牌设计师",

@@ -58,6 +58,10 @@ export default async function WorkProjectPage({ params }: PageProps<"/work/[slug
               <span className="value">{project.client}</span>
             </div>
             <div className="project-meta-item">
+              <span className="label">时间</span>
+              <span className="value">{project.year}</span>
+            </div>
+            <div className="project-meta-item">
               <span className="label">角色</span>
               <span className="value">{project.role}</span>
             </div>
