@@ -12,9 +12,10 @@ export type WorkProjectDetail = {
   narrative: string[];
   gallery: string[];
   galleryColumns?: number;
+  hidden?: boolean;
 };
 
-export const workProjects: WorkProjectDetail[] = [
+const allWorkProjects: WorkProjectDetail[] = [
   {
     slug: "yuanhuan-intelligent",
     tag: "Branding",
@@ -61,6 +62,7 @@ export const workProjects: WorkProjectDetail[] = [
   },
   {
     slug: "zhipu-foundation-model",
+    hidden: true,
     tag: "Marketing",
     year: "2026",
     title: "智谱基座模型发布视觉与 Benchmark",
@@ -305,6 +307,8 @@ export const workProjects: WorkProjectDetail[] = [
     ],
   },
 ];
+
+export const workProjects = allWorkProjects.filter((project) => !project.hidden);
 
 export function getWorkProject(slug: string) {
   return workProjects.find((project) => project.slug === slug);
