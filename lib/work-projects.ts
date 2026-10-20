@@ -9,7 +9,6 @@ export type WorkProjectDetail = {
   role: string;
   deliverables: string[];
   client: string;
-  projectLink?: string;
   narrative: string[];
   gallery: string[];
   galleryColumns?: number;
@@ -34,13 +33,12 @@ export const workProjects: WorkProjectDetail[] = [
   {
     slug: "zhipu-brand-upgrade",
     tag: "Branding",
-    year: "2026",
+    year: "2025-2026",
     title: "智谱品牌定位及视觉升级",
     description: "Leading the brand upgrade end-to-end, from proposal to rollout.",
     role: "品牌设计师",
     deliverables: ["多方案创意提报", "品牌全新 logo", "品牌全新 VI", "全新主品牌网站"],
     client: "智谱",
-    projectLink: "https://chat.z.ai",
     narrative: [
       "随着企业规模的扩大，原有品牌形象已难以承载新的业务格局与国际化表达。此次为智谱进行品牌形象升级，从品牌战略与受众洞察出发，提炼「基座模型、学术、安全」的核心气质，完成多轮创意方案提报，并在反复对齐中推动共识落地了全新 logo 与完整 VI。",
     ],
@@ -115,7 +113,6 @@ export const workProjects: WorkProjectDetail[] = [
     role: "品牌设计师",
     deliverables: ["IP 形象", "IP 规范"],
     client: "第四范式",
-    projectLink: "learn-more",
     narrative: [
       "需求 — 企业文化落地需要一个核心载体，能与员工进行情感化沟通，进而引起员工的情感共鸣。",
       "目标 — 让每一位员工在轻松愉快的工作环境下，对公司文化有认同感，增强公司向心力与凝聚力，同时又能体现企业的个性。",

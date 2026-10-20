@@ -58,10 +58,6 @@ export default async function WorkProjectPage({ params }: PageProps<"/work/[slug
               <span className="value">{project.client}</span>
             </div>
             <div className="project-meta-item">
-              <span className="label">时间</span>
-              <span className="value">{project.year}</span>
-            </div>
-            <div className="project-meta-item">
               <span className="label">角色</span>
               <span className="value">{project.role}</span>
             </div>
@@ -69,19 +65,12 @@ export default async function WorkProjectPage({ params }: PageProps<"/work/[slug
               <span className="label">交付成果</span>
               <span className="value">{project.deliverables.join("、")}</span>
             </div>
-            {project.projectLink && project.projectLink !== "learn-more" && (
-              <div className="project-meta-item">
-                <span className="label">项目地址</span>
-                <a className="value" href={project.projectLink} target="_blank" rel="noreferrer">
-                  {project.projectLink}
-                </a>
-              </div>
-            )}
           </aside>
           <div className="project-narrative">
             {project.narrative.map((paragraph) => (
               <p key={paragraph.slice(0, 12)}>{paragraph}</p>
             ))}
+            <p>{project.year}</p>
           </div>
         </div>
 
