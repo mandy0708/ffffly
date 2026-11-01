@@ -8,13 +8,10 @@ import fourParadigmCultureSystem from "@/public/images/work/4paradigm-culture-sy
 import fourParadigmOnboardingGifts from "@/public/images/work/4paradigm-onboarding-gifts.jpg";
 import fourParadigmMahjong from "@/public/images/work/4paradigm-mahjong.jpg";
 import tetellusBranding from "@/public/images/work/tetellus-branding.jpg";
-import productPackagingDesign from "@/public/images/work/product-packaging-design.jpg";
 import fourParadigmHeiwaIp from "@/public/images/work/4paradigm-heiwa-ip.jpg";
 import fourParadigmStoreGifts from "@/public/images/work/4paradigm-store-gifts.jpg";
 import yuanhuanIntelligent from "@/public/images/work/yuanhuan-intelligent.jpg";
-import northeasternChoiceBranding from "@/public/images/work/northeastern-choice-branding.jpg";
 import nineAiBranding from "@/public/images/work/nine-ai-branding.jpg";
-import foodBrandPackagingDesign from "@/public/images/work/food-brand-packaging-design.jpg";
 
 export const coverImages = {
   "zhipu-brand-upgrade": zhipuBrandUpgrade,
@@ -27,11 +24,8 @@ export const coverImages = {
   "4paradigm-onboarding-gifts": fourParadigmOnboardingGifts,
   "4paradigm-mahjong": fourParadigmMahjong,
   "tetellus-branding": tetellusBranding,
-  "product-packaging-design": productPackagingDesign,
   "4paradigm-heiwa-ip": fourParadigmHeiwaIp,
   "4paradigm-store-gifts": fourParadigmStoreGifts,
   "yuanhuan-intelligent": yuanhuanIntelligent,
-  "northeastern-choice-branding": northeasternChoiceBranding,
   "nine-ai-branding": nineAiBranding,
-  "food-brand-packaging-design": foodBrandPackagingDesign,
 };
