@@ -11,7 +11,6 @@ import tetellusBranding from "@/public/images/work/tetellus-branding.jpg";
 import fourParadigmHeiwaIp from "@/public/images/work/4paradigm-heiwa-ip.jpg";
 import fourParadigmStoreGifts from "@/public/images/work/4paradigm-store-gifts.jpg";
 import yuanhuanIntelligent from "@/public/images/work/yuanhuan-intelligent.jpg";
-import nineAiBranding from "@/public/images/work/nine-ai-branding.jpg";
 
 export const coverImages = {
   "zhipu-brand-upgrade": zhipuBrandUpgrade,
@@ -27,5 +26,4 @@ export const coverImages = {
   "4paradigm-heiwa-ip": fourParadigmHeiwaIp,
   "4paradigm-store-gifts": fourParadigmStoreGifts,
   "yuanhuan-intelligent": yuanhuanIntelligent,
-  "nine-ai-branding": nineAiBranding,
 };

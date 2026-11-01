@@ -232,24 +232,6 @@ const allWorkProjects: WorkProjectDetail[] = [
       "22.jpg", "23.jpg", "24.jpg", "25.jpg", "26.jpg", "27.jpg", "28.jpg", "29.jpg", "30.jpg", "31.jpg",
     ],
   },
-  {
-    slug: "nine-ai-branding",
-    tag: "Branding",
-    year: "2018",
-    title: "品牌设计 | 互联网金融品牌",
-    description: "Logo and brand identity exploration for an AI-driven internet finance brand.",
-    role: "品牌设计师",
-    deliverables: ["品牌命名与 Logo 设计", "多方案创意提报", "标识应用延展"],
-    client: "NINE AI",
-    narrative: [
-      "为一家互联网金融科技品牌进行 Logo 设计提案，从「九狐」的品牌联想出发，探索狐狸形象与 AI 科技感的结合，提出 NINE AI、FOX TIMES.AI 等多个命名与标识方向。",
-      "标识以简洁的几何线条构建狐狸剪影，橙黑配色兼具警觉与活力，并延展至员工文化衫等应用场景，验证标识在多场景下的识别度与延展性。",
-    ],
-    gallery: [
-      "01.jpg", "02.jpg", "03.jpg", "04.jpg", "05.jpg", "06.jpg", "07.jpg", "08.jpg",
-      "09.jpg", "10.jpg", "11.jpg", "12.jpg", "13.jpg", "14.jpg", "15.jpg",
-    ],
-  },
 ];
 
 export const workProjects = allWorkProjects.filter((project) => !project.hidden);
