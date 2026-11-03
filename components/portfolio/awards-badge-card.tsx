@@ -1,4 +1,8 @@
+"use client";
+
 import Image from "next/image";
+import { copy } from "@/lib/copy";
+import { useLang } from "@/components/site/lang-provider";
 import award1 from "@/public/images/awards/award-1.png";
 import award2 from "@/public/images/awards/award-2-pentawards.png";
 import award3 from "@/public/images/awards/award-3-a-design.png";
@@ -8,11 +12,12 @@ import award5 from "@/public/images/awards/award-5-kdesign.png";
 const logos = [award4, award1, award2, award3, award5];
 
 export function AwardsBadgeCard() {
+  const t = copy[useLang()].home;
   return (
     <div className="badge-card-awards" aria-hidden="true">
       <div className="badge-awards-stat">
         <span className="badge-awards-number">5+</span>
-        <span className="badge-awards-label">International Design Awards</span>
+        <span className="badge-awards-label">{t.awards}</span>
       </div>
       <div className="badge-awards-logos">
         {logos.map((logo, i) => (

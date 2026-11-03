@@ -135,7 +135,7 @@ button, input { font: inherit; color: inherit; }
   z-index: 20;
   display: flex;
   align-items: center;
-  width: 480px;
+  width: 540px;
   height: 56px;
   padding: 6px 6px 6px 26px;
   border-radius: 999px;
@@ -484,7 +484,7 @@ button, input { font: inherit; color: inherit; }
   z-index: 50;
   display: flex;
   align-items: center;
-  width: 480px;
+  width: 540px;
   height: 56px;
   padding: 6px 6px 6px 26px;
   border-radius: 999px;
@@ -544,7 +544,7 @@ button, input { font: inherit; color: inherit; }
 .section-title-block h2 { font-size: clamp(22px, 3vw, 28px); font-weight: 600; margin: 0; }
 .section-subtitle { max-width: 560px; margin: 0; font-size: 15px; font-weight: 400; color: var(--ink-60); line-height: 1.75; }
 
-.about-title-sub { max-width: none; margin: 18px 0 0; font-size: clamp(18px, 2.4vw, 24px); font-weight: 400; color: var(--ink-70); line-height: 1.7; white-space: nowrap; }
+.about-title-sub { max-width: 960px; margin: 18px 0 0; font-size: clamp(18px, 2.4vw, 24px); font-weight: 400; color: var(--ink-70); line-height: 1.7; }
 
 /* About — Skills & Expertise: 8 capability cards, each with an icon badge that
    inverts to a solid fill on hover (style previously shipped on
@@ -820,7 +820,6 @@ a.project-meta-item .value:hover { opacity: 0.7; }
   .project-overview { grid-template-columns: 1fr; gap: 32px; }
   .project-related-item { flex-basis: 62vw; }
   .project-gallery--two { grid-template-columns: 1fr; }
-  .about-title-sub { white-space: normal; }
 }
 
 /* Sketchbook — cosmos.so-style waterfall: equal-width columns, natural image
@@ -1064,6 +1063,7 @@ a.project-meta-item .value:hover { opacity: 0.7; }
 .best-card[data-tone="1"] { background-image: url(/images/gradients/violet-top.jpg); }
 .best-card[data-tone="2"] { background-image: url(/images/gradients/green-top.jpg); }
 .best-card[data-tone="3"] { background-image: url(/images/gradients/slate-top.jpg); }
+.best-card-title, .best-card-en { color: #fff; }
 .best-card-en { opacity: 0.8; }
 .best-card-panel { background: rgba(255, 255, 255, 0.9); }
 
@@ -1077,3 +1077,13 @@ a.project-meta-item .value:hover { opacity: 0.7; }
 }
 .contact-block .contact-item .label { color: var(--ink-muted); }
 .contact-block .contact-qr { border-color: rgba(255, 255, 255, 0.7); background: #fff; }
+
+/* Language switch in the nav: "EN / 中" */
+.lang-switch { display: flex; align-items: center; flex-shrink: 0; margin-right: 10px; font-size: 13px; color: var(--ink-35); }
+.lang-switch button { border: 0; background: transparent; padding: 6px 6px; border-radius: 999px; color: var(--ink-45); font-weight: 400; cursor: pointer; transition: color 0.2s ease; }
+.lang-switch button:hover { color: var(--ink); }
+.lang-switch button[aria-pressed="true"] { color: var(--ink); font-weight: 500; }
+@media (max-width: 640px) {
+  .lang-switch { margin-right: 4px; }
+  .lang-switch button { padding: 6px 4px; }
+}

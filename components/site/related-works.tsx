@@ -4,6 +4,8 @@ import Image from "next/image";
 import type { StaticImageData } from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
+import { copy } from "@/lib/copy";
+import { useLang } from "@/components/site/lang-provider";
 
 export type RelatedProject = {
   slug: string;
@@ -14,6 +16,7 @@ export type RelatedProject = {
 };
 
 export function RelatedWorks({ projects }: { projects: RelatedProject[] }) {
+  const t = copy[useLang()];
   const trackRef = useRef<HTMLDivElement>(null);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(false);
@@ -45,7 +48,7 @@ export function RelatedWorks({ projects }: { projects: RelatedProject[] }) {
   return (
     <div className="project-related">
       <div className="project-related-head">
-        <h2>Related Works</h2>
+        <h2>{t.project.related}</h2>
         <div className="project-related-arrows">
           <button type="button" aria-label="Scroll left" onClick={() => scrollByStep(-1)} disabled={!canScrollLeft}>
             <svg viewBox="0 0 20 20" fill="none" aria-hidden="true">
@@ -65,7 +68,7 @@ export function RelatedWorks({ projects }: { projects: RelatedProject[] }) {
             <div className="project-related-image">
               <Image src={related.image} alt={related.title} fill sizes="(max-width: 640px) 45vw, 280px" style={{ objectFit: "cover" }} />
             </div>
-            <span className="project-related-tag">{related.tag} · {related.year}</span>
+            <span className="project-related-tag">{t.work.categories[related.tag] ?? related.tag} · {related.year}</span>
             <span className="project-related-title">{related.title}</span>
           </Link>
         ))}

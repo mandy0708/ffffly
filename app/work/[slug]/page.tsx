@@ -6,6 +6,9 @@ import { SiteFooter } from "@/components/site/site-footer";
 import { RelatedWorks } from "@/components/site/related-works";
 import { getWorkProject, workProjects } from "@/lib/work-projects";
 import { coverImages } from "@/lib/work-images";
+import { localizeProject } from "@/lib/work-projects-i18n";
+import { copy } from "@/lib/copy";
+import { getLang } from "@/lib/i18n-server";
 
 export function generateStaticParams() {
   return workProjects.map((project) => ({ slug: project.slug }));
@@ -23,8 +26,11 @@ export async function generateMetadata({ params }: PageProps<"/work/[slug]">): P
 
 export default async function WorkProjectPage({ params }: PageProps<"/work/[slug]">) {
   const { slug } = await params;
-  const project = getWorkProject(slug);
-  if (!project) notFound();
+  const base = getWorkProject(slug);
+  if (!base) notFound();
+  const lang = await getLang();
+  const t = copy[lang];
+  const project = localizeProject(base, lang);
 
   const cover = coverImages[project.slug as keyof typeof coverImages];
   const galleryImages = project.gallery.map(
@@ -34,7 +40,7 @@ export default async function WorkProjectPage({ params }: PageProps<"/work/[slug
   const currentIndex = workProjects.findIndex((p) => p.slug === project.slug);
   const relatedCount = workProjects.length - 1;
   const relatedProjects = Array.from({ length: relatedCount }, (_, i) => {
-    const p = workProjects[(currentIndex + 1 + i) % workProjects.length];
+    const p = localizeProject(workProjects[(currentIndex + 1 + i) % workProjects.length], lang);
     return { slug: p.slug, tag: p.tag, year: p.year, title: p.title, image: coverImages[p.slug as keyof typeof coverImages] };
   });
 
@@ -43,7 +49,7 @@ export default async function WorkProjectPage({ params }: PageProps<"/work/[slug
       <SiteNav />
       <div className="site-main project-detail">
         <div className="project-title-block">
-          <span className="project-tag">{project.tag} · {project.year}</span>
+          <span className="project-tag">{t.work.categories[project.tag] ?? project.tag} · {project.year}</span>
           <h1>{project.title}</h1>
         </div>
 
@@ -54,16 +60,16 @@ export default async function WorkProjectPage({ params }: PageProps<"/work/[slug
         <div className="project-overview">
           <aside className="project-meta-sidebar">
             <div className="project-meta-item">
-              <span className="label">服务品牌</span>
+              <span className="label">{t.project.client}</span>
               <span className="value">{project.client}</span>
             </div>
             <div className="project-meta-item">
-              <span className="label">角色</span>
+              <span className="label">{t.project.role}</span>
               <span className="value">{project.role}</span>
             </div>
             <div className="project-meta-item">
-              <span className="label">交付成果</span>
-              <span className="value">{project.deliverables.join("、")}</span>
+              <span className="label">{t.project.deliverables}</span>
+              <span className="value">{project.deliverables.join(t.project.sep)}</span>
             </div>
           </aside>
           <div className="project-narrative">

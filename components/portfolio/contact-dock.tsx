@@ -2,6 +2,8 @@
 
 import { useEffect, useRef, useState } from "react";
 import { Phone } from "lucide-react";
+import { copy } from "@/lib/copy";
+import { useLang } from "@/components/site/lang-provider";
 
 const links = [
   {
@@ -33,6 +35,8 @@ const links = [
 ];
 
 export function ContactDock() {
+  const t = copy[useLang()].home;
+  const labelFor = (key: string, fallback: string) => (key === "wechat" ? t.wechat : key === "phone" ? t.phone : fallback);
   const [isOpen, setIsOpen] = useState(false);
   const dockRef = useRef<HTMLDivElement>(null);
 
@@ -88,11 +92,11 @@ export function ContactDock() {
                 <span className="contact-item-icon">
                   {link.icon}
                 </span>
-                <span className="contact-item-label">{link.label}</span>
+                <span className="contact-item-label">{labelFor(link.key, link.label)}</span>
               </a>
             ))}
           </div>
-          <span className="contact-copyright">All Rights Reserved</span>
+          <span className="contact-copyright">{t.rights}</span>
         </div>
       </div>
     </div>

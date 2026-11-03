@@ -3,6 +3,8 @@ export type WorkProjectDetail = {
   tag: string;
   categories?: string[];
   year: string;
+  /** Placeholder publish date (YYYY-MM-DD), shown on the Work cards. */
+  date: string;
   title: string;
   subtitle?: string;
   description: string;
@@ -20,6 +22,7 @@ const allWorkProjects: WorkProjectDetail[] = [
     slug: "yuanhuan-intelligent",
     tag: "Branding",
     year: "2026",
+    date: "2026-03-18",
     title: "品牌设计 | MetaCircle",
     description: "Building the brand identity and visual system for MetaCircle, a corporate analytics platform.",
     role: "品牌设计师",
@@ -35,6 +38,7 @@ const allWorkProjects: WorkProjectDetail[] = [
     slug: "zhipu-brand-upgrade",
     tag: "Branding",
     year: "2025-2026",
+    date: "2026-01-09",
     title: "智谱品牌定位及视觉升级",
     description: "Leading the brand upgrade end-to-end, from proposal to rollout.",
     role: "品牌设计师",
@@ -49,6 +53,7 @@ const allWorkProjects: WorkProjectDetail[] = [
     slug: "zhipu-agent-openday",
     tag: "Marketing",
     year: "2025",
+    date: "2025-11-20",
     title: "Agent Openday",
     description: "Event visual identity and on-site design for the Agent Openday.",
     role: "品牌设计负责人",
@@ -65,6 +70,7 @@ const allWorkProjects: WorkProjectDetail[] = [
     hidden: true,
     tag: "Marketing",
     year: "2026",
+    date: "2026-02-11",
     title: "智谱基座模型发布视觉与 Benchmark",
     description: "Launch visuals and benchmark presentation for the foundation model release.",
     role: "品牌设计师",
@@ -80,6 +86,7 @@ const allWorkProjects: WorkProjectDetail[] = [
     slug: "4paradigm-branding",
     tag: "Branding",
     year: "2021",
+    date: "2021-06-15",
     title: "第四范式品牌全案设计",
     description: "Defining 4Paradigm's brand visual identity system.",
     role: "品牌设计负责人",
@@ -95,6 +102,7 @@ const allWorkProjects: WorkProjectDetail[] = [
     slug: "4paradigm-marketing",
     tag: "Marketing",
     year: "2023",
+    date: "2023-09-21",
     title: "第四范式营销设计与雇主品牌",
     description: "Marketing visuals and an employer-brand illustration system across 4Paradigm's brand touchpoints.",
     role: "品牌设计师",
@@ -110,6 +118,7 @@ const allWorkProjects: WorkProjectDetail[] = [
     slug: "4paradigm-culture-ip",
     tag: "Culture&IP",
     year: "2023",
+    date: "2023-04-12",
     title: "第四范式文化 IP 设计",
     description: "Culture IP design, translating tradition into a modern brand experience.",
     role: "品牌设计师",
@@ -126,6 +135,7 @@ const allWorkProjects: WorkProjectDetail[] = [
     slug: "4paradigm-heiwa-ip",
     tag: "Culture&IP",
     year: "2021",
+    date: "2021-11-03",
     title: "文创周边 | 黑娃IP设计",
     description: "A mascot IP design bringing 4Paradigm's AI-for-everyone spirit to life.",
     role: "IP 设计师",
@@ -141,6 +151,7 @@ const allWorkProjects: WorkProjectDetail[] = [
     slug: "4paradigm-culture-system",
     tag: "Culture&IP",
     year: "2022",
+    date: "2022-05-26",
     title: "第四范式企业文化视觉系统",
     description: "A culture symbol system translating 4Paradigm's vision and mission into visual language.",
     role: "品牌设计师",
@@ -171,6 +182,7 @@ const allWorkProjects: WorkProjectDetail[] = [
     slug: "4paradigm-onboarding-gifts",
     tag: "Culture&IP",
     year: "2024",
+    date: "2024-03-07",
     title: "文创周边 | 入职礼",
     description: "Gift box and badge system design for onboarding and work-anniversary milestones.",
     role: "品牌设计师",
@@ -186,6 +198,7 @@ const allWorkProjects: WorkProjectDetail[] = [
     slug: "4paradigm-store-gifts",
     tag: "Culture&IP",
     year: "2023",
+    date: "2023-12-14",
     title: "文创周边 | 企业商店礼品",
     description: "Notebook and sock designs for 4Paradigm's internal culture store.",
     role: "品牌设计师",
@@ -201,6 +214,7 @@ const allWorkProjects: WorkProjectDetail[] = [
     slug: "4paradigm-mahjong",
     tag: "Culture&IP",
     year: "2024",
+    date: "2024-08-22",
     title: "文创周边 | 麻将设计",
     description: "A custom mahjong set that turns the brand system into a playable cultural gift.",
     role: "品牌设计师",
@@ -217,6 +231,7 @@ const allWorkProjects: WorkProjectDetail[] = [
     slug: "tetellus-branding",
     tag: "Branding",
     year: "2018",
+    date: "2018-10-09",
     title: "品牌设计 | Tetellus 谛造",
     description: "Building a full brand identity for a smart-technology company.",
     role: "品牌设计师",
