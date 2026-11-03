@@ -4,9 +4,14 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import type { StaticImageData } from "next/image";
-import { copy } from "@/lib/copy";
-import { formatDate } from "@/lib/i18n";
-import { useLang } from "@/components/site/lang-provider";
+
+const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+/** "2026-03-18" → "Mar 18, 2026" */
+function formatDate(iso: string) {
+  const [y, m, d] = iso.split("-").map(Number);
+  return `${MONTHS[m - 1]} ${d}, ${y}`;
+}
 
 export type WorkProject = {
   slug: string;
@@ -31,8 +36,6 @@ const BRANDING_ORDER = [
 ];
 
 export function WorkGrid({ projects }: { projects: WorkProject[] }) {
-  const lang = useLang();
-  const t = copy[lang].work;
   const searchParams = useSearchParams();
   const requested = searchParams.get("category");
   const initial = requested && CATEGORIES.includes(requested) ? requested : CATEGORIES[0];
@@ -54,7 +57,7 @@ export function WorkGrid({ projects }: { projects: WorkProject[] }) {
 
   return (
     <>
-      <div className="work-filter" role="tablist" aria-label={t.filterLabel}>
+      <div className="work-filter" role="tablist" aria-label="Filter projects by category">
         {CATEGORIES.map((category) => (
           <button
             key={category}
@@ -62,7 +65,7 @@ export function WorkGrid({ projects }: { projects: WorkProject[] }) {
             data-active={category === active}
             onClick={() => setActive(category)}
           >
-            {t.categories[category]}
+            {category}
           </button>
         ))}
       </div>
@@ -82,10 +85,10 @@ export function WorkGrid({ projects }: { projects: WorkProject[] }) {
               <div className="work-item-body">
                 <div className="work-item-head">
                   <h3>{project.title}</h3>
-                  <span className="tag">{t.categories[project.tag] ?? project.tag}</span>
+                  <span className="tag">{project.tag}</span>
                 </div>
                 <p>{project.description}</p>
-                {project.date && <time className="work-item-date" dateTime={project.date}>{formatDate(project.date, lang)}</time>}
+                {project.date && <time className="work-item-date" dateTime={project.date}>{formatDate(project.date)}</time>}
               </div>
             </button>
           ) : (
@@ -96,10 +99,10 @@ export function WorkGrid({ projects }: { projects: WorkProject[] }) {
               <div className="work-item-body">
                 <div className="work-item-head">
                   <h3>{project.title}</h3>
-                  <span className="tag">{t.categories[project.tag] ?? project.tag}</span>
+                  <span className="tag">{project.tag}</span>
                 </div>
                 <p>{project.description}</p>
-                {project.date && <time className="work-item-date" dateTime={project.date}>{formatDate(project.date, lang)}</time>}
+                {project.date && <time className="work-item-date" dateTime={project.date}>{formatDate(project.date)}</time>}
               </div>
             </a>
           ),
@@ -108,7 +111,7 @@ export function WorkGrid({ projects }: { projects: WorkProject[] }) {
 
       {showComingSoon && (
         <div className="coming-soon-toast" role="status">
-          {t.comingSoon}
+          筹备中
         </div>
       )}
     </>

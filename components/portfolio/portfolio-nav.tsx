@@ -1,20 +1,15 @@
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
-import { copy } from "@/lib/copy";
-import { getLang } from "@/lib/i18n-server";
-import { LangSwitch } from "@/components/site/lang-switch";
 
-export async function PortfolioNav() {
-  const t = copy[await getLang()].nav;
-  const links = [
-    { href: "/", label: t.home },
-    { href: "/work", label: t.work },
-    { href: "/sketchbook", label: t.sketchbook },
-    { href: "/about", label: t.about },
-  ];
+const links = [
+  { href: "/", label: "Home" },
+  { href: "/work", label: "Work" },
+  { href: "/sketchbook", label: "Sketchbook" },
+  { href: "/about", label: "About" },
+];
 
+export function PortfolioNav() {
   return (
-    <>
     <nav className="top-nav" aria-label="Main navigation">
       <div className="nav-links">
         {links.map((link, index) => (
@@ -24,11 +19,9 @@ export async function PortfolioNav() {
         ))}
       </div>
       <Link className="nav-cta" href="/about#contact">
-        <span className="nav-cta-label">{t.cta}</span>
+        <span className="nav-cta-label">Let&apos;s talk</span>
         <ArrowUpRight className="nav-cta-icon" size={18} strokeWidth={2} aria-hidden="true" />
       </Link>
     </nav>
-    <LangSwitch />
-    </>
   );
 }

@@ -3,22 +3,18 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ArrowUpRight } from "lucide-react";
-import { copy } from "@/lib/copy";
-import { useLang } from "@/components/site/lang-provider";
-import { LangSwitch } from "@/components/site/lang-switch";
+
+const links = [
+  { href: "/", label: "Home" },
+  { href: "/work", label: "Work" },
+  { href: "/sketchbook", label: "Sketchbook" },
+  { href: "/about", label: "About" },
+];
 
 export function SiteNav() {
   const pathname = usePathname();
-  const t = copy[useLang()].nav;
-  const links = [
-    { href: "/", label: t.home },
-    { href: "/work", label: t.work },
-    { href: "/sketchbook", label: t.sketchbook },
-    { href: "/about", label: t.about },
-  ];
 
   return (
-    <>
     <nav className="site-nav" aria-label="Main navigation">
       <div className="site-nav-links">
         {links.map((link) => (
@@ -28,11 +24,9 @@ export function SiteNav() {
         ))}
       </div>
       <Link className="site-nav-cta" href="/about#contact">
-        <span className="nav-cta-label">{t.cta}</span>
+        <span className="nav-cta-label">Let&apos;s talk</span>
         <ArrowUpRight className="nav-cta-icon" size={18} strokeWidth={2} aria-hidden="true" />
       </Link>
     </nav>
-    <LangSwitch />
-    </>
   );
 }

@@ -1114,31 +1114,3 @@ a.project-meta-item .value:hover { opacity: 0.7; }
 .contact-block > * { position: relative; z-index: 1; }
 .contact-block .contact-item .label { color: var(--ink-muted); }
 .contact-block .contact-qr { border-color: rgba(255, 255, 255, 0.7); background: #fff; }
-
-/* Language switch: its own capsule beside the nav (not part of the menu) */
-.lang-switch {
-  position: fixed;
-  top: 24px;
-  left: calc(50% + 250px);
-  z-index: 50;
-  display: flex;
-  align-items: center;
-  height: 56px;
-  padding: 0 16px;
-  border-radius: 999px;
-  border: 1px solid var(--nav-border);
-  background: var(--nav-bg);
-  backdrop-filter: blur(16px);
-  box-shadow: var(--nav-shadow);
-  font-size: 13px;
-  color: var(--ink-35);
-}
-.lang-switch button { border: 0; background: transparent; padding: 6px 5px; color: var(--ink-45); font-weight: 400; cursor: pointer; transition: color 0.2s ease; }
-.lang-switch button:hover { color: var(--ink); }
-.lang-switch button[aria-pressed="true"] { color: var(--ink); font-weight: 500; }
-@media (max-width: 640px) {
-  /* Phones: nav shrinks to the left, the language capsule sits to its right */
-  .site-nav, .top-nav { left: 16px; transform: none; width: calc(100% - 118px); }
-  .lang-switch { left: auto; right: 16px; padding: 0 10px; }
-  .lang-switch button { padding: 6px 3px; }
-}

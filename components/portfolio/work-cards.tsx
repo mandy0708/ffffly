@@ -7,11 +7,8 @@ import cultureImage from "@/public/images/portfolio/culture-cover.jpg";
 import cultureImageMobile from "@/public/images/portfolio/culture-cover-phone.jpeg";
 import { WorkCard } from "@/components/portfolio/work-card";
 import { AwardsBadgeCard } from "@/components/portfolio/awards-badge-card";
-import { copy } from "@/lib/copy";
-import { useLang } from "@/components/site/lang-provider";
 
 export function WorkCards() {
-  const t = copy[useLang()].home;
   return (
     <div id="work" className="works" aria-label="Selected work">
       <WorkCard
@@ -19,8 +16,8 @@ export function WorkCards() {
         href="/sketchbook"
         gradient="violet"
         imageAlt="Soft violet gradient"
-        title={t.sketchbook.title}
-        subtitle={t.sketchbook.subtitle}
+        title="Sketchbook"
+        subtitle="Illustration, 3D and motion — loose, unbriefed exploration."
       />
 
       <WorkCard
@@ -30,8 +27,8 @@ export function WorkCards() {
         mobileImage={brandImageMobile}
         imageAlt="Branded tote bag with a purple geometric pattern"
         objectPosition="center 65%"
-        title={t.brand.title}
-        subtitle={t.brand.subtitle}
+        title="Brand Design"
+        subtitle="Building brands from positioning to system."
       />
 
       <WorkCard
@@ -39,8 +36,8 @@ export function WorkCards() {
         href="/about"
         image={aboutImage}
         imageAlt="Portrait of Mandy ZhangMan"
-        title={t.about.title}
-        subtitle={t.about.subtitle}
+        title="About Me"
+        subtitle="Brand designer, AI tinkerer, and problem-solver."
       />
 
       <WorkCard
@@ -48,7 +45,7 @@ export function WorkCards() {
         href="/about#contact"
         gradient="ocean"
         imageAlt="Soft blue gradient"
-        title={t.contact.title}
+        title="Contact Me"
       />
 
       <WorkCard
@@ -57,12 +54,12 @@ export function WorkCards() {
         image={cultureImage}
         mobileImage={cultureImageMobile}
         imageAlt="Backpack with 4Paradigm brand patches"
-        title={t.culture.title}
-        subtitle={t.culture.subtitle}
+        title="Culture & IP"
+        subtitle="Corporate culture, IP and merchandise design."
       />
 
       <div className="mandy-badge" aria-hidden="true">
-        {t.hello}
+        👋 Hello, I&apos;m Mandy !
       </div>
 
       <AwardsBadgeCard />

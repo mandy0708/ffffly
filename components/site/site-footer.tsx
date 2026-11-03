@@ -1,12 +1,8 @@
-import { copy } from "@/lib/copy";
-import { getLang } from "@/lib/i18n-server";
-
-export async function SiteFooter() {
-  const t = copy[await getLang()].footer;
+export function SiteFooter() {
   return (
     <footer className="site-footer">
-      <p>{t.designed}</p>
-      <p>{t.copyright}</p>
+      <p>Designed by ZHANGMAN</p>
+      <p>Copyright ©ZHANGMAN, All rights reserved</p>
     </footer>
   );
 }
