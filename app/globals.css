@@ -1074,8 +1074,8 @@ a.project-meta-item .value:hover { opacity: 0.7; }
 .best-card[data-tone="2"] { background-image: url("/images/gradients/about%20me%203.png"); }
 .best-card[data-tone="3"] { background-image: url("/images/gradients/about%20me%204.jpg"); }
 .best-card:hover { box-shadow: 0 26px 44px rgba(30, 50, 40, 0.32), 0 4px 10px rgba(30, 50, 40, 0.16); }
-.best-card-title, .best-card-en { color: var(--ink); text-shadow: none; }
-.best-card-en { opacity: 0.7; }
+.best-card-title, .best-card-en { color: #fff; text-shadow: 0 1px 10px rgba(10, 20, 10, 0.5); }
+.best-card-en { opacity: 0.9; }
 
 /* About: contact panel */
 .contact-block {
@@ -1086,5 +1086,6 @@ a.project-meta-item .value:hover { opacity: 0.7; }
   background: #dfe9d3 url("/images/gradients/portfolio-content%20me.png") center / cover no-repeat;
   box-shadow: 0 14px 30px rgba(30, 50, 20, 0.16), 0 2px 6px rgba(30, 50, 20, 0.1);
 }
-.contact-block .contact-item .label { color: var(--ink-muted); }
+.contact-block .contact-item .label { color: rgba(255, 255, 255, 0.88); text-shadow: 0 1px 8px rgba(10, 30, 10, 0.45); }
+.contact-block .contact-item a { color: #fff; text-shadow: 0 1px 10px rgba(10, 30, 10, 0.5); }
 .contact-block .contact-qr { border-color: rgba(255, 255, 255, 0.7); background: #fff; }
