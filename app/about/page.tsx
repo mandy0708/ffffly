@@ -73,11 +73,10 @@ const capabilities = [
 // "02 Skills & Expertise": 4 pastel, alternating-tilt overlapping cards —
 // mirrors the colorful "What I do best?" cards on harrisonz.webflow.io (title
 // color tinted from the card's own pastel, tool names as plain scattered text).
-const toolGroups: { zh: string; en: string; fg: string; tools: string[][] }[] = [
+const toolGroups: { zh: string; en: string; tools: string[][] }[] = [
   {
     zh: "视觉生成",
     en: "Visual Generation",
-    fg: "#FFFFFF",
     tools: [
       ["GPT Image", "即梦", "Liblib", "Midjourney"],
       ["TapNow", "Kling", "CapCut"],
@@ -86,7 +85,6 @@ const toolGroups: { zh: string; en: string; fg: string; tools: string[][] }[] = 
   {
     zh: "设计与原型",
     en: "Design & Prototyping",
-    fg: "#FFFFFF",
     tools: [
       ["Figma", "Figma AI", "Photoshop"],
       ["Illustrator"],
@@ -95,7 +93,6 @@ const toolGroups: { zh: string; en: string; fg: string; tools: string[][] }[] = 
   {
     zh: "创意开发",
     en: "Creative Development",
-    fg: "#FFFFFF",
     tools: [
       ["Cursor", "Codex", "Figma Make"],
       ["Vercel", "Framer"],
@@ -104,7 +101,6 @@ const toolGroups: { zh: string; en: string; fg: string; tools: string[][] }[] = 
   {
     zh: "研究与协作",
     en: "Research & Collaboration",
-    fg: "#FFFFFF",
     tools: [["Gemini", "Claude"]],
   },
 ];
@@ -151,8 +147,8 @@ export default function AboutPage() {
               data-tone={i}
               key={group.zh}
             >
-              <h3 className="best-card-title" style={{ color: group.fg }}>{group.zh}</h3>
-              <span className="best-card-en" style={{ color: group.fg }}>{group.en}</span>
+              <h3 className="best-card-title">{group.zh}</h3>
+              <span className="best-card-en">{group.en}</span>
               <div className="best-card-panel">
                 <p className="best-card-tools">
                   {group.tools.map((line, li) => (

@@ -683,7 +683,9 @@ button, input { font: inherit; color: inherit; }
 .work-item-head .tag { font-size: 13px; font-weight: 400; color: var(--ink-45); white-space: nowrap; }
 .work-item-body p { font-size: 14px; font-weight: 400; color: var(--ink-55); margin: 0; line-height: 1.5; }
 
-.work-item-date { font-size: 13px; font-weight: 400; color: var(--ink-45); line-height: 1.4; }
+.work-item-meta { display: flex; align-items: baseline; gap: 12px; font-size: 13px; line-height: 1.4; }
+.work-item-cat { font-weight: 400; color: var(--ink); }
+.work-item-date { font-weight: 400; color: var(--ink-45); }
 
 .work-item--coming-soon { border: 0; background: none; padding: 0; text-align: left; cursor: pointer; }
 
@@ -1018,9 +1020,11 @@ a.project-meta-item .value:hover { opacity: 0.7; }
 .about-title-block h1,
 .sketchbook-title-block h1,
 .project-title-block h1,
-.section-title-block h2,
 .home-projects-heading h2,
 .project-related-head h2 { font-weight: 400; letter-spacing: -0.025em; }
+
+/* Section (second-level) headings: sturdier — semibold, text-size optical cut */
+.section-title-block h2 { font-weight: 600; letter-spacing: -0.015em; font-optical-sizing: none; }
 
 /* Nav: Inter regular */
 .nav-links a, .site-nav-links a { font-size: 15px; font-weight: 400; letter-spacing: -0.005em; }
@@ -1056,25 +1060,22 @@ a.project-meta-item .value:hover { opacity: 0.7; }
 }
 
 /* =====================================================================
-   Colour bases: the soft-gradient images in public/images/gradients
+   Colour bases: the images in public/images/gradients, by file name
+   (about me 1-4 → workflow cards, portfolio-content me → contact panel)
    ===================================================================== */
-/* About: AI-Native workflow cards — image base, white sheet flush to the
-   bottom (no rim line), real drop shadow */
+/* About: AI-Native workflow cards — outer card (image) wraps the inner panel */
 .best-card {
   border: 0;
-  padding: 16px 0 0;
   overflow: hidden;
-  background: #6f9a3a url(/images/gradients/gradient-1.jpg) center 20% / cover no-repeat;
-  box-shadow: 0 16px 30px rgba(30, 50, 20, 0.28), 0 3px 8px rgba(30, 50, 20, 0.16);
+  background: #d5e2d6 url("/images/gradients/about%20me%201.png") center / cover no-repeat;
+  box-shadow: 0 16px 30px rgba(30, 50, 40, 0.26), 0 3px 8px rgba(30, 50, 40, 0.14);
 }
-.best-card[data-tone="1"] { background-image: url(/images/gradients/gradient-2.jpg); background-position: center 65%; }
-.best-card[data-tone="2"] { background-image: url(/images/gradients/gradient-3.png); background-position: center 30%; }
-.best-card[data-tone="3"] { background-image: url(/images/gradients/gradient-4.png); background-position: center 100%; }
-.best-card:hover { box-shadow: 0 26px 44px rgba(30, 50, 20, 0.34), 0 4px 10px rgba(30, 50, 20, 0.18); }
-.best-card-title, .best-card-en { color: #fff; text-shadow: 0 1px 10px rgba(10, 30, 10, 0.45); }
-.best-card[data-tone="2"] .best-card-title, .best-card[data-tone="2"] .best-card-en { color: var(--ink); text-shadow: none; }
-.best-card-en { opacity: 0.85; }
-.best-card-panel { background: rgba(255, 255, 255, 0.92); border-radius: 14px 14px 0 0; }
+.best-card[data-tone="1"] { background-image: url("/images/gradients/about%20me%202.png"); }
+.best-card[data-tone="2"] { background-image: url("/images/gradients/about%20me%203.png"); }
+.best-card[data-tone="3"] { background-image: url("/images/gradients/about%20me%204.jpg"); }
+.best-card:hover { box-shadow: 0 26px 44px rgba(30, 50, 40, 0.32), 0 4px 10px rgba(30, 50, 40, 0.16); }
+.best-card-title, .best-card-en { color: var(--ink); text-shadow: none; }
+.best-card-en { opacity: 0.7; }
 
 /* About: contact panel */
 .contact-block {
@@ -1082,7 +1083,7 @@ a.project-meta-item .value:hover { opacity: 0.7; }
   max-width: 560px;
   padding: 44px 40px;
   border-radius: 24px;
-  background: #dfe9d3 url(/images/gradients/gradient-3.png) center / cover no-repeat;
+  background: #dfe9d3 url("/images/gradients/portfolio-content%20me.png") center / cover no-repeat;
   box-shadow: 0 14px 30px rgba(30, 50, 20, 0.16), 0 2px 6px rgba(30, 50, 20, 0.1);
 }
 .contact-block .contact-item .label { color: var(--ink-muted); }

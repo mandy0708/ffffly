@@ -85,10 +85,12 @@ export function WorkGrid({ projects }: { projects: WorkProject[] }) {
               <div className="work-item-body">
                 <div className="work-item-head">
                   <h3>{project.title}</h3>
-                  <span className="tag">{project.tag}</span>
                 </div>
                 <p>{project.description}</p>
-                {project.date && <time className="work-item-date" dateTime={project.date}>{formatDate(project.date)}</time>}
+                <div className="work-item-meta">
+                  <span className="work-item-cat">{project.tag}</span>
+                  {project.date && <time className="work-item-date" dateTime={project.date}>{formatDate(project.date)}</time>}
+                </div>
               </div>
             </button>
           ) : (
@@ -99,10 +101,12 @@ export function WorkGrid({ projects }: { projects: WorkProject[] }) {
               <div className="work-item-body">
                 <div className="work-item-head">
                   <h3>{project.title}</h3>
-                  <span className="tag">{project.tag}</span>
                 </div>
                 <p>{project.description}</p>
-                {project.date && <time className="work-item-date" dateTime={project.date}>{formatDate(project.date)}</time>}
+                <div className="work-item-meta">
+                  <span className="work-item-cat">{project.tag}</span>
+                  {project.date && <time className="work-item-date" dateTime={project.date}>{formatDate(project.date)}</time>}
+                </div>
               </div>
             </a>
           ),

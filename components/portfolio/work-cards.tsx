@@ -1,7 +1,7 @@
 "use client";
 
-import sketchbookImage from "@/public/images/gradients/gradient-1.jpg";
-import contactImage from "@/public/images/gradients/gradient-2.jpg";
+import sketchbookImage from "@/public/images/gradients/portfolio-sketchbook.jpg";
+import contactImage from "@/public/images/gradients/portfolio-content me.png";
 import brandImage from "@/public/images/portfolio/brand-bag.jpg";
 import brandImageMobile from "@/public/images/portfolio/brand-bag-phone.png";
 import aboutImage from "@/public/images/portfolio/about-me.jpg";
