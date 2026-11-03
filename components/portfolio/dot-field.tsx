@@ -46,23 +46,58 @@ export function DotField({ fixed = false }: { fixed?: boolean }) {
     window.addEventListener("pointermove", onPointerMove, { passive: true });
     document.addEventListener("pointerleave", onPointerLeave);
 
-    // Dense, small dots. The flow field is smooth, so it is sampled on a coarse
-    // lattice (every COARSE dots) and bilinearly interpolated to the dot grid;
-    // dots are batched into a few opacity buckets so one frame is a handful of
-    // fills instead of tens of thousands.
-    const SPACING = 6;
+    // Dense, small dots, kept cheap on purpose: the flow field is sampled on a
+    // coarse lattice and bilinearly interpolated; every dot is a blit of a
+    // pre-rendered sprite (no per-frame Path2D allocation — that used to balloon
+    // native memory by gigabytes and get the tab killed); dot count, canvas
+    // pixels and frame rate are all capped so wide / hi-dpi screens stay light.
     const COARSE = 4;
-    const BUCKETS = 8;
+    const BUCKETS = 8; // opacity levels
+    const RADIUS_LEVELS = 6;
+    const R_MIN = 0.35;
+    const R_MAX = 1.25;
     const MAX_ENERGY = 1.27;
+    const MAX_DOTS = 36000;
+    const MAX_CANVAS_PIXELS = 4_000_000;
+    const FRAME_MS = 33; // ~30fps — the flow is slow, nobody sees the difference
+
+    let spacing = 6;
     let cols = 0;
     let rows = 0;
     let coarseCols = 0;
     let coarseRows = 0;
     let coarse = new Float32Array(0);
+    let sprites: HTMLCanvasElement[] = [];
+    let spriteCss = 0;
+
+    function buildSprites() {
+      sprites = [];
+      const size = Math.ceil((R_MAX * 2 + 1) * pixelRatio);
+      spriteCss = size / pixelRatio;
+      for (let b = 0; b < BUCKETS; b++) {
+        const alpha = 0.2 + ((b + 0.5) / BUCKETS) * MAX_ENERGY * 0.3;
+        for (let k = 0; k < RADIUS_LEVELS; k++) {
+          const sprite = document.createElement("canvas");
+          sprite.width = size;
+          sprite.height = size;
+          const ctx = sprite.getContext("2d");
+          if (ctx) {
+            const radius = (R_MIN + (k / (RADIUS_LEVELS - 1)) * (R_MAX - R_MIN)) * pixelRatio;
+            ctx.globalAlpha = alpha;
+            ctx.fillStyle = dotColor;
+            ctx.beginPath();
+            ctx.arc(size / 2, size / 2, radius, 0, Math.PI * 2);
+            ctx.fill();
+          }
+          sprites.push(sprite);
+        }
+      }
+    }
 
     function layout() {
-      cols = Math.ceil(width / SPACING) + 2;
-      rows = Math.ceil(height / SPACING) + 2;
+      spacing = Math.max(6, Math.ceil(Math.sqrt((width * height) / MAX_DOTS)));
+      cols = Math.ceil(width / spacing) + 2;
+      rows = Math.ceil(height / spacing) + 2;
       coarseCols = Math.ceil(cols / COARSE) + 2;
       coarseRows = Math.ceil(rows / COARSE) + 2;
       coarse = new Float32Array(coarseCols * coarseRows);
@@ -72,17 +107,29 @@ export function DotField({ fixed = false }: { fixed?: boolean }) {
       if (!canvas || !context) return;
 
       const bounds = canvas.getBoundingClientRect();
-      pixelRatio = Math.min(window.devicePixelRatio || 1, 2);
       width = Math.ceil(bounds.width);
       height = Math.ceil(bounds.height);
+      pixelRatio = Math.min(window.devicePixelRatio || 1, 2);
+      // Cap the backing store so very large / hi-dpi windows don't allocate a huge bitmap.
+      if (width * height * pixelRatio * pixelRatio > MAX_CANVAS_PIXELS) {
+        pixelRatio = Math.max(1, Math.sqrt(MAX_CANVAS_PIXELS / (width * height)));
+      }
       canvas.width = Math.ceil(width * pixelRatio);
       canvas.height = Math.ceil(height * pixelRatio);
       context.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
       layout();
+      buildSprites();
     }
+
+    let lastFrame = 0;
 
     function draw(now: number) {
       if (!context) return;
+      if (!reduceMotion.matches && now - lastFrame < FRAME_MS) {
+        animationFrame = requestAnimationFrame(draw);
+        return;
+      }
+      lastFrame = now;
 
       const time = reduceMotion.matches ? 0 : now * 0.00022;
       // Dedicated, faster clock for the autonomous flow so it visibly moves on
@@ -107,7 +154,7 @@ export function DotField({ fixed = false }: { fixed?: boolean }) {
       const lightY = currentY;
 
       // Flow field on the coarse lattice (this is the only trig-heavy part).
-      const step = SPACING * COARSE;
+      const step = spacing * COARSE;
       for (let j = 0; j < coarseRows; j++) {
         const y = (j - 1) * step;
         const ny = y * 0.009;
@@ -134,16 +181,15 @@ export function DotField({ fixed = false }: { fixed?: boolean }) {
       }
 
       context.clearRect(0, 0, width, height);
-      context.fillStyle = dotColor;
 
-      const paths = Array.from({ length: BUCKETS }, () => new Path2D());
+      const half = spriteCss / 2;
       for (let j = 0; j < rows; j++) {
-        const y = (j - 1) * SPACING;
+        const y = (j - 1) * spacing;
         const fy = y / step + 1;
         const j0 = Math.floor(fy);
         const ty = fy - j0;
         for (let i = 0; i < cols; i++) {
-          const x = (i - 1) * SPACING;
+          const x = (i - 1) * spacing;
           const fx = x / step + 1;
           const i0 = Math.floor(fx);
           const tx = fx - i0;
@@ -161,16 +207,14 @@ export function DotField({ fixed = false }: { fixed?: boolean }) {
           if (energy < 0.05) continue;
           const radius = 0.3 + energy * 0.7;
           const bucket = Math.min(BUCKETS - 1, Math.floor((energy / MAX_ENERGY) * BUCKETS));
-          paths[bucket].moveTo(x + radius, y);
-          paths[bucket].arc(x, y, radius, 0, Math.PI * 2);
+          const level = Math.min(
+            RADIUS_LEVELS - 1,
+            Math.max(0, Math.round(((radius - R_MIN) / (R_MAX - R_MIN)) * (RADIUS_LEVELS - 1))),
+          );
+          context.drawImage(sprites[bucket * RADIUS_LEVELS + level], x - half, y - half, spriteCss, spriteCss);
         }
       }
-      for (let b = 0; b < BUCKETS; b++) {
-        context.globalAlpha = 0.2 + ((b + 0.5) / BUCKETS) * MAX_ENERGY * 0.3;
-        context.fill(paths[b]);
-      }
 
-      context.globalAlpha = 1;
       if (!reduceMotion.matches) animationFrame = requestAnimationFrame(draw);
     }
 
