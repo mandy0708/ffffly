@@ -127,8 +127,8 @@ export function DotField({ fixed = false }: { fixed?: boolean }) {
             Math.sin(ny * 1.1 + wy * 0.9 - flowTime * 0.9) +
             Math.sin((nx + ny) * 0.7 + (wx + wy) * 0.5 + flowTime * 0.6);
           const base = (v + 3) / 6; // 0..1
-          // Bias toward peaks so bright dots form drifting streaks, not an even haze.
-          coarse[j * coarseCols + i] = base * (base * 0.85 + 0.15);
+          // Raised floor so dots stay visible across the whole canvas, with the flow on top.
+          coarse[j * coarseCols + i] = 0.3 + 0.7 * base;
         }
       }
 
@@ -157,14 +157,14 @@ export function DotField({ fixed = false }: { fixed?: boolean }) {
           const glow = Math.exp(-Math.sqrt(dx * dx + dy * dy) / 260) * 0.55;
 
           const energy = shaped * (0.72 + glow);
-          const radius = 0.32 + energy * 0.85;
+          const radius = 0.3 + energy * 0.7;
           const bucket = Math.min(BUCKETS - 1, Math.floor((energy / MAX_ENERGY) * BUCKETS));
           paths[bucket].moveTo(x + radius, y);
           paths[bucket].arc(x, y, radius, 0, Math.PI * 2);
         }
       }
       for (let b = 0; b < BUCKETS; b++) {
-        context.globalAlpha = 0.06 + ((b + 0.5) / BUCKETS) * MAX_ENERGY * 0.26;
+        context.globalAlpha = 0.16 + ((b + 0.5) / BUCKETS) * MAX_ENERGY * 0.3;
         context.fill(paths[b]);
       }
 

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
+import { DotField } from "@/components/portfolio/dot-field";
 import { SiteNav } from "@/components/site/site-nav";
 import { SiteFooter } from "@/components/site/site-footer";
 import { WorkGrid, type WorkProject } from "@/components/site/work-grid";
@@ -33,6 +34,7 @@ const projects: WorkProject[] = [
 export default function WorkPage() {
   return (
     <main className="site-shell">
+      <DotField fixed />
       <SiteNav />
       <div className="site-main">
         <div className="work-intro">

@@ -15,8 +15,8 @@
   --ink: #1a1a18;                     /* primary text: warm near-black */
   --ink-muted: #6b6a63;               /* secondary text: warm gray */
   --line: rgba(26, 26, 24, 0.12);     /* hairlines / borders */
-  --accent: #d4663c;                  /* terracotta — sparingly */
-  --accent-soft: rgba(212, 102, 60, 0.1);
+  --accent: #1a1a18;                  /* neutral — no colour highlight */
+  --accent-soft: rgba(26, 26, 24, 0.1);
 
   /* v1 aliases → warm palette */
   --paper: var(--bg);
@@ -69,12 +69,10 @@
   --nav-shadow: 0 1px 2px rgba(60, 40, 20, 0.04);
 
   /* Animated dot-field texture (read by dot-field.tsx) */
-  --dot-color: #8a877d;
+  --dot-color: #6e6b62;
 
   /* Type */
   --font-sans: var(--font-inter), "PingFang SC", "Hiragino Sans GB", "Source Han Sans SC", "Noto Sans SC", "Microsoft YaHei", system-ui, -apple-system, sans-serif;
-  --font-display-stack: var(--font-geist), var(--font-inter), "PingFang SC", "Hiragino Sans GB", "Source Han Sans SC", "Noto Sans SC", "Microsoft YaHei", system-ui, sans-serif;
-  --font-mono-stack: var(--font-geist-mono), "SF Mono", ui-monospace, Menlo, Consolas, monospace;
 }
 
 * { box-sizing: border-box; }
@@ -396,7 +394,7 @@ button, input { font: inherit; color: inherit; }
 .contact-items { display: flex; gap: 2.2cqw; }
 .contact-item-link { display: flex; flex-direction: column; align-items: center; gap: 0.7333cqw; text-decoration: none; }
 .contact-item-icon { display: grid; place-items: center; width: 3.6667cqw; height: 3.6667cqw; border-radius: 50%; background: var(--surface-alt); border: 1px solid var(--line); color: var(--ink); transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease; }
-.contact-item-link:hover .contact-item-icon { background: var(--accent-soft); border-color: var(--accent); color: var(--accent); }
+.contact-item-link:hover .contact-item-icon { background: var(--ink); border-color: var(--ink); color: var(--bg); }
 .contact-item-icon svg { width: 1.65cqw; height: 1.65cqw; }
 .contact-item-label { font-size: 1.2833cqw; font-weight: 500; color: var(--ink); }
 
@@ -1014,64 +1012,26 @@ a.project-meta-item .value:hover { opacity: 0.7; }
    (appended layer; everything above is token / component recolouring)
    ===================================================================== */
 
-/* --- Headings: light display face (ElevenLabs-style), large, tightened ---
-   Big titles use Geist Light 300; small card titles stay Inter medium. */
-h1, h2, h3 { letter-spacing: -0.02em; }
+/* --- Display headings: Inter regular, tightened (no other type changes) --- */
 .work-intro h1,
 .about-title-block h1,
 .sketchbook-title-block h1,
 .project-title-block h1,
 .section-title-block h2,
 .home-projects-heading h2,
-.project-related-head h2 { font-family: var(--font-display-stack); font-weight: 300; letter-spacing: -0.025em; }
-.section-title-block h2 { font-size: clamp(28px, 3.6vw, 40px); }
-.work-item-head h3,
-.awards-title,
-.expertise-zh,
-.best-card-title,
-.project-related-title { font-weight: 500; letter-spacing: -0.01em; }
+.project-related-head h2 { font-weight: 400; letter-spacing: -0.025em; }
 
-/* --- Labels / nav / meta / numerals: monospace, small, slightly open --- */
-.awards-num,
-.awards-detail,
-.expertise-en,
-.best-card-en,
-.contact-item .label,
-.project-meta-item .label,
-.project-tag,
-.work-item-head .tag,
-.project-related-tag,
-.contact-copyright,
-.site-footer p,
-.hero-intro-eyebrow {
-  font-family: var(--font-mono-stack);
-  letter-spacing: 0.02em;
-}
-/* Nav stays Inter regular (as on elevenlabs.io), not monospace */
+/* Nav: Inter regular */
 .nav-links a, .site-nav-links a { font-size: 15px; font-weight: 400; letter-spacing: -0.005em; }
 .nav-links a:hover, .site-nav-links a:hover,
 .nav-links a[data-active="true"], .site-nav-links a[data-active="true"] { font-weight: 500; }
-.awards-num { font-weight: 500; color: var(--accent); }
-.expertise-en, .best-card-en { letter-spacing: 0.06em; }
-.project-tag, .work-item-head .tag, .project-related-tag { font-size: 12px; }
-.site-footer p { font-size: 12px; color: var(--ink-muted); }
 
-/* --- Accent: links / hover only, never large areas --- */
-.work-item-head h3,
-.project-related-title,
-.home-project-card h3 { transition: color 0.2s ease; }
-.work-item:hover .work-item-head h3,
-.project-related-item:hover .project-related-title,
-.home-project-card:hover h3 { color: var(--accent); }
-.contact-item a { transition: color 0.2s ease; }
-.contact-item a:hover { color: var(--accent); opacity: 1; }
-a.project-meta-item .value:hover { color: var(--accent); opacity: 1; }
 .work-filter button:hover { color: var(--ink); background: var(--surface-alt); }
 .work-filter button[data-active="true"]:hover { background: var(--pill-active-bg); }
 
 /* --- Decoration: soft gradient blobs + dot grid ---
    Purely ornamental pseudo-elements: no layout impact, behind all content,
-   low saturation. Warm orange→pink in the upper corner, warm beige→light gray
+   low saturation. Warm sand in the upper corner, warm beige→light gray
    on the opposite side. *
 .site-shell::before,
 .portfolio-shell::before {
@@ -1084,94 +1044,34 @@ a.project-meta-item .value:hover { color: var(--accent); opacity: 1; }
   z-index: 0;
   pointer-events: none;
   background:
-    radial-gradient(520px 430px at 88% 7%, rgba(240, 168, 128, 0.34), rgba(243, 190, 192, 0.18) 55%, transparent 100%),
+    radial-gradient(520px 430px at 88% 7%, rgba(230, 222, 210, 0.85), rgba(236, 232, 226, 0.35) 55%, transparent 100%),
     radial-gradient(580px 480px at 4% 36%, rgba(234, 224, 206, 0.75), rgba(226, 226, 222, 0.34) 55%, transparent 100%);
 }
 .portfolio-shell::before { height: 100%; }
 
-/* faint dot-grid on the opposite flank, fading out */
-.site-main::before {
-  content: "";
-  position: absolute;
-  top: 120px;
-  left: -40px;
-  width: 360px;
-  height: 360px;
-  z-index: -1;
-  pointer-events: none;
-  background-image: radial-gradient(rgba(138, 135, 125, 0.42) 0.6px, transparent 0.9px);
-  background-size: 6px 6px;
-  -webkit-mask-image: radial-gradient(closest-side, #000, transparent);
-  mask-image: radial-gradient(closest-side, #000, transparent);
-}
-@media (max-width: 640px) {
-  .site-main::before { display: none; }
-}
 
 @media (max-width: 640px) {
   .nav-links a, .site-nav-links a { font-size: 14px; }
 }
 
 /* =====================================================================
-   ElevenLabs-style colour bases: soft mesh gradients with film grain.
-   Used behind a few chosen modules; content sits on top. Generated in CSS
-   (no image files). Each mesh is four radial blooms over a base colour.
+   Colour bases: the soft-gradient images in public/images/gradients
    ===================================================================== */
-:root {
-  /* grain first, then the 5 mesh layers — list must cover every layer or it repeats */
-  --grain-blend: soft-light, normal, normal, normal, normal, normal;
-  --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3CfeComponentTransfer%3E%3CfeFuncA type='linear' slope='0' intercept='1'/%3E%3C/feComponentTransfer%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-
-  /* dark-at-top (white titles sit on the top edge) */
-  --mesh-sunset: radial-gradient(80% 70% at 14% 6%, #ff7a3d 0%, transparent 64%), radial-gradient(70% 80% at 92% 14%, #e8467c 0%, transparent 64%), radial-gradient(85% 85% at 20% 106%, #ffc15e 0%, transparent 62%), radial-gradient(75% 75% at 106% 100%, #8a63ff 0%, transparent 64%), linear-gradient(#f2704f, #f2704f);
-  --mesh-dusk: radial-gradient(80% 70% at 14% 6%, #6a7bff 0%, transparent 64%), radial-gradient(70% 80% at 92% 14%, #8a5cf0 0%, transparent 64%), radial-gradient(85% 85% at 20% 106%, #8fd3ff 0%, transparent 62%), radial-gradient(75% 75% at 106% 100%, #ff9ec0 0%, transparent 64%), linear-gradient(#6f86ff, #6f86ff);
-  --mesh-lagoon: radial-gradient(80% 70% at 14% 6%, #1fa7a0 0%, transparent 64%), radial-gradient(70% 80% at 92% 14%, #2f7de1 0%, transparent 64%), radial-gradient(85% 85% at 20% 106%, #a8f0d0 0%, transparent 62%), radial-gradient(75% 75% at 106% 100%, #ffe48a 0%, transparent 64%), linear-gradient(#2a9fc0, #2a9fc0);
-  --mesh-ember: radial-gradient(80% 70% at 14% 6%, #c2255c 0%, transparent 64%), radial-gradient(70% 80% at 92% 14%, #ff6a45 0%, transparent 64%), radial-gradient(85% 85% at 20% 106%, #ffb347 0%, transparent 62%), radial-gradient(75% 75% at 106% 100%, #5b46e6 0%, transparent 64%), linear-gradient(#e04a62, #e04a62);
-  /* pastel (ink text) */
-  --mesh-bloom: radial-gradient(80% 70% at 12% 8%, #ffe3c2 0%, transparent 62%), radial-gradient(70% 80% at 92% 18%, #ffc2c9 0%, transparent 64%), radial-gradient(85% 85% at 30% 106%, #f3d1ff 0%, transparent 62%), radial-gradient(75% 75% at 106% 100%, #ffd9a8 0%, transparent 64%), linear-gradient(#ffe8dc, #ffe8dc);
-  /* home photo cards: saturated at the bottom where the title sits */
-  --mesh-home-sketch: radial-gradient(80% 70% at 14% 6%, #ffd46b 0%, transparent 62%), radial-gradient(70% 80% at 92% 18%, #ff6a45 0%, transparent 64%), radial-gradient(85% 85% at 22% 106%, #ef3f7b 0%, transparent 62%), radial-gradient(75% 75% at 106% 100%, #7f5bff 0%, transparent 64%), linear-gradient(#f59a52, #f59a52);
-  --mesh-home-about: radial-gradient(80% 70% at 14% 6%, #8fd3ff 0%, transparent 62%), radial-gradient(70% 80% at 92% 18%, #7a6bff 0%, transparent 64%), radial-gradient(85% 85% at 22% 106%, #c46bff 0%, transparent 62%), radial-gradient(75% 75% at 106% 100%, #ff7aa0 0%, transparent 64%), linear-gradient(#8a8cff, #8a8cff);
-}
-
-/* Home: Sketchbook + About Me — media becomes an inset "screen" floating on the
-   colour base, title/subtitle sit on the gradient below it. */
-.card-sketchbook .card-art { background-image: var(--grain), var(--mesh-home-sketch); background-blend-mode: var(--grain-blend); }
-.card-about .card-art { background-image: var(--grain), var(--mesh-home-about); background-blend-mode: var(--grain-blend); }
-.card-sketchbook .card-art video,
-.card-about .card-art img {
-  position: absolute !important;
-  inset: 7% 7% auto 7% !important;
-  width: 86% !important;
-  height: 62% !important;
-  border-radius: 10px;
-  box-shadow: 0 10px 28px rgba(40, 18, 8, 0.28);
-}
-.card-about .card-art img { object-position: center 18% !important; }
-.card-sketchbook .card-shade,
-.card-about .card-shade { background: linear-gradient(to bottom, rgba(30, 18, 10, 0), rgba(30, 18, 10, 0.32)); }
-@media (max-width: 720px) {
-  .card-sketchbook .card-art video,
-  .card-about .card-art img { height: 56% !important; inset: 6% 6% auto 6% !important; width: 88% !important; }
-}
-
-/* About: AI-Native workflow cards → four colour bases, white UI-like panel */
-.best-card { border-color: transparent; background-image: var(--grain), var(--mesh-sunset); background-blend-mode: var(--grain-blend); }
-.best-card[data-tone="1"] { background-image: var(--grain), var(--mesh-dusk); }
-.best-card[data-tone="2"] { background-image: var(--grain), var(--mesh-lagoon); }
-.best-card[data-tone="3"] { background-image: var(--grain), var(--mesh-ember); }
-.best-card-title, .best-card-en { color: #fff !important; }
+/* About: AI-Native workflow cards */
+.best-card { border-color: transparent; background: #7f93c9 url(/images/gradients/blue-pink.jpg) center / cover no-repeat; }
+.best-card[data-tone="1"] { background-image: url(/images/gradients/purple-pink.jpg); }
+.best-card[data-tone="2"] { background-image: url(/images/gradients/rose-navy.jpg); }
+.best-card[data-tone="3"] { background-image: url(/images/gradients/slate-blue.jpg); }
 .best-card-en { opacity: 0.8; }
 .best-card-panel { background: rgba(255, 255, 255, 0.9); }
 
-/* About: contact → a pastel colour panel */
+/* About: contact panel */
 .contact-block {
   width: 100%;
   max-width: 560px;
   padding: 44px 40px;
   border-radius: 24px;
-  background-image: var(--grain), var(--mesh-bloom);
-  background-blend-mode: var(--grain-blend);
+  background: #cfe3f5 url(/images/gradients/soft-light-1.png) center / cover no-repeat;
 }
 .contact-block .contact-item .label { color: var(--ink-muted); }
 .contact-block .contact-qr { border-color: rgba(255, 255, 255, 0.7); background: #fff; }

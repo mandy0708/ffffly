@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { DotField } from "@/components/portfolio/dot-field";
 import { SiteNav } from "@/components/site/site-nav";
 import { SiteFooter } from "@/components/site/site-footer";
 import { SketchbookMasonry } from "@/components/site/sketchbook-masonry";
@@ -12,6 +13,7 @@ export const metadata: Metadata = {
 export default function SketchbookPage() {
   return (
     <main className="site-shell">
+      <DotField fixed />
       <SiteNav />
       <div className="site-main sketchbook-main">
         <div className="sketchbook-title-block">

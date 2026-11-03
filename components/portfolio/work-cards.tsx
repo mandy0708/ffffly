@@ -3,7 +3,8 @@
 import brandImage from "@/public/images/portfolio/brand-bag.jpg";
 import brandImageMobile from "@/public/images/portfolio/brand-bag-phone.png";
 import aboutImage from "@/public/images/portfolio/about-me.jpg";
-import contactImage from "@/public/images/portfolio/contactme-planB.png";
+import sketchbookImage from "@/public/images/gradients/purple-pink.jpg";
+import contactImage from "@/public/images/gradients/blue-pink.jpg";
 import cultureImage from "@/public/images/portfolio/culture-cover.jpg";
 import cultureImageMobile from "@/public/images/portfolio/culture-cover-phone.jpeg";
 import { WorkCard } from "@/components/portfolio/work-card";
@@ -15,8 +16,8 @@ export function WorkCards() {
       <WorkCard
         className="card-sketchbook"
         href="/sketchbook"
-        video="/images/portfolio/sketchbook-planB.mp4"
-        imageAlt="Looping video illustration for the sketchbook"
+        image={sketchbookImage}
+        imageAlt="Soft purple and pink gradient"
         title="Sketchbook"
         subtitle="Illustration, 3D and motion — loose, unbriefed exploration."
       />
@@ -45,7 +46,7 @@ export function WorkCards() {
         className="card-contact"
         href="/about#contact"
         image={contactImage}
-        imageAlt="Illustration of a blue mailbox with an iced coffee inside"
+        imageAlt="Soft blue and pink gradient"
         title="Contact Me"
       />
 
