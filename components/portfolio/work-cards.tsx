@@ -1,5 +1,7 @@
 "use client";
 
+import sketchbookImage from "@/public/images/gradients/gradient-1.jpg";
+import contactImage from "@/public/images/gradients/gradient-2.jpg";
 import brandImage from "@/public/images/portfolio/brand-bag.jpg";
 import brandImageMobile from "@/public/images/portfolio/brand-bag-phone.png";
 import aboutImage from "@/public/images/portfolio/about-me.jpg";
@@ -14,8 +16,8 @@ export function WorkCards() {
       <WorkCard
         className="card-sketchbook"
         href="/sketchbook"
-        gradient="violet"
-        imageAlt="Soft violet gradient"
+        image={sketchbookImage}
+        imageAlt="Soft green gradient"
         title="Sketchbook"
         subtitle="Illustration, 3D and motion — loose, unbriefed exploration."
       />
@@ -43,8 +45,8 @@ export function WorkCards() {
       <WorkCard
         className="card-contact"
         href="/about#contact"
-        gradient="ocean"
-        imageAlt="Soft blue gradient"
+        image={contactImage}
+        imageAlt="Soft green gradient with light streaks"
         title="Contact Me"
       />
 

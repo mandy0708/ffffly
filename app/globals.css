@@ -1056,61 +1056,34 @@ a.project-meta-item .value:hover { opacity: 0.7; }
 }
 
 /* =====================================================================
-   Colour bases — ElevenLabs-style: big colour swings (bright field + a dark
-   blotch) over layered radial gradients, with film grain on top. Drawn
-   entirely in CSS/SVG (no image files) so the grain stays crisp at any DPR.
+   Colour bases: the soft-gradient images in public/images/gradients
    ===================================================================== */
-:root {
-  --noise: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.15' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3CfeComponentTransfer%3E%3CfeFuncR type='linear' slope='1.9' intercept='-.45'/%3E%3CfeFuncG type='linear' slope='1.9' intercept='-.45'/%3E%3CfeFuncB type='linear' slope='1.9' intercept='-.45'/%3E%3CfeFuncA type='linear' slope='0' intercept='1'/%3E%3C/feComponentTransfer%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-
-  --gx-ocean: radial-gradient(75% 70% at 8% 6%, #c8efff 0%, rgba(200, 239, 255, 0) 62%), radial-gradient(60% 70% at 92% 10%, #2a66ff 0%, rgba(42, 102, 255, 0) 66%), radial-gradient(42% 92% at 70% 46%, rgba(5, 15, 44, 0.72) 0%, rgba(5, 15, 44, 0) 78%), radial-gradient(75% 55% at 6% 100%, #27c8ff 0%, rgba(39, 200, 255, 0) 66%), radial-gradient(65% 50% at 100% 100%, #0a2b9c 0%, rgba(10, 43, 156, 0) 70%), linear-gradient(#2d78ff, #2d78ff);
-  --gx-violet: radial-gradient(75% 70% at 8% 6%, #d9d2ff 0%, rgba(217, 210, 255, 0) 62%), radial-gradient(60% 70% at 92% 10%, #6a4bff 0%, rgba(106, 75, 255, 0) 66%), radial-gradient(42% 92% at 70% 46%, rgba(15, 8, 56, 0.72) 0%, rgba(15, 8, 56, 0) 78%), radial-gradient(75% 55% at 6% 100%, #4fb6ff 0%, rgba(79, 182, 255, 0) 66%), radial-gradient(65% 50% at 100% 100%, #2a1a9c 0%, rgba(42, 26, 156, 0) 70%), linear-gradient(#6c5cff, #6c5cff);
-  --gx-green: radial-gradient(75% 70% at 8% 6%, #e3ffb0 0%, rgba(227, 255, 176, 0) 62%), radial-gradient(60% 70% at 92% 10%, #1fb866 0%, rgba(31, 184, 102, 0) 66%), radial-gradient(42% 92% at 70% 46%, rgba(3, 32, 31, 0.72) 0%, rgba(3, 32, 31, 0) 78%), radial-gradient(75% 55% at 6% 100%, #66e3c4 0%, rgba(102, 227, 196, 0) 66%), radial-gradient(65% 50% at 100% 100%, #0c5a3a 0%, rgba(12, 90, 58, 0) 70%), linear-gradient(#38c76a, #38c76a);
-  --gx-teal: radial-gradient(75% 70% at 8% 6%, #d9f3f0 0%, rgba(217, 243, 240, 0) 62%), radial-gradient(60% 70% at 92% 10%, #2f8f9d 0%, rgba(47, 143, 157, 0) 66%), radial-gradient(42% 92% at 70% 46%, rgba(6, 22, 31, 0.72) 0%, rgba(6, 22, 31, 0) 78%), radial-gradient(75% 55% at 6% 100%, #5ec4d6 0%, rgba(94, 196, 214, 0) 66%), radial-gradient(65% 50% at 100% 100%, #123e66 0%, rgba(18, 62, 102, 0) 70%), linear-gradient(#3b8fb0, #3b8fb0);
-  --gx-mist: radial-gradient(60% 70% at 8% 8%, #ffffff 0%, rgba(255, 255, 255, 0) 64%), radial-gradient(55% 70% at 94% 16%, #8ac8ff 0%, rgba(138, 200, 255, 0) 66%), radial-gradient(60% 60% at 10% 100%, #b9a8ff 0%, rgba(185, 168, 255, 0) 66%), radial-gradient(55% 55% at 100% 100%, #5fd6c8 0%, rgba(95, 214, 200, 0) 68%), linear-gradient(#cfe6ff, #cfe6ff);
-}
-
-/* Home: Sketchbook + Contact Me — full-bleed colour base, white title on top */
-.card-gradient { position: absolute; inset: 0; }
-.card-gradient::after { content: ""; position: absolute; inset: 0; background: var(--noise); background-size: 240px; mix-blend-mode: overlay; opacity: 0.5; pointer-events: none; }
-.card-gradient--ocean { background-image: var(--gx-ocean); }
-.card-gradient--violet { background-image: var(--gx-violet); }
-.card-gradient--green { background-image: var(--gx-green); }
-.card-gradient--teal { background-image: var(--gx-teal); }
-
-/* About: AI-Native workflow cards — gradient + grain, white sheet flush to the
+/* About: AI-Native workflow cards — image base, white sheet flush to the
    bottom (no rim line), real drop shadow */
 .best-card {
   border: 0;
   padding: 16px 0 0;
   overflow: hidden;
-  isolation: isolate;
-  background-image: var(--gx-ocean);
-  box-shadow: 0 16px 30px rgba(20, 28, 70, 0.28), 0 3px 8px rgba(20, 28, 70, 0.16);
+  background: #6f9a3a url(/images/gradients/gradient-1.jpg) center 20% / cover no-repeat;
+  box-shadow: 0 16px 30px rgba(30, 50, 20, 0.28), 0 3px 8px rgba(30, 50, 20, 0.16);
 }
-.best-card::before { content: ""; position: absolute; inset: 0; z-index: 0; background: var(--noise); background-size: 240px; mix-blend-mode: overlay; opacity: 0.5; pointer-events: none; }
-.best-card > * { position: relative; z-index: 1; }
-.best-card[data-tone="1"] { background-image: var(--gx-violet); }
-.best-card[data-tone="2"] { background-image: var(--gx-green); }
-.best-card[data-tone="3"] { background-image: var(--gx-teal); }
-.best-card:hover { box-shadow: 0 26px 44px rgba(20, 28, 70, 0.34), 0 4px 10px rgba(20, 28, 70, 0.18); }
-.best-card-title, .best-card-en { color: #fff; text-shadow: 0 1px 10px rgba(10, 20, 50, 0.45); }
+.best-card[data-tone="1"] { background-image: url(/images/gradients/gradient-2.jpg); background-position: center 65%; }
+.best-card[data-tone="2"] { background-image: url(/images/gradients/gradient-3.png); background-position: center 30%; }
+.best-card[data-tone="3"] { background-image: url(/images/gradients/gradient-4.png); background-position: center 100%; }
+.best-card:hover { box-shadow: 0 26px 44px rgba(30, 50, 20, 0.34), 0 4px 10px rgba(30, 50, 20, 0.18); }
+.best-card-title, .best-card-en { color: #fff; text-shadow: 0 1px 10px rgba(10, 30, 10, 0.45); }
+.best-card[data-tone="2"] .best-card-title, .best-card[data-tone="2"] .best-card-en { color: var(--ink); text-shadow: none; }
 .best-card-en { opacity: 0.85; }
 .best-card-panel { background: rgba(255, 255, 255, 0.92); border-radius: 14px 14px 0 0; }
 
 /* About: contact panel */
 .contact-block {
-  position: relative;
-  isolation: isolate;
   width: 100%;
   max-width: 560px;
   padding: 44px 40px;
   border-radius: 24px;
-  overflow: hidden;
-  background-image: var(--gx-mist);
-  box-shadow: 0 14px 30px rgba(40, 60, 110, 0.16), 0 2px 6px rgba(40, 60, 110, 0.1);
+  background: #dfe9d3 url(/images/gradients/gradient-3.png) center / cover no-repeat;
+  box-shadow: 0 14px 30px rgba(30, 50, 20, 0.16), 0 2px 6px rgba(30, 50, 20, 0.1);
 }
-.contact-block::before { content: ""; position: absolute; inset: 0; z-index: 0; background: var(--noise); background-size: 240px; mix-blend-mode: overlay; opacity: 0.42; pointer-events: none; }
-.contact-block > * { position: relative; z-index: 1; }
 .contact-block .contact-item .label { color: var(--ink-muted); }
 .contact-block .contact-qr { border-color: rgba(255, 255, 255, 0.7); background: #fff; }
