@@ -17,7 +17,7 @@ type WorkCardProps = {
   onActivate?: () => void;
 };
 
-const CARD_CORNER_RADIUS = 22;
+const CARD_CORNER_RADIUS = 16;
 const CARD_CORNER_SMOOTHING = 0.6;
 
 export function WorkCard({

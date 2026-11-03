@@ -128,7 +128,7 @@ const toolGroups: { zh: string; en: string; bg?: string; fg: string; dark?: bool
     zh: "视觉生成",
     en: "Visual Generation",
     bg: "#FFFFFF",
-    fg: "#171717",
+    fg: "#1A1A18",
     tools: [
       ["GPT Image", "即梦", "Liblib", "Midjourney"],
       ["TapNow", "Kling", "CapCut"],
@@ -138,7 +138,7 @@ const toolGroups: { zh: string; en: string; bg?: string; fg: string; dark?: bool
     zh: "设计与原型",
     en: "Design & Prototyping",
     dark: true,
-    fg: "#FFFFFF",
+    fg: "#1A1A18",
     tools: [
       ["Figma", "Figma AI", "Photoshop"],
       ["Illustrator"],
@@ -148,7 +148,7 @@ const toolGroups: { zh: string; en: string; bg?: string; fg: string; dark?: bool
     zh: "创意开发",
     en: "Creative Development",
     bg: "#FFFFFF",
-    fg: "#171717",
+    fg: "#1A1A18",
     tools: [
       ["Cursor", "Codex", "Figma Make"],
       ["Vercel", "Framer"],
@@ -158,7 +158,7 @@ const toolGroups: { zh: string; en: string; bg?: string; fg: string; dark?: bool
     zh: "研究与协作",
     en: "Research & Collaboration",
     dark: true,
-    fg: "#FFFFFF",
+    fg: "#1A1A18",
     tools: [["Gemini", "Claude"]],
   },
 ];
