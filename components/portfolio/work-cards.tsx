@@ -3,8 +3,8 @@
 import brandImage from "@/public/images/portfolio/brand-bag.jpg";
 import brandImageMobile from "@/public/images/portfolio/brand-bag-phone.png";
 import aboutImage from "@/public/images/portfolio/about-me.jpg";
-import sketchbookImage from "@/public/images/gradients/purple-pink.jpg";
-import contactImage from "@/public/images/gradients/blue-pink.jpg";
+import sketchbookImage from "@/public/images/gradients/violet.jpg";
+import contactImage from "@/public/images/gradients/ocean.jpg";
 import cultureImage from "@/public/images/portfolio/culture-cover.jpg";
 import cultureImageMobile from "@/public/images/portfolio/culture-cover-phone.jpeg";
 import { WorkCard } from "@/components/portfolio/work-card";
@@ -17,7 +17,7 @@ export function WorkCards() {
         className="card-sketchbook"
         href="/sketchbook"
         image={sketchbookImage}
-        imageAlt="Soft purple and pink gradient"
+        imageAlt="Soft violet gradient"
         title="Sketchbook"
         subtitle="Illustration, 3D and motion — loose, unbriefed exploration."
       />
@@ -46,7 +46,7 @@ export function WorkCards() {
         className="card-contact"
         href="/about#contact"
         image={contactImage}
-        imageAlt="Soft blue and pink gradient"
+        imageAlt="Soft blue gradient"
         title="Contact Me"
       />
 

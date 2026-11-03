@@ -27,6 +27,7 @@ const projects: WorkProject[] = [
     categories: project.categories,
     title: project.title,
     description: project.description,
+    year: project.year,
     image: coverImages[project.slug as keyof typeof coverImages],
   })),
 ];

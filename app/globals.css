@@ -683,6 +683,8 @@ button, input { font: inherit; color: inherit; }
 .work-item-head .tag { font-size: 13px; font-weight: 400; color: var(--ink-45); white-space: nowrap; }
 .work-item-body p { font-size: 14px; font-weight: 400; color: var(--ink-55); margin: 0; line-height: 1.5; }
 
+.work-item-date { font-size: 13px; font-weight: 400; color: var(--ink-45); line-height: 1.4; }
+
 .work-item--coming-soon { border: 0; background: none; padding: 0; text-align: left; cursor: pointer; }
 
 @media (max-width: 640px) {
@@ -1058,10 +1060,10 @@ a.project-meta-item .value:hover { opacity: 0.7; }
    Colour bases: the soft-gradient images in public/images/gradients
    ===================================================================== */
 /* About: AI-Native workflow cards */
-.best-card { border-color: transparent; background: #7f93c9 url(/images/gradients/blue-pink.jpg) center / cover no-repeat; }
-.best-card[data-tone="1"] { background-image: url(/images/gradients/purple-pink.jpg); }
-.best-card[data-tone="2"] { background-image: url(/images/gradients/rose-navy.jpg); }
-.best-card[data-tone="3"] { background-image: url(/images/gradients/slate-blue.jpg); }
+.best-card { border-color: transparent; background: #3a5fc9 url(/images/gradients/ocean-top.jpg) center / cover no-repeat; }
+.best-card[data-tone="1"] { background-image: url(/images/gradients/violet-top.jpg); }
+.best-card[data-tone="2"] { background-image: url(/images/gradients/green-top.jpg); }
+.best-card[data-tone="3"] { background-image: url(/images/gradients/slate-top.jpg); }
 .best-card-en { opacity: 0.8; }
 .best-card-panel { background: rgba(255, 255, 255, 0.9); }
 
@@ -1071,7 +1073,7 @@ a.project-meta-item .value:hover { opacity: 0.7; }
   max-width: 560px;
   padding: 44px 40px;
   border-radius: 24px;
-  background: #cfe3f5 url(/images/gradients/soft-light-1.png) center / cover no-repeat;
+  background: #dcebf8 url(/images/gradients/mist.jpg) center / cover no-repeat;
 }
 .contact-block .contact-item .label { color: var(--ink-muted); }
 .contact-block .contact-qr { border-color: rgba(255, 255, 255, 0.7); background: #fff; }

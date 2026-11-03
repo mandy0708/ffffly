@@ -127,8 +127,9 @@ export function DotField({ fixed = false }: { fixed?: boolean }) {
             Math.sin(ny * 1.1 + wy * 0.9 - flowTime * 0.9) +
             Math.sin((nx + ny) * 0.7 + (wx + wy) * 0.5 + flowTime * 0.6);
           const base = (v + 3) / 6; // 0..1
-          // Raised floor so dots stay visible across the whole canvas, with the flow on top.
-          coarse[j * coarseCols + i] = 0.3 + 0.7 * base;
+          // Thresholded so dots form flowing patches with clear empty space between.
+          const t = Math.min(1, Math.max(0, (base - 0.5) / 0.3));
+          coarse[j * coarseCols + i] = t * t * (3 - 2 * t); // smoothstep: ~35% of the field is lit, the rest stays empty
         }
       }
 
@@ -156,7 +157,8 @@ export function DotField({ fixed = false }: { fixed?: boolean }) {
           const dy = y - lightY;
           const glow = Math.exp(-Math.sqrt(dx * dx + dy * dy) / 260) * 0.55;
 
-          const energy = shaped * (0.72 + glow);
+          const energy = shaped * (0.72 + glow) + glow * 0.3;
+          if (energy < 0.05) continue;
           const radius = 0.3 + energy * 0.7;
           const bucket = Math.min(BUCKETS - 1, Math.floor((energy / MAX_ENERGY) * BUCKETS));
           paths[bucket].moveTo(x + radius, y);
@@ -164,7 +166,7 @@ export function DotField({ fixed = false }: { fixed?: boolean }) {
         }
       }
       for (let b = 0; b < BUCKETS; b++) {
-        context.globalAlpha = 0.16 + ((b + 0.5) / BUCKETS) * MAX_ENERGY * 0.3;
+        context.globalAlpha = 0.2 + ((b + 0.5) / BUCKETS) * MAX_ENERGY * 0.3;
         context.fill(paths[b]);
       }
 

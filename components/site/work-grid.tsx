@@ -11,6 +11,7 @@ export type WorkProject = {
   categories?: string[];
   title: string;
   description: string;
+  year?: string;
   image: StaticImageData;
   comingSoon?: boolean;
 };
@@ -79,6 +80,7 @@ export function WorkGrid({ projects }: { projects: WorkProject[] }) {
                   <span className="tag">{project.tag}</span>
                 </div>
                 <p>{project.description}</p>
+                {project.year && <time className="work-item-date">{project.year.replace("-", "–")}</time>}
               </div>
             </button>
           ) : (
@@ -92,6 +94,7 @@ export function WorkGrid({ projects }: { projects: WorkProject[] }) {
                   <span className="tag">{project.tag}</span>
                 </div>
                 <p>{project.description}</p>
+                {project.year && <time className="work-item-date">{project.year.replace("-", "–")}</time>}
               </div>
             </a>
           ),
