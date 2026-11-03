@@ -94,14 +94,14 @@ const toolGroups: { zh: string; en: string; tools: string[][] }[] = [
     zh: "创意开发",
     en: "Creative Development",
     tools: [
-      ["Cursor", "Codex", "Figma Make"],
+      ["Claude Code", "Codex", "Figma Make"],
       ["Vercel", "Framer"],
     ],
   },
   {
     zh: "研究与协作",
     en: "Research & Collaboration",
-    tools: [["Gemini", "Claude"]],
+    tools: [["Claude", "ChatGPT", "Gemini"]],
   },
 ];
 
