@@ -170,6 +170,8 @@ button, input { font: inherit; color: inherit; }
 }
 .nav-cta:hover { transform: scale(1.03); background: var(--accent); }
 .nav-cta-icon { display: none; }
+/* The menu button only exists on phones (shown in the 640px block below) */
+.nav-burger { display: none; }
 
 @container (max-width: 520px) {
   .top-nav { width: calc(100% - 32px); }
@@ -310,7 +312,7 @@ button, input { font: inherit; color: inherit; }
   height: 3.2cqw;
   overflow: hidden;
   border-radius: 50%;
-  border: 2px solid var(--surface);
+  border: 1px solid rgba(26, 26, 24, 0.2);
   box-shadow: none;
   background: var(--surface);
   margin-left: -0.9cqw;
@@ -707,25 +709,49 @@ button, input { font: inherit; color: inherit; }
   .work-filter button { flex-shrink: 0; }
 }
 @media (max-width: 640px) {
-  /* Nav — the 480px desktop pill has no room for four links plus the CTA once
-     the tab shrinks to fit a phone screen. Keep the CTA as the same black
-     rounded-rect button and let the links row scroll sideways instead of
-     squeezing everything down or replacing the CTA with an icon. */
+  /* Nav — on phones the link row collapses into a two-line menu button at the
+     left; tapping it drops the links down. The CTA stays on the right. */
   .site-nav,
   .top-nav {
     width: calc(100% - 32px);
-    padding: 6px 6px 6px 20px;
+    padding: 6px 6px 6px 10px;
   }
+  .nav-burger {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 6px;
+    width: 40px;
+    height: 40px;
+    margin-right: auto;
+    padding: 0 10px;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+  }
+  .nav-burger span { display: block; width: 100%; height: 1.5px; border-radius: 2px; background: var(--ink); transition: transform 0.2s ease; }
+  nav[data-open="true"] .nav-burger span:first-child { transform: translateY(3.75px) rotate(45deg); }
+  nav[data-open="true"] .nav-burger span:last-child { transform: translateY(-3.75px) rotate(-45deg); }
   .nav-links, .site-nav-links {
-    gap: 22px;
-    flex-shrink: 1;
-    min-width: 0;
-    overflow-x: auto;
-    scrollbar-width: none;
-    -webkit-overflow-scrolling: touch;
+    display: none;
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 2px;
+    margin: 0;
+    padding: 8px;
+    border: 1px solid var(--nav-border);
+    border-radius: 20px;
+    background: rgba(249, 249, 246, 0.97);
+    backdrop-filter: blur(16px);
+    box-shadow: 0 8px 24px rgba(60, 40, 20, 0.1);
   }
-  .nav-links::-webkit-scrollbar, .site-nav-links::-webkit-scrollbar { display: none; }
-  .nav-links a, .site-nav-links a { flex-shrink: 0; font-size: 14px; }
+  nav[data-open="true"] .nav-links, nav[data-open="true"] .site-nav-links { display: flex; }
+  .nav-links a, .site-nav-links a { padding: 12px 16px; border-radius: 12px; font-size: 16px; }
+  .nav-links a[data-active="true"], .site-nav-links a[data-active="true"] { background: var(--surface-alt); }
   .nav-cta, .site-nav-cta { flex-shrink: 0; padding: 0 16px; font-size: 13px; }
 }
 @media (max-width: 640px) {
@@ -984,7 +1010,21 @@ a.project-meta-item .value:hover { opacity: 0.7; }
     height: 40px;
   }
 
-  .mandy-badge, .badge-card-awards { display: none; }
+  .mandy-badge { display: none; }
+  /* Awards card joins the stacked column (cqw units don't apply here) */
+  .badge-card-awards {
+    position: static;
+    order: 6;
+    width: 100%;
+    padding: 20px 22px;
+    border-radius: 16px;
+    gap: 14px;
+    animation: none;
+    translate: none;
+  }
+  .badge-awards-number { font-size: 36px; }
+  .badge-awards-label { font-size: 14px; }
+  .badge-awards-logo { width: 40px; height: 40px; margin-left: -10px; }
 
   /* Contact dock — normal flow below the cards, `relative` (not static) so
      the absolutely-positioned pill inside anchors to the dock while the dock
@@ -1057,9 +1097,6 @@ a.project-meta-item .value:hover { opacity: 0.7; }
 .portfolio-shell::before { height: 100%; }
 
 
-@media (max-width: 640px) {
-  .nav-links a, .site-nav-links a { font-size: 14px; }
-}
 
 /* =====================================================================
    Colour bases: the images in public/images/gradients, by file name
