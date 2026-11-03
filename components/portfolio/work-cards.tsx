@@ -3,8 +3,6 @@
 import brandImage from "@/public/images/portfolio/brand-bag.jpg";
 import brandImageMobile from "@/public/images/portfolio/brand-bag-phone.png";
 import aboutImage from "@/public/images/portfolio/about-me.jpg";
-import sketchbookImage from "@/public/images/gradients/violet.jpg";
-import contactImage from "@/public/images/gradients/ocean.jpg";
 import cultureImage from "@/public/images/portfolio/culture-cover.jpg";
 import cultureImageMobile from "@/public/images/portfolio/culture-cover-phone.jpeg";
 import { WorkCard } from "@/components/portfolio/work-card";
@@ -19,7 +17,7 @@ export function WorkCards() {
       <WorkCard
         className="card-sketchbook"
         href="/sketchbook"
-        image={sketchbookImage}
+        gradient="violet"
         imageAlt="Soft violet gradient"
         title={t.sketchbook.title}
         subtitle={t.sketchbook.subtitle}
@@ -48,7 +46,7 @@ export function WorkCards() {
       <WorkCard
         className="card-contact"
         href="/about#contact"
-        image={contactImage}
+        gradient="ocean"
         imageAlt="Soft blue gradient"
         title={t.contact.title}
       />

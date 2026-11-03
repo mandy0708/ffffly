@@ -10,6 +10,8 @@ type WorkCardProps = {
   image?: StaticImageData;
   mobileImage?: StaticImageData;
   video?: string;
+  /** Colour-base tone drawn in CSS (mesh gradient + grain) instead of an image. */
+  gradient?: "ocean" | "violet" | "green" | "teal";
   imageAlt: string;
   objectPosition?: string;
   title: string;
@@ -26,6 +28,7 @@ export function WorkCard({
   image,
   mobileImage,
   video,
+  gradient,
   imageAlt,
   objectPosition,
   title,
@@ -44,7 +47,9 @@ export function WorkCard({
       onClick={onActivate ? (event) => { event.preventDefault(); onActivate(); } : undefined}
     >
       <div className="card-art">
-        {video ? (
+        {gradient ? (
+          <div className={`card-gradient card-gradient--${gradient}`} role="img" aria-label={imageAlt} />
+        ) : video ? (
           <video
             src={video}
             aria-label={imageAlt}

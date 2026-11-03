@@ -14,6 +14,7 @@ export async function PortfolioNav() {
   ];
 
   return (
+    <>
     <nav className="top-nav" aria-label="Main navigation">
       <div className="nav-links">
         {links.map((link, index) => (
@@ -22,11 +23,12 @@ export async function PortfolioNav() {
           </Link>
         ))}
       </div>
-      <LangSwitch />
       <Link className="nav-cta" href="/about#contact">
         <span className="nav-cta-label">{t.cta}</span>
         <ArrowUpRight className="nav-cta-icon" size={18} strokeWidth={2} aria-hidden="true" />
       </Link>
     </nav>
+    <LangSwitch />
+    </>
   );
 }

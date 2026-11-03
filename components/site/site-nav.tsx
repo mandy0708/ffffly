@@ -18,6 +18,7 @@ export function SiteNav() {
   ];
 
   return (
+    <>
     <nav className="site-nav" aria-label="Main navigation">
       <div className="site-nav-links">
         {links.map((link) => (
@@ -26,11 +27,12 @@ export function SiteNav() {
           </Link>
         ))}
       </div>
-      <LangSwitch />
       <Link className="site-nav-cta" href="/about#contact">
         <span className="nav-cta-label">{t.cta}</span>
         <ArrowUpRight className="nav-cta-icon" size={18} strokeWidth={2} aria-hidden="true" />
       </Link>
     </nav>
+    <LangSwitch />
+    </>
   );
 }
