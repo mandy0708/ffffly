@@ -1069,19 +1069,18 @@ a.project-meta-item .value:hover { opacity: 0.7; }
 .best-card {
   border: 0;
   overflow: hidden;
-  /* zoom 3x into the deepest-coloured part of each image; light ones get a
-     same-hue multiply tint so all four cards read as strong colour */
-  background-color: #7f93bd;
+  /* Gentle crop toward the deeper part of each image — the gradient itself
+     (light → deep colour range) stays visible, no tint layer on top */
+  background-color: #6f8fb8;
   background-image: url("/images/gradients/about%20me%201.png");
-  background-size: 300% auto;
-  background-position: 84% 74%;
+  background-size: 170% auto;
+  background-position: 96% 76%;
   background-repeat: no-repeat;
-  background-blend-mode: multiply;
   box-shadow: 0 16px 30px rgba(30, 50, 40, 0.26), 0 3px 8px rgba(30, 50, 40, 0.14);
 }
-.best-card[data-tone="1"] { background-color: #6e9c7a; background-image: url("/images/gradients/about%20me%202.png"); background-position: 99% 100%; }
-.best-card[data-tone="2"] { background-color: #fff; background-image: url("/images/gradients/about%20me%203.png"); background-position: 63% 74%; }
-.best-card[data-tone="3"] { background-color: #fff; background-image: url("/images/gradients/about%20me%204.jpg"); background-position: 100% 100%; }
+.best-card[data-tone="1"] { background-color: #4f8a5a; background-image: url("/images/gradients/about%20me%202.png"); background-size: 170% auto; background-position: 100% 100%; }
+.best-card[data-tone="2"] { background-color: #8a5a3a; background-image: url("/images/gradients/about%20me%203.png"); background-size: 130% auto; background-position: 3% 100%; }
+.best-card[data-tone="3"] { background-color: #5a6e96; background-image: url("/images/gradients/about%20me%204.jpg"); background-size: 130% auto; background-position: 100% 100%; }
 .best-card:hover { box-shadow: 0 26px 44px rgba(30, 50, 40, 0.32), 0 4px 10px rgba(30, 50, 40, 0.16); }
 .best-card-title, .best-card-en { color: #fff; text-shadow: 0 0 28px rgba(0, 0, 0, 0.28); }
 .best-card-en { opacity: 0.9; }
