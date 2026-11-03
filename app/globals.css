@@ -73,7 +73,8 @@
 
   /* Type */
   --font-sans: var(--font-inter), "PingFang SC", "Hiragino Sans GB", "Source Han Sans SC", "Noto Sans SC", "Microsoft YaHei", system-ui, -apple-system, sans-serif;
-  --font-mono-stack: var(--font-mono), "SF Mono", ui-monospace, Menlo, Consolas, monospace;
+  --font-display-stack: var(--font-geist), var(--font-inter), "PingFang SC", "Hiragino Sans GB", "Source Han Sans SC", "Noto Sans SC", "Microsoft YaHei", system-ui, sans-serif;
+  --font-mono-stack: var(--font-geist-mono), "SF Mono", ui-monospace, Menlo, Consolas, monospace;
 }
 
 * { box-sizing: border-box; }
@@ -606,27 +607,6 @@ button, input { font: inherit; color: inherit; }
 .best-card-en { display: block; font-size: 10px; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; opacity: 0.65; margin: 2px 0 16px; padding: 0 14px; }
 .best-card-panel { flex: 1; min-height: 0; overflow: hidden; display: flex; align-items: center; justify-content: center; background: var(--surface-alt); border-radius: 12px; padding: 18px 16px; }
 .best-card-tools { margin: 0; font-size: 13px; font-weight: 400; line-height: 1.7; text-align: center; color: var(--ink-muted); }
-.best-card--dark { background: var(--surface-alt); }
-.best-card--dark .best-card-panel { background: var(--surface); }
-
-/* About — experience cards follow gelbero-wilson.webflow.io/about: each job
-   in its own white card, title top-left, content below, date on the right. */
-/* Experience — jenny-m.webflow.io/about's "Job Experience": hairline-divided
-   rows, company/date set larger, no card chrome. */
-.job-list { display: flex; flex-direction: column; align-items: center; gap: 0; width: 100%; margin-bottom: 120px; padding: 0 24px; text-align: left; }
-.job-item {
-  display: flex;
-  align-items: flex-start;
-  padding: 32px 0;
-  border-bottom: 1px solid var(--line);
-}
-.job-item:first-child { padding-top: 0; }
-.job-company { flex: 0 0 240px; font-size: 22px; font-weight: 600; white-space: nowrap; margin: 0 56px 0 0; text-align: left; }
-.job-body { flex: 0 0 420px; min-width: 0; margin-right: 57px; text-align: left; }
-.job-role { font-size: 15px; font-weight: 600; color: var(--ink); margin: 0 0 8px; text-align: left; }
-.job-desc { font-size: 14px; font-weight: 400; color: var(--ink-60); line-height: 1.75; margin: 0; text-align: left; }
-.job-note { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.75; margin: 6px 0 0; text-align: left; }
-.job-year { flex: 0 0 170px; text-align: right; font-size: 20px; font-weight: 600; color: var(--ink); white-space: nowrap; margin: 0; }
 
 /* Awards & recognition — harrisonz.webflow.io/about's white award rows, but
    narrower than its full-width version and using this site's own type scale. */
@@ -756,12 +736,6 @@ button, input { font: inherit; color: inherit; }
   .about-hero-photo { width: 100%; max-width: 320px; flex: none; }
   .about-hero-copy, .about-hero-list { max-width: none; text-align: center; }
   .about-hero-list { align-items: center; }
-  .job-list { align-items: stretch; }
-  .job-item { flex-direction: column; justify-content: flex-start; gap: 12px; width: 100%; }
-  .job-company { flex: none; white-space: normal; margin: 0; }
-  .job-body { flex: none; width: 100%; margin: 0; }
-  .job-year { flex: none; text-align: left; }
-  .job-desc { max-width: none; }
   .expertise-grid { grid-template-columns: 1fr; }
   .best-grid { grid-template-columns: 1fr; gap: 32px; padding: 0 16px; }
   .best-card { width: 100%; margin: 0; }
@@ -1040,7 +1014,8 @@ a.project-meta-item .value:hover { opacity: 0.7; }
    (appended layer; everything above is token / component recolouring)
    ===================================================================== */
 
-/* --- Headings: medium-light weight, large, slightly tightened --- */
+/* --- Headings: light display face (ElevenLabs-style), large, tightened ---
+   Big titles use Geist Light 300; small card titles stay Inter medium. */
 h1, h2, h3 { letter-spacing: -0.02em; }
 .work-intro h1,
 .about-title-block h1,
@@ -1048,17 +1023,15 @@ h1, h2, h3 { letter-spacing: -0.02em; }
 .project-title-block h1,
 .section-title-block h2,
 .home-projects-heading h2,
-.project-related-head h2 { font-weight: 500; letter-spacing: -0.025em; }
+.project-related-head h2 { font-family: var(--font-display-stack); font-weight: 300; letter-spacing: -0.025em; }
+.section-title-block h2 { font-size: clamp(28px, 3.6vw, 40px); }
 .work-item-head h3,
-.job-company,
 .awards-title,
 .expertise-zh,
 .best-card-title,
-.project-related-title { font-weight: 500; letter-spacing: -0.015em; }
+.project-related-title { font-weight: 500; letter-spacing: -0.01em; }
 
 /* --- Labels / nav / meta / numerals: monospace, small, slightly open --- */
-.nav-links a,
-.site-nav-links a,
 .awards-num,
 .awards-detail,
 .expertise-en,
@@ -1068,17 +1041,16 @@ h1, h2, h3 { letter-spacing: -0.02em; }
 .project-tag,
 .work-item-head .tag,
 .project-related-tag,
-.job-year,
 .contact-copyright,
 .site-footer p,
 .hero-intro-eyebrow {
   font-family: var(--font-mono-stack);
   letter-spacing: 0.02em;
 }
-.nav-links a, .site-nav-links a { font-size: 13px; font-weight: 400; }
+/* Nav stays Inter regular (as on elevenlabs.io), not monospace */
+.nav-links a, .site-nav-links a { font-size: 15px; font-weight: 400; letter-spacing: -0.005em; }
 .nav-links a:hover, .site-nav-links a:hover,
 .nav-links a[data-active="true"], .site-nav-links a[data-active="true"] { font-weight: 500; }
-.job-year { font-size: 16px; font-weight: 400; letter-spacing: 0; }
 .awards-num { font-weight: 500; color: var(--accent); }
 .expertise-en, .best-card-en { letter-spacing: 0.06em; }
 .project-tag, .work-item-head .tag, .project-related-tag { font-size: 12px; }
@@ -1117,8 +1089,7 @@ a.project-meta-item .value:hover { color: var(--accent); opacity: 1; }
 }
 .portfolio-shell::before { height: 100%; }
 
-.site-shell::after,
-.portfolio-shell::after {
+.site-shell::after {
   content: "";
   position: absolute;
   top: 0;
@@ -1141,12 +1112,80 @@ a.project-meta-item .value:hover { color: var(--accent); opacity: 1; }
   height: 360px;
   z-index: -1;
   pointer-events: none;
-  background-image: radial-gradient(rgba(26, 26, 24, 0.16) 1px, transparent 1.2px);
-  background-size: 18px 18px;
+  background-image: radial-gradient(rgba(138, 135, 125, 0.42) 0.6px, transparent 0.9px);
+  background-size: 6px 6px;
   -webkit-mask-image: radial-gradient(closest-side, #000, transparent);
   mask-image: radial-gradient(closest-side, #000, transparent);
 }
 @media (max-width: 640px) {
-  .site-shell::after, .portfolio-shell::after { width: 420px; height: 420px; opacity: 0.8; }
+  .site-shell::after { width: 420px; height: 420px; opacity: 0.8; }
   .site-main::before { display: none; }
 }
+
+@media (max-width: 640px) {
+  .nav-links a, .site-nav-links a { font-size: 14px; }
+}
+
+/* =====================================================================
+   ElevenLabs-style colour bases: soft mesh gradients with film grain.
+   Used behind a few chosen modules; content sits on top. Generated in CSS
+   (no image files). Each mesh is four radial blooms over a base colour.
+   ===================================================================== */
+:root {
+  /* grain first, then the 5 mesh layers — list must cover every layer or it repeats */
+  --grain-blend: soft-light, normal, normal, normal, normal, normal;
+  --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3CfeComponentTransfer%3E%3CfeFuncA type='linear' slope='0' intercept='1'/%3E%3C/feComponentTransfer%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+
+  /* dark-at-top (white titles sit on the top edge) */
+  --mesh-sunset: radial-gradient(80% 70% at 14% 6%, #ff7a3d 0%, transparent 64%), radial-gradient(70% 80% at 92% 14%, #e8467c 0%, transparent 64%), radial-gradient(85% 85% at 20% 106%, #ffc15e 0%, transparent 62%), radial-gradient(75% 75% at 106% 100%, #8a63ff 0%, transparent 64%), linear-gradient(#f2704f, #f2704f);
+  --mesh-dusk: radial-gradient(80% 70% at 14% 6%, #6a7bff 0%, transparent 64%), radial-gradient(70% 80% at 92% 14%, #8a5cf0 0%, transparent 64%), radial-gradient(85% 85% at 20% 106%, #8fd3ff 0%, transparent 62%), radial-gradient(75% 75% at 106% 100%, #ff9ec0 0%, transparent 64%), linear-gradient(#6f86ff, #6f86ff);
+  --mesh-lagoon: radial-gradient(80% 70% at 14% 6%, #1fa7a0 0%, transparent 64%), radial-gradient(70% 80% at 92% 14%, #2f7de1 0%, transparent 64%), radial-gradient(85% 85% at 20% 106%, #a8f0d0 0%, transparent 62%), radial-gradient(75% 75% at 106% 100%, #ffe48a 0%, transparent 64%), linear-gradient(#2a9fc0, #2a9fc0);
+  --mesh-ember: radial-gradient(80% 70% at 14% 6%, #c2255c 0%, transparent 64%), radial-gradient(70% 80% at 92% 14%, #ff6a45 0%, transparent 64%), radial-gradient(85% 85% at 20% 106%, #ffb347 0%, transparent 62%), radial-gradient(75% 75% at 106% 100%, #5b46e6 0%, transparent 64%), linear-gradient(#e04a62, #e04a62);
+  /* pastel (ink text) */
+  --mesh-bloom: radial-gradient(80% 70% at 12% 8%, #ffe3c2 0%, transparent 62%), radial-gradient(70% 80% at 92% 18%, #ffc2c9 0%, transparent 64%), radial-gradient(85% 85% at 30% 106%, #f3d1ff 0%, transparent 62%), radial-gradient(75% 75% at 106% 100%, #ffd9a8 0%, transparent 64%), linear-gradient(#ffe8dc, #ffe8dc);
+  /* home photo cards: saturated at the bottom where the title sits */
+  --mesh-home-sketch: radial-gradient(80% 70% at 14% 6%, #ffd46b 0%, transparent 62%), radial-gradient(70% 80% at 92% 18%, #ff6a45 0%, transparent 64%), radial-gradient(85% 85% at 22% 106%, #ef3f7b 0%, transparent 62%), radial-gradient(75% 75% at 106% 100%, #7f5bff 0%, transparent 64%), linear-gradient(#f59a52, #f59a52);
+  --mesh-home-about: radial-gradient(80% 70% at 14% 6%, #8fd3ff 0%, transparent 62%), radial-gradient(70% 80% at 92% 18%, #7a6bff 0%, transparent 64%), radial-gradient(85% 85% at 22% 106%, #c46bff 0%, transparent 62%), radial-gradient(75% 75% at 106% 100%, #ff7aa0 0%, transparent 64%), linear-gradient(#8a8cff, #8a8cff);
+}
+
+/* Home: Sketchbook + About Me — media becomes an inset "screen" floating on the
+   colour base, title/subtitle sit on the gradient below it. */
+.card-sketchbook .card-art { background-image: var(--grain), var(--mesh-home-sketch); background-blend-mode: var(--grain-blend); }
+.card-about .card-art { background-image: var(--grain), var(--mesh-home-about); background-blend-mode: var(--grain-blend); }
+.card-sketchbook .card-art video,
+.card-about .card-art img {
+  position: absolute !important;
+  inset: 7% 7% auto 7% !important;
+  width: 86% !important;
+  height: 62% !important;
+  border-radius: 10px;
+  box-shadow: 0 10px 28px rgba(40, 18, 8, 0.28);
+}
+.card-about .card-art img { object-position: center 18% !important; }
+.card-sketchbook .card-shade,
+.card-about .card-shade { background: linear-gradient(to bottom, rgba(30, 18, 10, 0), rgba(30, 18, 10, 0.32)); }
+@media (max-width: 720px) {
+  .card-sketchbook .card-art video,
+  .card-about .card-art img { height: 56% !important; inset: 6% 6% auto 6% !important; width: 88% !important; }
+}
+
+/* About: AI-Native workflow cards → four colour bases, white UI-like panel */
+.best-card { border-color: transparent; background-image: var(--grain), var(--mesh-sunset); background-blend-mode: var(--grain-blend); }
+.best-card[data-tone="1"] { background-image: var(--grain), var(--mesh-dusk); }
+.best-card[data-tone="2"] { background-image: var(--grain), var(--mesh-lagoon); }
+.best-card[data-tone="3"] { background-image: var(--grain), var(--mesh-ember); }
+.best-card-title, .best-card-en { color: #fff !important; }
+.best-card-en { opacity: 0.8; }
+.best-card-panel { background: rgba(255, 255, 255, 0.9); }
+
+/* About: contact → a pastel colour panel */
+.contact-block {
+  width: 100%;
+  max-width: 560px;
+  padding: 44px 40px;
+  border-radius: 24px;
+  background-image: var(--grain), var(--mesh-bloom);
+  background-blend-mode: var(--grain-blend);
+}
+.contact-block .contact-item .label { color: var(--ink-muted); }
+.contact-block .contact-qr { border-color: rgba(255, 255, 255, 0.7); background: #fff; }

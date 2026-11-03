@@ -18,57 +18,6 @@ export const metadata: Metadata = {
   description: "Brand designer. Making brands for AI, with AI. Resume, education and contact.",
 };
 
-const experience: {
-  date: string;
-  companyZh: string;
-  companyEn: string;
-  role: string;
-  description: string;
-  note?: string;
-}[] = [
-  {
-    date: "2024 — Present",
-    companyZh: "智谱华章",
-    companyEn: "Z.ai",
-    role: "品牌设计负责人",
-    description:
-      "负责 AI 科技品牌从品牌升级、视觉体系到产品发布、传播、数字体验、展览及品牌资产的完整建设，并推动 AI 融入设计生产流程。",
-  },
-  {
-    date: "2019 — 2023",
-    companyZh: "第四范式",
-    companyEn: "4Paradigm",
-    role: "品牌设计负责人",
-    description:
-      "负责企业科技品牌体系建设与持续升级，覆盖品牌识别、产品与营销传播、雇主品牌、活动、IP 及实体品牌资产。",
-    note: "IxDC2022 大会讲师 · 受邀为中央美术学院讲授 AI 品牌设计案例",
-  },
-  {
-    date: "2018 — 2019",
-    companyZh: "玖富数科",
-    companyEn: "9F",
-    role: "资深品牌设计师",
-    description:
-      "负责多业务线品牌与产品视觉，从品牌识别、IP 到营销活动及品牌周边，推动视觉资产系统化。",
-  },
-  {
-    date: "2016 — 2017",
-    companyZh: "万科",
-    companyEn: "Vanke",
-    role: "创意总监",
-    description:
-      "负责企业品牌与文化传播，覆盖品牌视觉、招聘与活动，并承担设计团队建设与管理。",
-  },
-  {
-    date: "2014 — 2016",
-    companyZh: "中信信托",
-    companyEn: "",
-    role: "品牌设计",
-    description:
-      "参与多个业务线品牌建设与视觉体系搭建，覆盖地产、科技及消费相关业务。",
-  },
-];
-
 const capabilities = [
   {
     en: "Brand Strategy",
@@ -123,12 +72,11 @@ const capabilities = [
 // "02 Skills & Expertise": 4 pastel, alternating-tilt overlapping cards —
 // mirrors the colorful "What I do best?" cards on harrisonz.webflow.io (title
 // color tinted from the card's own pastel, tool names as plain scattered text).
-const toolGroups: { zh: string; en: string; bg?: string; fg: string; dark?: boolean; tools: string[][] }[] = [
+const toolGroups: { zh: string; en: string; fg: string; tools: string[][] }[] = [
   {
     zh: "视觉生成",
     en: "Visual Generation",
-    bg: "#FFFFFF",
-    fg: "#1A1A18",
+    fg: "#FFFFFF",
     tools: [
       ["GPT Image", "即梦", "Liblib", "Midjourney"],
       ["TapNow", "Kling", "CapCut"],
@@ -137,8 +85,7 @@ const toolGroups: { zh: string; en: string; bg?: string; fg: string; dark?: bool
   {
     zh: "设计与原型",
     en: "Design & Prototyping",
-    dark: true,
-    fg: "#1A1A18",
+    fg: "#FFFFFF",
     tools: [
       ["Figma", "Figma AI", "Photoshop"],
       ["Illustrator"],
@@ -147,8 +94,7 @@ const toolGroups: { zh: string; en: string; bg?: string; fg: string; dark?: bool
   {
     zh: "创意开发",
     en: "Creative Development",
-    bg: "#FFFFFF",
-    fg: "#1A1A18",
+    fg: "#FFFFFF",
     tools: [
       ["Cursor", "Codex", "Figma Make"],
       ["Vercel", "Framer"],
@@ -157,8 +103,7 @@ const toolGroups: { zh: string; en: string; bg?: string; fg: string; dark?: bool
   {
     zh: "研究与协作",
     en: "Research & Collaboration",
-    dark: true,
-    fg: "#1A1A18",
+    fg: "#FFFFFF",
     tools: [["Gemini", "Claude"]],
   },
 ];
@@ -199,9 +144,9 @@ export default function AboutPage() {
         <div className="best-grid">
           {toolGroups.map((group, i) => (
             <div
-              className={`best-card${group.dark ? " best-card--dark" : ""}`}
+              className="best-card"
               data-tilt={i % 2 === 0 ? "a" : "b"}
-              style={group.dark ? undefined : { background: group.bg }}
+              data-tone={i}
               key={group.zh}
             >
               <h3 className="best-card-title" style={{ color: group.fg }}>{group.zh}</h3>
@@ -216,27 +161,6 @@ export default function AboutPage() {
                   ))}
                 </p>
               </div>
-            </div>
-          ))}
-        </div>
-
-        <div className="section-title-block">
-          <h2>Job Experience</h2>
-          <p className="section-subtitle">14+ 年品牌与创意设计经验，覆盖 AI、科技、互联网与大型企业，兼具品牌全链路实践与团队管理</p>
-        </div>
-        <div className="job-list">
-          {experience.map((job) => (
-            <div className="job-item" key={job.date}>
-              <h3 className="job-company">
-                {job.companyZh}
-                {job.companyEn && ` · ${job.companyEn}`}
-              </h3>
-              <div className="job-body">
-                <p className="job-role">{job.role}</p>
-                <p className="job-desc">{job.description}</p>
-                {job.note && <p className="job-note">{job.note}</p>}
-              </div>
-              <p className="job-year">{job.date}</p>
             </div>
           ))}
         </div>

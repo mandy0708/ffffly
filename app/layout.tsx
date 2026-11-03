@@ -1,16 +1,24 @@
 import type { Metadata } from "next";
-import { Inter, JetBrains_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Inter } from "next/font/google";
 import "./globals.css";
 
-// Visual style v2 — Inter for text, JetBrains Mono for labels / nav / meta.
+// Visual style v2 — modelled on ElevenLabs: Inter for text/nav, a light geometric
+// grotesque for display headings (ElevenLabs uses the commercial "Waldenburg
+// Light"; Geist Light is the closest free match), Geist Mono for small labels.
 const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
   weight: ["400", "500", "600"],
 });
 
-const jetbrainsMono = JetBrains_Mono({
-  variable: "--font-mono",
+const geist = Geist({
+  variable: "--font-geist",
+  subsets: ["latin"],
+  weight: ["300", "400", "500"],
+});
+
+const geistMono = Geist_Mono({
+  variable: "--font-geist-mono",
   subsets: ["latin"],
   weight: ["400", "500"],
 });
@@ -26,7 +34,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="zh-CN" className={`${inter.variable} ${jetbrainsMono.variable} h-full antialiased`}>
+    <html lang="zh-CN" className={`${inter.variable} ${geist.variable} ${geistMono.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col">{children}</body>
     </html>
   );

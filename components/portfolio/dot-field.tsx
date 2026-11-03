@@ -46,6 +46,28 @@ export function DotField({ fixed = false }: { fixed?: boolean }) {
     window.addEventListener("pointermove", onPointerMove, { passive: true });
     document.addEventListener("pointerleave", onPointerLeave);
 
+    // Dense, small dots. The flow field is smooth, so it is sampled on a coarse
+    // lattice (every COARSE dots) and bilinearly interpolated to the dot grid;
+    // dots are batched into a few opacity buckets so one frame is a handful of
+    // fills instead of tens of thousands.
+    const SPACING = 6;
+    const COARSE = 4;
+    const BUCKETS = 8;
+    const MAX_ENERGY = 1.27;
+    let cols = 0;
+    let rows = 0;
+    let coarseCols = 0;
+    let coarseRows = 0;
+    let coarse = new Float32Array(0);
+
+    function layout() {
+      cols = Math.ceil(width / SPACING) + 2;
+      rows = Math.ceil(height / SPACING) + 2;
+      coarseCols = Math.ceil(cols / COARSE) + 2;
+      coarseRows = Math.ceil(rows / COARSE) + 2;
+      coarse = new Float32Array(coarseCols * coarseRows);
+    }
+
     function resize() {
       if (!canvas || !context) return;
 
@@ -56,6 +78,7 @@ export function DotField({ fixed = false }: { fixed?: boolean }) {
       canvas.width = Math.ceil(width * pixelRatio);
       canvas.height = Math.ceil(height * pixelRatio);
       context.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
+      layout();
     }
 
     function draw(now: number) {
@@ -65,7 +88,6 @@ export function DotField({ fixed = false }: { fixed?: boolean }) {
       // Dedicated, faster clock for the autonomous flow so it visibly moves on
       // its own — independent of the cursor.
       const flowTime = reduceMotion.matches ? 0 : now * 0.001;
-      const spacing = 10;
 
       // Automatic drift, used as the origin whenever the cursor is idle/away.
       const autoX = width * (0.5 + Math.sin(time * 0.64) * 0.23);
@@ -84,17 +106,16 @@ export function DotField({ fixed = false }: { fixed?: boolean }) {
       const lightX = currentX;
       const lightY = currentY;
 
-      context.clearRect(0, 0, width, height);
-      context.fillStyle = dotColor;
-
-      for (let y = -spacing; y <= height + spacing; y += spacing) {
-        for (let x = -spacing; x <= width + spacing; x += spacing) {
+      // Flow field on the coarse lattice (this is the only trig-heavy part).
+      const step = SPACING * COARSE;
+      for (let j = 0; j < coarseRows; j++) {
+        const y = (j - 1) * step;
+        const ny = y * 0.009;
+        for (let i = 0; i < coarseCols; i++) {
+          const x = (i - 1) * step;
           // Autonomous flow: several traveling waves whose coordinates are warped
-          // by other slow waves (domain warping). They move in different
-          // directions and reshape over time, so the whole field keeps flowing
-          // with or without the cursor — no single origin, never symmetric.
+          // by other slow waves (domain warping) — no single origin, never symmetric.
           const nx = x * 0.009;
-          const ny = y * 0.009;
           const wx =
             Math.sin(ny * 0.8 + flowTime * 0.7) +
             Math.cos(ny * 1.7 - flowTime * 0.5);
@@ -107,7 +128,28 @@ export function DotField({ fixed = false }: { fixed?: boolean }) {
             Math.sin((nx + ny) * 0.7 + (wx + wy) * 0.5 + flowTime * 0.6);
           const base = (v + 3) / 6; // 0..1
           // Bias toward peaks so bright dots form drifting streaks, not an even haze.
-          const shaped = base * (base * 0.85 + 0.15);
+          coarse[j * coarseCols + i] = base * (base * 0.85 + 0.15);
+        }
+      }
+
+      context.clearRect(0, 0, width, height);
+      context.fillStyle = dotColor;
+
+      const paths = Array.from({ length: BUCKETS }, () => new Path2D());
+      for (let j = 0; j < rows; j++) {
+        const y = (j - 1) * SPACING;
+        const fy = y / step + 1;
+        const j0 = Math.floor(fy);
+        const ty = fy - j0;
+        for (let i = 0; i < cols; i++) {
+          const x = (i - 1) * SPACING;
+          const fx = x / step + 1;
+          const i0 = Math.floor(fx);
+          const tx = fx - i0;
+          const k = j0 * coarseCols + i0;
+          const top = coarse[k] * (1 - tx) + coarse[k + 1] * tx;
+          const bottom = coarse[k + coarseCols] * (1 - tx) + coarse[k + coarseCols + 1] * tx;
+          const shaped = top * (1 - ty) + bottom * ty;
 
           // Cursor gently lifts the nearby flow; it is an accent, not the subject.
           const dx = x - lightX;
@@ -115,14 +157,15 @@ export function DotField({ fixed = false }: { fixed?: boolean }) {
           const glow = Math.exp(-Math.sqrt(dx * dx + dy * dy) / 260) * 0.55;
 
           const energy = shaped * (0.72 + glow);
-          const radius = 0.4 + energy * 1.6;
-          const opacity = 0.04 + energy * 0.24;
-
-          context.globalAlpha = opacity;
-          context.beginPath();
-          context.arc(x, y, radius, 0, Math.PI * 2);
-          context.fill();
+          const radius = 0.32 + energy * 0.85;
+          const bucket = Math.min(BUCKETS - 1, Math.floor((energy / MAX_ENERGY) * BUCKETS));
+          paths[bucket].moveTo(x + radius, y);
+          paths[bucket].arc(x, y, radius, 0, Math.PI * 2);
         }
+      }
+      for (let b = 0; b < BUCKETS; b++) {
+        context.globalAlpha = 0.06 + ((b + 0.5) / BUCKETS) * MAX_ENERGY * 0.26;
+        context.fill(paths[b]);
       }
 
       context.globalAlpha = 1;
