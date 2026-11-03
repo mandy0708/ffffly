@@ -622,6 +622,8 @@ button, input { font: inherit; color: inherit; }
   padding: 18px 26px;
   box-shadow: none;
 }
+.awards-item { transition: transform 0.25s ease, border-color 0.25s ease; }
+.awards-item:hover { transform: translateY(-2px); border-color: var(--ink-35); }
 .awards-item-left { display: flex; align-items: baseline; gap: 20px; min-width: 0; }
 .awards-num { flex-shrink: 0; font-size: 13px; font-weight: 600; color: var(--ink-40); }
 .awards-title { font-size: 17px; font-weight: 600; margin: 0; }
@@ -1023,8 +1025,8 @@ a.project-meta-item .value:hover { opacity: 0.7; }
 .home-projects-heading h2,
 .project-related-head h2 { font-weight: 400; letter-spacing: -0.025em; }
 
-/* Section (second-level) headings: sturdier — semibold, text-size optical cut */
-.section-title-block h2 { font-weight: 600; letter-spacing: -0.015em; font-optical-sizing: none; }
+/* Section (second-level) headings: same face as the page title, smaller, regular-medium (not bold) */
+.section-title-block h2 { font-size: clamp(20px, 2.6vw, 26px); font-weight: 500; letter-spacing: -0.02em; }
 
 /* Nav: Inter regular */
 .nav-links a, .site-nav-links a { font-size: 15px; font-weight: 400; letter-spacing: -0.005em; }
@@ -1067,14 +1069,21 @@ a.project-meta-item .value:hover { opacity: 0.7; }
 .best-card {
   border: 0;
   overflow: hidden;
-  background: #d5e2d6 url("/images/gradients/about%20me%201.png") center / cover no-repeat;
+  /* zoom 3x into the deepest-coloured part of each image; light ones get a
+     same-hue multiply tint so all four cards read as strong colour */
+  background-color: #7f93bd;
+  background-image: url("/images/gradients/about%20me%201.png");
+  background-size: 300% auto;
+  background-position: 84% 74%;
+  background-repeat: no-repeat;
+  background-blend-mode: multiply;
   box-shadow: 0 16px 30px rgba(30, 50, 40, 0.26), 0 3px 8px rgba(30, 50, 40, 0.14);
 }
-.best-card[data-tone="1"] { background-image: url("/images/gradients/about%20me%202.png"); }
-.best-card[data-tone="2"] { background-image: url("/images/gradients/about%20me%203.png"); }
-.best-card[data-tone="3"] { background-image: url("/images/gradients/about%20me%204.jpg"); }
+.best-card[data-tone="1"] { background-color: #6e9c7a; background-image: url("/images/gradients/about%20me%202.png"); background-position: 99% 100%; }
+.best-card[data-tone="2"] { background-color: #fff; background-image: url("/images/gradients/about%20me%203.png"); background-position: 63% 74%; }
+.best-card[data-tone="3"] { background-color: #fff; background-image: url("/images/gradients/about%20me%204.jpg"); background-position: 100% 100%; }
 .best-card:hover { box-shadow: 0 26px 44px rgba(30, 50, 40, 0.32), 0 4px 10px rgba(30, 50, 40, 0.16); }
-.best-card-title, .best-card-en { color: #fff; text-shadow: 0 1px 10px rgba(10, 20, 10, 0.5); }
+.best-card-title, .best-card-en { color: #fff; text-shadow: 0 0 28px rgba(0, 0, 0, 0.28); }
 .best-card-en { opacity: 0.9; }
 
 /* About: contact panel */
@@ -1086,6 +1095,6 @@ a.project-meta-item .value:hover { opacity: 0.7; }
   background: #dfe9d3 url("/images/gradients/portfolio-content%20me.png") center 90% / cover no-repeat;
   box-shadow: 0 14px 30px rgba(30, 50, 20, 0.16), 0 2px 6px rgba(30, 50, 20, 0.1);
 }
-.contact-block .contact-item .label { color: rgba(255, 255, 255, 0.88); text-shadow: 0 1px 8px rgba(10, 30, 10, 0.45); }
-.contact-block .contact-item a { color: #fff; text-shadow: 0 1px 10px rgba(10, 30, 10, 0.5); }
+.contact-block .contact-item .label { color: rgba(255, 255, 255, 0.88); text-shadow: 0 0 26px rgba(0, 0, 0, 0.26); }
+.contact-block .contact-item a { color: #fff; text-shadow: 0 0 28px rgba(0, 0, 0, 0.28); }
 .contact-block .contact-qr { border-color: rgba(255, 255, 255, 0.7); background: #fff; }
