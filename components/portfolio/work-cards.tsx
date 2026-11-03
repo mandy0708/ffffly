@@ -46,6 +46,7 @@ export function WorkCards() {
         className="card-contact"
         href="/about#contact"
         image={contactImage}
+        objectPosition="center 92%"
         imageAlt="Soft green gradient with light streaks"
         title="Contact Me"
       />
