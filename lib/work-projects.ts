@@ -15,6 +15,8 @@ export type WorkProjectDetail = {
   gallery: string[];
   galleryColumns?: number;
   hidden?: boolean;
+  /** Omit the standalone year line under the intro (the tag line above already shows it). */
+  hideYearInBody?: boolean;
 };
 
 const allWorkProjects: WorkProjectDetail[] = [
@@ -122,7 +124,8 @@ const allWorkProjects: WorkProjectDetail[] = [
     title: "第四范式产品宣传与交付设计",
     description: "算力一体机｜AI 加速卡｜慢病管理一体机｜智能机器人｜行业解决方案",
     role: "品牌设计负责人",
-    deliverables: ["手册", "单页", "白皮书", "说明书"],
+    deliverables: ["手册", "单页", "白皮书", "说明书", "硬件外观视觉"],
+    hideYearInBody: true,
     client: "第四范式",
     narrative: [
       "第四范式产品线覆盖硬件、平台、应用三类，对外宣传与交付资料快速增长，却缺少统一体系。作为品牌设计负责人，我对全品牌物料做了整体规划，分为企业形象、产品/方案宣传、说明资料与专项物料四大类，明确各类定位与设计标准。",

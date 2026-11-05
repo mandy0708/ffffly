@@ -70,7 +70,7 @@ export default async function WorkProjectPage({ params }: PageProps<"/work/[slug
             {project.narrative.map((paragraph) => (
               <p key={paragraph.slice(0, 12)}>{paragraph}</p>
             ))}
-            <p>{project.year}</p>
+            {!project.hideYearInBody && <p>{project.year}</p>}
           </div>
         </div>
 
