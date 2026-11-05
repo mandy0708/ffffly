@@ -119,7 +119,7 @@ const allWorkProjects: WorkProjectDetail[] = [
     tag: "Marketing",
     year: "2020",
     date: "2020-03-05",
-    title: "第四范式 产品宣传与交付设计",
+    title: "第四范式产品宣传与交付设计",
     description: "算力一体机｜AI 加速卡｜慢病管理一体机｜智能机器人｜行业解决方案",
     role: "品牌设计负责人",
     deliverables: ["手册", "单页", "白皮书", "说明书"],
