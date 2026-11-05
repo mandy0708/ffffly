@@ -45,6 +45,7 @@ export default async function WorkProjectPage({ params }: PageProps<"/work/[slug
         <div className="project-title-block">
           <span className="project-tag">{project.tag} · {project.year}</span>
           <h1>{project.title}</h1>
+          {project.subtitle && <p className="project-subtitle">{project.subtitle}</p>}
         </div>
 
         <div className="project-hero">
