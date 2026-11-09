@@ -25,7 +25,7 @@ const allWorkProjects: WorkProjectDetail[] = [
     tag: "Branding",
     year: "2026",
     date: "2026-03-18",
-    title: "品牌设计 | MetaCircle",
+    title: "MetaCircle 品牌视觉设计",
     description: "为企业数字化分析平台 MetaCircle 构建品牌形象与视觉系统。",
     role: "品牌设计师",
     deliverables: ["品牌 LOGO 与 VI", "品牌视觉系统", "品牌应用物料"],
