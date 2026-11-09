@@ -957,9 +957,10 @@ a.project-meta-item .value:hover { opacity: 0.7; }
     flex-direction: column;
     gap: 20px;
   }
-  /* Mobile card order: Work (Brand) → Culture & IP → Sketchbook → About → Contact */
+  /* Mobile card order: Work (Brand) → Sketchbook → About → Contact */
   .card-brand { order: 1; }
-  .card-culture { order: 2; }
+  /* Culture & IP is a wide-screen-only entry: hidden in the stacked mobile layout */
+  .card-culture { display: none; }
   .card-sketchbook { order: 3; }
   .card-about { order: 4; }
   .card-contact { order: 5; }
