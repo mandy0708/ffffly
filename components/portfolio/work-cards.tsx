@@ -29,7 +29,7 @@ export function WorkCards() {
         mobileImage={brandImageMobile}
         imageAlt="Branded tote bag with a purple geometric pattern"
         objectPosition="center 65%"
-        title="Brand Design"
+        title="Portfolio"
         subtitle="Building brands from positioning to system."
       />
 
