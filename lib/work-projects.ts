@@ -49,7 +49,7 @@ const allWorkProjects: WorkProjectDetail[] = [
     narrative: [
       "随着企业规模的扩大，原有品牌形象已难以承载新的业务格局与国际化表达。此次为智谱进行品牌形象升级，从品牌战略与受众洞察出发，提炼「基座模型、学术、安全」的核心气质，完成多轮创意方案提报，并在反复对齐中推动共识落地了全新 logo 与完整 VI。",
     ],
-    gallery: ["1.jpg", "2.jpg", "3.jpg", "4.jpg", "5.jpg", "6.jpg", "7.jpg", "7-2.mp4", "8.jpg", "9.jpg", "10.jpg", "11.jpg", "12.jpg", "13.jpg", "14.jpg", "15.jpg", "16.jpg", "17.jpg", "18.jpg", "19.jpg"],
+    gallery: ["1.jpg", "2.jpg", "3.jpg", "4.jpg", "5.jpg", "6.jpg", "7.jpg", "7-2.mp4", "8.jpg", "9.jpg", "10.jpg", "11.jpg", "12.jpg", "13.jpg", "14-1.jpg", "14-2.jpg", "14-3.jpg", "15.jpg", "16.jpg", "17.jpg", "18.jpg", "19.jpg"],
   },
   {
     slug: "zhipu-agent-openday",
@@ -148,7 +148,7 @@ const allWorkProjects: WorkProjectDetail[] = [
       "目标 — 让每一位员工在轻松愉快的工作环境下，对公司文化有认同感，增强公司向心力与凝聚力，同时又能体现企业的个性。",
       "解决方案 — 推出企业形象 IP。形象 IP 具有强生命力，可做更丰富的延伸内容，将企业文化故事化，增强企业文化的渗透力。除此之外，IP 作为标志性的载体，与员工建立情感联系的同时，也保持了企业文化的一致性与连贯性。",
     ],
-    gallery: ["1.jpg", "2.jpg", "3.jpg", "4.jpg", "5.jpg", "6.jpg", "7.jpg", "8.jpg", "9.jpg", "10.jpg"],
+    gallery: ["1.jpg", "2.jpg", "3.jpg", "4.jpg", "5.jpg", "6.jpg", "7.jpg", "9.jpg", "10.jpg", "笔记本1.jpg", "笔记本2.jpg"],
   },
   {
     slug: "4paradigm-heiwa-ip",
@@ -215,6 +215,7 @@ const allWorkProjects: WorkProjectDetail[] = [
   },
   {
     slug: "4paradigm-store-gifts",
+    hidden: true,
     tag: "Culture&IP",
     year: "2023",
     date: "2023-12-14",

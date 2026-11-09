@@ -38,6 +38,8 @@ yarn-error.log*
 
 # raw project source assets (originals kept locally, compressed copies live in public/images/work)
 /public/images/portfolio/项目*/
+# superseded versions marked （旧版，不上线）: never deploy
+/public/images/portfolio/（旧版，不上线）*/
 
 # typescript
 *.tsbuildinfo
