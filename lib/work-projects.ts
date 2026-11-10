@@ -270,7 +270,7 @@ const allWorkProjects: WorkProjectDetail[] = [
   {
     slug: "product-packaging-design",
     tag: "Packaging",
-    categories: ["Branding"],
+    categories: ["Packaging", "Branding"],
     year: "2023",
     date: "2023-09-12",
     title: "合集｜产品包装设计",
@@ -285,6 +285,46 @@ const allWorkProjects: WorkProjectDetail[] = [
     gallery: [
       "01.jpg", "02.jpg", "03.jpg", "04.jpg", "05.jpg", "06.jpg", "07.jpg", "08.jpg",
       "09.jpg", "10.jpg", "11.jpg", "12.jpg", "13.jpg", "14.jpg", "15.jpg",
+    ],
+  },
+  {
+    slug: "meizhibao-branding",
+    tag: "Branding",
+    categories: ["Branding", "Packaging"],
+    year: "2023",
+    date: "2023-07-09",
+    title: "美植葆",
+    description: "日化美妆品牌形象建立与产品包装方案设计。",
+    role: "品牌设计师",
+    deliverables: ["品牌 LOGO 与 VI", "品牌应用物料", "产品包装结构与视觉设计"],
+    client: "美植葆 MEIZHIBAO",
+    narrative: [
+      "美植葆（MEIZHIBAO）定位于毛发养护与植发护理，需要在专业与亲和之间建立品牌形象。字标采用纤细现代的中英文组合，以克制的黑灰色保持专业感，再以荧光绿渐变的流动波纹作为核心图形，象征发丝的生长与生命力，让品牌在同类产品中拥有鲜明的识别。",
+      "包装延续品牌图形，采用细长的条形盒结构，搭配银灰色内盒与软木内托，兼顾开启时的仪式感与产品保护；品牌图形同步延展至名片、帆布袋与户外灯箱等应用物料，形成统一的品牌视觉系统。",
+    ],
+    gallery: [
+      "01.jpg", "02.jpg", "03.jpg", "04.jpg", "05.jpg", "06.jpg",
+      "07.jpg", "08.jpg", "09.jpg", "10.jpg", "11.jpg",
+    ],
+  },
+  {
+    slug: "emonster-branding",
+    tag: "Branding",
+    categories: ["Branding", "Packaging"],
+    year: "2022",
+    date: "2022-09-19",
+    title: "Emonster",
+    description: "香薰品牌的从 0 到 1 品牌建设与首批香薰系列包装设计。",
+    role: "品牌设计师",
+    deliverables: ["品牌 LOGO 与 VI", "品牌应用物料", "数字端视觉", "香薰系列包装设计"],
+    client: "Emonster",
+    narrative: [
+      "ëmonster 是一个从 0 到 1 起步的香薰品牌，以「Everything will gonna be fine」为品牌态度。字标采用圆润饱满的字形，ë 上的两点如同一双眼睛，让品牌带有一点俏皮的情绪感；这一表情也被延展为陶瓷香薰杯上的浮雕图案，成为产品的记忆点。",
+      "首批香薰系列以流动的波纹肌理作为包装图形，Echo of Youth、Love Love Love、Inner Peace、Beyond Dark 四款香型分别对应绿、粉、黄、灰四种主色，搭配黑色缎带与同色系杯盖，让系列在统一之中各具情绪。",
+    ],
+    gallery: [
+      "01.jpg", "02.jpg", "03.jpg", "04.jpg", "05.jpg", "06.jpg",
+      "07.jpg", "08.jpg", "09.jpg", "10.jpg", "11.jpg",
     ],
   },
 ];

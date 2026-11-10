@@ -12,6 +12,8 @@ import tetellusBranding from "@/public/images/work/tetellus-branding.jpg";
 import fourParadigmHeiwaIp from "@/public/images/work/4paradigm-heiwa-ip.jpg";
 import fourParadigmStoreGifts from "@/public/images/work/4paradigm-store-gifts.jpg";
 import productPackagingDesign from "@/public/images/work/product-packaging-design.jpg";
+import emonsterBranding from "@/public/images/work/emonster-branding.jpg";
+import meizhibaoBranding from "@/public/images/work/meizhibao-branding.jpg";
 import yuanhuanIntelligent from "@/public/images/work/yuanhuan-intelligent.jpg";
 
 export const coverImages = {
@@ -30,4 +32,6 @@ export const coverImages = {
   "4paradigm-store-gifts": fourParadigmStoreGifts,
   "yuanhuan-intelligent": yuanhuanIntelligent,
   "product-packaging-design": productPackagingDesign,
+  "emonster-branding": emonsterBranding,
+  "meizhibao-branding": meizhibaoBranding,
 };

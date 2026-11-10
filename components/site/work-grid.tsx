@@ -24,7 +24,7 @@ export type WorkProject = {
   comingSoon?: boolean;
 };
 
-const CATEGORIES = ["All Projects", "Branding", "Marketing", "Culture&IP"];
+const CATEGORIES = ["All Projects", "Branding", "Marketing", "Culture&IP", "Packaging"];
 
 // Under the Branding filter, 4Paradigm should lead ahead of Zhipu — the
 // reverse of their order in "All Projects" — so this list overrides it there.
@@ -34,6 +34,8 @@ const BRANDING_ORDER = [
   "zhipu-brand-upgrade",
   "tetellus-branding",
   "product-packaging-design",
+  "meizhibao-branding",
+  "emonster-branding",
 ];
 
 export function WorkGrid({ projects }: { projects: WorkProject[] }) {
