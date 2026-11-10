@@ -271,6 +271,7 @@ const allWorkProjects: WorkProjectDetail[] = [
     slug: "product-packaging-design",
     tag: "Packaging",
     categories: ["Packaging", "Branding"],
+    hidden: true,
     year: "2023",
     date: "2023-09-12",
     title: "合集｜产品包装设计",
