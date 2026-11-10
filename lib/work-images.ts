@@ -11,6 +11,7 @@ import fourParadigmMahjong from "@/public/images/work/4paradigm-mahjong.jpg";
 import tetellusBranding from "@/public/images/work/tetellus-branding.jpg";
 import fourParadigmHeiwaIp from "@/public/images/work/4paradigm-heiwa-ip.jpg";
 import fourParadigmStoreGifts from "@/public/images/work/4paradigm-store-gifts.jpg";
+import productPackagingDesign from "@/public/images/work/product-packaging-design.jpg";
 import yuanhuanIntelligent from "@/public/images/work/yuanhuan-intelligent.jpg";
 
 export const coverImages = {
@@ -28,4 +29,5 @@ export const coverImages = {
   "4paradigm-heiwa-ip": fourParadigmHeiwaIp,
   "4paradigm-store-gifts": fourParadigmStoreGifts,
   "yuanhuan-intelligent": yuanhuanIntelligent,
+  "product-packaging-design": productPackagingDesign,
 };

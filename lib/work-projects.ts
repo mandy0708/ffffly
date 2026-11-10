@@ -267,6 +267,26 @@ const allWorkProjects: WorkProjectDetail[] = [
       "22.jpg", "23.jpg", "24.jpg", "25.jpg", "26.jpg", "27.jpg", "28.jpg", "29.jpg", "30.jpg", "31.jpg",
     ],
   },
+  {
+    slug: "product-packaging-design",
+    tag: "Packaging",
+    categories: ["Branding"],
+    year: "2023",
+    date: "2023-09-12",
+    title: "合集｜产品包装设计",
+    description: "覆盖香氛、茶饮、谷物膳食与鲜面等多个生活方式品牌的包装设计合集。",
+    role: "包装设计师",
+    deliverables: ["包装结构与视觉设计", "礼盒与外包装设计", "系列化产品视觉延展"],
+    client: "Florid / ëmonster / 谙味 / 汤面日记 / 中国电信定制",
+    narrative: [
+      "从花草茶、香薰蜡烛到谷物膳食、鸡汤鲜面与节庆礼盒，我为多个品牌完成了从包装结构到视觉表达的完整设计，覆盖健康、香氛与生活方式等多个品类。",
+      "每个项目都围绕品牌调性与产品卖点展开：用色彩与图形传递产品的功能与情绪价值，在保证陈列与生产可行性的同时，塑造具有辨识度的货架形象。",
+    ],
+    gallery: [
+      "01.jpg", "02.jpg", "03.jpg", "04.jpg", "05.jpg", "06.jpg", "07.jpg", "08.jpg",
+      "09.jpg", "10.jpg", "11.jpg", "12.jpg", "13.jpg", "14.jpg", "15.jpg",
+    ],
+  },
 ];
 
 export const workProjects = allWorkProjects.filter((project) => !project.hidden);

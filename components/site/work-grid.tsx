@@ -33,6 +33,7 @@ const BRANDING_ORDER = [
   "4paradigm-branding",
   "zhipu-brand-upgrade",
   "tetellus-branding",
+  "product-packaging-design",
 ];
 
 export function WorkGrid({ projects }: { projects: WorkProject[] }) {
