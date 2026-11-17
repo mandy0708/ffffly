@@ -28,6 +28,7 @@ aside h3,aside .label{margin:0 0 8px}
 .views{grid-template-columns:repeat(3,minmax(0,1fr))}
 button{font:inherit;font-size:12px;color:#dfdce4;padding:5px 2px;background:transparent;border:1px solid transparent;border-radius:7px;white-space:nowrap;cursor:pointer}
 .buttons button{font-weight:400;color:#efedf2}
+.buttons button:is([data-module],[data-hidden-lines]){padding-block:3px}
 .buttons button[aria-pressed=true]{color:#141218;background:#f2eff6 padding-box}
 button:focus-visible,input:focus-visible{outline:2px solid var(--ink-purple);outline-offset:3px}
 
