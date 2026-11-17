@@ -1,0 +1,551 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>元环智能 · 标志结构演示</title>
+<style>
+:root{color-scheme:dark;--ink-black:#d6d3dc;--ink-purple:#aa84ff;--line:#303034;font:15px/1.5 Geist,Inter,"PingFang SC",system-ui,sans-serif;color:#f5f4f6;background:#0b0b0c}
+*{box-sizing:border-box}
+body{margin:0}
+main{--content-inset:20px;--toolbar-height:36px;--panel-width:clamp(238px,22vw,290px);min-height:100dvh;display:grid;grid-template-columns:minmax(0,1fr) clamp(258px,22vw,320px);padding:0}
+#stage{grid-area:1/1;position:relative;min-height:460px;overflow:hidden;background-color:#09090c;background-image:radial-gradient(ellipse at 50% 45%,#20223255,transparent 70%),radial-gradient(circle at 12px 12px,#2f2f2f 1px,transparent 1.4px);background-size:auto,24px 24px}
+canvas{position:absolute;inset:0;width:100%;height:100%;display:block;touch-action:none;cursor:grab}
+canvas:active{cursor:grabbing}
+.hud-item{display:inline-flex;align-items:center;gap:7px;white-space:nowrap}.hud-sep{width:3px;height:3px;border-radius:50%;background:#64616e}.hint{display:flex;flex-wrap:wrap;align-items:center;gap:7px 11px;position:absolute;bottom:var(--content-inset);left:var(--content-inset);max-width:calc(100% - 40px);padding:6px 14px;border:1px solid #25262d;border-radius:22px;background:#101116;pointer-events:none;color:#b3afb9;font-size:12px}
+aside{--inspector-padding:clamp(16px,1.5vw,23px);grid-area:1/2;min-width:0;background:#101116;border-left:1px solid #202127}
+@font-face{font-family:"Viewer MiSans";src:local("MiSans Semibold"),local("MiSans-Semibold");font-weight:600}
+@font-face{font-family:"Viewer MiSans Medium";src:local("MiSans Medium"),local("MiSans-Medium");font-weight:500}
+h1{font-family:"Viewer MiSans Medium",MiSans,Geist,system-ui,sans-serif;display:flex;align-items:center;gap:16px;font-size:clamp(16px,1.5vw,20px);line-height:1.2;letter-spacing:-.025em;margin:0;font-weight:500}
+.title-copy{display:grid;gap:4px}.title-subtitle{font:500 10px/1.2 Geist,Inter,system-ui,sans-serif;letter-spacing:.09em;color:#a9a6ae}
+.page-header{position:absolute;z-index:1;top:var(--content-inset);left:var(--content-inset);padding:0;pointer-events:none}
+.brand-mark{display:grid;place-items:center;width:40px;flex:none;color:#6B4C9A;filter:drop-shadow(0 0 11px #7948f34d)}.brand-mark svg{display:block;width:36px;height:40px}
+
+p{margin:0;color:#aaa7ae;line-height:1.65;font-size:13px;font-weight:400}
+section{border-top:1px solid var(--line);padding-top:19px;margin-top:21px}
+aside .controls-group{margin-top:clamp(34px,7vh,82px)}
+.controls-group > section:first-of-type{border-top:0;padding-top:0;margin-top:14px}
+@font-face{font-family:"Viewer MiSans Variable";src:local("MiSans VF"),local("MiSansVF");font-weight:100 900}
+.controls-group h2{font:360 19px/1.3 "Viewer MiSans Variable",MiSans,Geist,system-ui,sans-serif;color:#f5f4f6;margin:0 0 9px}
+aside h3,aside .label,.visibility label{font-size:14px;font-weight:400;color:#d0cdd5}
+aside h3,aside .label{margin:0 0 8px}
+.buttons{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px;padding:5px;border:1px solid #39393e;border-radius:10px;background:#27272a}
+.views{grid-template-columns:repeat(3,minmax(0,1fr))}
+button{font:inherit;font-size:12px;color:#dfdce4;padding:8px 2px;background:transparent;border:1px solid transparent;border-radius:7px;white-space:nowrap;cursor:pointer}
+.buttons button{font-weight:400;background:#3b393e;color:#efedf2}
+.buttons button:hover{background:#4c4950}
+.buttons button[aria-pressed=true]{color:#141218;background:#f2eff6}.buttons button[data-module="1"][aria-pressed=true]{background:#6B4C9A;color:#fff}.buttons button[data-module="0"][aria-pressed=true]{background:#4F2C5B;color:#fff}
+button:focus-visible,input:focus-visible{outline:2px solid var(--ink-purple);outline-offset:3px}
+
+.label,.ends{display:flex;align-items:center;justify-content:space-between}
+output{font:400 12px/1.4 Geist,Inter,system-ui,sans-serif;font-variant-numeric:tabular-nums;border:1px solid #38383e;border-radius:6px;padding:3px 7px;color:#dfdbe7;background:#252527}
+input[type=range]{appearance:none;width:100%;height:24px;margin:0;cursor:pointer;border:0;background:transparent}
+input[type=range]::-webkit-slider-runnable-track{height:5px;border-radius:4px;background:linear-gradient(90deg,#6B4C9A var(--fill,0%),#303035 var(--fill,0%))}
+input[type=range]::-moz-range-track{height:5px;border-radius:4px;background:linear-gradient(90deg,#6B4C9A var(--fill,0%),#303035 var(--fill,0%))}
+input[type=range]::-webkit-slider-thumb{appearance:none;width:13px;height:13px;margin-top:-4px;border-radius:50%;background:#e7e0f2}
+input[type=range]::-moz-range-thumb{width:13px;height:13px;border:0;border-radius:50%;background:#e7e0f2}
+.visibility{margin-top:20px;padding-top:16px}
+.visibility label{display:flex;justify-content:space-between;align-items:center;cursor:pointer;font-size:14px}
+.visibility input{appearance:none;width:32px;height:18px;border-radius:10px;background:#38383e;position:relative;cursor:pointer;margin:0}
+.visibility input:checked{background:#6B4C9A}
+.visibility input::before{content:"";position:absolute;left:3px;top:3px;width:12px;height:12px;border-radius:50%;background:#f2eff6}
+.visibility input:checked::before{left:17px}
+.ends{color:#85818f;font-size:12px;margin-top:1px}
+.zoom-tools{position:absolute;z-index:1;top:var(--content-inset);right:calc(var(--content-inset) + 42px);display:flex;gap:5px;padding:4px;background:#29292b;border:0;border-radius:9px}
+.zoom-tools button,.zoom-tools input{height:28px;padding:0 7px;border:0;border-radius:5px;background:transparent;color:#eee;font:inherit;font-size:12px}
+.zoom-tools>button{width:29px;padding:0;font-size:17px;color:#a9a7ad}
+.zoom-settings summary{height:28px;min-width:56px;display:grid;place-items:center;cursor:pointer;list-style:none;font-size:15px;font-weight:550;font-variant-numeric:tabular-nums}
+.zoom-settings summary::-webkit-details-marker{display:none}
+.zoom-options{position:absolute;right:0;top:calc(100% + 6px);display:flex;gap:8px;padding:7px;background:#29292b;border-radius:9px;white-space:nowrap}
+.zoom-options input{background:#1b1a1b}
+.zoom-tools button:hover{background:#302e31}
+.zoom-tools #zoom-reset{position:absolute;left:calc(100% + 6px);top:0;width:36px;height:36px;background:#29292b;border-radius:9px;color:#eee}
+.zoom-tools #zoom-reset:hover{background:#38383b}
+.zoom-tools label{display:flex;align-items:center;font-size:12px;gap:3px}
+.zoom-tools input{width:44px;text-align:right;appearance:textfield}
+.zoom-tools input::-webkit-inner-spin-button{appearance:none}
+.inspector-header{height:calc(2 * var(--content-inset) + var(--toolbar-height) + 1px);display:flex;align-items:center;justify-content:space-between;padding:0 var(--inspector-padding);border-bottom:1px solid #202127;color:#9294a4;font-size:11px;letter-spacing:.09em}
+.inspector-toggle{padding:0;width:32px;height:32px;display:grid;place-items:center;color:#dedde6;font-size:17px}
+.inspector-toggle svg{display:block;width:22px;height:22px}
+#close-inspector{width:var(--toolbar-height);height:var(--toolbar-height)}#reopen-inspector svg{transform:scaleX(-1)}
+.inspector-toggle:hover{background:#202127}
+.inspector-body{padding:26px var(--inspector-padding)}
+.inspector-description{padding:16px 18px;background:#15161b;border:1px solid #25262c;border-radius:9px;color:#cdccd7}
+.inspector-description span{display:block;margin-top:10px;color:#999bad}
+aside .controls-group{margin-top:72px}
+.controls-group h2{padding-bottom:13px;border-bottom:1px solid #26272d}
+.controls-group section{border-top:0;padding-top:0;margin-top:17px}
+.controls-group section + section:not(.visibility){border-top:1px solid #23242a;padding-top:11px}
+.controls-group .visibility{padding:11px 14px;background:#15161b;border:1px solid #26272d;border-radius:9px}
+.buttons button:not([aria-pressed=true]){background:#1c1d23;border-color:#2b2c34;color:#b9b9c6}
+.buttons button:not([aria-pressed=true]):hover{background:#272832;border-color:#393a46;color:#eee}
+#reopen-inspector{position:absolute;right:var(--content-inset);top:var(--content-inset);z-index:2;width:var(--toolbar-height);height:var(--toolbar-height);border-radius:9px;background:#29292b}
+#reopen-inspector[hidden],.inspector-closed aside{display:none}
+main.inspector-closed{grid-template-columns:minmax(0,1fr)}
+.inspector-closed .zoom-tools{right:calc(var(--content-inset) + 94px)}
+.mobile-inspector-toggle{display:none}
+@media(max-width:760px){
+  main{--content-inset:14px;grid-template-columns:minmax(0,1fr)}
+  #stage{min-height:clamp(420px,72dvh,560px)}
+  main.inspector-closed{grid-template-rows:minmax(0,1fr) auto}
+  aside{grid-area:2/1;border-left:0;border-top:1px solid #202127}
+  .hint{display:none}
+  .zoom-tools,.inspector-closed .zoom-tools{top:auto;bottom:var(--content-inset);right:calc(var(--content-inset) + 38px);gap:1px;padding:3px}
+  .zoom-options{top:auto;bottom:calc(100% + 6px)}
+  .zoom-tools #zoom-reset{left:calc(100% + 4px);width:34px;height:34px}
+  .inspector-header{height:52px}
+  aside .controls-group{margin-top:24px}
+  .inspector-closed aside{display:block}
+  .inspector-closed .inspector-body{display:none}
+  #close-inspector,#reopen-inspector{display:none}
+  .mobile-inspector-toggle{display:grid;width:34px;height:34px;background:transparent;border:0;border-radius:9px}
+  .mobile-inspector-toggle:hover{background:transparent}
+  .mobile-inspector-toggle:active{background:#29292b}
+  .mobile-inspector-toggle::after{content:"";width:8px;height:8px;border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;transform:translateY(2px) rotate(225deg)}
+  .mobile-inspector-toggle[aria-expanded=false]::after{transform:translateY(-2px) rotate(45deg)}
+}
+</style>
+</head>
+<body>
+<main>
+<div id="stage"><header class="page-header">
+  <h1><span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 91.5 101.72" focusable="false"><defs><filter id="brand-rounding" x="-5" y="-5" width="102" height="112" filterUnits="userSpaceOnUse">
+    <feGaussianBlur in="SourceGraphic" stdDeviation="1.05"/>
+    <feComponentTransfer><feFuncA type="linear" slope="5" intercept="-2"/></feComponentTransfer>
+  </filter></defs><path fill="currentColor" filter="url(#brand-rounding)" d="M70.51,0l-21.38,12.34-3.37,1.95L21,0,0,12.12V45.02l24.75,14.29v30.28l21,12.12,21-12.12v-10.6c0-5.65,1.71-9.9,10.43-14.89l14.32-8.27V12.12L70.51,0Zm16,50.06l-13.5-7.79V7.22l13.5,7.79V50.06ZM51.63,16.67l16.38-9.46V42.27l-9.58,5.53c-7.34,4.36-15.17,9.83-15.17,19.6v8.62l-13.5,7.79v-24.42l17.25-9.96,5.87-3.39V28.16l-4.62-2.76v-6.78l3.37-1.95Zm-30.63,19.11l19.83,11.45-13.5,7.79L7.5,43.58l13.5-7.79Zm26.88-4.76v12.14l-2.05,1.18-22.33-12.89V7.22l19.75,11.41v9.73l4.62,2.67ZM18.5,7.22V31.45l-13.5,7.79V15.01l13.5-7.79Zm13.76,80.94l13.5-7.79,13.5,7.79-13.5,7.79-13.5-7.79Zm42.44-28.38c-10.74,6.14-12.94,12.13-12.94,19.23v4.83l-13.5-7.79v-8.62c0-6.48,4.67-10.52,12.7-15.29l9.55-5.52,13.5,7.79-9.31,5.38Z"/></svg></span><span class="title-copy">元环智能 · 标志结构演示<span class="title-subtitle" lang="en">METACIRCLE / LOGO STRUCTURE</span></span></h1>
+</header><button class="inspector-toggle" type="button" id="reopen-inspector" aria-label="展开模型控制" aria-controls="inspector" title="展开参数调整" hidden><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="3" ry="3"></rect><line x1="15" y1="3" x2="15" y2="21"></line><polyline points="11 9 8 12 11 15"></polyline></svg></button><div class="zoom-tools" role="group" aria-label="缩放比例">
+  <button type="button" id="zoom-out" aria-label="缩小">−</button>
+  <details class="zoom-settings">
+    <summary id="zoom-display" title="设置缩放比例">100%</summary>
+    <div class="zoom-options">
+      <label><input id="zoom-value" aria-label="缩放百分比" type="number" min="35" max="400" value="100">%</label>
+    </div>
+  </details>
+  <button type="button" id="zoom-in" aria-label="放大">+</button>
+  <button type="button" id="zoom-reset" aria-label="恢复到 100%" title="恢复到 100%">↺</button>
+</div><canvas aria-label="元环榫卯结构，点击选中模块"></canvas><div class="hint"><div class="hud-item">
+<svg aria-hidden="true" fill="none" height="14" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="14">
+<path d="M3 3l7 18 2.5-7.5L20 11 3 3z"></path>
+</svg>
+<span>点击选中</span>
+</div>
+<div class="hud-sep"></div>
+<div class="hud-item"><svg aria-hidden="true" fill="none" height="14" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="14"><path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path><polyline points="8 8 3 8 3 3"></polyline><path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"></path><polyline points="16 16 21 16 21 21"></polyline></svg><span>拖动旋转</span></div>
+<div class="hud-sep"></div>
+<div class="hud-item">
+<svg aria-hidden="true" fill="none" height="14" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="14">
+<rect height="18" rx="6" width="12" x="6" y="3"></rect>
+<line x1="12" x2="12" y1="7" y2="10"></line>
+</svg>
+<span>滚轮缩放</span>
+</div>
+<div class="hud-sep"></div>
+<div class="hud-item">
+<svg aria-hidden="true" fill="none" height="14" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="14">
+<path d="M5 9l-3 3 3 3"></path>
+<path d="M9 5l3-3 3 3"></path>
+<path d="M19 9l3 3-3 3"></path>
+<path d="M9 19l3 3 3-3"></path>
+<line x1="2" x2="22" y1="12" y2="12"></line>
+<line x1="12" x2="12" y1="2" y2="22"></line>
+</svg>
+<span>右键平移</span></div></div></div>
+  <aside id="inspector">
+    <header class="inspector-header"><button class="inspector-toggle" type="button" id="close-inspector" aria-label="收起模型控制" aria-controls="inspector" title="收起参数调整"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="3" ry="3"></rect><line x1="15" y1="3" x2="15" y2="21"></line><polyline points="11 9 8 12 11 15"></polyline></svg></button><button class="inspector-toggle mobile-inspector-toggle" id="mobile-inspector-toggle" type="button" aria-controls="inspector-body" aria-expanded="true" aria-label="收起参数调整"></button><span>INSPECTOR</span></header>
+    <div class="inspector-body" id="inspector-body">
+    <p class="inspector-description">以「元」的首字母 Y 为形态原点，将两个独立的几何单元，以榫卯为灵感组合为完整标志。<span>形态源于字母，结构呼应物理。</span></p>
+    <div class="controls-group" role="group" aria-labelledby="controls-title">
+    <h2 id="controls-title">参数调整</h2>
+    <section><h3>模块选择</h3><div class="buttons views">
+      <button type="button" data-module="1" aria-pressed="false">故宫紫</button>
+      <button type="button" data-module="0" aria-pressed="false">九离紫</button>
+      <button type="button" data-module="none" aria-pressed="true">默认</button>
+    </div></section>
+    <section><label class="label" for="assembly">拆解与嵌入 <output id="assembly-value" for="assembly">0%</output></label>
+      <input id="assembly" type="range" min="0" max="100" value="0"><div class="ends"><span>嵌入</span><span>拆解</span></div>
+    </section>
+
+    <section><h3>视图选择</h3><div class="buttons views">
+      <button type="button" data-view="front" aria-pressed="true">正面仰视</button>
+      <button type="button" data-view="rear" aria-pressed="false">背面俯视</button>
+      <button type="button" data-view="top" aria-pressed="false">顶部视图</button>
+    </div></section>
+    <section><label class="label" for="stroke">线条宽度 <output id="stroke-value" for="stroke">6.0 px</output></label>
+      <input id="stroke" type="range" min="1" max="10" step="0.5" value="6">
+    </section>
+    <section class="visibility"><label>显示虚线 <input id="show-hidden" type="checkbox" role="switch" checked></label></section>
+    </div>
+    </div>
+  </aside>
+</main>
+<script>
+(() => {
+  const root = document.documentElement;
+  const canvas = root.querySelector('canvas');
+  const slider = root.querySelector('#assembly');
+  const ctx = canvas.getContext('2d');
+  let yaw = -Math.PI/4;
+  let pitch = -Math.asin(1/Math.sqrt(3));
+  let drag = null;
+  const faces = [];
+
+  function solid(axes, occupied, moving, warp = point => point) {
+    const [xs,ys,zs] = axes;
+    for (let i=0;i<xs.length-1;i++) for (let j=0;j<ys.length-1;j++) for (let k=0;k<zs.length-1;k++) {
+      if (!occupied(i,j,k)) continue;
+      const cell = [i,j,k];
+      for (let axis=0;axis<3;axis++) for (const side of [-1,1]) {
+        const next = cell.slice();
+        next[axis] += side;
+        if (next.every((n,d)=>n>=0 && n<axes[d].length-1) && occupied(...next)) continue;
+        const a=(axis+1)%3, b=(axis+2)%3;
+        const points = [[0,0],[1,0],[1,1],[0,1]].map(([u,v])=>{
+          const corner=cell.slice();
+          corner[axis]+=side>0 ? 1 : 0;
+          corner[a]+=u;
+          corner[b]+=v;
+          return warp(corner.map((n,d)=>axes[d][n]));
+        });
+        faces.push({points,axis,side,moving});
+      }
+    }
+  }
+
+  // The three views share a square foot and perpendicular extrusion axes.
+  const top = 223/79;
+  const shoulder = -91/68;
+  const tongueBottom = top - 111/79;
+  const tongueTop = top - 36/79;
+  const fit = 0.004;
+  const width = 1;
+  const depth = 1;
+  const lipStart = depth - 0.22;
+  solid([[shoulder,0,lipStart,depth], [0,width], [tongueBottom,tongueTop,top]],
+    (i,j,k)=>i===0 || i===2 || k===0, true);
+
+  const underside = top - 151/79;
+  const curveStart = underside - 0.44;
+  const curveLevels = Array.from({length:17}, (_,i) =>
+    curveStart + (underside-curveStart)*Math.sin(i*Math.PI/32));
+  const arm = curveLevels.length;
+  const footInside = 0;
+  const slotInside = -0.25;
+  const outside = -91/68;
+  // The raised lip slides alongside the capped portion of the groove.
+  solid([[0,lipStart-fit,depth],[outside,slotInside,footInside,width],
+    [0,...curveLevels,tongueBottom-fit,tongueTop+fit,top]],
+    (i,j,k)=>k<arm ? j===2 : k===arm || j===0 || (k===arm+2 && i===0),
+    false, ([x,y,z])=>{
+      if(z>underside || y===outside) return [x,y,z];
+      const t=Math.max(0,(z-curveStart)/(underside-curveStart));
+      const bend=0.62*(1-Math.sqrt(Math.max(0,1-t*t)));
+      // Shift the inner edge of the foot while holding its outside edge fixed.
+      const weight = y < 0 ? (y-outside)/(-outside) : 1-y/width;
+      return [x,y-bend*weight,z];
+    });
+
+  const curvedJoin = -0.62;
+  const edgeMap = new Map();
+  for (const face of faces) {
+    face.points.forEach((a,i)=>{
+      const b=face.points[(i+1)%4];
+      const key=Number(face.moving)+':'+[a.join(','),b.join(',')].sort().join('|');
+      if (!edgeMap.has(key)) edgeMap.set(key,{a,b,moving:face.moving,axes:new Set()});
+      edgeMap.get(key).axes.add(face.axis);
+    });
+  }
+  const edges=[...edgeMap.values()].filter(({a,b,moving,axes})=>{
+    const tangentJoin = !moving && a[0]!==b[0] &&
+      [a,b].every(([,y,z])=>Math.abs(y-curvedJoin)<1e-7 && Math.abs(z-underside)<1e-7);
+    return axes.size>1 && !tangentJoin;
+  });
+  const stroke=root.querySelector('#stroke');
+  const assemblyValue=root.querySelector('#assembly-value');
+  const strokeValue=root.querySelector('#stroke-value');
+  const moduleButtons=[...root.querySelectorAll('[data-module]')];
+  const viewButtons=[...root.querySelectorAll('[data-view]')];
+  const showHidden=root.querySelector('#show-hidden');
+  let selected=null;
+  let hitFaces=[];
+  const zoomValue=root.querySelector('#zoom-value');
+  const zoomDisplay=root.querySelector('#zoom-display');
+  const layout=root.querySelector('main');
+  const closeInspector=root.querySelector('#close-inspector');
+  const reopenInspector=root.querySelector('#reopen-inspector');
+  const mobileToggle=root.querySelector('#mobile-inspector-toggle');
+  function setInspectorOpen(open){
+    reopenInspector.hidden=open;
+    layout.classList.toggle('inspector-closed',!open);
+    mobileToggle.setAttribute('aria-expanded',open);
+    mobileToggle.setAttribute('aria-label',open ? '收起参数调整' : '展开参数调整');
+  }
+  closeInspector.addEventListener('click',()=>{setInspectorOpen(false); reopenInspector.focus();});
+  reopenInspector.addEventListener('click',()=>{setInspectorOpen(true); closeInspector.focus();});
+  mobileToggle.addEventListener('click',()=>setInspectorOpen(layout.classList.contains('inspector-closed')));
+  let zoom=1, panX=0, panY=0;
+
+  function triangle(a,b,c) {
+    const det=(b[1]-c[1])*(a[0]-c[0])+(c[0]-b[0])*(a[1]-c[1]);
+    if(Math.abs(det)<1e-7) return null;
+    return {a,b,c,det,minX:Math.min(a[0],b[0],c[0]),maxX:Math.max(a[0],b[0],c[0]),
+      minY:Math.min(a[1],b[1],c[1]),maxY:Math.max(a[1],b[1],c[1])};
+  }
+
+  function depthAt(t,x,y) {
+    if(x<t.minX || x>t.maxX || y<t.minY || y>t.maxY) return -Infinity;
+    const {a,b,c,det}=t;
+    const u=((b[1]-c[1])*(x-c[0])+(c[0]-b[0])*(y-c[1]))/det;
+    const v=((c[1]-a[1])*(x-c[0])+(a[0]-c[0])*(y-c[1]))/det;
+    return u>=-1e-7 && v>=-1e-7 && u+v<=1+1e-7
+      ? u*a[2]+v*b[2]+(1-u-v)*c[2] : -Infinity;
+  }
+
+  function draw() {
+    const w=canvas.clientWidth, h=canvas.clientHeight, dpr=window.devicePixelRatio || 1;
+    if (!w || !h) return;
+    canvas.width=Math.round(w*dpr);
+    canvas.height=Math.round(h*dpr);
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+    const s=Math.sin(yaw), c=Math.cos(yaw), tilt=Math.sin(pitch);
+    const lift=Math.cos(pitch);
+    const offset=Number(slider.value)*0.0155;
+    const project=([x,y,z],moving)=>{
+      y+=(moving ? offset : 0)-offset/2;
+      z-=1.41;
+      const radial=s*x-c*y;
+      const depth=lift*radial+tilt*z;
+      return [c*x+s*y,tilt*radial-lift*z,depth];
+    };
+
+    const polygons=faces.map(face=>face.points.map(point=>project(point,face.moving)));
+    const points=polygons.flat();
+    const xs=points.map(p=>p[0]), ys=points.map(p=>p[1]);
+    const left=Math.min(...xs), right=Math.max(...xs);
+    const top=Math.min(...ys), bottom=Math.max(...ys);
+    const compact=matchMedia('(max-width:760px)').matches;
+    const modelWidth=w;
+    const modelHeight=h;
+    const usableHeight=Math.max(80,modelHeight-(compact ? 205 : 132));
+    const fittedScale=Math.min(Math.max(60,modelWidth-(compact ? 36 : 108))/Math.max(right-left,3.9),usableHeight/Math.max(bottom-top,3.0));
+    const modelSpan=Math.max(right-left,bottom-top);
+    const framingInset=compact ? 12 : 88;
+    const scale=0.9*zoom*Math.max(fittedScale*0.55,fittedScale-framingInset/modelSpan);
+    const screen=([x,y,d])=>[modelWidth/2+panX+(x-(left+right)/2)*scale,modelHeight/2+(compact ? 8 : 0)+panY+(y-(top+bottom)/2)*scale,d];
+    const triangles=polygons.flatMap((poly,index)=>{
+      const [a,b,c,d]=poly.map(screen);
+      return [triangle(a,b,c),triangle(a,c,d)].filter(Boolean).map(face=>Object.assign(face,{moving:faces[index].moving}));
+    });
+    hitFaces=triangles;
+    const gradientStart=screen([left,top,0]);
+    const gradientEnd=screen([right,bottom,0]);
+    const colors=[['#B592BD','#4F2C5B'],['#BEA7E0','#6B4C9A']].map(([light,dark])=>{
+      const gradient=ctx.createLinearGradient(gradientStart[0],gradientStart[1],gradientEnd[0],gradientEnd[1]);
+      gradient.addColorStop(0,light);
+      gradient.addColorStop(1,dark);
+      return gradient;
+    });
+
+    const silhouettes=[new Path2D(),new Path2D()];
+    for(const {a,b,c,moving,det} of triangles){
+      const path=silhouettes[Number(moving)];
+      path.moveTo(a[0],a[1]);
+      for(const point of det>0 ? [b,c] : [c,b]) path.lineTo(point[0],point[1]);
+      path.closePath();
+    }
+    for(const module of selected===0 ? [1,0] : [0,1]){
+      ctx.fillStyle=module===selected ? (module===1 ? '#6B4C9A' : '#4F2C5B') : '#0B0B0C';
+      ctx.fill(silhouettes[module]);
+    }
+    const runs=[[],[],[],[]];
+    for (const edge of edges) {
+      const a=screen(project(edge.a,edge.moving)), b=screen(project(edge.b,edge.moving));
+      const dx=b[0]-a[0], dy=b[1]-a[1], dd=b[2]-a[2];
+      const steps=Math.max(1,Math.ceil(Math.hypot(dx,dy)));
+      let previous=null;
+      for(let i=0;i<steps;i++){
+        const fraction=(i+0.5)/steps;
+        const hidden=triangles.some(t=>depthAt(t,a[0]+dx*fraction,a[1]+dy*fraction)>a[2]+dd*fraction+1e-6);
+        const group=2*Number(hidden)+Number(edge.moving);
+        if (group!==previous) runs[group].push([[a[0]+dx*i/steps,a[1]+dy*i/steps],null]);
+        runs[group].at(-1)[1]=[a[0]+dx*(i+1)/steps,a[1]+dy*(i+1)/steps];
+        previous=group;
+      }
+    }
+    // Screen-space fillets follow the projected edges in every view.
+    const cornerInset=Math.min(6,Math.max(3.5,scale*0.038));
+    const paths=runs.map((segments,index)=>roundedPaths(segments,index<2 ? cornerInset : 1.6));
+    ctx.lineCap='round';
+    ctx.lineJoin='round';
+    for (const i of [2,3,0,1]) {
+      ctx.strokeStyle=colors[i%2];
+      ctx.globalAlpha=i>=2 ? 0.30 : 1;
+      ctx.lineWidth=Number(stroke.value)*(i>=2 ? 0.53 : 1);
+      ctx.setLineDash(i>=2 ? [4,4] : []);
+      if(i<2 || showHidden.checked) ctx.stroke(paths[i]);
+    }
+  }
+
+  function roundedPaths(segments,radius){
+    const path=new Path2D();
+    const corners=new Map();
+    const trimmed=segments.map(segment=>segment.slice());
+    for(const [index,segment] of segments.entries()){
+      for(const [end,point] of segment.entries()){
+        const key=point.map(value=>value.toFixed(4)).join(',');
+        if(!corners.has(key)) corners.set(key,[]);
+        corners.get(key).push({index,end,point});
+      }
+    }
+    if(radius) for(const adjoining of corners.values()){
+      if(adjoining.length!==2 || adjoining[0].index===adjoining[1].index) continue;
+      const [first,second]=adjoining;
+      const directions=adjoining.map(({index,end,point})=>{
+        const [x,y]=segments[index][1-end];
+        const length=Math.hypot(x-point[0],y-point[1]);
+        return length>0.1 ? [(x-point[0])/length,(y-point[1])/length] : null;
+      });
+      if(directions.some(direction=>!direction)) continue;
+      const [u,v]=directions;
+      const cosine=u[0]*v[0]+u[1]*v[1];
+      if(Math.abs(cosine)>0.995) continue;
+      const tips=adjoining.map(({index,end,point})=>{
+        const [x,y]=segments[index][1-end];
+        const distance=Math.hypot(x-point[0],y-point[1]);
+        if(distance<0.1) return null;
+        const ratio=Math.min(radius/distance,0.24);
+        return [point[0]+(x-point[0])*ratio,point[1]+(y-point[1])*ratio];
+      });
+      if(tips.some(tip=>tip===null)) continue;
+      trimmed[first.index][first.end]=tips[0];
+      trimmed[second.index][second.end]=tips[1];
+      path.moveTo(...tips[0]);
+      path.quadraticCurveTo(...first.point,...tips[1]);
+    }
+    for(const [start,end] of trimmed){
+      path.moveTo(...start);
+      path.lineTo(...end);
+    }
+    return path;
+  }
+
+  function selectModule(module){
+    selected=module;
+    for(const button of moduleButtons) button.setAttribute('aria-pressed', button.dataset.module===(selected===null ? 'none' : String(selected)));
+    draw();
+  }
+
+  function updateSliders(){
+    assemblyValue.value=slider.value+'%';
+    strokeValue.value=Number(stroke.value).toFixed(1)+' px';
+    slider.style.setProperty('--fill',slider.value+'%');
+    stroke.style.setProperty('--fill',((stroke.value-stroke.min)/(stroke.max-stroke.min)*100)+'%');
+    draw();
+  }
+  for(const control of [slider,stroke]) control.addEventListener('input',updateSliders);
+  for(const button of moduleButtons) button.addEventListener('click',()=>selectModule(button.dataset.module==='none' ? null : Number(button.dataset.module)));
+
+  showHidden.addEventListener('change',draw);
+  const iso=Math.asin(1/Math.sqrt(3));
+
+  const views={front:[-Math.PI/4,-iso],rear:[3*Math.PI/4,iso],top:[-Math.PI/4,Math.PI/2]};
+  for(const button of viewButtons) button.addEventListener('click',()=>{
+    stopMotion();
+    [yaw,pitch]=views[button.dataset.view];
+
+    panX=panY=0;
+    zoom=1;
+    zoomValue.value=100;
+    zoomDisplay.textContent="100%";
+    for(const item of viewButtons) item.setAttribute('aria-pressed',item===button);
+    draw();
+  });
+
+  const damping=0.08;
+  let yawDelta=0, pitchDelta=0, panDeltaX=0, panDeltaY=0;
+  let motionFrame=0;
+
+  function applyMotion(){
+    yaw+=yawDelta*damping;
+    pitch=Math.max(-Math.PI/2+1e-6,Math.min(Math.PI/2-1e-6,pitch+pitchDelta*damping));
+    panX+=panDeltaX*damping;
+    panY+=panDeltaY*damping;
+    yawDelta*=1-damping;
+    pitchDelta*=1-damping;
+    panDeltaX*=1-damping;
+    panDeltaY*=1-damping;
+    draw();
+    motionFrame=Math.max(Math.abs(yawDelta),Math.abs(pitchDelta),
+      Math.abs(panDeltaX)/canvas.clientHeight,Math.abs(panDeltaY)/canvas.clientHeight)>0.00008
+      ? requestAnimationFrame(applyMotion) : 0;
+  }
+
+  function stopMotion(){
+    cancelAnimationFrame(motionFrame);
+    motionFrame=yawDelta=pitchDelta=panDeltaX=panDeltaY=0;
+  }
+
+  let press;
+  canvas.addEventListener('pointerdown',e=>{
+    if(drag || (e.button!==0 && e.button!==2)) return;
+    drag=[e.clientX,e.clientY,e.button===2 || e.ctrlKey || e.metaKey || e.shiftKey,e.pointerId];
+    press={x:e.clientX,y:e.clientY,moved:false};
+    canvas.setPointerCapture(e.pointerId);
+  });
+  canvas.addEventListener('pointermove',e=>{
+    if(!drag || drag[3]!==e.pointerId) return;
+    if(!press.moved && Math.hypot(e.clientX-press.x,e.clientY-press.y)<4) return;
+    press.moved=true;
+    if(!drag[2]){
+
+      for(const button of viewButtons) button.setAttribute('aria-pressed',false);
+    }
+    const dx=e.clientX-drag[0], dy=e.clientY-drag[1];
+    if(drag[2]) {
+      panDeltaX+=dx;
+      panDeltaY+=dy;
+    } else {
+      const radiansPerPixel=2*Math.PI/canvas.clientHeight;
+      // A rightward drag must move a camera-facing point right on screen.
+      yawDelta-=dx*radiansPerPixel;
+      pitchDelta+=dy*radiansPerPixel;
+    }
+    drag[0]=e.clientX;
+    drag[1]=e.clientY;
+    if(!motionFrame) motionFrame=requestAnimationFrame(applyMotion);
+  });
+  canvas.addEventListener('pointerup',e=>{
+    if(!drag || drag[3]!==e.pointerId || drag[2] || press.moved) return;
+    const bounds=canvas.getBoundingClientRect();
+    let closest=-Infinity, module=null;
+    for(const face of hitFaces){
+      const depth=depthAt(face,e.clientX-bounds.left,e.clientY-bounds.top);
+      if(depth>closest){ closest=depth; module=Number(face.moving); }
+    }
+    selectModule(selected===module ? null : module);
+  });
+  canvas.addEventListener('lostpointercapture',()=>{drag=null;});
+  canvas.addEventListener('contextmenu',e=>e.preventDefault());
+  function setZoom(value){
+    if(!Number.isFinite(value)) value=zoom;
+    zoom=Math.max(0.35,Math.min(4,value));
+    zoomValue.value=Math.round(zoom*100);
+    zoomDisplay.textContent=zoomValue.value+"%";
+    draw();
+  }
+  zoomValue.addEventListener('change',()=>setZoom(zoomValue.valueAsNumber/100));
+  zoomValue.addEventListener('keydown',event=>{if(event.key==='Enter') zoomValue.blur();});
+  root.querySelector('#zoom-out').addEventListener('click',()=>setZoom(zoom-0.1));
+  root.querySelector('#zoom-in').addEventListener('click',()=>setZoom(zoom+0.1));
+  root.querySelector('#zoom-reset').addEventListener('click',()=>setZoom(1));
+  canvas.addEventListener('wheel',e=>{
+    e.preventDefault();
+    const delta=e.deltaY*(e.deltaMode===1 ? 16 : e.deltaMode===2 ? canvas.clientHeight : 1);
+    setZoom(zoom*Math.exp(-delta*0.0015));
+  },{passive:false});
+  const resize=new ResizeObserver(draw);
+  resize.observe(canvas);
+  updateSliders();
+})();
+</script>
+</body>
+</html>
