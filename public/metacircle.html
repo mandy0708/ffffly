@@ -5,61 +5,54 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>元环智能 · 标志结构演示</title>
 <style>
-:root{color-scheme:dark;--ink-black:#d6d3dc;--ink-purple:#aa84ff;--line:#303034;font:15px/1.5 Geist,Inter,"PingFang SC",system-ui,sans-serif;color:#f5f4f6;background:#0b0b0c}
+:root{color-scheme:dark;--ink-black:#d6d3dc;--ink-purple:#aa84ff;--line:#303034;font:15px/1.5 "PingFang SC",system-ui,sans-serif;color:#f5f4f6;background:#0b0b0c}
 *{box-sizing:border-box}
 body{margin:0}
-main{--content-inset:20px;--toolbar-height:36px;--panel-width:clamp(238px,22vw,290px);min-height:100dvh;display:grid;grid-template-columns:minmax(0,1fr) clamp(232.2px,19.8vw,288px);padding:0}
+main{--content-inset:20px;--toolbar-height:32px;--panel-width:clamp(238px,22vw,290px);min-height:100dvh;display:grid;grid-template-columns:minmax(0,1fr) clamp(258px,22vw,320px);padding:0}
 #stage{grid-area:1/1;position:relative;min-height:460px;overflow:hidden;background-color:#09090c;background-image:radial-gradient(ellipse at 50% 45%,#20223255,transparent 70%),radial-gradient(circle at 12px 12px,#2f2f2f 1px,transparent 1.4px);background-size:auto,24px 24px}
 canvas{position:absolute;inset:0;width:100%;height:100%;display:block;touch-action:none;cursor:grab}
 canvas:active{cursor:grabbing}
 .hud-item{display:inline-flex;align-items:center;gap:7px;white-space:nowrap}.hud-sep{width:3px;height:3px;border-radius:50%;background:#64616e}.hint{display:flex;flex-wrap:wrap;align-items:center;gap:7px 11px;position:absolute;bottom:var(--content-inset);left:var(--content-inset);max-width:calc(100% - 40px);padding:6px 14px;border:1px solid #25262d;border-radius:22px;background:#101116;pointer-events:none;color:#b3afb9;font-size:12px}
 aside{--inspector-padding:clamp(16px,1.5vw,23px);grid-area:1/2;min-width:0;background:#101116;border-left:1px solid #202127}
-@font-face{font-family:"Viewer MiSans";src:local("MiSans Semibold"),local("MiSans-Semibold");font-weight:600}
-@font-face{font-family:"Viewer MiSans Medium";src:local("MiSans Medium"),local("MiSans-Medium");font-weight:500}
-h1{font-family:"Viewer MiSans Medium",MiSans,Geist,system-ui,sans-serif;display:flex;align-items:center;gap:16px;font-size:clamp(16px,1.5vw,20px);line-height:1.2;letter-spacing:-.025em;margin:0;font-weight:500}
-.title-copy{display:grid;gap:4px}.title-subtitle{font:500 10px/1.2 Geist,Inter,system-ui,sans-serif;letter-spacing:.09em;color:#a9a6ae}
+h1{font-family:"PingFang SC",system-ui,sans-serif;display:flex;align-items:center;gap:16px;font-size:clamp(16px,1.5vw,20px);line-height:1.2;letter-spacing:-.025em;margin:0;font-weight:500}
+.title-copy{display:grid;gap:4px}.title-subtitle{font:500 10px/1.2 "PingFang SC",system-ui,sans-serif;letter-spacing:.09em;color:#a9a6ae}
 .page-header{position:absolute;z-index:1;top:var(--content-inset);left:var(--content-inset);padding:0;pointer-events:none}
 .brand-mark{display:grid;place-items:center;width:40px;flex:none;color:#6B4C9A;filter:drop-shadow(0 0 11px #7948f34d)}.brand-mark svg{display:block;width:36px;height:40px}
 
 p{margin:0;color:#aaa7ae;line-height:1.65;font-size:13px;font-weight:400}
 section{border-top:1px solid var(--line);padding-top:19px;margin-top:21px}
-aside .controls-group{margin-top:clamp(34px,7vh,82px)}
 .controls-group > section:first-of-type{border-top:0;padding-top:0;margin-top:14px}
-@font-face{font-family:"Viewer MiSans Variable";src:local("MiSans VF"),local("MiSansVF");font-weight:100 900}
-.controls-group h2{font:360 19px/1.3 "Viewer MiSans Variable",MiSans,Geist,system-ui,sans-serif;color:#f5f4f6;margin:0 0 9px}
-aside h3,aside .label,.visibility label{font-size:14px;font-weight:400;color:#d0cdd5}
+aside h3,aside .label{font-size:14px;font-weight:400;color:#d0cdd5}
 aside h3,aside .label{margin:0 0 8px}
-.buttons{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px;padding:5px;border:1px solid #39393e;border-radius:10px;background:#27272a}
+.buttons{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:3px;padding:3px;border:1px solid #39393e;border-radius:10px;background:#27272a}
 .views{grid-template-columns:repeat(3,minmax(0,1fr))}
-button{font:inherit;font-size:12px;color:#dfdce4;padding:8px 2px;background:transparent;border:1px solid transparent;border-radius:7px;white-space:nowrap;cursor:pointer}
-.buttons button{font-weight:400;background:#3b393e;color:#efedf2}
-.buttons button:hover{background:#4c4950}
-.buttons button[aria-pressed=true]{color:#141218;background:#f2eff6}.buttons button[data-module="1"][aria-pressed=true]{background:#6B4C9A;color:#fff}.buttons button[data-module="0"][aria-pressed=true]{background:#4F2C5B;color:#fff}
+button{font:inherit;font-size:12px;color:#dfdce4;padding:5px 2px;background:transparent;border:1px solid transparent;border-radius:7px;white-space:nowrap;cursor:pointer}
+.buttons button{font-weight:400;color:#efedf2}
+.buttons button[aria-pressed=true]{color:#141218;background:#f2eff6 padding-box}
 button:focus-visible,input:focus-visible{outline:2px solid var(--ink-purple);outline-offset:3px}
 
-.label,.ends{display:flex;align-items:center;justify-content:space-between}
-output{font:400 12px/1.4 Geist,Inter,system-ui,sans-serif;font-variant-numeric:tabular-nums;border:1px solid #38383e;border-radius:6px;padding:3px 7px;color:#dfdbe7;background:#252527}
+.label{display:flex;align-items:center;justify-content:space-between}
+output{font:400 12px/1.4 "PingFang SC",system-ui,sans-serif;font-variant-numeric:tabular-nums;border:1px solid #38383e;border-radius:6px;padding:3px 7px;color:#dfdbe7;background:#252527}
 input[type=range]{appearance:none;width:100%;height:24px;margin:0;cursor:pointer;border:0;background:transparent}
 input[type=range]::-webkit-slider-runnable-track{height:5px;border-radius:4px;background:linear-gradient(90deg,#6B4C9A var(--fill,0%),#303035 var(--fill,0%))}
 input[type=range]::-moz-range-track{height:5px;border-radius:4px;background:linear-gradient(90deg,#6B4C9A var(--fill,0%),#303035 var(--fill,0%))}
 input[type=range]::-webkit-slider-thumb{appearance:none;width:13px;height:13px;margin-top:-4px;border-radius:50%;background:#e7e0f2}
 input[type=range]::-moz-range-thumb{width:13px;height:13px;border:0;border-radius:50%;background:#e7e0f2}
-.visibility{margin-top:20px;padding-top:16px}
-.visibility label{display:flex;justify-content:space-between;align-items:center;cursor:pointer;font-size:14px}
-.visibility input{appearance:none;width:32px;height:18px;border-radius:10px;background:#38383e;position:relative;cursor:pointer;margin:0}
-.visibility input:checked{background:#6B4C9A}
-.visibility input::before{content:"";position:absolute;left:3px;top:3px;width:12px;height:12px;border-radius:50%;background:#f2eff6}
-.visibility input:checked::before{left:17px}
-.ends{color:#85818f;font-size:12px;margin-top:1px}
-.zoom-tools{position:absolute;z-index:1;top:var(--content-inset);right:calc(var(--content-inset) + 42px);display:flex;gap:5px;padding:4px;background:#29292b;border:0;border-radius:9px}
-.zoom-tools button,.zoom-tools input{height:28px;padding:0 7px;border:0;border-radius:5px;background:transparent;color:#eee;font:inherit;font-size:12px}
+.range-row{display:grid;grid-template-columns:minmax(0,1fr) 58px;gap:9px;align-items:center}
+.range-row output{min-height:28px;display:grid;place-items:center;white-space:nowrap}
+.range-row input::-webkit-slider-runnable-track{height:11px;border-radius:999px}
+.range-row input::-moz-range-track{height:11px;border-radius:999px}
+.range-row input::-webkit-slider-thumb{width:21px;height:13px;margin-top:-1px;border-radius:999px;box-shadow:0 1px 3px #0007}
+.range-row input::-moz-range-thumb{width:21px;height:13px;border-radius:999px;box-shadow:0 1px 3px #0007}
+.zoom-tools{position:absolute;z-index:1;top:var(--content-inset);right:calc(var(--content-inset) + var(--toolbar-height) + 6px);display:flex;gap:5px;padding:4px;background:#29292b;border:0;border-radius:9px}
+.zoom-tools button,.zoom-tools input{height:24px;padding:0 7px;border:0;border-radius:5px;background:transparent;color:#eee;font:inherit;font-size:12px}
 .zoom-tools>button{width:29px;padding:0;font-size:17px;color:#a9a7ad}
-.zoom-settings summary{height:28px;min-width:56px;display:grid;place-items:center;cursor:pointer;list-style:none;font-size:15px;font-weight:550;font-variant-numeric:tabular-nums}
+.zoom-settings summary{height:24px;min-width:56px;display:grid;place-items:center;cursor:pointer;list-style:none;font-size:15px;font-weight:550;font-variant-numeric:tabular-nums}
 .zoom-settings summary::-webkit-details-marker{display:none}
 .zoom-options{position:absolute;right:0;top:calc(100% + 6px);display:flex;gap:8px;padding:7px;background:#29292b;border-radius:9px;white-space:nowrap}
 .zoom-options input{background:#1b1a1b}
 .zoom-tools button:hover{background:#302e31}
-.zoom-tools #zoom-reset{position:absolute;left:calc(100% + 6px);top:0;width:36px;height:36px;background:#29292b;border-radius:9px;color:#eee}
+.zoom-tools #zoom-reset{position:absolute;left:calc(100% + 6px);top:0;width:var(--toolbar-height);height:var(--toolbar-height);background:#29292b;border-radius:9px;color:#eee}
 .zoom-tools #zoom-reset:hover{background:#38383b}
 .zoom-tools label{display:flex;align-items:center;font-size:12px;gap:3px}
 .zoom-tools input{width:44px;text-align:right;appearance:textfield}
@@ -69,21 +62,20 @@ input[type=range]::-moz-range-thumb{width:13px;height:13px;border:0;border-radiu
 .inspector-toggle svg{display:block;width:22px;height:22px}
 #close-inspector{width:var(--toolbar-height);height:var(--toolbar-height)}#reopen-inspector svg{transform:scaleX(-1)}
 .inspector-toggle:hover{background:#202127}
-.inspector-header,.inspector-body{zoom:0.9}
 .inspector-body{padding:26px var(--inspector-padding)}
 .inspector-description{padding:16px 18px;background:#15161b;border:1px solid #25262c;border-radius:9px;color:#cdccd7}
-.inspector-description span{display:block;margin-top:10px;color:#999bad}
-aside .controls-group{margin-top:72px}
-.controls-group h2{padding-bottom:13px;border-bottom:1px solid #26272d}
+aside .controls-group{margin-top:36px}
 .controls-group section{border-top:0;padding-top:0;margin-top:17px}
-.controls-group section + section:not(.visibility){border-top:1px solid #23242a;padding-top:11px}
-.controls-group .visibility{padding:11px 14px;background:#15161b;border:1px solid #26272d;border-radius:9px}
-.buttons button:not([aria-pressed=true]){background:#1c1d23;border-color:#2b2c34;color:#b9b9c6}
-.buttons button:not([aria-pressed=true]):hover{background:#272832;border-color:#393a46;color:#eee}
+.controls-group section + section{border-top:1px solid #23242a;padding-top:11px}
+.buttons button:not([aria-pressed=true]){background:transparent;border-color:transparent;color:#b9b9c6}
+.buttons button:not([aria-pressed=true]):hover{color:#eee}
+.buttons.view-presets{gap:6px;padding:0;border:0;background:transparent}
+.buttons.view-presets button:not([aria-pressed=true]){background:#27272a}
+.buttons.view-presets button:not([aria-pressed=true]):hover{background:#35343a}
 #reopen-inspector{position:absolute;right:var(--content-inset);top:var(--content-inset);z-index:2;width:var(--toolbar-height);height:var(--toolbar-height);border-radius:9px;background:#29292b}
 #reopen-inspector[hidden],.inspector-closed aside{display:none}
 main.inspector-closed{grid-template-columns:minmax(0,1fr)}
-.inspector-closed .zoom-tools{right:calc(var(--content-inset) + 94px)}
+.inspector-closed .zoom-tools{right:calc(var(--content-inset) + 2 * var(--toolbar-height) + 22px)}
 .mobile-inspector-toggle{display:none}
 @media(min-width:761px){
   main{height:100dvh;grid-template-rows:minmax(0,1fr)}
@@ -96,20 +88,40 @@ main.inspector-closed{grid-template-columns:minmax(0,1fr)}
   main.inspector-closed{grid-template-rows:minmax(0,1fr) auto}
   aside{grid-area:2/1;border-left:0;border-top:1px solid #202127}
   .hint{display:none}
-  .zoom-tools,.inspector-closed .zoom-tools{top:auto;bottom:var(--content-inset);right:calc(var(--content-inset) + 38px);gap:1px;padding:3px}
+  .zoom-tools,.inspector-closed .zoom-tools{top:auto;bottom:var(--content-inset);right:calc(var(--content-inset) + 34px);gap:1px;padding:3px}
   .zoom-options{top:auto;bottom:calc(100% + 6px)}
-  .zoom-tools #zoom-reset{left:calc(100% + 4px);width:34px;height:34px}
+  .zoom-tools #zoom-reset{left:calc(100% + 4px);width:30px;height:30px}
   .inspector-header{height:52px}
-  aside .controls-group{margin-top:24px}
+  aside .controls-group{margin-top:22px}
   .inspector-closed aside{display:block}
   .inspector-closed .inspector-body{display:none}
   #close-inspector,#reopen-inspector{display:none}
-  .mobile-inspector-toggle{display:grid;width:34px;height:34px;background:transparent;border:0;border-radius:9px}
+  .mobile-inspector-toggle{display:grid;width:30px;height:30px;background:transparent;border:0;border-radius:9px}
   .mobile-inspector-toggle:hover{background:transparent}
   .mobile-inspector-toggle:active{background:#29292b}
   .mobile-inspector-toggle::after{content:"";width:8px;height:8px;border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;transform:translateY(2px) rotate(225deg)}
   .mobile-inspector-toggle[aria-expanded=false]::after{transform:translateY(-2px) rotate(45deg)}
 }
+.module-colors{display:grid;grid-template-columns:minmax(52px,1fr) minmax(88px,1.55fr) 33px;align-items:center;gap:8px 10px;font-size:12px;color:#d0cdd5}
+.color-entry{display:flex;align-items:center;min-width:0;height:30px;padding:0 6px;gap:6px;border:1px solid #35353e;border-radius:6px;background:#141419}.color-module{display:grid;place-items:center;padding:0;width:16px;height:16px;flex:none}
+.module-colors input[type=text]{min-width:0;width:100%;height:26px;padding:0;border:0;background:transparent;color:#eee;font:inherit}
+.color-entry:has(input[aria-invalid=true]){border-color:#db8089}
+#inspector .module-colors > label{font-size:12px;font-weight:400;color:#85818f}
+.module-colors .color-reset{margin:0;padding:2px 0;color:#85818f}
+.color-chip{width:16px;height:16px;flex:none;background:var(--color);border:1px solid #ffffff33;border-radius:3px}
+.color-popup{position:fixed;z-index:10;width:min(224px,calc(100vw - 24px));padding:12px;box-shadow:0 8px 24px #0008;background:#1c1d23;border:1px solid #35353e;border-radius:12px}
+.color-popup[hidden]{display:none}
+.color-field{position:relative;height:92px;border-radius:7px;touch-action:none;cursor:crosshair;background:linear-gradient(0deg,#000,transparent),linear-gradient(90deg,#fff,transparent),hsl(var(--hue,270) 100% 50%)}
+.color-cursor{position:absolute;left:var(--x,50%);top:var(--y,50%);width:9px;height:9px;border:1px solid white;border-radius:50%;box-shadow:0 0 0 1px #000;transform:translate(-50%,-50%);pointer-events:none}
+.color-popup .hue::-webkit-slider-runnable-track{background:linear-gradient(90deg,red,yellow,lime,cyan,blue,magenta,red)}
+.color-popup .hue::-moz-range-track{background:linear-gradient(90deg,red,yellow,lime,cyan,blue,magenta,red)}
+.hex-row{display:flex;align-items:center;gap:9px;font-size:12px;color:#d0cdd5}
+.hex-row input{width:100%;min-width:0;height:30px;padding:0 8px;border:1px solid #35353e;border-radius:6px;background:#141419;color:#eee;font:inherit}
+.color-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:10px}
+.color-actions button{min-width:48px;height:25px;padding:0 8px;background:#292930;font-size:12px}
+.color-actions .color-confirm{background:#f2eff6;color:#141218}
+.hex-row input[aria-invalid=true]{border-color:#db8089}
+.color-reset{margin-top:6px;padding:4px 0;color:#d0cdd5}
 </style>
 </head>
 <body>
@@ -159,27 +171,51 @@ main.inspector-closed{grid-template-columns:minmax(0,1fr)}
   <aside id="inspector">
     <header class="inspector-header"><button class="inspector-toggle" type="button" id="close-inspector" aria-label="收起模型控制" aria-controls="inspector" title="收起参数调整"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="3" ry="3"></rect><line x1="15" y1="3" x2="15" y2="21"></line><polyline points="11 9 8 12 11 15"></polyline></svg></button><button class="inspector-toggle mobile-inspector-toggle" id="mobile-inspector-toggle" type="button" aria-controls="inspector-body" aria-expanded="true" aria-label="收起参数调整"></button><span>INSPECTOR</span></header>
     <div class="inspector-body" id="inspector-body">
-    <p class="inspector-description">以「元」的首字母 Y 为形态原点，将两个独立的几何单元，以榫卯为灵感组合为完整标志。<span>形态源于字母，结构呼应物理。</span></p>
-    <div class="controls-group" role="group" aria-labelledby="controls-title">
-    <h2 id="controls-title">参数调整</h2>
+    <p class="inspector-description">元环智能的 logo 以「元」的首字母 Y 为形态原点，将两个独立的几何单元，以榫卯为灵感组合为完整标志。</p>
+    <div class="controls-group" role="group" aria-label="参数调整">
     <section><h3>模块选择</h3><div class="buttons views">
-      <button type="button" data-module="1" aria-pressed="false">故宫紫</button>
-      <button type="button" data-module="0" aria-pressed="false">九离紫</button>
+      <button type="button" data-module="1" aria-pressed="false">左结构元</button>
+      <button type="button" data-module="0" aria-pressed="false">右结构元</button>
       <button type="button" data-module="none" aria-pressed="true">默认</button>
     </div></section>
-    <section><label class="label" for="assembly">拆解与嵌入 <output id="assembly-value" for="assembly">0%</output></label>
-      <input id="assembly" type="range" min="0" max="100" value="0"><div class="ends"><span>嵌入</span><span>拆解</span></div>
+    <section><h3>描边颜色</h3><div class="module-colors">
+      <label for="fill-hex-1">左结构元</label>
+      <div class="color-entry"><button type="button" class="color-module" data-color-module="1" aria-label="左结构元调色盘" aria-expanded="false" aria-controls="color-popup"><span class="color-chip" aria-hidden="true" style="--color:#6B4C9A"></span></button>
+      <input type="text" id="fill-hex-1" aria-label="左结构元 HEX 色值" value="6B4C9A" maxlength="7" spellcheck="false" autocomplete="off"></div>
+      <button class="color-reset" data-reset-color="1" type="button" aria-label="重置左结构元描边">重置</button>
+      <label for="fill-hex-0">右结构元</label>
+      <div class="color-entry"><button type="button" class="color-module" data-color-module="0" aria-label="右结构元调色盘" aria-expanded="false" aria-controls="color-popup"><span class="color-chip" aria-hidden="true" style="--color:#4F2C5B"></span></button>
+      <input type="text" id="fill-hex-0" aria-label="右结构元 HEX 色值" value="4F2C5B" maxlength="7" spellcheck="false" autocomplete="off"></div>
+      <button class="color-reset" data-reset-color="0" type="button" aria-label="重置右结构元描边">重置</button>
+      <div class="color-popup" id="color-popup" hidden>
+        <div class="color-field" aria-hidden="true"><span class="color-cursor"></span></div>
+        <input class="hue" type="range" min="0" max="360" aria-label="色相">
+        <div class="hex-row"><label for="fill-hex">HEX</label><input type="text" id="fill-hex" maxlength="7" spellcheck="false" autocomplete="off"></div>
+        <div class="color-actions"><button class="color-cancel" type="button">取消</button><button class="color-confirm" type="button">确定</button></div>
+      </div>
+    </div></section>
+    <section><label class="label" for="assembly">拆解与嵌入</label>
+      <div class="range-row"><input id="assembly" type="range" min="0" max="100" value="0"><output id="assembly-value" for="assembly">0%</output></div>
     </section>
 
-    <section><h3>视图选择</h3><div class="buttons views">
+    <section><h3>视图选择</h3><div class="buttons views view-presets">
       <button type="button" data-view="front" aria-pressed="true">正面仰视</button>
       <button type="button" data-view="rear" aria-pressed="false">背面俯视</button>
       <button type="button" data-view="top" aria-pressed="false">顶部视图</button>
+      <button type="button" data-view="bottom" aria-pressed="false">底部视图</button>
+      <button type="button" data-view="left" aria-pressed="false">左视图</button>
+      <button type="button" data-view="right" aria-pressed="false">右视图</button>
     </div></section>
-    <section><label class="label" for="stroke">线条宽度 <output id="stroke-value" for="stroke">6.0 px</output></label>
-      <input id="stroke" type="range" min="1" max="10" step="0.5" value="6">
+    <section><label class="label" for="stroke">线条宽度</label>
+      <div class="range-row"><input id="stroke" type="range" min="1" max="10" step="0.5" value="6"><output id="stroke-value" for="stroke">6.0 px</output></div>
     </section>
-    <section class="visibility"><label>显示虚线 <input id="show-hidden" type="checkbox" role="switch" checked></label></section>
+    <section>
+      <h3 id="hidden-lines-title">显示虚线</h3>
+      <div class="buttons" role="group" aria-labelledby="hidden-lines-title">
+        <button type="button" data-hidden-lines="off" aria-pressed="false">Off</button>
+        <button type="button" data-hidden-lines="on" aria-pressed="true">On</button>
+      </div>
+    </section>
     </div>
     </div>
   </aside>
@@ -270,8 +306,11 @@ main.inspector-closed{grid-template-columns:minmax(0,1fr)}
   const strokeValue=root.querySelector('#stroke-value');
   const moduleButtons=[...root.querySelectorAll('[data-module]')];
   const viewButtons=[...root.querySelectorAll('[data-view]')];
-  const showHidden=root.querySelector('#show-hidden');
+  const hiddenLineButtons=[...root.querySelectorAll('[data-hidden-lines]')];
+  let showHidden=true;
   let selected=null;
+  const originalColors=['#4F2C5B','#6B4C9A'];
+  const strokeColors=[...originalColors];
   let hitFaces=[];
   const zoomValue=root.querySelector('#zoom-value');
   const zoomDisplay=root.querySelector('#zoom-display');
@@ -344,7 +383,9 @@ main.inspector-closed{grid-template-columns:minmax(0,1fr)}
     hitFaces=triangles;
     const gradientStart=screen([left,top,0]);
     const gradientEnd=screen([right,bottom,0]);
-    const colors=[['#B592BD','#4F2C5B'],['#BEA7E0','#6B4C9A']].map(([light,dark])=>{
+    const colors=strokeColors.map((dark,index)=>{
+      const light=dark===originalColors[index] ? ['#B592BD','#BEA7E0'][index] :
+        '#'+dark.slice(1).match(/../g).map(pair=>Math.round(parseInt(pair,16)*0.58+255*0.42).toString(16).padStart(2,'0')).join('');
       const gradient=ctx.createLinearGradient(gradientStart[0],gradientStart[1],gradientEnd[0],gradientEnd[1]);
       gradient.addColorStop(0,light);
       gradient.addColorStop(1,dark);
@@ -359,7 +400,7 @@ main.inspector-closed{grid-template-columns:minmax(0,1fr)}
       path.closePath();
     }
     for(const module of selected===0 ? [1,0] : [0,1]){
-      ctx.fillStyle=module===selected ? (module===1 ? '#6B4C9A' : '#4F2C5B') : '#0B0B0C';
+      ctx.fillStyle=module===selected ? originalColors[module] : '#0B0B0C';
       ctx.fill(silhouettes[module]);
     }
     const runs=[[],[],[],[]];
@@ -384,10 +425,10 @@ main.inspector-closed{grid-template-columns:minmax(0,1fr)}
     ctx.lineJoin='round';
     for (const i of [2,3,0,1]) {
       ctx.strokeStyle=colors[i%2];
-      ctx.globalAlpha=i>=2 ? 0.30 : 1;
+      ctx.globalAlpha=(i>=2 ? 0.30 : 1)*(selected===null || selected===i%2 ? 1 : 0.55);
       ctx.lineWidth=Number(stroke.value)*(i>=2 ? 0.53 : 1);
       ctx.setLineDash(i>=2 ? [4,4] : []);
-      if(i<2 || showHidden.checked) ctx.stroke(paths[i]);
+      if(i<2 || showHidden) ctx.stroke(paths[i]);
     }
   }
 
@@ -440,6 +481,161 @@ main.inspector-closed{grid-template-columns:minmax(0,1fr)}
     draw();
   }
 
+  const colorPopup=root.querySelector('#color-popup');
+  document.body.append(colorPopup);
+  const colorField=colorPopup.querySelector('.color-field');
+  const hue=colorPopup.querySelector('.hue');
+  const hex=colorPopup.querySelector('#fill-hex');
+  const colorButtons=[...root.querySelectorAll('[data-color-module]')];
+  let activeColorModule=null;
+  let colorBeforePreview=null;
+  let saturation=0, brightness=0;
+
+  function updateColorField(){
+    colorField.style.setProperty('--hue',hue.value);
+    colorField.style.setProperty('--x',saturation*100+'%');
+    colorField.style.setProperty('--y',(1-brightness)*100+'%');
+  }
+
+  function syncPalette(color){
+    const [r,g,b]=color.slice(1).match(/../g).map(pair=>parseInt(pair,16)/255);
+    const max=Math.max(r,g,b), min=Math.min(r,g,b), delta=max-min;
+    const sector=delta===0 ? 0 : max===r ? (g-b)/delta : max===g ? 2+(b-r)/delta : 4+(r-g)/delta;
+    hue.value=Math.round((sector*60+360)%360);
+    saturation=max ? delta/max : 0;
+    brightness=max;
+    updateColorField();
+  }
+
+  function applyColor(color,module=activeColorModule){
+    strokeColors[module]=color;
+    const button=colorButtons.find(item=>Number(item.dataset.colorModule)===module);
+    root.querySelector('#fill-hex-'+module).value=color.slice(1);
+    button.querySelector('.color-chip').style.setProperty('--color',color);
+    hex.removeAttribute('aria-invalid');
+    draw();
+  }
+
+  function applyPalette(){
+    const chroma=brightness*saturation;
+    const sector=Number(hue.value)%360/60;
+    const cross=chroma*(1-Math.abs(sector%2-1));
+    const channels=[[chroma,cross,0],[cross,chroma,0],[0,chroma,cross],
+      [0,cross,chroma],[cross,0,chroma],[chroma,0,cross]][Math.floor(sector)];
+    hex.value=channels.map(channel=>Math.round((channel+brightness-chroma)*255).toString(16).padStart(2,'0')).join('').toUpperCase();
+    updateColorField();
+    applyColor('#'+hex.value);
+  }
+
+  function positionPalette(){
+    if(colorPopup.hidden) return;
+    const trigger=colorButtons.find(button=>Number(button.dataset.colorModule)===activeColorModule);
+    const bounds=trigger.getBoundingClientRect();
+    if(bounds.bottom<0 || bounds.top>innerHeight || !trigger.getClientRects().length){
+      closePalette();
+      return;
+    }
+    const {offsetWidth:width,offsetHeight:height}=colorPopup;
+    const left=bounds.left-width-10;
+    const fitsLeft=left>=12;
+    const top=fitsLeft ? bounds.top : bounds.top-height-8;
+    colorPopup.style.left=Math.max(12,Math.min(innerWidth-width-12,fitsLeft ? left : bounds.left))+'px';
+    colorPopup.style.top=Math.max(12,Math.min(innerHeight-height-12,top))+'px';
+  }
+
+  for(const button of colorButtons) button.addEventListener('click',()=>{
+    const module=Number(button.dataset.colorModule);
+    activeColorModule=activeColorModule===module ? null : module;
+    colorPopup.hidden=activeColorModule===null;
+    for(const item of colorButtons) item.setAttribute('aria-expanded',Number(item.dataset.colorModule)===activeColorModule);
+    if(colorPopup.hidden) return;
+    colorBeforePreview=strokeColors[module];
+    hex.value=strokeColors[module].slice(1);
+    hex.removeAttribute('aria-invalid');
+    syncPalette('#'+hex.value);
+    positionPalette();
+  });
+  window.addEventListener('resize',positionPalette);
+  window.addEventListener('scroll',positionPalette,true);
+  function closePalette(restoreFocus=false){
+    if(activeColorModule===null) return;
+    const trigger=colorButtons.find(button=>Number(button.dataset.colorModule)===activeColorModule);
+    activeColorModule=null;
+    colorPopup.hidden=true;
+    trigger.setAttribute('aria-expanded','false');
+    if(restoreFocus) trigger.focus();
+  }
+  function cancelPalette(){
+    if(activeColorModule===null) return;
+    applyColor(colorBeforePreview,activeColorModule);
+    closePalette(true);
+  }
+  colorPopup.querySelector('.color-confirm').addEventListener('click',()=>{
+    if(hex.getAttribute('aria-invalid')==='true') { hex.focus(); return; }
+    closePalette(true);
+  });
+  colorPopup.querySelector('.color-cancel').addEventListener('click',cancelPalette);
+  root.addEventListener('click',event=>{
+    if(!colorPopup.contains(event.target) && !event.target.closest('[data-color-module]')) closePalette();
+  });
+  root.addEventListener('keydown',event=>{
+    if(event.key==='Escape') cancelPalette();
+  });
+  function pickColor(event){
+    const bounds=colorField.getBoundingClientRect();
+    saturation=Math.max(0,Math.min(1,(event.clientX-bounds.left)/bounds.width));
+    brightness=1-Math.max(0,Math.min(1,(event.clientY-bounds.top)/bounds.height));
+    applyPalette();
+  }
+  colorField.addEventListener('pointerdown',event=>{
+    colorField.setPointerCapture(event.pointerId);
+    pickColor(event);
+  });
+  colorField.addEventListener('pointermove',event=>{
+    if(colorField.hasPointerCapture(event.pointerId)) pickColor(event);
+  });
+  hue.addEventListener('input',applyPalette);
+  hex.addEventListener('input',()=>{
+    const value=hex.value.trim().replace(/^#/,'');
+    hex.removeAttribute('aria-invalid');
+    if(!/^[0-9a-f]{6}$/i.test(value)) return;
+    const color='#'+value.toUpperCase();
+    syncPalette(color);
+    applyColor(color);
+  });
+  hex.addEventListener('change',()=>{
+    const value=hex.value.trim().replace(/^#/,'');
+    if(!/^(?:[0-9a-f]{3}|[0-9a-f]{6})$/i.test(value)){
+      hex.setAttribute('aria-invalid','true');
+      return;
+    }
+    hex.value=(value.length===3 ? [...value].map(d=>d+d).join('') : value).toUpperCase();
+    syncPalette('#'+hex.value);
+    applyColor('#'+hex.value);
+  });
+  hex.addEventListener('keydown',event=>{if(event.key==='Enter') hex.blur();});
+  for(const module of [0,1]){
+    const input=root.querySelector('#fill-hex-'+module);
+    input.addEventListener('change',()=>{
+      const digits=input.value.trim().replace(/^#/,'');
+      if(!/^(?:[0-9a-f]{3}|[0-9a-f]{6})$/i.test(digits)){
+        input.setAttribute('aria-invalid','true');
+        return;
+      }
+      const color='#'+(digits.length===3 ? [...digits].map(d=>d+d).join('') : digits).toUpperCase();
+      input.removeAttribute('aria-invalid');
+      applyColor(color,module);
+      if(activeColorModule===module){hex.value=color.slice(1);syncPalette(color);}
+    });
+    input.addEventListener('keydown',event=>{if(event.key==='Enter') input.blur();});
+    root.querySelector('[data-reset-color="'+module+'"]').addEventListener('click',()=>{
+      const color=originalColors[module];
+      input.removeAttribute('aria-invalid');
+      applyColor(color,module);
+      if(activeColorModule===module){hex.value=color.slice(1);syncPalette(color);}
+    });
+  }
+
   function updateSliders(){
     assemblyValue.value=slider.value+'%';
     strokeValue.value=Number(stroke.value).toFixed(1)+' px';
@@ -450,10 +646,14 @@ main.inspector-closed{grid-template-columns:minmax(0,1fr)}
   for(const control of [slider,stroke]) control.addEventListener('input',updateSliders);
   for(const button of moduleButtons) button.addEventListener('click',()=>selectModule(button.dataset.module==='none' ? null : Number(button.dataset.module)));
 
-  showHidden.addEventListener('change',draw);
+  for(const button of hiddenLineButtons) button.addEventListener('click',()=>{
+    showHidden=button.dataset.hiddenLines==='on';
+    for(const item of hiddenLineButtons) item.setAttribute('aria-pressed',item===button);
+    draw();
+  });
   const iso=Math.asin(1/Math.sqrt(3));
 
-  const views={front:[-Math.PI/4,-iso],rear:[3*Math.PI/4,iso],top:[-Math.PI/4,Math.PI/2]};
+  const views={front:[-Math.PI/4,-iso],rear:[3*Math.PI/4,iso],top:[-Math.PI/4,Math.PI/2],bottom:[-Math.PI/4,-Math.PI/2],left:[-Math.PI/2,0],right:[Math.PI/2,0]};
   for(const button of viewButtons) button.addEventListener('click',()=>{
     stopMotion();
     [yaw,pitch]=views[button.dataset.view];
