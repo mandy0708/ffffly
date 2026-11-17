@@ -8,7 +8,7 @@
 :root{color-scheme:dark;--ink-black:#d6d3dc;--ink-purple:#aa84ff;--line:#303034;font:15px/1.5 "PingFang SC",system-ui,sans-serif;color:#f5f4f6;background:#0b0b0c}
 *{box-sizing:border-box}
 body{margin:0}
-main{--content-inset:20px;--toolbar-height:32px;--panel-width:clamp(238px,22vw,290px);min-height:100dvh;display:grid;grid-template-columns:minmax(0,1fr) clamp(258px,22vw,320px);padding:0}
+main{--content-inset:20px;--toolbar-height:32px;--panel-width:clamp(238px,22vw,290px);min-height:100dvh;display:grid;grid-template-columns:minmax(0,1fr) clamp(232.2px,19.8vw,288px);padding:0}
 #stage{grid-area:1/1;position:relative;min-height:460px;overflow:hidden;background-color:#09090c;background-image:radial-gradient(ellipse at 50% 45%,#20223255,transparent 70%),radial-gradient(circle at 12px 12px,#2f2f2f 1px,transparent 1.4px);background-size:auto,24px 24px}
 canvas{position:absolute;inset:0;width:100%;height:100%;display:block;touch-action:none;cursor:grab}
 canvas:active{cursor:grabbing}
@@ -122,6 +122,7 @@ main.inspector-closed{grid-template-columns:minmax(0,1fr)}
 .color-actions .color-confirm{background:#f2eff6;color:#141218}
 .hex-row input[aria-invalid=true]{border-color:#db8089}
 .color-reset{margin-top:6px;padding:4px 0;color:#d0cdd5}
+.page-header,.hint,.zoom-tools,#reopen-inspector,.inspector-header,.inspector-body{zoom:0.9}
 </style>
 </head>
 <body>
@@ -374,7 +375,7 @@ main.inspector-closed{grid-template-columns:minmax(0,1fr)}
     const fittedScale=Math.min(Math.max(60,modelWidth-(compact ? 36 : 108))/Math.max(right-left,3.9),usableHeight/Math.max(bottom-top,3.0));
     const modelSpan=Math.max(right-left,bottom-top);
     const framingInset=compact ? 12 : 88;
-    const scale=0.9*zoom*Math.max(fittedScale*0.55,fittedScale-framingInset/modelSpan);
+    const scale=0.81*zoom*Math.max(fittedScale*0.55,fittedScale-framingInset/modelSpan);
     const screen=([x,y,d])=>[modelWidth/2+panX+(x-(left+right)/2)*scale,modelHeight/2+(compact ? 8 : 0)+panY+(y-(top+bottom)/2)*scale,d];
     const triangles=polygons.flatMap((poly,index)=>{
       const [a,b,c,d]=poly.map(screen);
