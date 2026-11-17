@@ -8,7 +8,7 @@
 :root{color-scheme:dark;--ink-black:#d6d3dc;--ink-purple:#aa84ff;--line:#303034;font:15px/1.5 Geist,Inter,"PingFang SC",system-ui,sans-serif;color:#f5f4f6;background:#0b0b0c}
 *{box-sizing:border-box}
 body{margin:0}
-main{--content-inset:20px;--toolbar-height:36px;--panel-width:clamp(238px,22vw,290px);min-height:100vh;min-height:100dvh;display:grid;grid-template-columns:minmax(0,1fr) clamp(258px,22vw,320px);padding:0}
+main{--content-inset:20px;--toolbar-height:36px;--panel-width:clamp(238px,22vw,290px);min-height:100vh;min-height:100dvh;display:grid;grid-template-columns:minmax(0,1fr) clamp(258px,20vw,320px);padding:0}
 #stage{grid-area:1/1;position:sticky;top:0;align-self:start;height:100vh;height:100dvh;overflow:hidden;background-color:#09090c;background-image:radial-gradient(ellipse at 50% 45%,#20223255,transparent 70%),radial-gradient(circle at 12px 12px,#2f2f2f 1px,transparent 1.4px);background-size:auto,24px 24px}
 canvas{position:absolute;inset:0;width:100%;height:100%;display:block;touch-action:none;cursor:grab}
 canvas:active{cursor:grabbing}
@@ -16,7 +16,7 @@ canvas:active{cursor:grabbing}
 aside{--inspector-padding:clamp(16px,1.5vw,23px);grid-area:1/2;min-width:0;background:#101116;border-left:1px solid #202127}
 @font-face{font-family:"Viewer MiSans";src:local("MiSans Semibold"),local("MiSans-Semibold");font-weight:600}
 @font-face{font-family:"Viewer MiSans Medium";src:local("MiSans Medium"),local("MiSans-Medium");font-weight:500}
-h1{font-family:"Viewer MiSans Medium",MiSans,Geist,system-ui,sans-serif;display:flex;align-items:center;gap:16px;font-size:clamp(16px,1.5vw,20px);line-height:1.2;letter-spacing:-.025em;margin:0;font-weight:500}
+h1{font-family:"Viewer MiSans Medium",MiSans,Geist,system-ui,sans-serif;display:flex;align-items:center;gap:16px;font-size:clamp(16px,1.3vw,20px);line-height:1.2;letter-spacing:-.025em;margin:0;font-weight:500}
 .title-copy{display:grid;gap:4px}.title-subtitle{font:500 10px/1.2 Geist,Inter,system-ui,sans-serif;letter-spacing:.09em;color:#a9a6ae}
 .page-header{position:absolute;z-index:1;top:var(--content-inset);left:var(--content-inset);padding:0;pointer-events:none}
 .brand-mark{display:grid;place-items:center;width:40px;flex:none;color:#6B4C9A;filter:drop-shadow(0 0 11px #7948f34d)}.brand-mark svg{display:block;width:36px;height:40px}
@@ -87,7 +87,7 @@ main.inspector-closed{grid-template-columns:minmax(0,1fr)}
   aside{height:100vh;height:100dvh;overflow-y:auto;scrollbar-gutter:stable}
   .inspector-header{position:sticky;top:0;z-index:1;background:#101116}
 }
-@media(min-width:901px) and (max-height:760px){
+@media(min-width:901px) and (max-height:820px){
   .inspector-body{padding-top:14px;padding-bottom:16px}
   .inspector-description{padding:10px 12px}
   aside .controls-group{margin-top:20px}
