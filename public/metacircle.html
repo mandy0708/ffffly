@@ -14,10 +14,8 @@ canvas{position:absolute;inset:0;width:100%;height:100%;display:block;touch-acti
 canvas:active{cursor:grabbing}
 .hud-item{display:inline-flex;align-items:center;gap:7px;white-space:nowrap}.hud-sep{width:3px;height:3px;border-radius:50%;background:#64616e}.hint{display:flex;flex-wrap:wrap;align-items:center;gap:7px 11px;position:absolute;bottom:var(--content-inset);left:var(--content-inset);max-width:calc(100% - 40px);padding:6px 14px;border:1px solid #25262d;border-radius:22px;background:#101116;pointer-events:none;color:#b3afb9;font-size:12px}
 aside{--inspector-padding:clamp(16px,1.5vw,23px);grid-area:1/2;min-width:0;background:#101116;border-left:1px solid #202127}
-h1{font-family:"PingFang SC",system-ui,sans-serif;display:flex;align-items:center;gap:16px;font-size:clamp(16px,1.5vw,20px);line-height:1.2;letter-spacing:-.025em;margin:0;font-weight:500}
-.title-copy{display:grid;gap:4px}.title-subtitle{font:500 10px/1.2 "PingFang SC",system-ui,sans-serif;letter-spacing:.09em;color:#a9a6ae}
 .page-header{position:absolute;z-index:1;top:var(--content-inset);left:var(--content-inset);padding:0;pointer-events:none}
-.brand-mark{display:grid;place-items:center;width:40px;flex:none;color:#6B4C9A;filter:drop-shadow(0 0 11px #7948f34d)}.brand-mark svg{display:block;width:36px;height:40px}
+.page-header img{display:block;width:193.21px;height:auto}
 
 p{margin:0;color:#aaa7ae;line-height:1.65;font-size:13px;font-weight:400}
 section{border-top:1px solid var(--line);padding-top:19px;margin-top:21px}
@@ -129,10 +127,7 @@ main.inspector-closed{grid-template-columns:minmax(0,1fr)}
 <body>
 <main>
 <div id="stage"><header class="page-header">
-  <h1><span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 91.5 101.72" focusable="false"><defs><filter id="brand-rounding" x="-5" y="-5" width="102" height="112" filterUnits="userSpaceOnUse">
-    <feGaussianBlur in="SourceGraphic" stdDeviation="1.05"/>
-    <feComponentTransfer><feFuncA type="linear" slope="5" intercept="-2"/></feComponentTransfer>
-  </filter></defs><path fill="currentColor" filter="url(#brand-rounding)" d="M70.51,0l-21.38,12.34-3.37,1.95L21,0,0,12.12V45.02l24.75,14.29v30.28l21,12.12,21-12.12v-10.6c0-5.65,1.71-9.9,10.43-14.89l14.32-8.27V12.12L70.51,0Zm16,50.06l-13.5-7.79V7.22l13.5,7.79V50.06ZM51.63,16.67l16.38-9.46V42.27l-9.58,5.53c-7.34,4.36-15.17,9.83-15.17,19.6v8.62l-13.5,7.79v-24.42l17.25-9.96,5.87-3.39V28.16l-4.62-2.76v-6.78l3.37-1.95Zm-30.63,19.11l19.83,11.45-13.5,7.79L7.5,43.58l13.5-7.79Zm26.88-4.76v12.14l-2.05,1.18-22.33-12.89V7.22l19.75,11.41v9.73l4.62,2.67ZM18.5,7.22V31.45l-13.5,7.79V15.01l13.5-7.79Zm13.76,80.94l13.5-7.79,13.5,7.79-13.5,7.79-13.5-7.79Zm42.44-28.38c-10.74,6.14-12.94,12.13-12.94,19.23v4.83l-13.5-7.79v-8.62c0-6.48,4.67-10.52,12.7-15.29l9.55-5.52,13.5,7.79-9.31,5.38Z"/></svg></span><span class="title-copy">元环智能 · 标志结构演示<span class="title-subtitle" lang="en">METACIRCLE / LOGO STRUCTURE</span></span></h1>
+  <img src="/metacircle-logo.svg" alt="元环智能" width="193" height="36">
 </header><button class="inspector-toggle" type="button" id="reopen-inspector" aria-label="展开模型控制" aria-controls="inspector" title="展开参数调整" hidden><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="3" ry="3"></rect><line x1="15" y1="3" x2="15" y2="21"></line><polyline points="11 9 8 12 11 15"></polyline></svg></button><div class="zoom-tools" role="group" aria-label="缩放比例">
   <button type="button" id="zoom-out" aria-label="缩小">−</button>
   <details class="zoom-settings">
