@@ -6,10 +6,10 @@ import { PortfolioNav } from "@/components/portfolio/portfolio-nav";
 export default function Home() {
   return (
     <main id="home">
+      <PortfolioNav />
       <div className="portfolio-shell">
         <DotField fixed />
         <div className="stage">
-          <PortfolioNav />
           <Hero />
           <ContactDock />
         </div>
