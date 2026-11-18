@@ -709,8 +709,10 @@ button, input { font: inherit; color: inherit; }
      left; tapping it drops the links down. The CTA stays on the right. */
   .site-nav,
   .top-nav {
-    width: calc(100vw - 32px);
+    inset-inline: 16px;
+    width: auto;
     padding: 6px 6px 6px 10px;
+    transform: none;
   }
   .nav-burger {
     display: flex;
