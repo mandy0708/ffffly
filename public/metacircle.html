@@ -572,8 +572,9 @@ main.inspector-closed{grid-template-columns:minmax(0,1fr)}
       for(const point of det>0 ? [b,c] : [c,b]) path.lineTo(point[0],point[1]);
       path.closePath();
     }
+    const selectedFills = darkMode ? originalColors : ['#EEE4F0', '#EDE5F8'];
     for(const module of selected===0 ? [1,0] : [0,1]){
-      ctx.fillStyle=module===selected ? originalColors[module] : (darkMode ? '#0B0B0C' : '#FBFAFD');
+      ctx.fillStyle=module===selected ? selectedFills[module] : (darkMode ? '#0B0B0C' : '#FBFAFD');
       ctx.fill(silhouettes[module]);
     }
     const runs=[[],[],[],[]];
