@@ -18,7 +18,6 @@
   const themeOptions = [...document.querySelectorAll('[name=card-theme]')];
   const touched = new Set();
   const domain = $('domain');
-  const editDomain = $('edit-domain');
   const example = Object.freeze({
     name: '陈晓',
     english: 'Alex Chen',
@@ -86,46 +85,19 @@
     hint.hidden = !message;
   }
 
-  function startDomainEdit() {
-    if (!domain.readOnly) return;
-    domain.readOnly = false;
-    editDomain.textContent = '恢复默认';
-    editDomain.setAttribute('aria-label', '恢复默认邮箱后缀');
-    domain.focus();
-    domain.select();
-  }
-
-  function restoreDefaultDomain() {
-    domain.value = config.emailDomain;
-    domain.readOnly = true;
-    editDomain.textContent = '修改后缀';
-    editDomain.removeAttribute('aria-label');
-    touched.delete('domain');
-  }
-
-  editDomain.addEventListener('click', () => {
-    if (domain.readOnly) {
-      startDomainEdit();
-    } else {
-      restoreDefaultDomain();
-      update();
-    }
-  });
-  domain.addEventListener('dblclick', startDomainEdit);
-
   function update() {
     const raw = Object.fromEntries(fields.map(id => [id, $(id).value.trim()]));
     const currentConfig = {
       ...config,
       companyName: raw.company,
-      emailDomain: raw.domain.replace(/^@/, '').toLowerCase()
+      emailDomain: config.emailDomain
     };
     data = card.normalize(raw, currentConfig);
     const errors = card.validate(data);
     const configErrors = card.configErrors(currentConfig);
     if (!data.company) errors.company = '请填写公司名称';
     if (configErrors.includes('企业邮箱后缀尚未配置')) {
-      errors.domain = '请输入有效的邮箱域名，例如 meta-circle.com';
+      errors.domain = '邮箱后缀配置无效，请联系管理员';
     }
 
     for (const key of requiredFields) {
@@ -215,7 +187,7 @@
   form.addEventListener('reset', () => {
     touched.clear();
     setTimeout(() => {
-      restoreDefaultDomain();
+      domain.value = config.emailDomain;
       $('name').focus();
       update();
     }, 0);
