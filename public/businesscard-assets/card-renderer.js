@@ -25,8 +25,7 @@ window.CardRenderer = (() => {
   const assets = Promise.all([
     load('businesscard-assets/card-pattern.svg'),
     load('businesscard-assets/card-logo.svg'),
-    load('businesscard-assets/logo-white.svg'),
-    load('businesscard-assets/logo-corner.svg')
+    load('businesscard-assets/logo-white.svg')
   ]);
 
   function wrap(ctx, text, maxWidth) {
@@ -162,7 +161,7 @@ window.CardRenderer = (() => {
   }
 
   async function render(canvas, data, matrix, theme) {
-    const [pattern, logo, whiteLogo, cornerLogo] = await assets;
+    const [pattern, logo, whiteLogo] = await assets;
     const dark = theme === 'purple';
     canvas.width = width * pixelRatio;
     canvas.height = height * pixelRatio;
@@ -176,13 +175,8 @@ window.CardRenderer = (() => {
 
     ctx.fillStyle = dark ? '#4F2C5B' : '#F2F1F4';
     ctx.fillRect(0, 0, width, height);
-    if (dark) {
-      ctx.globalAlpha = 0.255;
-      ctx.drawImage(pattern, -925, 0, 2950, height);
-    } else {
-      ctx.globalAlpha = 0.42;
-      ctx.drawImage(cornerLogo, 490, 935, 825, 910.8);
-    }
+    ctx.globalAlpha = dark ? 0.255 : 0.08775;
+    ctx.drawImage(pattern, -925, 0, 2950, height);
     ctx.globalAlpha = 1;
 
     const brand = dark ? whiteLogo : logo;

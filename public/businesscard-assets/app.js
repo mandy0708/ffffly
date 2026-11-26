@@ -174,7 +174,10 @@
       update();
     });
   }
-  $('dial').addEventListener('change', update);
+  $('dial').addEventListener('change', () => {
+    $('dial-display').textContent = $('dial').value;
+    update();
+  });
   for (const option of themeOptions) {
     option.addEventListener('change', () => {
       if (!option.checked) return;
@@ -188,6 +191,7 @@
     touched.clear();
     setTimeout(() => {
       domain.value = config.emailDomain;
+      $('dial-display').textContent = $('dial').value;
       $('name').focus();
       update();
     }, 0);

@@ -6,12 +6,12 @@
   <meta name="description" content="元环智能电子名片生成器。个人信息仅在当前浏览器内处理。">
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' blob: data:; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
   <title>元环智能名片生成器</title>
-  <link rel="stylesheet" href="businesscard-assets/style.css?v=20261126-33">
+  <link rel="stylesheet" href="businesscard-assets/style.css?v=20261126-42">
   <script defer src="businesscard-assets/config.js"></script>
   <script defer src="businesscard-assets/vendor/qrcodegen.js"></script>
   <script defer src="businesscard-assets/core.js?v=20261126-38"></script>
-  <script defer src="businesscard-assets/card-renderer.js?v=20261126-34"></script>
-  <script defer src="businesscard-assets/app.js?v=20261126-36"></script>
+  <script defer src="businesscard-assets/card-renderer.js?v=20261126-40"></script>
+  <script defer src="businesscard-assets/app.js?v=20261126-42"></script>
 </head>
 <body>
 <main class="shell">
@@ -58,9 +58,12 @@
           <div class="field">
             <label for="mobile">手机号码<span class="required" aria-hidden="true"> *</span></label>
             <div class="phone-row">
+              <div class="dial-picker">
               <select id="dial" aria-label="国际电话区号">
                 <option value="+86">中国 +86</option><option value="+852">中国香港 +852</option><option value="+853">中国澳门 +853</option><option value="+886">中国台湾 +886</option><option value="+1">美国 / 加拿大 +1</option><option value="+44">英国 +44</option><option value="+65">新加坡 +65</option><option value="+81">日本 +81</option><option value="+82">韩国 +82</option><option value="+61">澳大利亚 +61</option><option value="+49">德国 +49</option><option value="+33">法国 +33</option>
               </select>
+              <span id="dial-display" class="dial-display" aria-hidden="true">+86</span>
+              </div>
               <input id="mobile" type="tel" inputmode="tel" maxlength="24" placeholder="请输入手机号码" required aria-describedby="mobile-error">
             </div>
             <small id="mobile-error" class="error"></small>

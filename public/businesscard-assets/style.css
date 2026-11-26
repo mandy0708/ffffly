@@ -92,6 +92,16 @@ h2[tabindex]:focus { outline: none; }
 .name-row { grid-template-columns: 1fr 1fr; }
 .name-row .field { margin-top: 0; }
 .phone-row { grid-template-columns: minmax(100px, .33fr) minmax(0, 1fr); }
+.dial-picker { position: relative; min-width: 0; }
+.dial-display {
+  position: absolute;
+  inset: 0 auto 0 14px;
+  display: flex;
+  align-items: center;
+  color: var(--ink);
+  font-size: 13px;
+  pointer-events: none;
+}
 .field { min-width: 0; }
 
 .field label {
@@ -118,7 +128,18 @@ h2[tabindex]:focus { outline: none; }
   font-size: 16px;
 }
 
-.field select { font-size: 13px; }
+.field select {
+  appearance: none;
+  padding-right: 34px;
+  color: transparent;
+  font-size: 13px;
+  background-image: linear-gradient(45deg, transparent 50%, #77737e 50%),
+    linear-gradient(135deg, #77737e 50%, transparent 50%);
+  background-position: right 17px center, right 12px center;
+  background-size: 5px 5px;
+  background-repeat: no-repeat;
+}
+.field select option { color: var(--ink); }
 .field input::placeholder { color: #73717b; }
 .field :is(input, select):focus { background: #fff; border-color: #9b83a6; outline: 2px solid #e6ddeb; outline-offset: 1px; }
 .field input[aria-invalid=true] { border-color: #a83d4a; }
