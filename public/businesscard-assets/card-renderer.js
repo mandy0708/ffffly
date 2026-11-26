@@ -6,9 +6,12 @@ window.CardRenderer = (() => {
   const cardRadius = 60;
   const textInset = 100;
   const qrSize = 405;
-  const qrPadding = 14.4;
+  const qrPadding = 4;
   const qrBackingSize = qrSize + 2 * qrPadding;
   const minimumQrGap = 96;
+  const captionGap = 40;
+  const qrGroupHeight = qrBackingSize + captionGap + 44;
+  const preferredQrTop = height - textInset - 24 - qrGroupHeight;
 
   function load(src) {
     return new Promise((resolve, reject) => {
@@ -22,7 +25,8 @@ window.CardRenderer = (() => {
   const assets = Promise.all([
     load('businesscard-assets/card-pattern.svg'),
     load('businesscard-assets/card-logo.svg'),
-    load('businesscard-assets/logo-white.svg')
+    load('businesscard-assets/logo-white.svg'),
+    load('businesscard-assets/logo-corner.svg')
   ]);
 
   function wrap(ctx, text, maxWidth) {
@@ -40,24 +44,24 @@ window.CardRenderer = (() => {
     return rows;
   }
 
-  function setFont(ctx, size) {
-    ctx.font = `${size}px -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif`;
+  function setFont(ctx, size, weight = 400) {
+    ctx.font = `${weight} ${size}px -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif`;
   }
 
   function layoutGroup(ctx, entries, scale) {
     let y = 0;
-    const blocks = entries.map(({ text, size, maxLines, gap = 0, color }) => {
+    const blocks = entries.map(({ text, size, maxLines, gap = 0, color, weight }) => {
       size = Math.max(1, Math.floor(size * scale));
       let rows;
       for (;;) {
-        setFont(ctx, size);
+        setFont(ctx, size, weight);
         rows = wrap(ctx, text, width - textInset * 2);
         if (rows.length <= maxLines || size === 1) break;
         size -= 1;
       }
       y += gap;
       const lineHeight = size * 1.25;
-      const block = { rows, size, color, lineHeight, y };
+      const block = { rows, size, color, weight, lineHeight, y };
       y += rows.length * lineHeight;
       return block;
     });
@@ -67,7 +71,7 @@ window.CardRenderer = (() => {
   function drawGroup(ctx, group, top) {
     let inkBottom = top;
     for (const block of group.blocks) {
-      setFont(ctx, block.size);
+      setFont(ctx, block.size, block.weight);
       ctx.fillStyle = block.color;
       block.rows.forEach((row, index) => {
         const y = top + block.y + index * block.lineHeight;
@@ -79,23 +83,25 @@ window.CardRenderer = (() => {
     return inkBottom;
   }
 
-  function drawContact(ctx, data, primary, secondary) {
+  function drawContact(ctx, data, primary, secondary, nameColor) {
     const website = (data.website || '').replace(/^https?:\/\//, '').replace(/\/$/, '');
+    const detailSize = 47;
+    const detailGap = 12;
     const personalEntries = [
-      { text: data.name || '你的姓名', size: 82, maxLines: 2, color: primary },
-      ...(data.english ? [{ text: data.english, size: 39, maxLines: 2, gap: 5, color: secondary }] : []),
-      { text: data.title || '职位', size: 43, maxLines: 3, gap: 14, color: secondary },
-      { text: data.mobile ? data.dial + ' ' + data.mobile : '手机号码', size: 48, maxLines: 1, gap: 29, color: secondary },
-      { text: data.prefix ? data.email : '邮箱', size: 44, maxLines: 2, gap: 8, color: secondary }
+      { text: data.name || '你的姓名', size: 88, weight: 600, maxLines: 2, color: nameColor },
+      ...(data.english ? [{ text: data.english, size: detailSize, maxLines: 2, gap: detailGap, color: secondary }] : []),
+      { text: data.title || '职位', size: detailSize, maxLines: 3, gap: detailGap, color: secondary },
+      { text: data.mobile ? data.dial + ' ' + data.mobile : '手机号码', size: detailSize, maxLines: 1, gap: detailGap, color: secondary },
+      { text: data.prefix ? data.email : '邮箱', size: detailSize, maxLines: 2, gap: detailGap, color: secondary }
     ];
     const companyEntries = [
-      { text: data.company || '公司名称', size: 42, maxLines: 2, color: primary },
-      ...(website ? [{ text: website, size: 41, maxLines: 2, gap: 10, color: secondary }] : [])
+      { text: data.company || '公司名称', size: 45, maxLines: 2, color: primary },
+      ...(website ? [{ text: website, size: 44, maxLines: 2, gap: 10, color: secondary }] : [])
     ];
     const personalTop = 340;
     const companyPreferredTop = 875;
     const groupGap = 56;
-    const contentBottom = height - qrBackingSize - 2 * minimumQrGap;
+    const contentBottom = preferredQrTop - minimumQrGap;
     let scale = 1;
     let personal;
     let company;
@@ -115,9 +121,10 @@ window.CardRenderer = (() => {
   }
 
   function drawQR(ctx, matrix, qrColor, textBottom, captionColor) {
-    const backingTop = textBottom + (height - textBottom - qrBackingSize) / 2;
+    const backingTop = Math.max(textBottom + minimumQrGap, preferredQrTop);
     const qrTop = backingTop + qrPadding;
-    const left = (width - qrSize) / 2;
+    const left = width - textInset - qrSize - qrPadding;
+    const center = left + qrSize / 2;
     ctx.fillStyle = '#fff';
     ctx.beginPath();
     ctx.roundRect(left - qrPadding, backingTop, qrBackingSize, qrBackingSize, 19.8);
@@ -127,14 +134,14 @@ window.CardRenderer = (() => {
     ctx.textAlign = 'center';
     ctx.textBaseline = 'top';
     setFont(ctx, 36);
-    ctx.fillText('扫一扫添加至通讯录', width / 2, backingTop + qrBackingSize + 28);
+    ctx.fillText('扫一扫添加至通讯录', center, backingTop + qrBackingSize + captionGap);
 
     if (!matrix) {
       ctx.fillStyle = '#615f68';
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
       setFont(ctx, 49);
-      ctx.fillText('二维码预留', width / 2, qrTop + qrSize / 2);
+      ctx.fillText('二维码预留', center, qrTop + qrSize / 2);
       return;
     }
 
@@ -154,8 +161,8 @@ window.CardRenderer = (() => {
     ctx.restore();
   }
 
-  async function render(canvas, data, matrix, qrColor, theme) {
-    const [pattern, logo, whiteLogo] = await assets;
+  async function render(canvas, data, matrix, theme) {
+    const [pattern, logo, whiteLogo, cornerLogo] = await assets;
     const dark = theme === 'purple';
     canvas.width = width * pixelRatio;
     canvas.height = height * pixelRatio;
@@ -169,14 +176,21 @@ window.CardRenderer = (() => {
 
     ctx.fillStyle = dark ? '#4F2C5B' : '#F2F1F4';
     ctx.fillRect(0, 0, width, height);
-    ctx.globalAlpha = dark ? 0.255 : 0.0975;
-    ctx.drawImage(pattern, -925, 0, 2950, height);
+    if (dark) {
+      ctx.globalAlpha = 0.255;
+      ctx.drawImage(pattern, -925, 0, 2950, height);
+    } else {
+      ctx.globalAlpha = 0.42;
+      ctx.drawImage(cornerLogo, 490, 935, 825, 910.8);
+    }
     ctx.globalAlpha = 1;
 
     const brand = dark ? whiteLogo : logo;
     ctx.drawImage(brand, textInset, 100, 323, 323 * brand.naturalHeight / brand.naturalWidth);
     const secondary = dark ? '#e2d5e8' : '#71657b';
-    const textBottom = drawContact(ctx, data, dark ? '#fff' : '#4F2C5B', secondary);
+    const qrColor = dark ? '#4F2C5B' : '#6B4C9A';
+    const primary = dark ? '#fff' : '#4F2C5B';
+    const textBottom = drawContact(ctx, data, primary, secondary, dark ? primary : qrColor);
     drawQR(ctx, matrix, qrColor, textBottom, secondary);
     return canvas;
   }

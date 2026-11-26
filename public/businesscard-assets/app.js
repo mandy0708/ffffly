@@ -16,7 +16,6 @@
   const requiredFields = ['company', 'name', 'title', 'mobile', 'email', 'domain'];
   const themeOptions = [...document.querySelectorAll('[name=card-theme]')];
   const touched = new Set();
-  const qrColor = '#4F2C5B';
   const domain = $('domain');
   const editDomain = $('edit-domain');
   const example = Object.freeze({
@@ -52,6 +51,25 @@
     previewDialog.showModal();
   });
   $('close-card-preview').addEventListener('click', () => previewDialog.close());
+
+  function isPreviewBackdrop(event) {
+    if (event.target !== previewDialog) return false;
+    const { left, top, right, bottom } = previewDialog.getBoundingClientRect();
+    return event.clientX < left || event.clientX >= right ||
+      event.clientY < top || event.clientY >= bottom;
+  }
+
+  let pressedPreviewBackdrop = false;
+  previewDialog.addEventListener('pointerdown', event => {
+    pressedPreviewBackdrop = isPreviewBackdrop(event);
+  });
+  previewDialog.addEventListener('click', event => {
+    if (pressedPreviewBackdrop && isPreviewBackdrop(event)) previewDialog.close();
+    pressedPreviewBackdrop = false;
+  });
+  previewDialog.addEventListener('close', () => {
+    pressedPreviewBackdrop = false;
+  });
 
   function closeMenu(restoreFocus = false) {
     menu.hidden = true;
@@ -140,7 +158,7 @@
       && raw.company === config.companyName && raw.domain === config.emailDomain && raw.dial === '+86';
     const contact = isExample ? example : data;
     const output = document.createElement('canvas');
-    CardRenderer.render(output, contact, matrix, qrColor, theme).then(() => {
+    CardRenderer.render(output, contact, matrix, theme).then(() => {
       if (revision !== renderRevision) return;
       const details = [
         contact.name, contact.english, contact.title,
@@ -251,7 +269,7 @@
 
   downloadCard.addEventListener('click', () => {
     if (!matrix || downloadCard.disabled) return;
-    const variant = theme === 'purple' ? 'Purple' : 'Gray';
+    const variant = theme === 'purple' ? 'Jiuli' : 'Yuanhuan';
     const filename = card.filename(data.name, 'png').replace('_QRCode.png', '_BusinessCard_' + variant + '.png');
     savePNG(previewCanvas, filename, '名片下载失败，请重试。');
   });
