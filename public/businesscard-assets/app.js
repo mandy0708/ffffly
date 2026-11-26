@@ -9,6 +9,7 @@
   const download = $('download');
   const downloadCard = $('download-card');
   const previewCard = $('preview-card');
+  const previewZoomHint = $('preview-zoom-hint');
   const previewCanvas = $('card-canvas');
   const previewDialog = $('card-preview-dialog');
   const largeCanvas = $('large-card-canvas');
@@ -46,10 +47,12 @@
     largeCanvas.setAttribute('aria-label', previewCanvas.getAttribute('aria-label'));
   }
 
-  previewCard.addEventListener('click', () => {
+  function openPreviewDialog() {
     syncLargePreview();
     previewDialog.showModal();
-  });
+  }
+  previewCard.addEventListener('click', openPreviewDialog);
+  previewZoomHint.addEventListener('click', openPreviewDialog);
   $('close-card-preview').addEventListener('click', () => previewDialog.close());
 
   function isPreviewBackdrop(event) {
@@ -176,13 +179,13 @@
       if (previewDialog.open) syncLargePreview();
       $('preview-example').hidden = !isExample;
       previewCard.hidden = false;
-      $('preview-zoom-hint').hidden = false;
+      previewZoomHint.hidden = false;
       downloadCard.disabled = !matrix;
     }).catch(() => {
       if (revision !== renderRevision) return;
       if (previewDialog.open) previewDialog.close();
       previewCard.hidden = true;
-      $('preview-zoom-hint').hidden = true;
+      previewZoomHint.hidden = true;
       $('preview-example').hidden = true;
       showPreviewError('名片预览加载失败，请刷新页面重试。');
     });
