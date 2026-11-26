@@ -8,6 +8,10 @@
   const menu = $('download-menu');
   const download = $('download');
   const downloadCard = $('download-card');
+  const previewCard = $('preview-card');
+  const previewCanvas = $('card-canvas');
+  const previewDialog = $('card-preview-dialog');
+  const largeCanvas = $('large-card-canvas');
   const fields = ['name', 'english', 'title', 'dial', 'mobile', 'email', 'company', 'domain'];
   const requiredFields = ['company', 'name', 'title', 'mobile', 'email', 'domain'];
   const themeOptions = [...document.querySelectorAll('[name=card-theme]')];
@@ -35,6 +39,19 @@
 
   $('company').defaultValue = config.companyName;
   $('domain').defaultValue = config.emailDomain;
+
+  function syncLargePreview() {
+    const context = largeCanvas.getContext('2d');
+    context.clearRect(0, 0, largeCanvas.width, largeCanvas.height);
+    context.drawImage(previewCanvas, 0, 0);
+    largeCanvas.setAttribute('aria-label', previewCanvas.getAttribute('aria-label'));
+  }
+
+  previewCard.addEventListener('click', () => {
+    syncLargePreview();
+    previewDialog.showModal();
+  });
+  $('close-card-preview').addEventListener('click', () => previewDialog.close());
 
   function closeMenu(restoreFocus = false) {
     menu.hidden = true;
@@ -125,25 +142,29 @@
     const output = document.createElement('canvas');
     CardRenderer.render(output, contact, matrix, qrColor, theme).then(() => {
       if (revision !== renderRevision) return;
-      const canvas = $('card-canvas');
       const details = [
         contact.name, contact.english, contact.title,
         contact.mobile ? contact.dial + ' ' + contact.mobile : '', contact.prefix ? contact.email : '',
         contact.company, contact.website
       ].filter(Boolean);
-      canvas.setAttribute('aria-label', [
+      previewCanvas.setAttribute('aria-label', [
         isExample ? '示例名片' : '名片预览', ...details,
         matrix ? '联系人二维码，扫一扫添加至通讯录' : '二维码占位'
       ].join('，'));
-      const context = canvas.getContext('2d');
-      context.clearRect(0, 0, canvas.width, canvas.height);
+      previewCard.setAttribute('aria-description', previewCanvas.getAttribute('aria-label'));
+      const context = previewCanvas.getContext('2d');
+      context.clearRect(0, 0, previewCanvas.width, previewCanvas.height);
       context.drawImage(output, 0, 0);
+      if (previewDialog.open) syncLargePreview();
       $('preview-example').hidden = !isExample;
-      $('preview-card').hidden = false;
+      previewCard.hidden = false;
+      $('preview-zoom-hint').hidden = false;
       downloadCard.disabled = !matrix;
     }).catch(() => {
       if (revision !== renderRevision) return;
-      $('preview-card').hidden = true;
+      if (previewDialog.open) previewDialog.close();
+      previewCard.hidden = true;
+      $('preview-zoom-hint').hidden = true;
       $('preview-example').hidden = true;
       showPreviewError('名片预览加载失败，请刷新页面重试。');
     });
@@ -232,7 +253,7 @@
     if (!matrix || downloadCard.disabled) return;
     const variant = theme === 'purple' ? 'Purple' : 'Gray';
     const filename = card.filename(data.name, 'png').replace('_QRCode.png', '_BusinessCard_' + variant + '.png');
-    savePNG($('card-canvas'), filename, '名片下载失败，请重试。');
+    savePNG(previewCanvas, filename, '名片下载失败，请重试。');
   });
 
   menu.addEventListener('click', event => {

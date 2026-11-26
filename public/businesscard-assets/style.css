@@ -41,7 +41,7 @@ button:disabled { cursor: default; }
   height: 48px;
   place-items: center;
   border-radius: 50%;
-  background: #ede3f0;
+  background: #fff;
 }
 .hero-icon { display: block; width: 40px; height: 40px; }
 
@@ -152,16 +152,51 @@ h2[tabindex]:focus { outline: none; }
 .preview-stage {
   display: grid;
   place-items: center;
+  align-content: center;
   padding: 20px 12px 12px;
 }
 
 .business-card {
   width: min(100%, 204px);
   aspect-ratio: 55 / 90;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: zoom-in;
   border-radius: 5.45% / 3.33%;
   box-shadow: 0 3px 7px #21182724, 0 14px 24px -8px #2118274a;
 }
 .business-card canvas { width: 100%; height: auto; display: block; }
+.preview-zoom-hint { margin: 10px 0 0; color: var(--secondary); font-size: 12px; }
+.card-preview-dialog {
+  --zoom-width: min(420px, calc(100vw - 64px), calc((100dvh - 108px) * 55 / 90));
+  width: max-content;
+  max-width: calc(100vw - 24px);
+  max-height: calc(100dvh - 24px);
+  box-sizing: border-box;
+  padding: 8px 16px 16px;
+  border: 0;
+  border-radius: 18px;
+  color: var(--ink);
+  background: #fff;
+}
+.card-preview-dialog::backdrop { background: #17141bbb; }
+.card-preview-toolbar { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 6px; }
+.card-preview-toolbar h2 { margin: 0; font-size: 16px; }
+.card-preview-close {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: #f2f1f3;
+  color: inherit;
+  cursor: pointer;
+}
+.card-preview-dialog canvas { display: block; width: var(--zoom-width); height: auto; margin-inline: auto; }
+body:has(.card-preview-dialog[open]) { overflow: hidden; }
 
 .sample-label {
   border-radius: 5px;
@@ -307,7 +342,7 @@ h2[tabindex]:focus { outline: none; }
 
   .preview { padding-block: 24px; }
   .preview-stage { padding-block: 19px 12px; }
-  .preview .business-card { width: min(100%, 190px); }
+  .preview .business-card { width: min(100%, 209px); }
   .preview .card-themes { margin-top: 16px; }
 }
 
