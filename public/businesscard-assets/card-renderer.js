@@ -83,12 +83,12 @@ window.CardRenderer = (() => {
     return inkBottom;
   }
 
-  function drawContact(ctx, data, primary, secondary, nameColor) {
+  function drawContact(ctx, data, primary, secondary) {
     const website = (data.website || '').replace(/^https?:\/\//, '').replace(/\/$/, '');
     const detailSize = 47;
     const detailGap = 12;
     const personalEntries = [
-      { text: data.name || '你的姓名', size: 88, weight: 600, maxLines: 2, color: nameColor },
+      { text: data.name || '你的姓名', size: 88, weight: 600, maxLines: 2, color: primary },
       ...(data.english ? [{ text: data.english, size: detailSize, maxLines: 2, gap: detailGap, color: secondary }] : []),
       { text: data.title || '职位', size: detailSize, maxLines: 3, gap: detailGap, color: secondary },
       { text: data.mobile ? data.dial + ' ' + data.mobile : '手机号码', size: detailSize, maxLines: 1, gap: detailGap, color: secondary },
@@ -187,10 +187,10 @@ window.CardRenderer = (() => {
 
     const brand = dark ? whiteLogo : logo;
     ctx.drawImage(brand, textInset, 100, 323, 323 * brand.naturalHeight / brand.naturalWidth);
-    const secondary = dark ? '#e2d5e8' : '#71657b';
+    const secondary = dark ? '#e2d5e8' : '#4F2C5B';
     const qrColor = dark ? '#4F2C5B' : '#6B4C9A';
     const primary = dark ? '#fff' : '#4F2C5B';
-    const textBottom = drawContact(ctx, data, primary, secondary, dark ? primary : qrColor);
+    const textBottom = drawContact(ctx, data, primary, secondary);
     drawQR(ctx, matrix, qrColor, textBottom, secondary);
     return canvas;
   }
