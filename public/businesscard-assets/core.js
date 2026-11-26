@@ -36,9 +36,10 @@ window.BusinessCard = (() => {
     return ['BEGIN:VCARD','VERSION:3.0','FN:'+escape(display),'N:'+escape(d.name)+';;;;','ORG:'+escape(d.company),'TITLE:'+escape(d.title),'TEL;TYPE=CELL:'+d.dial+d.mobile,'EMAIL;TYPE=INTERNET,WORK:'+d.email,'URL:'+d.website,'END:VCARD'].map(fold).join('\r\n')+'\r\n';
   }
   function contactQrText(d) {
+    const display = d.name + (d.english ? ' (' + d.english + ')' : '');
     return [
       'BEGIN:VCARD',
-      'FN:' + escape(d.name),
+      'FN:' + escape(display),
       'ORG:' + escape(d.company),
       'TITLE:' + escape(d.title),
       'TEL;CELL:' + escape(d.dial + d.mobile),
