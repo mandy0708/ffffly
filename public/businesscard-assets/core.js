@@ -35,9 +35,22 @@ window.BusinessCard = (() => {
     // A single unsplit name is kept in the family-name component; do not guess surnames.
     return ['BEGIN:VCARD','VERSION:3.0','FN:'+escape(display),'N:'+escape(d.name)+';;;;','ORG:'+escape(d.company),'TITLE:'+escape(d.title),'TEL;TYPE=CELL:'+d.dial+d.mobile,'EMAIL;TYPE=INTERNET,WORK:'+d.email,'URL:'+d.website,'END:VCARD'].map(fold).join('\r\n')+'\r\n';
   }
+  function contactQrText(d) {
+    const display = d.name + (d.english ? ' (' + d.english + ')' : '');
+    return [
+      'BEGIN:VCARD',
+      'FN:' + escape(display),
+      'ORG:' + escape(d.company),
+      'TITLE:' + escape(d.title),
+      'TEL;CELL:' + escape(d.dial + d.mobile),
+      'EMAIL:' + escape(d.email),
+      'URL:' + escape(d.website),
+      'END:VCARD'
+    ].join('\n');
+  }
   function qr(text) {
     const {QrCode,QrSegment}=qrcodegen;
-    return QrCode.encodeSegments([QrSegment.makeEci(26),QrSegment.makeBytes(Array.from(new TextEncoder().encode(text)))],QrCode.Ecc.MEDIUM,1,40,-1,false);
+    return QrCode.encodeSegments([QrSegment.makeBytes(Array.from(new TextEncoder().encode(text)))],QrCode.Ecc.MEDIUM,1,40,-1,false);
   }
   function svg(matrix,color) {
     if (!['#000000','#4F2C5B','#6B4C9A'].includes(color)) throw Error('不支持的二维码颜色');
@@ -57,5 +70,5 @@ window.BusinessCard = (() => {
     for(let y=0;y<matrix.size;y++)for(let x=0;x<matrix.size;x++)if(matrix.getModule(x,y))ctx.fillRect(offset+x*scale,offset+y*scale,scale,scale);
   }
   const filename=(name,extension)=>'Metacircle_'+clean(name).replace(/[<>:"/\\|?*\x00-\x1F\x7F]/g,'_').replace(/[. ]+$/g,'')+(extension==='vcf'?'_Contact.vcf':'_QRCode.'+extension);
-  return {normalize,validate,configErrors,vcard,qr,svg,paint,filename};
+  return {normalize,validate,configErrors,vcard,contactQrText,qr,svg,paint,filename};
 })();

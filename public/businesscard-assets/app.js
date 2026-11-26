@@ -150,7 +150,7 @@
 
     if (!Object.keys(errors).length && !configErrors.length) {
       try {
-        matrix = card.qr(card.vcard(data));
+        matrix = card.qr(card.contactQrText(data));
         download.disabled = false;
       } catch {
         showPreviewError('二维码生成失败。请缩短填写的内容后重试。');
