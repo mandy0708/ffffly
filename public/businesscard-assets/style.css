@@ -10,7 +10,7 @@
   --brand: #4f2c5b;
   --panel-radius: 22px;
   background: var(--page);
-  background-image: radial-gradient(circle, rgb(70 70 70 / 8%) 0.75px, transparent 1.1px);
+  background-image: radial-gradient(circle, rgb(79 44 91 / 8%) 0.75px, transparent 1.1px);
   background-size: 20px 20px;
   color: var(--ink);
 }
@@ -346,7 +346,7 @@ body:has(.card-preview-dialog[open]) { overflow: hidden; }
 .download-menu small { display: block; margin-top: 3px; color: var(--secondary); font-size: 12px; }
 
 .brand-footer { display: flex; justify-content: center; padding: 44px 0 28px; }
-.brand-footer img { display: block; object-fit: contain; filter: grayscale(1); }
+.brand-footer img { display: block; object-fit: contain; }
 .toast { position: fixed; z-index: 2; left: 50%; bottom: max(18px, env(safe-area-inset-bottom)); transform: translateX(-50%); max-width: calc(100% - 32px); width: max-content; border-radius: 10px; background: #242129; color: #fff; padding: 10px 14px; font-size: 13px; overflow-wrap: anywhere; }
 .toast:empty { display: none; }
 
