@@ -6,11 +6,11 @@
   --line: #e8e7ea;
   --page: #f2f2f2;
   --surface: #fff;
-  --field: #f5f5f6;
+  --field: #f5f5f5;
   --brand: #4f2c5b;
   --panel-radius: 22px;
   background: var(--page);
-  background-image: radial-gradient(circle, rgb(79 44 91 / 8%) 0.75px, transparent 1.1px);
+  background-image: radial-gradient(circle, rgb(70 70 70 / 8%) 0.75px, transparent 1.1px);
   background-size: 20px 20px;
   color: var(--ink);
 }
@@ -98,7 +98,7 @@ h2[tabindex]:focus { outline: none; }
   inset: 0 auto 0 14px;
   display: flex;
   align-items: center;
-  color: var(--ink);
+  color: #242424;
   font-size: 13px;
   pointer-events: none;
 }
@@ -106,13 +106,14 @@ h2[tabindex]:focus { outline: none; }
 
 .field label {
   display: block;
+  color: #242424;
   margin-bottom: 7px;
   font-size: 14px;
   font-weight: 600;
   line-height: 1.35;
 }
 
-.required, .optional { color: #676470; }
+.required, .optional { color: #686868; }
 .optional { margin-inline-start: 4px; font-size: 12px; font-weight: 400; }
 
 .field :is(input, select) {
@@ -124,7 +125,7 @@ h2[tabindex]:focus { outline: none; }
   border-radius: 10px;
   background: var(--field);
   padding: 0 12px;
-  color: var(--ink);
+  color: #242424;
   font-size: 16px;
 }
 
@@ -133,15 +134,15 @@ h2[tabindex]:focus { outline: none; }
   padding-right: 34px;
   color: transparent;
   font-size: 13px;
-  background-image: linear-gradient(45deg, transparent 50%, #77737e 50%),
-    linear-gradient(135deg, #77737e 50%, transparent 50%);
+  background-image: linear-gradient(45deg, transparent 50%, #777 50%),
+    linear-gradient(135deg, #777 50%, transparent 50%);
   background-position: right 17px center, right 12px center;
   background-size: 5px 5px;
   background-repeat: no-repeat;
 }
-.field select option { color: var(--ink); }
-.field input::placeholder { color: #73717b; }
-.field :is(input, select):focus { background: #fff; border-color: #9b83a6; outline: 2px solid #e6ddeb; outline-offset: 1px; }
+.field select option { color: #242424; }
+.field input::placeholder { color: #767676; }
+.field :is(input, select):focus { background: #fff; border-color: #999; outline: 2px solid #ddd; outline-offset: 1px; }
 .field input[aria-invalid=true] { border-color: #a83d4a; }
 .error { display: block; color: #a13542; margin-top: 6px; font-size: 12px; line-height: 1.4; }
 .error:empty { display: none; }
@@ -151,12 +152,12 @@ h2[tabindex]:focus { outline: none; }
 .text-action { min-height: 44px; border: 0; border-radius: 8px; background: none; color: var(--brand); padding: 0 6px; font-size: 13px; font-weight: 600; }
 .field-heading .text-action { margin-top: -4px; }
 .email-field { margin-top: 10px !important; }
-.email-row { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 1px; border-radius: 10px; background: #e6e6e9; }
+.email-row { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 1px; border-radius: 10px; background: #e6e6e6; }
 .email-row > input { border-radius: 10px 0 0 10px; }
-.email-suffix { display: flex; align-items: center; min-width: 0; background: #eeeef0; border-radius: 0 10px 10px 0; }
-.email-suffix > span { padding-left: 10px; font-size: 13px; color: var(--secondary); }
+.email-suffix { display: flex; align-items: center; min-width: 0; background: #eee; border-radius: 0 10px 10px 0; }
+.email-suffix > span { padding-left: 10px; font-size: 13px; color: #616161; }
 .email-suffix > input { border-radius: 0 10px 10px 0; padding-left: 3px; background: none; }
-.email-suffix > input[readonly] { font-size: 14px; color: var(--secondary); }
+.email-suffix > input[readonly] { font-size: 14px; color: #616161; }
 
 .form-footer {
   display: flex;
@@ -346,7 +347,7 @@ body:has(.card-preview-dialog[open]) { overflow: hidden; }
 .download-menu small { display: block; margin-top: 3px; color: var(--secondary); font-size: 12px; }
 
 .brand-footer { display: flex; justify-content: center; padding: 44px 0 28px; }
-.brand-footer img { display: block; object-fit: contain; }
+.brand-footer img { display: block; object-fit: contain; filter: brightness(0) invert(58%); }
 .toast { position: fixed; z-index: 2; left: 50%; bottom: max(18px, env(safe-area-inset-bottom)); transform: translateX(-50%); max-width: calc(100% - 32px); width: max-content; border-radius: 10px; background: #242129; color: #fff; padding: 10px 14px; font-size: 13px; overflow-wrap: anywhere; }
 .toast:empty { display: none; }
 
