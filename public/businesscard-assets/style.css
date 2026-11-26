@@ -10,7 +10,7 @@
   --brand: #4f2c5b;
   --panel-radius: 22px;
   background: var(--page);
-  background-image: radial-gradient(circle, rgb(79 44 91 / 8%) 0.75px, transparent 1.1px);
+  background-image: radial-gradient(circle, rgb(70 70 70 / 8%) 0.75px, transparent 1.1px);
   background-size: 20px 20px;
   color: var(--ink);
 }
