@@ -6,7 +6,7 @@
   <meta name="description" content="元环智能电子名片生成器。个人信息仅在当前浏览器内处理。">
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' blob: data:; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
   <title>元环智能名片生成器</title>
-  <link rel="stylesheet" href="businesscard-assets/style.css?v=20261127-double2">
+  <link rel="stylesheet" href="businesscard-assets/style.css?v=20261127-double3">
   <script defer src="businesscard-assets/config.js"></script>
   <script defer src="businesscard-assets/vendor/qrcodegen.js"></script>
   <script defer src="businesscard-assets/core.js?v=20261126-38"></script>
@@ -98,13 +98,11 @@
       <div class="preview-stage">
         <div class="preview-sides">
           <div class="preview-side">
-            <span class="card-side-label">正面</span>
             <button type="button" class="business-card" id="preview-card" aria-label="放大名片正面" aria-haspopup="dialog" aria-controls="card-preview-dialog" hidden>
               <canvas id="card-canvas" width="1800" height="1100" role="img" aria-label="名片正面预览"></canvas>
             </button>
           </div>
           <div class="preview-side">
-            <span class="card-side-label">背面</span>
             <button type="button" class="business-card" id="preview-back" aria-label="放大名片背面" aria-haspopup="dialog" aria-controls="card-preview-dialog" hidden>
               <canvas id="back-canvas" width="1800" height="1100" role="img" aria-label="名片背面预览"></canvas>
             </button>

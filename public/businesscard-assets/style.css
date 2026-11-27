@@ -411,6 +411,5 @@ body:has(.card-preview-dialog[open]) { overflow: hidden; }
   .name-row { grid-template-columns: 1fr; }
 }
 
-.card-side-label { margin: 4px 0 9px; color: #615f68; font-size: 13px; }
-.preview-sides { display: grid; justify-items: center; gap: 24px; width: 100%; }
+.preview-sides { display: grid; justify-items: center; gap: 16px; width: 100%; }
 .preview-side { width: 100%; display: grid; justify-items: center; }
