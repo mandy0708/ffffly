@@ -9,9 +9,7 @@
   const download = $('download');
   const downloadCard = $('download-card');
   const previewCard = $('preview-card');
-  const previewBack = $('preview-back');
-  const backCanvas = $('back-canvas');
-  let enlargedCanvas;
+  const previewZoomHint = $('preview-zoom-hint');
   const previewCanvas = $('card-canvas');
   const previewDialog = $('card-preview-dialog');
   const largeCanvas = $('large-card-canvas');
@@ -33,9 +31,10 @@
   let matrix = null;
   let data = null;
   let feedbackTimer;
-  let cardDownloads = null;
   let renderRevision = 0;
   let lastInput;
+  let fontsReady = false;
+  let fontsFailed = false;
 
   $('company').defaultValue = config.companyName;
   $('domain').defaultValue = config.emailDomain;
@@ -43,17 +42,16 @@
   function syncLargePreview() {
     const context = largeCanvas.getContext('2d');
     context.clearRect(0, 0, largeCanvas.width, largeCanvas.height);
-    context.drawImage(enlargedCanvas, 0, 0);
-    largeCanvas.setAttribute('aria-label', enlargedCanvas.getAttribute('aria-label'));
+    context.drawImage(previewCanvas, 0, 0);
+    largeCanvas.setAttribute('aria-label', previewCanvas.getAttribute('aria-label'));
   }
 
-  function openPreviewDialog(canvas) {
-    enlargedCanvas = canvas;
+  function openPreviewDialog() {
     syncLargePreview();
     previewDialog.showModal();
   }
-  previewCard.addEventListener('click', () => openPreviewDialog(previewCanvas));
-  previewBack.addEventListener('click', () => openPreviewDialog(backCanvas));
+  previewCard.addEventListener('click', openPreviewDialog);
+  previewZoomHint.addEventListener('click', openPreviewDialog);
   $('close-card-preview').addEventListener('click', () => previewDialog.close());
 
   function isPreviewBackdrop(event) {
@@ -111,15 +109,13 @@
     const input = JSON.stringify(raw);
     if (input === lastInput) return;
     lastInput = input;
-    cardDownloads = null;
-    $('card-download-fallback').hidden = true;
     const revision = ++renderRevision;
     matrix = null;
     closeMenu();
     download.disabled = true;
     downloadCard.disabled = true;
 
-    showPreviewError();
+    showPreviewError(fontsFailed ? '字体加载失败，请刷新页面重试。' : (fontsReady ? '' : '名片字体加载中，请稍候。'));
     if (configErrors.includes('公司官网尚未配置')) {
       showPreviewError('公司官网未配置，暂时无法生成名片。');
     }
@@ -127,7 +123,7 @@
     if (!Object.keys(errors).length && !configErrors.length) {
       try {
         matrix = card.qr(card.contactQrText(data));
-        download.disabled = false;
+        download.disabled = !fontsReady;
       } catch {
         showPreviewError('二维码生成失败。请缩短填写的内容后重试。');
       }
@@ -149,26 +145,32 @@
         contact.company, contact.website
       ].filter(Boolean);
       previewCanvas.setAttribute('aria-label', [
-        isExample ? '示例名片正面' : '名片正面', ...details
+        isExample ? '示例名片' : '名片预览', ...details, matrix ? '联系人二维码' : '二维码占位'
       ].join('，'));
       previewCard.setAttribute('aria-description', previewCanvas.getAttribute('aria-label'));
       const context = previewCanvas.getContext('2d');
       context.clearRect(0, 0, previewCanvas.width, previewCanvas.height);
+      context.save();
+      context.beginPath();
+      context.roundRect(0, 0, 1800, 2200, 60);
+      context.clip();
+      context.fillStyle = '#FFFFFF';
+      context.fillRect(0, 0, 1800, 1100);
+      context.fillStyle = '#4F2C5B';
+      context.fillRect(0, 1100, 1800, 1100);
       context.drawImage(frontOutput, 0, 0);
-      const backContext = backCanvas.getContext('2d');
-      backContext.clearRect(0, 0, backCanvas.width, backCanvas.height);
-      backContext.drawImage(backOutput, 0, 0);
-      backCanvas.setAttribute('aria-label', matrix ? '名片背面，联系人二维码' : '名片背面，二维码占位');
+      context.drawImage(backOutput, 0, 1100);
+      context.restore();
       if (previewDialog.open) syncLargePreview();
       $('preview-example').hidden = !isExample;
       previewCard.hidden = false;
-      previewBack.hidden = false;
-      downloadCard.disabled = !matrix;
+      previewZoomHint.hidden = false;
+      downloadCard.disabled = !matrix || !fontsReady;
     }).catch(() => {
       if (revision !== renderRevision) return;
       if (previewDialog.open) previewDialog.close();
       previewCard.hidden = true;
-      previewBack.hidden = true;
+      previewZoomHint.hidden = true;
       $('preview-example').hidden = true;
       showPreviewError('名片预览加载失败，请刷新页面重试。');
     });
@@ -252,35 +254,9 @@
 
   downloadCard.addEventListener('click', () => {
     if (!matrix || downloadCard.disabled) return;
-    const front = document.createElement('canvas');
-    const back = document.createElement('canvas');
-    const snapshot = { ...data };
-    const qr = matrix;
-    Promise.all([
-      CardRenderer.render(front, snapshot, qr, 'front'),
-      CardRenderer.render(back, snapshot, qr, 'back')
-    ]).then(() => Promise.all([
-      new Promise(resolve => front.toBlob(resolve, 'image/png')),
-      new Promise(resolve => back.toBlob(resolve, 'image/png'))
-    ])).then(([frontBlob, backBlob]) => {
-      if (!frontBlob || !backBlob) throw Error('无法生成图片');
-      const base = card.filename(snapshot.name, 'png').replace('_QRCode.png', '');
-      cardDownloads = {
-        front: { blob: frontBlob, name: base + '_BusinessCard_Front.png' },
-        back: { blob: backBlob, name: base + '_BusinessCard_Back.png' }
-      };
-      $('card-download-fallback').hidden = false;
-      save(cardDownloads.front.blob, cardDownloads.front.name);
-      save(cardDownloads.back.blob, cardDownloads.back.name);
-      feedback('已发起正反面图片下载');
-    }).catch(() => feedback('名片下载失败，请重试。'));
+    const filename = card.filename(data.name, 'png').replace('_QRCode.png', '_BusinessCard.png');
+    savePNG(previewCanvas, filename, '名片下载失败，请重试。');
   });
-
-  for (const side of ['front', 'back']) {
-    $('save-' + side).addEventListener('click', () => {
-      if (cardDownloads) save(cardDownloads[side].blob, cardDownloads[side].name);
-    });
-  }
 
   menu.addEventListener('click', event => {
     const button = event.target.closest('[data-format]');
@@ -301,4 +277,16 @@
   });
 
   update();
+  Promise.all([
+    document.fonts.load('400 56px MiSansCard'),
+    document.fonts.load('600 85px MiSansCard')
+  ]).then(() => {
+    fontsReady = true;
+    lastInput = undefined;
+    update();
+  }).catch(() => {
+    fontsFailed = true;
+    lastInput = undefined;
+    update();
+  });
 })();

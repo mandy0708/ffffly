@@ -1,5 +1,5 @@
-@font-face { font-family: MiSansCard; src: url("MiSans-Semibold.ttf") format("truetype"); font-weight: 600; font-display: swap; }
-@font-face { font-family: MiSansCard; src: url("MiSans-Regular.ttf") format("truetype"); font-weight: 400; font-display: swap; }
+@font-face { font-family: MiSansCard; src: url("MiSans-Semibold.woff2") format("woff2"); font-weight: 600; font-display: swap; }
+@font-face { font-family: MiSansCard; src: url("MiSans-Regular.woff2") format("woff2"); font-weight: 400; font-display: swap; }
 :root {
   font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
   color-scheme: light;
@@ -183,13 +183,13 @@ h2[tabindex]:focus { outline: none; }
 }
 
 .business-card {
-  width: min(100%, 390px);
-  aspect-ratio: 90 / 55;
+  width: min(100%, 300px);
+  aspect-ratio: 9 / 11;
   padding: 0;
   border: 0;
   background: transparent;
   cursor: zoom-in;
-  border-radius: 3.33% / 5.45%;
+  border-radius: 3.33% / 2.73%;
   box-shadow: 0 3px 7px #21182724, 0 14px 24px -8px #2118274a;
 }
 .business-card canvas { width: 100%; height: auto; display: block; }
@@ -204,7 +204,7 @@ h2[tabindex]:focus { outline: none; }
   cursor: zoom-in;
 }
 .card-preview-dialog {
-  --zoom-width: min(800px, calc(100vw - 64px), calc((100dvh - 108px) * 90 / 55));
+  --zoom-width: min(550px, calc(100vw - 64px), calc((100dvh - 108px) * 9 / 11));
   width: max-content;
   max-width: calc(100vw - 24px);
   max-height: calc(100dvh - 24px);
@@ -380,7 +380,7 @@ body:has(.card-preview-dialog[open]) { overflow: hidden; }
 
   .preview { padding-block: 24px; }
   .preview-stage { padding-block: 19px 12px; }
-  .preview .business-card { width: min(100%, 390px); }
+  .preview .business-card { width: min(100%, 300px); }
   .preview .card-themes { margin-top: 16px; }
 }
 
@@ -395,7 +395,7 @@ body:has(.card-preview-dialog[open]) { overflow: hidden; }
   .panel h2 { font-size: 17px; }
   .section-link { display: inline-flex; align-items: center; min-height: 44px; margin: -8px 0; padding-inline: 3px; color: var(--brand); font-weight: 600; font-size: 13px; text-decoration: underline; text-underline-offset: 3px; }
   .preview-stage { padding-block: 24px 12px; }
-  .business-card { width: min(100%, 360px); }
+  .business-card { width: min(100%, 300px); }
   .form-caption { padding-inline: 20px; }
   .editor .panel-heading { margin-bottom: 22px; }
   .field + .field, .name-row + .field { margin-top: 20px; }
@@ -410,6 +410,3 @@ body:has(.card-preview-dialog[open]) { overflow: hidden; }
   .mobile-title-break { display: initial; }
   .name-row { grid-template-columns: 1fr; }
 }
-
-.preview-sides { display: grid; justify-items: center; gap: 16px; width: 100%; }
-.preview-side { width: 100%; display: grid; justify-items: center; }

@@ -14,8 +14,7 @@ window.CardRenderer = (() => {
 
   const assets = Promise.all([
     load('businesscard-assets/card-logo.svg'),
-    load('businesscard-assets/en-white.svg'),
-    Promise.all([document.fonts.load('400 56px MiSansCard'), document.fonts.load('600 85px MiSansCard')])
+    load('businesscard-assets/en-white.svg')
   ]);
 
   function font(ctx, size, weight = 400) {
@@ -41,7 +40,7 @@ window.CardRenderer = (() => {
     ctx.beginPath();
     ctx.roundRect(0, 0, width, height, 60);
     ctx.clip();
-    ctx.fillStyle = side === 'front' ? '#F8F8F8' : '#4F2C5B';
+    ctx.fillStyle = side === 'front' ? '#FFFFFF' : '#4F2C5B';
     ctx.fillRect(0, 0, width, height);
     ctx.textBaseline = 'top';
     ctx.textAlign = 'left';
