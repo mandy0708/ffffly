@@ -63,7 +63,7 @@ window.CardRenderer = (() => {
       ctx.fillStyle = '#6B4C9A';
       ctx.fillText(data.title || '职位', textX, baseY + line);
       ctx.fillStyle = '#141414';
-      const mobile = data.mobile ? data.dial + ' ' + data.mobile : '手机号码';
+      const mobile = data.mobile || '手机号码';
       const email = data.prefix ? data.email : '邮箱';
       ctx.fillText(mobile + '  |  ' + email, textX, baseY + line * 2);
       ctx.fillText('北京市海淀区清华科技园A座803', textX, baseY + line * 3);

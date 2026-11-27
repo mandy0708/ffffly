@@ -13,7 +13,7 @@
   const previewCanvas = $('card-canvas');
   const previewDialog = $('card-preview-dialog');
   const largeCanvas = $('large-card-canvas');
-  const fields = ['name', 'english', 'title', 'dial', 'mobile', 'email', 'company', 'domain'];
+  const fields = ['name', 'english', 'title', 'mobile', 'email', 'company', 'domain'];
   const requiredFields = ['company', 'name', 'title', 'mobile', 'email', 'domain'];
   const touched = new Set();
   const domain = $('domain');
@@ -21,7 +21,6 @@
     name: '陈晓',
     english: 'Alex Chen',
     title: '产品设计师',
-    dial: '+86',
     mobile: '138 XXXX XXXX',
     prefix: 'name',
     email: 'name@' + config.emailDomain,
@@ -128,7 +127,7 @@
     }
 
     const isExample = !raw.name && !raw.english && !raw.title && !raw.mobile && !raw.email
-      && raw.company === config.companyName && raw.domain === config.emailDomain && raw.dial === '+86';
+      && raw.company === config.companyName && raw.domain === config.emailDomain;
     const contact = isExample ? example : data;
     const frontOutput = document.createElement('canvas');
     const backOutput = document.createElement('canvas');
@@ -139,7 +138,7 @@
       if (revision !== renderRevision) return;
       const details = [
         contact.name, contact.english, contact.title,
-        contact.mobile ? contact.dial + ' ' + contact.mobile : '', contact.prefix ? contact.email : '',
+        contact.mobile || '', contact.prefix ? contact.email : '',
         contact.company, contact.website
       ].filter(Boolean);
       previewCanvas.setAttribute('aria-label', [
@@ -180,17 +179,11 @@
       update();
     });
   }
-  $('dial').addEventListener('change', () => {
-    $('dial-display').textContent = $('dial').value;
-    update();
-  });
-
   form.addEventListener('submit', event => event.preventDefault());
   form.addEventListener('reset', () => {
     touched.clear();
     setTimeout(() => {
       domain.value = config.emailDomain;
-      $('dial-display').textContent = $('dial').value;
       $('name').focus();
       update();
     }, 0);

@@ -20,20 +20,20 @@ window.BusinessCard = (() => {
     return errors;
   }
   function normalize(raw, c) {
-    return {name:clean(raw.name), english:clean(raw.english), title:clean(raw.title), dial:raw.dial, mobile:clean(raw.mobile).replace(/[ ()-]/g,''), prefix:clean(raw.email), company:clean(c.companyName), website:clean(c.website), email:clean(raw.email)+'@'+c.emailDomain};
+    return {name:clean(raw.name), english:clean(raw.english), title:clean(raw.title), mobile:clean(raw.mobile).replace(/[ ()-]/g,''), prefix:clean(raw.email), company:clean(c.companyName), website:clean(c.website), email:clean(raw.email)+'@'+c.emailDomain};
   }
   function validate(d) {
     const errors = {};
     if (!d.name) errors.name='请填写中文姓名';
     if (!d.title) errors.title='请填写职位';
-    if (!/^\d+$/.test(d.mobile) || !/^\+[1-9]\d{0,3}$/.test(d.dial) || !/^[1-9]\d{6,14}$/.test(d.dial.slice(1)+d.mobile) || (d.dial === '+86' && !/^1[3-9]\d{9}$/.test(d.mobile))) errors.mobile='请输入有效的手机号码，不含国际区号';
+    if (!/^1[3-9]\d{9}$/.test(d.mobile)) errors.mobile='请输入有效的 11 位中国大陆手机号码';
     if (!/^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*$/i.test(d.prefix) || d.prefix.length>64) errors.email='请输入有效的邮箱前缀，不含 @ 和域名';
     return errors;
   }
   function vcard(d) {
     const display = d.name + (d.english ? ' ('+d.english+')' : '');
     // A single unsplit name is kept in the family-name component; do not guess surnames.
-    return ['BEGIN:VCARD','VERSION:3.0','FN:'+escape(display),'N:'+escape(d.name)+';;;;','ORG:'+escape(d.company),'TITLE:'+escape(d.title),'TEL;TYPE=CELL:'+d.dial+d.mobile,'EMAIL;TYPE=INTERNET,WORK:'+d.email,'URL:'+d.website,'END:VCARD'].map(fold).join('\r\n')+'\r\n';
+    return ['BEGIN:VCARD','VERSION:3.0','FN:'+escape(display),'N:'+escape(d.name)+';;;;','ORG:'+escape(d.company),'TITLE:'+escape(d.title),'TEL;TYPE=CELL:'+d.mobile,'EMAIL;TYPE=INTERNET,WORK:'+d.email,'URL:'+d.website,'END:VCARD'].map(fold).join('\r\n')+'\r\n';
   }
   function contactQrText(d) {
     const display = d.name + (d.english ? ' (' + d.english + ')' : '');
@@ -42,7 +42,7 @@ window.BusinessCard = (() => {
       'FN:' + escape(display),
       'ORG:' + escape(d.company),
       'TITLE:' + escape(d.title),
-      'TEL;CELL:' + escape(d.dial + d.mobile),
+      'TEL;CELL:' + escape(d.mobile),
       'EMAIL:' + escape(d.email),
       'END:VCARD'
     ].join('\n');
