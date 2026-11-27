@@ -18,7 +18,7 @@ window.CardRenderer = (() => {
   ]);
 
   function font(ctx, size, weight = 400) {
-    ctx.font = `${weight} ${size}px MiSansCard, -apple-system, "PingFang SC", sans-serif`;
+    ctx.font = `${weight} ${size}px "PingFang SC", "Microsoft YaHei", sans-serif`;
   }
 
   function text(ctx, value, x, y, size, weight, color, maxWidth) {

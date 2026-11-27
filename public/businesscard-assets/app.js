@@ -30,8 +30,6 @@
   let feedbackTimer;
   let renderRevision = 0;
   let lastInput;
-  let fontsReady = false;
-  let fontsFailed = false;
 
   $('company').defaultValue = config.companyName;
   $('domain').defaultValue = config.emailDomain;
@@ -78,7 +76,7 @@
     download.disabled = true;
     downloadCard.disabled = true;
 
-    showPreviewError(fontsFailed ? '字体加载失败，请刷新页面重试。' : (fontsReady ? '' : '名片字体加载中，请稍候。'));
+    showPreviewError();
     if (configErrors.includes('公司官网尚未配置')) {
       showPreviewError('公司官网未配置，暂时无法生成名片。');
     }
@@ -86,7 +84,7 @@
     if (!Object.keys(errors).length && !configErrors.length) {
       try {
         matrix = card.qr(card.contactQrText(data));
-        download.disabled = !fontsReady;
+        download.disabled = false;
       } catch {
         showPreviewError('二维码生成失败。请缩短填写的内容后重试。');
       }
@@ -121,7 +119,7 @@
       context.drawImage(backOutput, 0, 1100);
       $('preview-example').hidden = !isExample;
       previewCard.hidden = false;
-      downloadCard.disabled = !matrix || !fontsReady;
+      downloadCard.disabled = !matrix;
     }).catch(() => {
       if (revision !== renderRevision) return;
       previewCard.hidden = true;
@@ -231,16 +229,4 @@
   });
 
   update();
-  Promise.all([
-    document.fonts.load('400 56px MiSansCard'),
-    document.fonts.load('600 85px MiSansCard')
-  ]).then(() => {
-    fontsReady = true;
-    lastInput = undefined;
-    update();
-  }).catch(() => {
-    fontsFailed = true;
-    lastInput = undefined;
-    update();
-  });
 })();
