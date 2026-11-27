@@ -6,12 +6,12 @@
   <meta name="description" content="元环智能电子名片生成器。个人信息仅在当前浏览器内处理。">
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' blob: data:; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
   <title>元环智能名片生成器</title>
-  <link rel="stylesheet" href="businesscard-assets/style.css?v=20261127-1">
+  <link rel="stylesheet" href="businesscard-assets/style.css?v=20261127-double2">
   <script defer src="businesscard-assets/config.js"></script>
   <script defer src="businesscard-assets/vendor/qrcodegen.js"></script>
   <script defer src="businesscard-assets/core.js?v=20261126-38"></script>
-  <script defer src="businesscard-assets/card-renderer.js?v=20261127-2"></script>
-  <script defer src="businesscard-assets/app.js?v=20261126-42"></script>
+  <script defer src="businesscard-assets/card-renderer.js?v=20261127-double2"></script>
+  <script defer src="businesscard-assets/app.js?v=20261127-double2"></script>
 </head>
 <body>
 <main class="shell">
@@ -96,25 +96,22 @@
         <a class="section-link" href="#form-title">返回修改</a>
       </div>
       <div class="preview-stage">
-        <button type="button" class="business-card" id="preview-card" aria-label="放大名片预览" aria-haspopup="dialog" aria-controls="card-preview-dialog" hidden>
-          <canvas id="card-canvas" width="1800" height="1100" role="img" aria-label="名片预览"></canvas>
-        </button>
-        <button type="button" class="preview-zoom-hint" id="preview-zoom-hint" aria-haspopup="dialog" aria-controls="card-preview-dialog" hidden>点击放大</button>
+        <div class="preview-sides">
+          <div class="preview-side">
+            <span class="card-side-label">正面</span>
+            <button type="button" class="business-card" id="preview-card" aria-label="放大名片正面" aria-haspopup="dialog" aria-controls="card-preview-dialog" hidden>
+              <canvas id="card-canvas" width="1800" height="1100" role="img" aria-label="名片正面预览"></canvas>
+            </button>
+          </div>
+          <div class="preview-side">
+            <span class="card-side-label">背面</span>
+            <button type="button" class="business-card" id="preview-back" aria-label="放大名片背面" aria-haspopup="dialog" aria-controls="card-preview-dialog" hidden>
+              <canvas id="back-canvas" width="1800" height="1100" role="img" aria-label="名片背面预览"></canvas>
+            </button>
+          </div>
+        </div>
       </div>
       <p class="preview-error" id="preview-error" role="status" hidden></p>
-      <fieldset class="card-themes">
-        <legend class="visually-hidden">名片版本</legend>
-        <div class="theme-options">
-          <label class="theme-segment">
-            <input class="visually-hidden" type="radio" name="card-theme" value="gray">
-            <span>浅色元环版</span>
-          </label>
-          <label class="theme-segment">
-            <input class="visually-hidden" type="radio" name="card-theme" value="purple" checked>
-            <span>深色九离版</span>
-          </label>
-        </div>
-      </fieldset>
     </section>
 
     <section class="export-panel" aria-label="下载">
@@ -130,8 +127,13 @@
       </div>
       <button type="button" id="download-card" class="download primary" disabled>
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m-4-4 4 4 4-4M5 16v3a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-3"/></svg>
-        下载名片
+        下载名片正反面
       </button>
+      <div id="card-download-fallback" class="card-download-fallback" hidden>
+        <p>如未下载完整，可分别保存：</p>
+        <button type="button" id="save-front">保存正面 PNG</button>
+        <button type="button" id="save-back">保存背面 PNG</button>
+      </div>
     </section>
   </div>
   <footer class="brand-footer"><img src="businesscard-assets/logo.svg" alt="元环智能" width="94" height="24"></footer>

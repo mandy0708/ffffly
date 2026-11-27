@@ -1,3 +1,5 @@
+@font-face { font-family: MiSansCard; src: url("MiSans-Semibold.ttf") format("truetype"); font-weight: 600; font-display: swap; }
+@font-face { font-family: MiSansCard; src: url("MiSans-Regular.ttf") format("truetype"); font-weight: 400; font-display: swap; }
 :root {
   font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
   color-scheme: light;
@@ -331,6 +333,9 @@ body:has(.card-preview-dialog[open]) { overflow: hidden; }
 .download.primary:disabled { background: #e4d9e8; color: #695c70; }
 .download.secondary:disabled { background: #e9e9ea; color: #6a6870; }
 .download-wrap { position: relative; min-width: 0; }
+.card-download-fallback { grid-column: 1 / -1; display: flex; align-items: center; flex-wrap: wrap; gap: 8px 14px; color: var(--secondary); font-size: 13px; }
+.card-download-fallback p { margin: 0; }
+.card-download-fallback button { min-height: 44px; padding: 0 8px; border: 0; background: transparent; color: var(--brand); text-decoration: underline; text-underline-offset: 3px; }
 
 .download-menu {
   position: absolute;
@@ -405,3 +410,7 @@ body:has(.card-preview-dialog[open]) { overflow: hidden; }
   .mobile-title-break { display: initial; }
   .name-row { grid-template-columns: 1fr; }
 }
+
+.card-side-label { margin: 4px 0 9px; color: #615f68; font-size: 13px; }
+.preview-sides { display: grid; justify-items: center; gap: 24px; width: 100%; }
+.preview-side { width: 100%; display: grid; justify-items: center; }

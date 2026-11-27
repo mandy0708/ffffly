@@ -9,13 +9,14 @@
   const download = $('download');
   const downloadCard = $('download-card');
   const previewCard = $('preview-card');
-  const previewZoomHint = $('preview-zoom-hint');
+  const previewBack = $('preview-back');
+  const backCanvas = $('back-canvas');
+  let enlargedCanvas;
   const previewCanvas = $('card-canvas');
   const previewDialog = $('card-preview-dialog');
   const largeCanvas = $('large-card-canvas');
   const fields = ['name', 'english', 'title', 'dial', 'mobile', 'email', 'company', 'domain'];
   const requiredFields = ['company', 'name', 'title', 'mobile', 'email', 'domain'];
-  const themeOptions = [...document.querySelectorAll('[name=card-theme]')];
   const touched = new Set();
   const domain = $('domain');
   const example = Object.freeze({
@@ -31,8 +32,8 @@
   });
   let matrix = null;
   let data = null;
-  let theme = 'purple';
   let feedbackTimer;
+  let cardDownloads = null;
   let renderRevision = 0;
   let lastInput;
 
@@ -42,16 +43,17 @@
   function syncLargePreview() {
     const context = largeCanvas.getContext('2d');
     context.clearRect(0, 0, largeCanvas.width, largeCanvas.height);
-    context.drawImage(previewCanvas, 0, 0);
-    largeCanvas.setAttribute('aria-label', previewCanvas.getAttribute('aria-label'));
+    context.drawImage(enlargedCanvas, 0, 0);
+    largeCanvas.setAttribute('aria-label', enlargedCanvas.getAttribute('aria-label'));
   }
 
-  function openPreviewDialog() {
+  function openPreviewDialog(canvas) {
+    enlargedCanvas = canvas;
     syncLargePreview();
     previewDialog.showModal();
   }
-  previewCard.addEventListener('click', openPreviewDialog);
-  previewZoomHint.addEventListener('click', openPreviewDialog);
+  previewCard.addEventListener('click', () => openPreviewDialog(previewCanvas));
+  previewBack.addEventListener('click', () => openPreviewDialog(backCanvas));
   $('close-card-preview').addEventListener('click', () => previewDialog.close());
 
   function isPreviewBackdrop(event) {
@@ -106,9 +108,11 @@
       $(key).setAttribute('aria-invalid', String(Boolean(error)));
     }
 
-    const input = JSON.stringify([raw, theme]);
+    const input = JSON.stringify(raw);
     if (input === lastInput) return;
     lastInput = input;
+    cardDownloads = null;
+    $('card-download-fallback').hidden = true;
     const revision = ++renderRevision;
     matrix = null;
     closeMenu();
@@ -132,8 +136,12 @@
     const isExample = !raw.name && !raw.english && !raw.title && !raw.mobile && !raw.email
       && raw.company === config.companyName && raw.domain === config.emailDomain && raw.dial === '+86';
     const contact = isExample ? example : data;
-    const output = document.createElement('canvas');
-    CardRenderer.render(output, contact, matrix, theme).then(() => {
+    const frontOutput = document.createElement('canvas');
+    const backOutput = document.createElement('canvas');
+    Promise.all([
+      CardRenderer.render(frontOutput, contact, matrix, 'front'),
+      CardRenderer.render(backOutput, contact, matrix, 'back')
+    ]).then(() => {
       if (revision !== renderRevision) return;
       const details = [
         contact.name, contact.english, contact.title,
@@ -141,23 +149,26 @@
         contact.company, contact.website
       ].filter(Boolean);
       previewCanvas.setAttribute('aria-label', [
-        isExample ? '示例名片' : '名片预览', ...details,
-        matrix ? '联系人二维码，扫一扫添加至通讯录' : '二维码占位'
+        isExample ? '示例名片正面' : '名片正面', ...details
       ].join('，'));
       previewCard.setAttribute('aria-description', previewCanvas.getAttribute('aria-label'));
       const context = previewCanvas.getContext('2d');
       context.clearRect(0, 0, previewCanvas.width, previewCanvas.height);
-      context.drawImage(output, 0, 0);
+      context.drawImage(frontOutput, 0, 0);
+      const backContext = backCanvas.getContext('2d');
+      backContext.clearRect(0, 0, backCanvas.width, backCanvas.height);
+      backContext.drawImage(backOutput, 0, 0);
+      backCanvas.setAttribute('aria-label', matrix ? '名片背面，联系人二维码' : '名片背面，二维码占位');
       if (previewDialog.open) syncLargePreview();
       $('preview-example').hidden = !isExample;
       previewCard.hidden = false;
-      previewZoomHint.hidden = false;
+      previewBack.hidden = false;
       downloadCard.disabled = !matrix;
     }).catch(() => {
       if (revision !== renderRevision) return;
       if (previewDialog.open) previewDialog.close();
       previewCard.hidden = true;
-      previewZoomHint.hidden = true;
+      previewBack.hidden = true;
       $('preview-example').hidden = true;
       showPreviewError('名片预览加载失败，请刷新页面重试。');
     });
@@ -178,13 +189,6 @@
     $('dial-display').textContent = $('dial').value;
     update();
   });
-  for (const option of themeOptions) {
-    option.addEventListener('change', () => {
-      if (!option.checked) return;
-      theme = option.value;
-      update();
-    });
-  }
 
   form.addEventListener('submit', event => event.preventDefault());
   form.addEventListener('reset', () => {
@@ -248,10 +252,35 @@
 
   downloadCard.addEventListener('click', () => {
     if (!matrix || downloadCard.disabled) return;
-    const variant = theme === 'purple' ? 'Jiuli' : 'Yuanhuan';
-    const filename = card.filename(data.name, 'png').replace('_QRCode.png', '_BusinessCard_' + variant + '.png');
-    savePNG(previewCanvas, filename, '名片下载失败，请重试。');
+    const front = document.createElement('canvas');
+    const back = document.createElement('canvas');
+    const snapshot = { ...data };
+    const qr = matrix;
+    Promise.all([
+      CardRenderer.render(front, snapshot, qr, 'front'),
+      CardRenderer.render(back, snapshot, qr, 'back')
+    ]).then(() => Promise.all([
+      new Promise(resolve => front.toBlob(resolve, 'image/png')),
+      new Promise(resolve => back.toBlob(resolve, 'image/png'))
+    ])).then(([frontBlob, backBlob]) => {
+      if (!frontBlob || !backBlob) throw Error('无法生成图片');
+      const base = card.filename(snapshot.name, 'png').replace('_QRCode.png', '');
+      cardDownloads = {
+        front: { blob: frontBlob, name: base + '_BusinessCard_Front.png' },
+        back: { blob: backBlob, name: base + '_BusinessCard_Back.png' }
+      };
+      $('card-download-fallback').hidden = false;
+      save(cardDownloads.front.blob, cardDownloads.front.name);
+      save(cardDownloads.back.blob, cardDownloads.back.name);
+      feedback('已发起正反面图片下载');
+    }).catch(() => feedback('名片下载失败，请重试。'));
   });
+
+  for (const side of ['front', 'back']) {
+    $('save-' + side).addEventListener('click', () => {
+      if (cardDownloads) save(cardDownloads[side].blob, cardDownloads[side].name);
+    });
+  }
 
   menu.addEventListener('click', event => {
     const button = event.target.closest('[data-format]');
