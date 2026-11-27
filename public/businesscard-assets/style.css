@@ -188,8 +188,6 @@ h2[tabindex]:focus { outline: none; }
   padding: 0;
   border: 0;
   background: transparent;
-  cursor: zoom-in;
-  border-radius: 3.33% / 2.73%;
   box-shadow: 0 3px 7px #21182724, 0 14px 24px -8px #2118274a;
 }
 .business-card canvas { width: 100%; height: auto; display: block; }

@@ -37,10 +37,7 @@ window.CardRenderer = (() => {
     canvas.height = height;
     const ctx = canvas.getContext('2d');
     if (!ctx) throw Error('浏览器无法生成名片图片');
-    ctx.beginPath();
-    ctx.roundRect(0, 0, width, height, 60);
-    ctx.clip();
-    ctx.fillStyle = side === 'front' ? '#FFFFFF' : '#4F2C5B';
+    ctx.fillStyle = side === 'front' ? '#F3F3F3' : '#4F2C5B';
     ctx.fillRect(0, 0, width, height);
     ctx.textBaseline = 'top';
     ctx.textAlign = 'left';

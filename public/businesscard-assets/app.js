@@ -9,10 +9,7 @@
   const download = $('download');
   const downloadCard = $('download-card');
   const previewCard = $('preview-card');
-  const previewZoomHint = $('preview-zoom-hint');
   const previewCanvas = $('card-canvas');
-  const previewDialog = $('card-preview-dialog');
-  const largeCanvas = $('large-card-canvas');
   const fields = ['name', 'english', 'title', 'dial', 'mobile', 'email', 'company', 'domain'];
   const requiredFields = ['company', 'name', 'title', 'mobile', 'email', 'domain'];
   const touched = new Set();
@@ -38,40 +35,6 @@
 
   $('company').defaultValue = config.companyName;
   $('domain').defaultValue = config.emailDomain;
-
-  function syncLargePreview() {
-    const context = largeCanvas.getContext('2d');
-    context.clearRect(0, 0, largeCanvas.width, largeCanvas.height);
-    context.drawImage(previewCanvas, 0, 0);
-    largeCanvas.setAttribute('aria-label', previewCanvas.getAttribute('aria-label'));
-  }
-
-  function openPreviewDialog() {
-    syncLargePreview();
-    previewDialog.showModal();
-  }
-  previewCard.addEventListener('click', openPreviewDialog);
-  previewZoomHint.addEventListener('click', openPreviewDialog);
-  $('close-card-preview').addEventListener('click', () => previewDialog.close());
-
-  function isPreviewBackdrop(event) {
-    if (event.target !== previewDialog) return false;
-    const { left, top, right, bottom } = previewDialog.getBoundingClientRect();
-    return event.clientX < left || event.clientX >= right ||
-      event.clientY < top || event.clientY >= bottom;
-  }
-
-  let pressedPreviewBackdrop = false;
-  previewDialog.addEventListener('pointerdown', event => {
-    pressedPreviewBackdrop = isPreviewBackdrop(event);
-  });
-  previewDialog.addEventListener('click', event => {
-    if (pressedPreviewBackdrop && isPreviewBackdrop(event)) previewDialog.close();
-    pressedPreviewBackdrop = false;
-  });
-  previewDialog.addEventListener('close', () => {
-    pressedPreviewBackdrop = false;
-  });
 
   function closeMenu(restoreFocus = false) {
     menu.hidden = true;
@@ -150,27 +113,18 @@
       previewCard.setAttribute('aria-description', previewCanvas.getAttribute('aria-label'));
       const context = previewCanvas.getContext('2d');
       context.clearRect(0, 0, previewCanvas.width, previewCanvas.height);
-      context.save();
-      context.beginPath();
-      context.roundRect(0, 0, 1800, 2200, 60);
-      context.clip();
-      context.fillStyle = '#FFFFFF';
+      context.fillStyle = '#F3F3F3';
       context.fillRect(0, 0, 1800, 1100);
       context.fillStyle = '#4F2C5B';
       context.fillRect(0, 1100, 1800, 1100);
       context.drawImage(frontOutput, 0, 0);
       context.drawImage(backOutput, 0, 1100);
-      context.restore();
-      if (previewDialog.open) syncLargePreview();
       $('preview-example').hidden = !isExample;
       previewCard.hidden = false;
-      previewZoomHint.hidden = false;
       downloadCard.disabled = !matrix || !fontsReady;
     }).catch(() => {
       if (revision !== renderRevision) return;
-      if (previewDialog.open) previewDialog.close();
       previewCard.hidden = true;
-      previewZoomHint.hidden = true;
       $('preview-example').hidden = true;
       showPreviewError('名片预览加载失败，请刷新页面重试。');
     });
