@@ -6,11 +6,11 @@
   <meta name="description" content="元环智能电子名片生成器。个人信息仅在当前浏览器内处理。">
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' blob: data:; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
   <title>元环智能名片生成器</title>
-  <link rel="stylesheet" href="businesscard-assets/style.css?v=20261126-46">
+  <link rel="stylesheet" href="businesscard-assets/style.css?v=20261127-1">
   <script defer src="businesscard-assets/config.js"></script>
   <script defer src="businesscard-assets/vendor/qrcodegen.js"></script>
   <script defer src="businesscard-assets/core.js?v=20261126-38"></script>
-  <script defer src="businesscard-assets/card-renderer.js?v=20261126-40"></script>
+  <script defer src="businesscard-assets/card-renderer.js?v=20261127-2"></script>
   <script defer src="businesscard-assets/app.js?v=20261126-42"></script>
 </head>
 <body>
@@ -97,7 +97,7 @@
       </div>
       <div class="preview-stage">
         <button type="button" class="business-card" id="preview-card" aria-label="放大名片预览" aria-haspopup="dialog" aria-controls="card-preview-dialog" hidden>
-          <canvas id="card-canvas" width="1650" height="2700" role="img" aria-label="名片预览"></canvas>
+          <canvas id="card-canvas" width="1800" height="1100" role="img" aria-label="名片预览"></canvas>
         </button>
         <button type="button" class="preview-zoom-hint" id="preview-zoom-hint" aria-haspopup="dialog" aria-controls="card-preview-dialog" hidden>点击放大</button>
       </div>
@@ -144,7 +144,7 @@
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg>
     </button>
   </div>
-  <canvas id="large-card-canvas" width="1650" height="2700" role="img" aria-label="名片大图"></canvas>
+  <canvas id="large-card-canvas" width="1800" height="1100" role="img" aria-label="名片大图"></canvas>
 </dialog>
 <div id="toast" class="toast" role="status" aria-live="polite"></div>
 </body>

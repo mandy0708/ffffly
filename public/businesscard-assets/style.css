@@ -181,13 +181,13 @@ h2[tabindex]:focus { outline: none; }
 }
 
 .business-card {
-  width: min(100%, 204px);
-  aspect-ratio: 55 / 90;
+  width: min(100%, 390px);
+  aspect-ratio: 90 / 55;
   padding: 0;
   border: 0;
   background: transparent;
   cursor: zoom-in;
-  border-radius: 5.45% / 3.33%;
+  border-radius: 3.33% / 5.45%;
   box-shadow: 0 3px 7px #21182724, 0 14px 24px -8px #2118274a;
 }
 .business-card canvas { width: 100%; height: auto; display: block; }
@@ -202,7 +202,7 @@ h2[tabindex]:focus { outline: none; }
   cursor: zoom-in;
 }
 .card-preview-dialog {
-  --zoom-width: min(420px, calc(100vw - 64px), calc((100dvh - 108px) * 55 / 90));
+  --zoom-width: min(800px, calc(100vw - 64px), calc((100dvh - 108px) * 90 / 55));
   width: max-content;
   max-width: calc(100vw - 24px);
   max-height: calc(100dvh - 24px);
@@ -375,7 +375,7 @@ body:has(.card-preview-dialog[open]) { overflow: hidden; }
 
   .preview { padding-block: 24px; }
   .preview-stage { padding-block: 19px 12px; }
-  .preview .business-card { width: min(100%, 209px); }
+  .preview .business-card { width: min(100%, 390px); }
   .preview .card-themes { margin-top: 16px; }
 }
 
@@ -390,7 +390,7 @@ body:has(.card-preview-dialog[open]) { overflow: hidden; }
   .panel h2 { font-size: 17px; }
   .section-link { display: inline-flex; align-items: center; min-height: 44px; margin: -8px 0; padding-inline: 3px; color: var(--brand); font-weight: 600; font-size: 13px; text-decoration: underline; text-underline-offset: 3px; }
   .preview-stage { padding-block: 24px 12px; }
-  .business-card { width: min(100%, 180px); }
+  .business-card { width: min(100%, 360px); }
   .form-caption { padding-inline: 20px; }
   .editor .panel-heading { margin-bottom: 22px; }
   .field + .field, .name-row + .field { margin-top: 20px; }
