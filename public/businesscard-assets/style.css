@@ -352,6 +352,9 @@ body:has(.card-preview-dialog[open]) { overflow: hidden; }
 .brand-footer img { display: block; object-fit: contain; filter: brightness(0) invert(58%); }
 .toast { position: fixed; z-index: 2; left: 50%; bottom: max(18px, env(safe-area-inset-bottom)); transform: translateX(-50%); max-width: calc(100% - 32px); width: max-content; border-radius: 10px; background: #242129; color: #fff; padding: 10px 14px; font-size: 13px; overflow-wrap: anywhere; }
 .toast:empty { display: none; }
+@media (max-width: 700px) {
+  .toast { top: 50%; bottom: auto; transform: translate(-50%, -50%); text-align: center; pointer-events: none; }
+}
 
 @media (hover: hover) {
   .theme-segment:hover span { color: var(--brand); }
