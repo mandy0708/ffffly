@@ -32,6 +32,7 @@
   let feedbackTimer;
   let renderRevision = 0;
   let lastInput;
+  let readyCardFile = null;
 
   $('company').defaultValue = config.companyName;
   $('domain').defaultValue = config.emailDomain;
@@ -108,6 +109,7 @@
     lastInput = input;
     const revision = ++renderRevision;
     matrix = null;
+    readyCardFile = null;
     closeMenu();
     download.disabled = true;
     downloadCard.disabled = true;
@@ -157,7 +159,15 @@
       $('preview-example').hidden = !isExample;
       previewCard.hidden = false;
       previewZoomHint.hidden = false;
-      downloadCard.disabled = !matrix;
+      if (matrix) {
+        const filename = card.filename(data.name, 'png').replace('_QRCode.png', '_BusinessCard.png');
+        previewCanvas.toBlob(blob => {
+          if (revision !== renderRevision) return;
+          if (!blob) { showPreviewError('名片图片生成失败，请重试。'); return; }
+          readyCardFile = new File([blob], filename, { type: 'image/png' });
+          downloadCard.disabled = false;
+        }, 'image/png');
+      }
     }).catch(() => {
       if (revision !== renderRevision) return;
       if (previewDialog.open) previewDialog.close();
@@ -238,10 +248,25 @@
     }, 'image/png');
   }
 
-  downloadCard.addEventListener('click', () => {
-    if (!matrix || downloadCard.disabled) return;
-    const filename = card.filename(data.name, 'png').replace('_QRCode.png', '_BusinessCard.png');
-    savePNG(previewCanvas, filename, '名片下载失败，请重试。');
+  downloadCard.addEventListener('click', async () => {
+    if (!matrix || downloadCard.disabled || !readyCardFile) return;
+    const file = readyCardFile;
+    const mobile = /Android|iPhone|iPad|iPod|HarmonyOS|Mobile/i.test(navigator.userAgent) ||
+      (navigator.maxTouchPoints > 1 && /Mac/i.test(navigator.platform));
+    if (mobile && navigator.canShare && navigator.share && navigator.canShare({ files: [file] })) {
+      try {
+        await navigator.share({ files: [file] });
+        feedback('请在相册中查看保存结果。');
+      } catch (error) {
+        if (error.name !== 'AbortError') {
+          save(file, file.name);
+          feedback('已发起下载，可在文件管理中查找图片。');
+        }
+      }
+      return;
+    }
+    save(file, file.name);
+    if (mobile) feedback('已发起下载，可在文件管理中查找图片。');
   });
 
   menu.addEventListener('click', event => {
