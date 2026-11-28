@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="元环智能电子名片生成器。个人信息仅在当前浏览器内处理。">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' blob: data:; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+  <title>元环智能名片生成器</title>
+  <link rel="stylesheet" href="businesscard-assets/style.css?v=local-photo-test-1">
+  <script defer src="businesscard-assets/config.js"></script>
+  <script defer src="businesscard-assets/vendor/qrcodegen.js"></script>
+  <script defer src="businesscard-assets/core.js?v=local-photo-test-1"></script>
+  <script defer src="businesscard-assets/card-renderer.js?v=local-photo-test-1"></script>
+  <script defer src="businesscard-assets/app.js?v=local-photo-test-1"></script>
+</head>
+<body>
+<main class="shell">
+  <header class="page-heading">
+    <span class="heading-mark" aria-hidden="true">
+      <svg class="hero-icon" viewBox="0 0 40 40" fill="none">
+        <rect x="6.5" y="10.5" width="27" height="19" rx="2.5" fill="#CCBBD4"/>
+        <rect x="10.5" y="16.8" width="8.5" height="1.8" rx=".9" fill="#896E94"/>
+        <rect x="10.5" y="21.5" width="6.5" height="1.8" rx=".9" fill="#896E94"/>
+        <circle cx="25.8" cy="17.1" r="2.55" fill="#4F2C5B"/>
+        <path d="M21.3 24.3c0-2.45 1.9-4.15 4.5-4.15s4.5 1.7 4.5 4.15q0 .7-.7 .7h-7.6q-.7 0-.7-.7z" fill="#4F2C5B"/>
+      </svg>
+    </span>
+    <h1>元环智能<br class="mobile-title-break">名片生成器</h1>
+  </header>
+
+  <div class="workspace">
+    <section class="form-stack" aria-labelledby="form-title">
+      <p class="form-caption">填写信息，做一张自己的电子名片。</p>
+      <div class="panel editor">
+        <div class="panel-heading"><h2 id="form-title" tabindex="-1">个人信息</h2><a class="section-link" href="#preview-title">看预览</a></div>
+        <form id="card-form" autocomplete="off" novalidate>
+          <div class="name-row">
+            <div class="field">
+              <label for="name">中文姓名<span class="required" aria-hidden="true"> *</span></label>
+              <input id="name" maxlength="40" placeholder="请输入中文姓名" required aria-describedby="name-error">
+              <small id="name-error" class="error"></small>
+            </div>
+            <div class="field">
+              <label for="english">英文姓名 <span class="optional">选填</span></label>
+              <input id="english" maxlength="80" placeholder="例如 Alex Chen">
+            </div>
+          </div>
+          <div class="field">
+            <label for="company">公司名称<span class="required" aria-hidden="true"> *</span></label>
+            <input id="company" maxlength="120" required aria-describedby="company-error">
+            <small id="company-error" class="error"></small>
+          </div>
+          <div class="field">
+            <label for="title">职位<span class="required" aria-hidden="true"> *</span></label>
+            <input id="title" maxlength="100" placeholder="请输入职位" required aria-describedby="title-error">
+            <small id="title-error" class="error"></small>
+          </div>
+          <div class="field">
+            <label for="mobile">手机号码<span class="required" aria-hidden="true"> *</span></label>
+            <input id="mobile" type="tel" inputmode="numeric" maxlength="11" placeholder="请输入 11 位手机号码" required aria-describedby="mobile-error">
+            <small id="mobile-error" class="error"></small>
+          </div>
+          <div class="field email-field">
+            <div class="field-heading">
+              <label for="email">邮箱<span class="required" aria-hidden="true"> *</span></label>
+            </div>
+            <div class="email-row">
+              <input id="email" inputmode="email" autocapitalize="none" spellcheck="false" maxlength="64" placeholder="填写邮箱前缀" required aria-describedby="email-error">
+              <div class="email-suffix"><span aria-hidden="true">@</span><input id="domain" type="text" inputmode="url" autocapitalize="none" spellcheck="false" maxlength="253" aria-label="邮箱后缀" aria-describedby="domain-error" readonly></div>
+            </div>
+            <small id="email-error" class="error"></small>
+            <small id="domain-error" class="error"></small>
+          </div>
+          <div class="form-footer">
+            <p>个人信息仅在当前页面处理</p>
+            <button class="text-action" type="reset">清空填写</button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <section class="panel preview" id="preview" aria-labelledby="preview-title">
+      <div class="panel-heading">
+        <div class="preview-heading">
+          <h2 id="preview-title" tabindex="-1">名片预览</h2>
+          <span class="sample-label" id="preview-example">示例</span>
+        </div>
+        <a class="section-link" href="#form-title">返回修改</a>
+      </div>
+      <div class="preview-stage">
+        <button type="button" class="business-card" id="preview-card" aria-label="放大名片预览" aria-haspopup="dialog" aria-controls="card-preview-dialog" hidden>
+          <canvas id="card-canvas" width="1800" height="2200" role="img" aria-label="名片预览"></canvas>
+        </button>
+        <button type="button" class="preview-zoom-hint" id="preview-zoom-hint" aria-haspopup="dialog" aria-controls="card-preview-dialog" hidden>点击放大</button>
+      </div>
+      <p class="preview-error" id="preview-error" role="status" hidden></p>
+    </section>
+
+    <section class="export-panel" aria-label="下载">
+      <div class="download-wrap">
+        <button type="button" id="download" class="download secondary" disabled aria-expanded="false" aria-controls="download-menu">
+          仅下载二维码
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m7 10 5 5 5-5"/></svg>
+        </button>
+        <div id="download-menu" class="download-menu" hidden>
+          <button type="button" data-format="svg">SVG 矢量图 <small>适用于纸质名片排版</small></button>
+          <button type="button" data-format="png-white">PNG 图片 <small>白底黑码 · 2048 × 2048 px</small></button>
+        </div>
+      </div>
+      <button type="button" id="download-card" class="download primary" disabled>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m-4-4 4 4 4-4M5 16v3a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-3"/></svg>
+        下载名片
+      </button>
+    </section>
+  </div>
+  <footer class="brand-footer"><img src="businesscard-assets/logo.svg" alt="元环智能" width="94" height="24"></footer>
+  <noscript>请启用 JavaScript 以在本地生成电子名片。</noscript>
+</main>
+
+<dialog id="card-preview-dialog" class="card-preview-dialog" aria-labelledby="card-preview-title">
+  <div class="card-preview-toolbar">
+    <h2 id="card-preview-title">名片大图</h2>
+    <button class="card-preview-close" id="close-card-preview" type="button" aria-label="关闭名片大图" autofocus>
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg>
+    </button>
+  </div>
+  <canvas id="large-card-canvas" width="1800" height="2200" role="img" aria-label="名片大图"></canvas>
+</dialog>
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
