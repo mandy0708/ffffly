@@ -256,6 +256,7 @@
     if (mobile && navigator.canShare && navigator.share && navigator.canShare({ files: [file] })) {
       try {
         await navigator.share({ files: [file] });
+        feedback('请在相册中查看保存结果。');
       } catch (error) {
         if (error.name !== 'AbortError') {
           save(file, file.name);
